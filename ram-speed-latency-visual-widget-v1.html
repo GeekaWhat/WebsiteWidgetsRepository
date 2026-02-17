@@ -1,0 +1,272 @@
+<!--
+GeekaWhat RAM Speed + Latency Visual Widget v1
+Paste into a Gutenberg "Custom HTML" block.
+-->
+
+<style>
+  .gw-ram-widget {
+    width: 100%;
+    margin: 18px 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+    color: inherit;
+    font: inherit;
+  }
+
+  .gw-ram-head {
+    margin: 0;
+    padding: 10px 12px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    color: #ffffff;
+    background: #3c7cff;
+  }
+
+  .gw-ram-body {
+    padding: 12px;
+    display: grid;
+    gap: 12px;
+  }
+
+  .gw-ram-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .gw-ram-metric {
+    border: 1px solid #dbe9ff;
+    border-radius: 10px;
+    background: #f8fbff;
+    padding: 9px 10px;
+  }
+
+  .gw-ram-label {
+    margin: 0 0 4px;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #1f4f98;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .gw-ram-value {
+    margin: 0;
+    font-size: 1.08rem;
+    line-height: 1.2;
+    font-weight: 800;
+    color: #142033;
+  }
+
+  .gw-ram-speed-track {
+    border: 1px solid #dfeaff;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 10px;
+  }
+
+  .gw-ram-speed-title {
+    margin: 0 0 8px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #4f647f;
+  }
+
+  .gw-ram-bar {
+    position: relative;
+    height: 12px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #9fd0ff 0%, #037cff 45%, #7a42d8 72%, #e14747 100%);
+    overflow: visible;
+  }
+
+  .gw-ram-bar-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #9fd0ff 0%, #037cff 45%, #7a42d8 72%, #e14747 100%);
+    border-radius: 999px;
+  }
+
+  .gw-ram-bar-marker {
+    position: absolute;
+    left: 75%;
+    top: 50%;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #3c7cff;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    z-index: 2;
+  }
+
+  .gw-ram-bar-marker-label {
+    position: absolute;
+    left: 75%;
+    top: -28px;
+    transform: translateX(-50%);
+    font-size: 0.74rem;
+    line-height: 1.1;
+    font-weight: 700;
+    color: #1d4ea6;
+    white-space: nowrap;
+    background: #ffffff;
+    border: 1px solid #d9e8ff;
+    border-radius: 8px;
+    padding: 3px 7px;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+  }
+
+  .gw-ram-bar-scale {
+    margin: 8px 0 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.76rem;
+    color: #516078;
+    line-height: 1.2;
+  }
+
+  .gw-ram-slot-card {
+    border: 1px solid #dfeaff;
+    border-radius: 10px;
+    padding: 10px;
+    background: #ffffff;
+  }
+
+  .gw-ram-slot-title {
+    margin: 0 0 8px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #4f647f;
+  }
+
+  .gw-ram-slots {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .gw-ram-slot {
+    border: 1px solid #dbe9ff;
+    border-radius: 8px;
+    background: #f8fbff;
+    padding: 8px 6px;
+    text-align: center;
+  }
+
+  .gw-ram-slot-name {
+    margin: 0 0 4px;
+    font-size: 0.74rem;
+    color: #1f4f98;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .gw-ram-slot-state {
+    margin: 0;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #516078;
+    line-height: 1.2;
+  }
+
+  .gw-ram-slot.recommended {
+    border-color: #3c7cff;
+    background: #eaf2ff;
+    box-shadow: inset 0 0 0 1px rgba(60, 124, 255, 0.18);
+  }
+
+  .gw-ram-slot.recommended .gw-ram-slot-state {
+    color: #1d4ea6;
+  }
+
+  .gw-ram-note {
+    margin: 0;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    color: #4f647f;
+  }
+
+  @media (max-width: 760px) {
+    .gw-ram-metrics {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .gw-ram-slots {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>
+
+<section class="gw-ram-widget" aria-label="RAM speed and slot recommendation">
+  <p class="gw-ram-head">RAM Configuration</p>
+
+  <div class="gw-ram-body">
+    <div class="gw-ram-metrics">
+      <article class="gw-ram-metric">
+        <p class="gw-ram-label">Speed</p>
+        <p class="gw-ram-value">6000MHz</p>
+      </article>
+      <article class="gw-ram-metric">
+        <p class="gw-ram-label">Latency</p>
+        <p class="gw-ram-value">CL36</p>
+      </article>
+      <article class="gw-ram-metric">
+        <p class="gw-ram-label">Generation</p>
+        <p class="gw-ram-value">DDR5</p>
+      </article>
+      <article class="gw-ram-metric">
+        <p class="gw-ram-label">DIMM Count</p>
+        <p class="gw-ram-value">2 Sticks</p>
+      </article>
+    </div>
+
+    <article class="gw-ram-speed-track">
+      <p class="gw-ram-speed-title">Memory Speed Visual (DDR5 Scale)</p>
+      <div class="gw-ram-bar" aria-hidden="true">
+        <span class="gw-ram-bar-fill"></span>
+        <span class="gw-ram-bar-marker-label">6000MHz</span>
+        <span class="gw-ram-bar-marker"></span>
+      </div>
+      <div class="gw-ram-bar-scale">
+        <span>4800MHz</span>
+        <span><strong>6000MHz</strong></span>
+        <span>8000MHz+</span>
+      </div>
+    </article>
+
+    <article class="gw-ram-slot-card">
+      <p class="gw-ram-slot-title">Recommended Motherboard Slot Population (4-Slot Board)</p>
+      <div class="gw-ram-slots">
+        <div class="gw-ram-slot">
+          <p class="gw-ram-slot-name">Slot 1 (A1)</p>
+          <p class="gw-ram-slot-state">Leave Empty</p>
+        </div>
+        <div class="gw-ram-slot recommended">
+          <p class="gw-ram-slot-name">Slot 2 (A2)</p>
+          <p class="gw-ram-slot-state">Install DIMM</p>
+        </div>
+        <div class="gw-ram-slot">
+          <p class="gw-ram-slot-name">Slot 3 (B1)</p>
+          <p class="gw-ram-slot-state">Leave Empty</p>
+        </div>
+        <div class="gw-ram-slot recommended">
+          <p class="gw-ram-slot-name">Slot 4 (B2)</p>
+          <p class="gw-ram-slot-state">Install DIMM</p>
+        </div>
+      </div>
+    </article>
+
+    <p class="gw-ram-note">For 2-DIMM kits on 4-slot motherboards, install memory in slots 2 and 4 (A2 + B2) for dual-channel operation and best stability.</p>
+  </div>
+</section>

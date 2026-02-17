@@ -1,0 +1,280 @@
+<!--
+GeekaWhat PCIe Lane Breakdown Widget v1 (HTML + CSS + JS)
+Paste into a Gutenberg "Custom HTML" block.
+-->
+
+<style>
+  .gw-pcie-widget {
+    width: 100%;
+    margin: 18px 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+  }
+
+  .gw-pcie-layout {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .gw-pcie-menu {
+    border-right: 1px solid #e6edf7;
+    background: #f8fbff;
+    padding: 8px;
+  }
+
+  .gw-pcie-tab {
+    width: 100%;
+    display: block;
+    border: 1px solid #d9e8ff;
+    background: #ffffff;
+    color: #111111;
+    border-radius: 10px;
+    padding: 10px 11px;
+    margin: 0 0 8px;
+    text-align: left;
+    font-size: 0.93rem;
+    font-weight: 600;
+    line-height: 1.25;
+    cursor: pointer;
+  }
+
+  .gw-pcie-tab:last-child {
+    margin-bottom: 0;
+  }
+
+  .gw-pcie-tab.is-active {
+    background: #037cff;
+    border-color: #037cff;
+    color: #ffffff;
+  }
+
+  .gw-pcie-tab:not(.is-active):hover,
+  .gw-pcie-tab:not(.is-active):focus {
+    background: #eef5ff;
+    border-color: #037cff;
+    color: #111111;
+    outline: none;
+  }
+
+  .gw-pcie-tab.is-active:hover,
+  .gw-pcie-tab.is-active:focus {
+    background: #026fe5;
+    border-color: #026fe5;
+    color: #ffffff;
+    outline: none;
+  }
+
+  .gw-pcie-content {
+    padding: 14px;
+  }
+
+  .gw-pcie-panel {
+    display: none;
+  }
+
+  .gw-pcie-panel.is-active {
+    display: block;
+  }
+
+  .gw-pcie-title {
+    margin: 0 0 8px;
+    font-size: 1.02rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .gw-pcie-specs {
+    margin: 0 0 12px;
+    border: 1px solid #e6edf7;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .gw-pcie-spec-row {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr);
+    border-bottom: 1px solid #e6edf7;
+    background: #ffffff;
+  }
+
+  .gw-pcie-spec-row:last-child {
+    border-bottom: 0;
+  }
+
+  .gw-pcie-label,
+  .gw-pcie-value {
+    padding: 9px 10px;
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+
+  .gw-pcie-label {
+    background: #f4f8ff;
+    font-weight: 700;
+  }
+
+  .gw-pcie-value {
+    font-weight: 500;
+  }
+
+  @media (max-width: 760px) {
+    .gw-pcie-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-pcie-menu {
+      border-right: 0;
+      border-bottom: 1px solid #e6edf7;
+    }
+
+    .gw-pcie-spec-row {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-pcie-label {
+      border-bottom: 1px solid #e6edf7;
+    }
+  }
+</style>
+
+<section class="gw-pcie-widget" aria-label="PCIe lane breakdown">
+  <div class="gw-pcie-layout">
+    <div class="gw-pcie-menu" role="tablist" aria-label="PCIe Slots">
+      <button class="gw-pcie-tab is-active" type="button" role="tab" aria-selected="true" data-target="gw-slot-top">
+        PCIe 5.0 x16 (Top)
+      </button>
+      <button class="gw-pcie-tab" type="button" role="tab" aria-selected="false" data-target="gw-slot-middle">
+        PCIe 4.0 x16 (Middle)
+      </button>
+      <button class="gw-pcie-tab" type="button" role="tab" aria-selected="false" data-target="gw-slot-bottom">
+        PCIe 3.0 x16 (Bottom)
+      </button>
+      <button class="gw-pcie-tab" type="button" role="tab" aria-selected="false" data-target="gw-slot-m2-1">
+        M2_1 (PCIe 5.0 x4)
+      </button>
+      <button class="gw-pcie-tab" type="button" role="tab" aria-selected="false" data-target="gw-slot-m2-2">
+        M2_2 (PCIe 5.0 x4)
+      </button>
+      <button class="gw-pcie-tab" type="button" role="tab" aria-selected="false" data-target="gw-slot-m2-3">
+        M2_3 (PCIe 4.0 x4)
+      </button>
+      <button class="gw-pcie-tab" type="button" role="tab" aria-selected="false" data-target="gw-slot-m2-4">
+        M2_4 (PCIe 4.0 x4)
+      </button>
+    </div>
+
+    <div class="gw-pcie-content">
+      <article id="gw-slot-top" class="gw-pcie-panel is-active" role="tabpanel">
+        <h3 class="gw-pcie-title">PCIe 5.0 x16 (Top)</h3>
+        <div class="gw-pcie-specs">
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Electrical</div><div class="gw-pcie-value">x16 / Gen 5.0</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Max Bandwidth</div><div class="gw-pcie-value">~63 GB/s (bidirectional)</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Primary Use</div><div class="gw-pcie-value">GPU / high-bandwidth accelerator</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Lane Source</div><div class="gw-pcie-value">Direct CPU PCIe lanes</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Notes</div><div class="gw-pcie-value">Best slot for flagship GPU performance.</div></div>
+        </div>
+      </article>
+
+      <article id="gw-slot-middle" class="gw-pcie-panel" role="tabpanel">
+        <h3 class="gw-pcie-title">PCIe 4.0 x16 (Middle)</h3>
+        <div class="gw-pcie-specs">
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Electrical</div><div class="gw-pcie-value">x4 / Gen 4.0</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Max Bandwidth</div><div class="gw-pcie-value">~8 GB/s (bidirectional)</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Primary Use</div><div class="gw-pcie-value">Capture cards / NVMe adapters / add-in cards</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Lane Source</div><div class="gw-pcie-value">Chipset lanes</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Notes</div><div class="gw-pcie-value">Physical x16 length, electrically limited.</div></div>
+        </div>
+      </article>
+
+      <article id="gw-slot-bottom" class="gw-pcie-panel" role="tabpanel">
+        <h3 class="gw-pcie-title">PCIe 3.0 x16 (Bottom)</h3>
+        <div class="gw-pcie-specs">
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Electrical</div><div class="gw-pcie-value">x2 / Gen 3.0</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Max Bandwidth</div><div class="gw-pcie-value">~2 GB/s (bidirectional)</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Primary Use</div><div class="gw-pcie-value">Low-bandwidth expansion cards</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Lane Source</div><div class="gw-pcie-value">Chipset lanes</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Notes</div><div class="gw-pcie-value">Best reserved for non-performance-critical cards.</div></div>
+        </div>
+      </article>
+
+      <article id="gw-slot-m2-1" class="gw-pcie-panel" role="tabpanel">
+        <h3 class="gw-pcie-title">M2_1 (PCIe 5.0 x4)</h3>
+        <div class="gw-pcie-specs">
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Interface</div><div class="gw-pcie-value">PCIe 5.0 x4</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Max Throughput</div><div class="gw-pcie-value">~15.8 GB/s</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Typical Lengths</div><div class="gw-pcie-value">2280 / 22110</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Lane Source</div><div class="gw-pcie-value">Direct CPU lanes</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Best Use</div><div class="gw-pcie-value">Primary high-speed NVMe SSD</div></div>
+        </div>
+      </article>
+
+      <article id="gw-slot-m2-2" class="gw-pcie-panel" role="tabpanel">
+        <h3 class="gw-pcie-title">M2_2 (PCIe 5.0 x4)</h3>
+        <div class="gw-pcie-specs">
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Interface</div><div class="gw-pcie-value">PCIe 5.0 x4</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Max Throughput</div><div class="gw-pcie-value">~15.8 GB/s</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Typical Lengths</div><div class="gw-pcie-value">2280</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Lane Source</div><div class="gw-pcie-value">CPU/chipset dependent on board routing</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Best Use</div><div class="gw-pcie-value">Secondary Gen5 NVMe SSD</div></div>
+        </div>
+      </article>
+
+      <article id="gw-slot-m2-3" class="gw-pcie-panel" role="tabpanel">
+        <h3 class="gw-pcie-title">M2_3 (PCIe 4.0 x4)</h3>
+        <div class="gw-pcie-specs">
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Interface</div><div class="gw-pcie-value">PCIe 4.0 x4</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Max Throughput</div><div class="gw-pcie-value">~7.9 GB/s</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Typical Lengths</div><div class="gw-pcie-value">2280</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Lane Source</div><div class="gw-pcie-value">Chipset lanes</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Best Use</div><div class="gw-pcie-value">Game/library SSD or scratch drive</div></div>
+        </div>
+      </article>
+
+      <article id="gw-slot-m2-4" class="gw-pcie-panel" role="tabpanel">
+        <h3 class="gw-pcie-title">M2_4 (PCIe 4.0 x4)</h3>
+        <div class="gw-pcie-specs">
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Interface</div><div class="gw-pcie-value">PCIe 4.0 x4</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Max Throughput</div><div class="gw-pcie-value">~7.9 GB/s</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Typical Lengths</div><div class="gw-pcie-value">2280</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Lane Source</div><div class="gw-pcie-value">Chipset lanes</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Best Use</div><div class="gw-pcie-value">Mass storage / project drive</div></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.currentScript && document.currentScript.previousElementSibling;
+    if (!root || !root.classList.contains("gw-pcie-widget")) {
+      root = document.querySelector(".gw-pcie-widget");
+    }
+    if (!root) return;
+
+    var tabs = root.querySelectorAll(".gw-pcie-tab");
+    var panels = root.querySelectorAll(".gw-pcie-panel");
+
+    function activate(targetId) {
+      tabs.forEach(function (tab) {
+        var isActive = tab.getAttribute("data-target") === targetId;
+        tab.classList.toggle("is-active", isActive);
+        tab.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+
+      panels.forEach(function (panel) {
+        panel.classList.toggle("is-active", panel.id === targetId);
+      });
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        activate(tab.getAttribute("data-target"));
+      });
+    });
+  })();
+</script>

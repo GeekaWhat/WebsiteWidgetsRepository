@@ -1,0 +1,249 @@
+<!--
+CPU cooler testing graph wiget
+HTML + JS only (no CSS), designed to reuse your existing testing widget styles already on page.
+-->
+
+<section class="gw-testing-widget" id="gw-cooler-testing-widget-v1" aria-label="CPU cooler testing carousel">
+  <p class="gw-testing-header">From Our Full Review</p>
+
+  <h3 class="gw-testing-title">
+    <a href="#" target="_blank" rel="noopener noreferrer">CPU Cooler Testing</a>
+  </h3>
+
+  <div class="gw-testing-controls" aria-label="Carousel navigation">
+    <button type="button" class="gw-testing-nav gw-testing-prev" aria-label="Previous graph">← Previous Graph</button>
+    <button type="button" class="gw-testing-nav gw-testing-next" aria-label="Next graph">Next Graph →</button>
+  </div>
+
+  <div class="gw-testing-carousel" aria-label="CPU cooler test charts carousel">
+    <article class="gw-test-slide">
+      <div class="gw-test-embed">
+        <p class="gw-test-chart-title">Cinebench 4 Thread (Avg / Max Temp)</p>
+        <p class="gw-test-note">Lower is better. Highlighted unit: Corsair iCUE LINK TITAN 360 RX.</p>
+        <div class="gw-test-canvas-wrap">
+          <button type="button" class="gw-chart-fullscreen" aria-label="View Cinebench chart fullscreen"></button>
+          <canvas class="gw-cinebench-chart" aria-label="Cinebench 4 thread temperatures"></canvas>
+        </div>
+      </div>
+    </article>
+
+    <article class="gw-test-slide">
+      <div class="gw-test-embed">
+        <p class="gw-test-chart-title">CPU-Z 8 Thread (Avg / Max Temp)</p>
+        <p class="gw-test-note">Lower is better. Highlighted unit: Corsair iCUE LINK TITAN 360 RX.</p>
+        <div class="gw-test-canvas-wrap">
+          <button type="button" class="gw-chart-fullscreen" aria-label="View CPU-Z chart fullscreen"></button>
+          <canvas class="gw-cpuz-chart" aria-label="CPU-Z 8 thread temperatures"></canvas>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <a class="gw-testing-cta" href="#" target="_blank" rel="noopener noreferrer">See Full Testing</a>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById("gw-cooler-testing-widget-v1");
+    if (!root || typeof Chart === "undefined") return;
+
+    var highlightName = "Corsair iCUE LINK TITAN 360 RX";
+
+    var cinebenchLabels = [
+      "Montech HyperFlow ARGB 360",
+      "Montech HyperFlow DIGITAL 360",
+      "Endorfy Navis F360 RGB",
+      "be quiet! Pure Loop 2 360mm",
+      "be quiet! Light Loop 360mm",
+      "MSI MAG CoreLiquid A15 360",
+      "Cougar Poseidon Vistek Pro ARGB 360",
+      "DeepCool MYSTIQUE 360",
+      "MPG CORELIQUID P13 360",
+      "NZXT Kraken Elite 360 RGB V2 (2024)",
+      "ASUS ROG STRIX LC III 360 ARGB",
+      "Corsair Nautilus 360 RS ARGB",
+      "ASUS PRIME LC 360 ARGB",
+      "Valkyrie V360 LCD",
+      "Corsair iCUE LINK TITAN 360 RX",
+      "Cooler Master MasterLiquid 360 Atmos",
+      "MSI MAG CoreLiquid E360",
+      "MSI MAG CoreLiquid I360",
+      "DeepCool LT720",
+      "DeepCool LE720",
+      "Lian Li GA II Trinity 360",
+      "Fractal Lumen S36 ARGB",
+      "Corsair iCUE LINK H150i LCD",
+      "SAMA L70",
+      "Thermaltake MINECUBE 360 Ultra ARGB Sync",
+      "NZXT Kraken 360"
+    ];
+    var cinebenchAvg = [58,58,59,59,60,60,60,60,60,60,60,60,60,61,61,61,61,62,63,63,63,64,64,65,66,67];
+    var cinebenchMax = [63,64,65,67,65,65,67,67,67,67,68,68,69,65,68,69,70,70,73,74,74,72,74,67,74,72];
+
+    var cpuzLabels = [
+      "be quiet! Pure Loop 2 360mm",
+      "Montech HyperFlow ARGB 360",
+      "Antec Vortex Lum 360 RGB",
+      "Arctic Liquid Freezer III 360 Pro",
+      "Endorfy Navis F360 RGB",
+      "MSI MAG CoreLiquid A15 360",
+      "MPG CORELIQUID P13 360",
+      "Corsair Nautilus 360 RS ARGB",
+      "Cooler Master MasterLiquid 360 Atmos",
+      "be quiet! Light Loop 360mm",
+      "ASUS ROG STRIX LC III 360 ARGB",
+      "ASUS PRIME LC 360 ARGB",
+      "Cougar Poseidon Vistek Pro ARGB 360",
+      "Corsair iCUE LINK TITAN 360 RX",
+      "DeepCool Mystique 360",
+      "MSI MAG CoreLiquid I360",
+      "Thermaltake MINECUBE 360 Ultra ARGB Sync",
+      "Lian Li GA II Trinity 360",
+      "DeepCool LT720",
+      "DeepCool LE720",
+      "Fractal Lumen S36 ARGB",
+      "NZXT Kraken Elite 360 RGB V2 (2024)",
+      "Corsair iCUE LINK H150i LCD",
+      "SAMA L70",
+      "MSI MAG CoreLiquid E360",
+      "NZXT Kraken 360"
+    ];
+    var cpuzAvg = [69,69,69,69,69,70,70,70,70,70,71,72,72,72,72,72,73,73,74,74,74,76,77,78,78,82];
+    var cpuzMax = [72,72,74,75,75,72,73,73,75,77,77,75,75,79,79,80,75,79,79,81,82,78,84,80,86,85];
+
+    function colorByHighlight(labels, focus, base, hi) {
+      return labels.map(function (n) { return n === focus ? hi : base; });
+    }
+
+    function chartOptions() {
+      return {
+        indexAxis: "y",
+        maintainAspectRatio: false,
+        responsive: true,
+        plugins: {
+          legend: { position: "bottom" },
+          tooltip: {
+            callbacks: {
+              label: function (ctx) { return ctx.dataset.label + ": " + ctx.parsed.x + "°C"; }
+            }
+          }
+        },
+        scales: {
+          x: {
+            beginAtZero: true,
+            ticks: { callback: function (v) { return v + "°C"; }, font: { size: 10 } },
+            grid: { color: "rgba(0,0,0,0.08)" }
+          },
+          y: {
+            ticks: { font: { size: 10 } },
+            grid: { display: false }
+          }
+        }
+      };
+    }
+
+    var cineCtx = root.querySelector(".gw-cinebench-chart");
+    if (cineCtx) {
+      new Chart(cineCtx, {
+        type: "bar",
+        data: {
+          labels: cinebenchLabels,
+          datasets: [
+            {
+              label: "Average Temp",
+              data: cinebenchAvg,
+              backgroundColor: colorByHighlight(cinebenchLabels, highlightName, "#3c8dff", "#7c3aed")
+            },
+            {
+              label: "Max Temp",
+              data: cinebenchMax,
+              backgroundColor: colorByHighlight(cinebenchLabels, highlightName, "#8fc0ff", "#a06cf5")
+            }
+          ]
+        },
+        options: chartOptions()
+      });
+    }
+
+    var cpuzCtx = root.querySelector(".gw-cpuz-chart");
+    if (cpuzCtx) {
+      new Chart(cpuzCtx, {
+        type: "bar",
+        data: {
+          labels: cpuzLabels,
+          datasets: [
+            {
+              label: "Average Temp",
+              data: cpuzAvg,
+              backgroundColor: colorByHighlight(cpuzLabels, highlightName, "#3c8dff", "#7c3aed")
+            },
+            {
+              label: "Max Temp",
+              data: cpuzMax,
+              backgroundColor: colorByHighlight(cpuzLabels, highlightName, "#8fc0ff", "#a06cf5")
+            }
+          ]
+        },
+        options: chartOptions()
+      });
+    }
+
+    var carousel = root.querySelector(".gw-testing-carousel");
+    var slides = carousel ? Array.prototype.slice.call(carousel.querySelectorAll(".gw-test-slide")) : [];
+    var prevBtn = root.querySelector(".gw-testing-prev");
+    var nextBtn = root.querySelector(".gw-testing-next");
+    var idx = 0;
+
+    function updateNav() {
+      if (!prevBtn || !nextBtn) return;
+      prevBtn.disabled = idx <= 0;
+      nextBtn.disabled = idx >= slides.length - 1;
+    }
+
+    function goTo(i) {
+      idx = Math.max(0, Math.min(slides.length - 1, i));
+      if (slides[idx]) slides[idx].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+      updateNav();
+    }
+
+    if (carousel && prevBtn && nextBtn) {
+      prevBtn.addEventListener("click", function () { goTo(idx - 1); });
+      nextBtn.addEventListener("click", function () { goTo(idx + 1); });
+      updateNav();
+    }
+
+    function enterFullscreen(el) {
+      if (el.requestFullscreen) return el.requestFullscreen();
+      if (el.webkitRequestFullscreen) return el.webkitRequestFullscreen();
+      return Promise.resolve();
+    }
+    function exitFullscreen() {
+      if (document.exitFullscreen) return document.exitFullscreen();
+      if (document.webkitExitFullscreen) return document.webkitExitFullscreen();
+      return Promise.resolve();
+    }
+
+    var fsButtons = root.querySelectorAll(".gw-chart-fullscreen");
+    fsButtons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var panel = btn.closest(".gw-test-embed");
+        if (!panel) return;
+        var open = document.fullscreenElement === panel || document.webkitFullscreenElement === panel;
+        if (open) exitFullscreen(); else enterFullscreen(panel);
+      });
+    });
+
+    function syncFs() {
+      var active = document.fullscreenElement || document.webkitFullscreenElement;
+      fsButtons.forEach(function (btn) {
+        var panel = btn.closest(".gw-test-embed");
+        var on = panel && active === panel;
+        btn.classList.toggle("is-active", !!on);
+        btn.setAttribute("title", on ? "Exit fullscreen" : "View chart fullscreen");
+      });
+    }
+    document.addEventListener("fullscreenchange", syncFs);
+    document.addEventListener("webkitfullscreenchange", syncFs);
+    syncFs();
+  })();
+</script>
