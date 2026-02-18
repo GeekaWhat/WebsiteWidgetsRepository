@@ -1,17 +1,4 @@
-<!--
-GeekaWhat Peripherals Recommendations Widget v1
-Paste into a Gutenberg "Custom HTML" block.
-
-Included features:
-- Single-open accordion (opening one closes others)
-- 4 categories: Keyboard, Mouse, Headset, Monitor
-- Summary header row: product name, quick reason, price tier
-- Expandable specs table per item
-- Review score badge with link target
-- Where to Buy shortcode slot
-- Product thumbnails (lazy-loaded except first)
-- Active blue highlight + mobile-friendly tap targets + smooth animation
--->
+<!-- GeekaWhat Peripherals Recommendations Widget v1 (Updated) -->
 
 <style>
   .gw-peri-widget {
@@ -24,28 +11,6 @@ Included features:
     overflow: hidden;
     color: inherit;
     font: inherit;
-  }
-
-  .gw-peri-head {
-    padding: 12px 13px 10px;
-    border-bottom: 1px solid #edf2fa;
-  }
-
-  .gw-peri-kicker {
-    margin: 0 0 5px;
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    opacity: 0.72;
-    font-weight: 700;
-  }
-
-  .gw-peri-title {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.35;
-    font-weight: 700;
-    color: inherit;
   }
 
   .gw-peri-list {
@@ -83,15 +48,8 @@ Included features:
     font: inherit;
   }
 
-  .gw-peri-item.is-open .gw-peri-trigger {
-    background: #eef5ff;
-  }
-
-  .gw-peri-trigger:hover,
-  .gw-peri-trigger:focus {
-    outline: none;
-    background: #f5f9ff;
-  }
+  .gw-peri-item.is-open .gw-peri-trigger { background: #eef5ff; }
+  .gw-peri-trigger:hover, .gw-peri-trigger:focus { outline: none; background: #f5f9ff; }
 
   .gw-peri-thumb {
     width: 62px;
@@ -103,10 +61,7 @@ Included features:
     cursor: zoom-in;
   }
 
-  .gw-peri-main {
-    min-width: 0;
-  }
-
+  .gw-peri-main { min-width: 0; }
   .gw-peri-type {
     margin: 0 0 3px;
     font-size: 0.72rem;
@@ -121,16 +76,9 @@ Included features:
     font-size: 0.95rem;
     line-height: 1.25;
     font-weight: 700;
-    color: inherit;
   }
 
-  .gw-peri-reason {
-    margin: 0;
-    font-size: 0.82rem;
-    line-height: 1.35;
-    color: inherit;
-    opacity: 0.82;
-  }
+  .gw-peri-reason { margin: 0; font-size: 0.82rem; line-height: 1.35; opacity: 0.82; }
 
   .gw-peri-side {
     text-align: right;
@@ -158,8 +106,7 @@ Included features:
     text-decoration: none;
   }
 
-  .gw-peri-rating:hover,
-  .gw-peri-rating:focus {
+  .gw-peri-rating:hover, .gw-peri-rating:focus {
     color: #ffffff;
     background: #026fe5;
     border-color: #026fe5;
@@ -189,23 +136,11 @@ Included features:
     transition: transform 0.2s ease;
   }
 
-  .gw-peri-item.is-open .gw-peri-chevron::before {
-    transform: rotate(225deg);
-  }
+  .gw-peri-item.is-open .gw-peri-chevron::before { transform: rotate(225deg); }
 
-  .gw-peri-panel {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.24s ease;
-  }
-
-  .gw-peri-item.is-open .gw-peri-panel {
-    grid-template-rows: 1fr;
-  }
-
-  .gw-peri-panel-inner {
-    overflow: hidden;
-  }
+  .gw-peri-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.24s ease; }
+  .gw-peri-item.is-open .gw-peri-panel { grid-template-rows: 1fr; }
+  .gw-peri-panel-inner { overflow: hidden; }
 
   .gw-peri-panel-content {
     border-top: 1px solid #e6edf7;
@@ -221,12 +156,7 @@ Included features:
     background: #ffffff;
   }
 
-  .gw-peri-summary {
-    margin: 0 0 10px;
-    font-size: 0.86rem;
-    line-height: 1.45;
-    opacity: 0.84;
-  }
+  .gw-peri-summary { margin: 0 0 10px; font-size: 0.86rem; line-height: 1.45; opacity: 0.84; }
 
   .gw-peri-spec-row {
     display: grid;
@@ -234,26 +164,16 @@ Included features:
     border-bottom: 1px solid #edf3ff;
   }
 
-  .gw-peri-spec-row:last-child {
-    border-bottom: 0;
-  }
+  .gw-peri-spec-row:last-child { border-bottom: 0; }
 
-  .gw-peri-spec-label,
-  .gw-peri-spec-value {
+  .gw-peri-spec-label, .gw-peri-spec-value {
     padding: 8px 10px;
     font-size: 0.84rem;
     line-height: 1.3;
   }
 
-  .gw-peri-spec-label {
-    background: #f4f8ff;
-    color: #173a72;
-    font-weight: 700;
-  }
-
-  .gw-peri-spec-value {
-    font-weight: 500;
-  }
+  .gw-peri-spec-label { background: #f4f8ff; color: #173a72; font-weight: 700; }
+  .gw-peri-spec-value { font-weight: 500; }
 
   .gw-peri-actions {
     margin-top: 0;
@@ -262,10 +182,7 @@ Included features:
     display: block;
   }
 
-  .gw-peri-buy {
-    margin: 0;
-    font-size: 0.84rem;
-  }
+  .gw-peri-buy { margin: 0; font-size: 0.84rem; }
 
   .gw-peri-review-link {
     display: inline-flex;
@@ -280,17 +197,8 @@ Included features:
     min-height: 32px;
   }
 
-  .gw-peri-review-link:hover,
-  .gw-peri-review-link:focus {
-    color: #037cff;
-    text-decoration: underline;
-    outline: none;
-  }
-
-  .gw-peri-review-link-wrap {
-    margin: 8px 0 0;
-    text-align: center;
-  }
+  .gw-peri-review-link:hover, .gw-peri-review-link:focus { color: #037cff; text-decoration: underline; outline: none; }
+  .gw-peri-review-link-wrap { margin: 8px 0 0; text-align: center; }
 
   .gw-peri-lightbox {
     position: fixed;
@@ -303,14 +211,8 @@ Included features:
     padding: 14px;
   }
 
-  .gw-peri-lightbox.is-open {
-    display: flex;
-  }
-
-  .gw-peri-lightbox-inner {
-    width: min(1200px, 95vw);
-    position: relative;
-  }
+  .gw-peri-lightbox.is-open { display: flex; }
+  .gw-peri-lightbox-inner { width: min(1200px, 95vw); position: relative; }
 
   .gw-peri-lightbox-img {
     width: 100%;
@@ -339,53 +241,34 @@ Included features:
   @media (max-width: 760px) {
     .gw-peri-trigger {
       grid-template-columns: 56px minmax(0, 1fr);
-      grid-template-areas:
-        "thumb main"
-        "side side";
+      grid-template-areas: "thumb main" "side side";
       gap: 8px;
       min-height: 78px;
       padding: 11px;
     }
 
-    .gw-peri-thumb {
-      width: 56px;
-      height: 56px;
-      grid-area: thumb;
-    }
-
-    .gw-peri-main {
-      grid-area: main;
-    }
-
-    .gw-peri-side {
-      grid-area: side;
-      width: auto;
-      justify-self: start;
-      gap: 8px;
-    }
-
-    .gw-peri-spec-row {
-      grid-template-columns: 1fr;
-    }
-
-    .gw-peri-spec-label {
-      border-bottom: 1px solid #e6edf7;
-    }
+    .gw-peri-thumb { width: 56px; height: 56px; grid-area: thumb; }
+    .gw-peri-main { grid-area: main; }
+    .gw-peri-side { grid-area: side; justify-self: start; }
+    .gw-peri-spec-row { grid-template-columns: 1fr; }
+    .gw-peri-spec-label { border-bottom: 1px solid #e6edf7; }
   }
 </style>
 
 <section class="gw-peri-widget" aria-label="Recommended peripherals">
   <div class="gw-peri-list" role="tablist" aria-label="Peripheral recommendations">
+
+    <!-- Keyboard -->
     <article class="gw-peri-item">
       <button class="gw-peri-trigger" type="button" aria-expanded="false" data-target="gw-peri-keyboard" role="tab" aria-selected="false">
-        <img class="gw-peri-thumb" src="/wp-content/uploads/2023/11/Corsair-Vengeance-RGB-White-DDR5_1233.jpg" alt="Recommended keyboard" width="124" height="124" decoding="async">
+        <img class="gw-peri-thumb" src="/wp-content/uploads/2026/02/TBSI_ASUS-ROG-Azoth-X.jpg" alt="TBSI_ASUS ROG Azoth X" width="124" height="124" decoding="async">
         <div class="gw-peri-main">
           <p class="gw-peri-type">Keyboard</p>
-          <p class="gw-peri-name">Keychron Q1 Max</p>
-          <p class="gw-peri-reason">Premium typing feel with excellent gaming latency.</p>
+          <p class="gw-peri-name">ASUS ROG Azoth X</p>
+          <p class="gw-peri-reason">Compact custom-style board with premium feel and tri-mode flexibility.</p>
         </div>
         <div class="gw-peri-side">
-          <a class="gw-peri-rating" href="#" target="_blank" rel="noopener noreferrer">4.7/5</a>
+          <a class="gw-peri-rating" href="https://geekawhat.com/asus-rog-azoth-review/" target="_blank" rel="noopener noreferrer">4.6/5</a>
           <span class="gw-peri-chevron" aria-hidden="true"></span>
         </div>
       </button>
@@ -393,32 +276,33 @@ Included features:
       <div id="gw-peri-keyboard" class="gw-peri-panel" role="tabpanel">
         <div class="gw-peri-panel-inner">
           <div class="gw-peri-panel-content">
-            <p class="gw-peri-summary">Add a concise recommendation summary here (1-2 lines) explaining why this is the best keyboard pick for this build.</p>
+            <p class="gw-peri-summary">A premium 75% pick with enthusiast-level build quality, smooth switches, and strong all-around gaming + daily use performance.</p>
             <div class="gw-peri-specs">
-              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Switch Type</div><div class="gw-peri-spec-value">Hot-swap mechanical (various switch options)</div></div>
-              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Layout</div><div class="gw-peri-spec-value">75% with programmable knob</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Switch Type</div><div class="gw-peri-spec-value">ROG NX Snow V2 (hot-swappable)</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Layout</div><div class="gw-peri-spec-value">75% compact</div></div>
               <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Connectivity</div><div class="gw-peri-spec-value">2.4GHz / Bluetooth / USB-C</div></div>
-              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Best For</div><div class="gw-peri-spec-value">Mixed gaming + productivity setups</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Best For</div><div class="gw-peri-spec-value">Premium gaming + typing setups</div></div>
             </div>
             <div class="gw-peri-actions">
-              <p class="gw-peri-buy">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/7kss" AMAZON-US-ASIN="B0BTZB7F88" AMAZON-GB-ASIN="B0BTZB7F88" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Famd-ryzen-7-7800x3d-eight-core-5.00ghz-socket-am5-processor-retail-cp-3dt-am.html" overclockers-awin-gb-itemid="CP-3DT-AM"]</p>
-              <p class="gw-peri-review-link-wrap"><a class="gw-peri-review-link" href="#" target="_blank" rel="noopener noreferrer">Read Full Review <span aria-hidden="true">↗</span></a></p>
+              <p class="gw-peri-buy">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/xfNl8r" AMAZON-US-ASIN="B0FCPMS1R3" AMAZON-GB-ASIN="B0FDBDPL1W" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fasus-rog-azoth-x-75-custom-gaming-keyboard-rog-nx-snow-v2-mechanical-switc-per-asu-05909.html" overclockers-awin-gb-itemid="PER-ASU-05909"]</p>
+              <p class="gw-peri-review-link-wrap"><a class="gw-peri-review-link" href="https://geekawhat.com/asus-rog-azoth-review/" target="_blank" rel="noopener noreferrer">Read Full Review <span aria-hidden="true">↗</span></a></p>
             </div>
           </div>
         </div>
       </div>
     </article>
 
+    <!-- Mouse -->
     <article class="gw-peri-item">
       <button class="gw-peri-trigger" type="button" aria-expanded="false" data-target="gw-peri-mouse" role="tab" aria-selected="false">
-        <img class="gw-peri-thumb" src="/wp-content/uploads/2023/11/Corsair-Vengeance-RGB-White-DDR5_1233.jpg" alt="Recommended mouse" width="124" height="124" loading="lazy" decoding="async">
+        <img class="gw-peri-thumb" src="/wp-content/uploads/2026/02/TBSI_Logitech-PRO-X2-SUPERSTRIKE.jpg" alt="TBSI_Logitech PRO X2 SUPERSTRIKE" width="124" height="124" loading="lazy" decoding="async">
         <div class="gw-peri-main">
           <p class="gw-peri-type">Mouse</p>
-          <p class="gw-peri-name">Logitech G Pro X Superlight 2</p>
-          <p class="gw-peri-reason">Ultra-light shape with class-leading wireless performance.</p>
+          <p class="gw-peri-name">Logitech PRO X2 SUPERSTRIKE</p>
+          <p class="gw-peri-reason">Lightweight competitive shape tuned for fast flicks and low-latency input.</p>
         </div>
         <div class="gw-peri-side">
-          <a class="gw-peri-rating" href="#" target="_blank" rel="noopener noreferrer">4.8/5</a>
+          <span class="gw-peri-rating" aria-label="Awaiting review">Awaiting review</span>
           <span class="gw-peri-chevron" aria-hidden="true"></span>
         </div>
       </button>
@@ -426,32 +310,32 @@ Included features:
       <div id="gw-peri-mouse" class="gw-peri-panel" role="tabpanel">
         <div class="gw-peri-panel-inner">
           <div class="gw-peri-panel-content">
-            <p class="gw-peri-summary">Add a concise recommendation summary here (1-2 lines) explaining why this is the best mouse pick for this build.</p>
+            <p class="gw-peri-summary">Esports-focused wireless mouse with strong sensor consistency and responsive click feel for FPS-heavy playstyles.</p>
             <div class="gw-peri-specs">
-              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Sensor</div><div class="gw-peri-spec-value">HERO 2, up to 32,000 DPI</div></div>
-              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Weight</div><div class="gw-peri-spec-value">~60g class</div></div>
-              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Polling Rate</div><div class="gw-peri-spec-value">Up to 4,000 Hz (with receiver support)</div></div>
-              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Best For</div><div class="gw-peri-spec-value">Competitive FPS and fast-paced shooters</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Sensor</div><div class="gw-peri-spec-value">High-performance optical sensor</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Weight</div><div class="gw-peri-spec-value">Ultra-light class</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Connectivity</div><div class="gw-peri-spec-value">Low-latency wireless + USB</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Best For</div><div class="gw-peri-spec-value">Competitive shooters</div></div>
             </div>
             <div class="gw-peri-actions">
-              <p class="gw-peri-buy">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/7kss" AMAZON-US-ASIN="B0BTZB7F88" AMAZON-GB-ASIN="B0BTZB7F88" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Famd-ryzen-7-7800x3d-eight-core-5.00ghz-socket-am5-processor-retail-cp-3dt-am.html" overclockers-awin-gb-itemid="CP-3DT-AM"]</p>
-              <p class="gw-peri-review-link-wrap"><a class="gw-peri-review-link" href="#" target="_blank" rel="noopener noreferrer">Read Full Review <span aria-hidden="true">↗</span></a></p>
+              <p class="gw-peri-buy">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/5Q60aU" AMAZON-US-ASIN="B0G12HGHGM" AMAZON-GB-ASIN="B0G3QGG18R"]</p>
             </div>
           </div>
         </div>
       </div>
     </article>
 
+    <!-- Headset -->
     <article class="gw-peri-item">
       <button class="gw-peri-trigger" type="button" aria-expanded="false" data-target="gw-peri-headset" role="tab" aria-selected="false">
-        <img class="gw-peri-thumb" src="/wp-content/uploads/2023/11/Corsair-Vengeance-RGB-White-DDR5_1233.jpg" alt="Recommended headset" width="124" height="124" loading="lazy" decoding="async">
+        <img class="gw-peri-thumb" src="/wp-content/uploads/2026/02/TBSI_Corsair-Virtuoso-RGB-Wireless-XT.jpg" alt="TBSI_Corsair Virtuoso RGB Wireless XT" width="124" height="124" loading="lazy" decoding="async">
         <div class="gw-peri-main">
           <p class="gw-peri-type">Headset</p>
-          <p class="gw-peri-name">SteelSeries Arctis Nova 7</p>
-          <p class="gw-peri-reason">Strong all-round audio with comfortable long-session fit.</p>
+          <p class="gw-peri-name">Corsair VIRTUOSO RGB WIRELESS XT</p>
+          <p class="gw-peri-reason">Feature-rich wireless headset with strong mic quality and broad platform support.</p>
         </div>
         <div class="gw-peri-side">
-          <a class="gw-peri-rating" href="#" target="_blank" rel="noopener noreferrer">4.5/5</a>
+          <span class="gw-peri-rating" aria-label="Awaiting review">Awaiting review</span>
           <span class="gw-peri-chevron" aria-hidden="true"></span>
         </div>
       </button>
@@ -459,32 +343,32 @@ Included features:
       <div id="gw-peri-headset" class="gw-peri-panel" role="tabpanel">
         <div class="gw-peri-panel-inner">
           <div class="gw-peri-panel-content">
-            <p class="gw-peri-summary">Add a concise recommendation summary here (1-2 lines) explaining why this is the best headset pick for this build.</p>
+            <p class="gw-peri-summary">A versatile premium headset with Bluetooth + low-latency wireless and a broadcast-style detachable microphone.</p>
             <div class="gw-peri-specs">
-              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Connection</div><div class="gw-peri-spec-value">2.4GHz + Bluetooth dual wireless</div></div>
-              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Mic</div><div class="gw-peri-spec-value">Retractable ClearCast microphone</div></div>
-              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Battery</div><div class="gw-peri-spec-value">Up to 35-40 hours</div></div>
-              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Best For</div><div class="gw-peri-spec-value">PC gamers who also want console/mobile flexibility</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Connection</div><div class="gw-peri-spec-value">2.4GHz + Bluetooth + USB</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Mic</div><div class="gw-peri-spec-value">Detachable high-bandwidth mic</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Audio</div><div class="gw-peri-spec-value">High-fidelity tuned drivers</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Best For</div><div class="gw-peri-spec-value">PC + console + mobile crossover use</div></div>
             </div>
             <div class="gw-peri-actions">
-              <p class="gw-peri-buy">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/7kss" AMAZON-US-ASIN="B0BTZB7F88" AMAZON-GB-ASIN="B0BTZB7F88" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Famd-ryzen-7-7800x3d-eight-core-5.00ghz-socket-am5-processor-retail-cp-3dt-am.html" overclockers-awin-gb-itemid="CP-3DT-AM"]</p>
-              <p class="gw-peri-review-link-wrap"><a class="gw-peri-review-link" href="#" target="_blank" rel="noopener noreferrer">Read Full Review <span aria-hidden="true">↗</span></a></p>
+              <p class="gw-peri-buy">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/B07X1XWHY1" AMAZON-US-ASIN="" AMAZON-GB-ASIN="B07X1XWHY1" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fcorsair-virtuoso-rgb-wireless-bluetooth-xt-high-fidelity-gaming-headset-wit-sp-04k-cs.html" overclockers-awin-gb-itemid="SP-04K-CS"]</p>
             </div>
           </div>
         </div>
       </div>
     </article>
 
+    <!-- Monitor -->
     <article class="gw-peri-item">
       <button class="gw-peri-trigger" type="button" aria-expanded="false" data-target="gw-peri-monitor" role="tab" aria-selected="false">
-        <img class="gw-peri-thumb" src="/wp-content/uploads/2023/11/Corsair-Vengeance-RGB-White-DDR5_1233.jpg" alt="Recommended monitor" width="124" height="124" loading="lazy" decoding="async">
+        <img class="gw-peri-thumb" src="/wp-content/uploads/2026/02/TBSI_MSI-MPG-321URXW-QD-OLED.jpg" alt="TBSI_MSI MPG 321URXW QD-OLED" width="124" height="124" loading="lazy" decoding="async">
         <div class="gw-peri-main">
           <p class="gw-peri-type">Monitor</p>
-          <p class="gw-peri-name">MSI MAG 274QRF QD E2</p>
-          <p class="gw-peri-reason">Excellent 1440p balance of speed, clarity and value.</p>
+          <p class="gw-peri-name">MSI MPG 321URXW QD-OLED</p>
+          <p class="gw-peri-reason">4K 240Hz QD‑OLED performance with elite motion clarity and contrast.</p>
         </div>
         <div class="gw-peri-side">
-          <a class="gw-peri-rating" href="#" target="_blank" rel="noopener noreferrer">4.6/5</a>
+          <a class="gw-peri-rating" href="https://geekawhat.com/msi-mpg-321urxw-qd-oled-review/" target="_blank" rel="noopener noreferrer">4.8/5</a>
           <span class="gw-peri-chevron" aria-hidden="true"></span>
         </div>
       </button>
@@ -492,16 +376,16 @@ Included features:
       <div id="gw-peri-monitor" class="gw-peri-panel" role="tabpanel">
         <div class="gw-peri-panel-inner">
           <div class="gw-peri-panel-content">
-            <p class="gw-peri-summary">Add a concise recommendation summary here (1-2 lines) explaining why this is the best monitor pick for this build.</p>
+            <p class="gw-peri-summary">Top-end 32-inch 4K gaming display with OLED-level response times and excellent HDR impact.</p>
             <div class="gw-peri-specs">
-              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Panel</div><div class="gw-peri-spec-value">27-inch, 2560x1440 Rapid IPS</div></div>
-              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Refresh Rate</div><div class="gw-peri-spec-value">180Hz</div></div>
-              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Response Time</div><div class="gw-peri-spec-value">1ms GtG class</div></div>
-              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Best For</div><div class="gw-peri-spec-value">High-refresh 1440p gaming builds</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Panel</div><div class="gw-peri-spec-value">32-inch 3840x2160 QD-OLED</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Refresh Rate</div><div class="gw-peri-spec-value">240Hz</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Response Time</div><div class="gw-peri-spec-value">0.03ms class</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Best For</div><div class="gw-peri-spec-value">High-end 4K gaming builds</div></div>
             </div>
             <div class="gw-peri-actions">
-              <p class="gw-peri-buy">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/7kss" AMAZON-US-ASIN="B0BTZB7F88" AMAZON-GB-ASIN="B0BTZB7F88" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Famd-ryzen-7-7800x3d-eight-core-5.00ghz-socket-am5-processor-retail-cp-3dt-am.html" overclockers-awin-gb-itemid="CP-3DT-AM"]</p>
-              <p class="gw-peri-review-link-wrap"><a class="gw-peri-review-link" href="#" target="_blank" rel="noopener noreferrer">Read Full Review <span aria-hidden="true">↗</span></a></p>
+              <p class="gw-peri-buy">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/7UdX" AMAZON-US-ASIN="B0DPXYZYPT" AMAZON-GB-ASIN="B0BSN2BXC5" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fmsi-32-mpg-321urxw-qd-oled-3840x2160-qd-oled-240hz-0.03ms-true-black-400-a-mon-msi-04652.html" overclockers-awin-gb-itemid="MON-MSI-04652"]</p>
+              <p class="gw-peri-review-link-wrap"><a class="gw-peri-review-link" href="https://geekawhat.com/msi-mpg-321urxw-qd-oled-review/" target="_blank" rel="noopener noreferrer">Read Full Review <span aria-hidden="true">↗</span></a></p>
             </div>
           </div>
         </div>
@@ -531,9 +415,7 @@ Included features:
 
       function toFullImagePath(src) {
         if (!src) return "";
-        if (/\.(jpg|jpeg)$/i.test(src)) {
-          return src.replace(/\.(jpg|jpeg)$/i, "-full.$1");
-        }
+        if (/\.(jpg|jpeg)$/i.test(src)) return src.replace(/\.(jpg|jpeg)$/i, "-full.$1");
         return src;
       }
 
@@ -568,7 +450,6 @@ Included features:
         items.forEach(function (item) {
           var btn = item.querySelector(".gw-peri-trigger");
           if (!btn) return;
-
           var isActive = btn.getAttribute("data-target") === targetId;
           item.classList.toggle("is-open", isActive);
           btn.setAttribute("aria-expanded", isActive ? "true" : "false");
@@ -594,19 +475,17 @@ Included features:
             closeAll();
             return;
           }
-
           openItem(target);
         });
       });
 
-      if (lightboxClose) {
-        lightboxClose.addEventListener("click", closeImage);
-      }
+      if (lightboxClose) lightboxClose.addEventListener("click", closeImage);
       if (lightbox) {
         lightbox.addEventListener("click", function (event) {
           if (event.target === lightbox) closeImage();
         });
       }
+
       document.addEventListener("keydown", function (event) {
         if (!lightbox || !lightbox.classList.contains("is-open")) return;
         if (event.key === "Escape") closeImage();
