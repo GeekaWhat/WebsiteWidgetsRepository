@@ -65,6 +65,7 @@ Paste into a Gutenberg "Custom HTML" block.
   }
 
   .gw-ram-speed-track {
+    --ram-marker-at: 50%;
     border: 1px solid #dfeaff;
     border-radius: 10px;
     background: #ffffff;
@@ -98,7 +99,7 @@ Paste into a Gutenberg "Custom HTML" block.
 
   .gw-ram-bar-marker {
     position: absolute;
-    left: 75%;
+    left: var(--ram-marker-at);
     top: 50%;
     width: 16px;
     height: 16px;
@@ -112,8 +113,8 @@ Paste into a Gutenberg "Custom HTML" block.
 
   .gw-ram-bar-marker-label {
     position: absolute;
-    left: 75%;
-    top: -28px;
+    left: 50%;
+    bottom: calc(100% + 8px);
     transform: translateX(-50%);
     font-size: 0.74rem;
     line-height: 1.1;
@@ -235,8 +236,7 @@ Paste into a Gutenberg "Custom HTML" block.
       <p class="gw-ram-speed-title">Memory Speed Visual (DDR5 Scale)</p>
       <div class="gw-ram-bar" aria-hidden="true">
         <span class="gw-ram-bar-fill"></span>
-        <span class="gw-ram-bar-marker-label">6000MHz</span>
-        <span class="gw-ram-bar-marker"></span>
+        <span class="gw-ram-bar-marker"><span class="gw-ram-bar-marker-label">6000MHz</span></span>
       </div>
       <div class="gw-ram-bar-scale">
         <span>4800MHz</span>

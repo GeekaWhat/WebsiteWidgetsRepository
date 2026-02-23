@@ -20,6 +20,20 @@ Paste into a Gutenberg "Custom HTML" block.
     gap: 0;
   }
 
+  .gw-pcie-head {
+    padding: 12px 13px 10px;
+    border-bottom: 1px solid #edf2fa;
+    background: #ffffff;
+  }
+
+  .gw-pcie-widget-title {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.3;
+    font-weight: 800;
+    color: #142033;
+  }
+
   .gw-pcie-menu {
     border-right: 1px solid #e6edf7;
     background: #f8fbff;
@@ -142,28 +156,28 @@ Paste into a Gutenberg "Custom HTML" block.
 </style>
 
 <section class="gw-pcie-widget" aria-label="PCIe lane breakdown">
+  <div class="gw-pcie-head">
+    <h3 class="gw-pcie-widget-title">PCIe Lane Breakdown</h3>
+  </div>
   <div class="gw-pcie-layout">
     <div class="gw-pcie-menu" role="tablist" aria-label="PCIe Slots">
       <button class="gw-pcie-tab is-active" type="button" role="tab" aria-selected="true" data-target="gw-slot-top">
         PCIe 5.0 x16 (Top)
       </button>
       <button class="gw-pcie-tab" type="button" role="tab" aria-selected="false" data-target="gw-slot-middle">
-        PCIe 4.0 x16 (Middle)
-      </button>
-      <button class="gw-pcie-tab" type="button" role="tab" aria-selected="false" data-target="gw-slot-bottom">
-        PCIe 3.0 x16 (Bottom)
+        PCIe 4.0 x16 (PCIEX4)
       </button>
       <button class="gw-pcie-tab" type="button" role="tab" aria-selected="false" data-target="gw-slot-m2-1">
-        M2_1 (PCIe 5.0 x4)
+        M2A_CPU
       </button>
       <button class="gw-pcie-tab" type="button" role="tab" aria-selected="false" data-target="gw-slot-m2-2">
-        M2_2 (PCIe 5.0 x4)
+        M2B_CPU
       </button>
       <button class="gw-pcie-tab" type="button" role="tab" aria-selected="false" data-target="gw-slot-m2-3">
-        M2_3 (PCIe 4.0 x4)
+        M2C_SB
       </button>
       <button class="gw-pcie-tab" type="button" role="tab" aria-selected="false" data-target="gw-slot-m2-4">
-        M2_4 (PCIe 4.0 x4)
+        M2D_SB
       </button>
     </div>
 
@@ -171,77 +185,62 @@ Paste into a Gutenberg "Custom HTML" block.
       <article id="gw-slot-top" class="gw-pcie-panel is-active" role="tabpanel">
         <h3 class="gw-pcie-title">PCIe 5.0 x16 (Top)</h3>
         <div class="gw-pcie-specs">
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Electrical</div><div class="gw-pcie-value">x16 / Gen 5.0</div></div>
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Max Bandwidth</div><div class="gw-pcie-value">~63 GB/s (bidirectional)</div></div>
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Primary Use</div><div class="gw-pcie-value">GPU / high-bandwidth accelerator</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Mode</div><div class="gw-pcie-value">PCIe 5.0 x16 (Ryzen 9000/7000), PCIe 4.0 x8 (Ryzen 8000 Phoenix 1), PCIe 4.0 x4 (Ryzen 8000 Phoenix 2)</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Supported Device</div><div class="gw-pcie-value">Graphics card or NVMe SSD</div></div>
           <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Lane Source</div><div class="gw-pcie-value">Direct CPU PCIe lanes</div></div>
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Notes</div><div class="gw-pcie-value">Best slot for flagship GPU performance.</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Notes</div><div class="gw-pcie-value">If only one graphics card is installed, Gigabyte recommends using PCIEX16.</div></div>
         </div>
       </article>
 
       <article id="gw-slot-middle" class="gw-pcie-panel" role="tabpanel">
-        <h3 class="gw-pcie-title">PCIe 4.0 x16 (Middle)</h3>
+        <h3 class="gw-pcie-title">PCIe 4.0 x16 (PCIEX4)</h3>
         <div class="gw-pcie-specs">
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Electrical</div><div class="gw-pcie-value">x4 / Gen 4.0</div></div>
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Max Bandwidth</div><div class="gw-pcie-value">~8 GB/s (bidirectional)</div></div>
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Primary Use</div><div class="gw-pcie-value">Capture cards / NVMe adapters / add-in cards</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Mode</div><div class="gw-pcie-value">PCIe 4.0 x4 (physical x16 slot)</div></div>
           <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Lane Source</div><div class="gw-pcie-value">Chipset lanes</div></div>
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Notes</div><div class="gw-pcie-value">Physical x16 length, electrically limited.</div></div>
-        </div>
-      </article>
-
-      <article id="gw-slot-bottom" class="gw-pcie-panel" role="tabpanel">
-        <h3 class="gw-pcie-title">PCIe 3.0 x16 (Bottom)</h3>
-        <div class="gw-pcie-specs">
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Electrical</div><div class="gw-pcie-value">x2 / Gen 3.0</div></div>
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Max Bandwidth</div><div class="gw-pcie-value">~2 GB/s (bidirectional)</div></div>
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Primary Use</div><div class="gw-pcie-value">Low-bandwidth expansion cards</div></div>
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Lane Source</div><div class="gw-pcie-value">Chipset lanes</div></div>
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Notes</div><div class="gw-pcie-value">Best reserved for non-performance-critical cards.</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Notes</div><div class="gw-pcie-value">Shares bandwidth with M2D_SB. PCIEX4 becomes unavailable when a device is installed in M2D_SB.</div></div>
         </div>
       </article>
 
       <article id="gw-slot-m2-1" class="gw-pcie-panel" role="tabpanel">
-        <h3 class="gw-pcie-title">M2_1 (PCIe 5.0 x4)</h3>
+        <h3 class="gw-pcie-title">M2A_CPU</h3>
         <div class="gw-pcie-specs">
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Interface</div><div class="gw-pcie-value">PCIe 5.0 x4</div></div>
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Max Throughput</div><div class="gw-pcie-value">~15.8 GB/s</div></div>
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Typical Lengths</div><div class="gw-pcie-value">2280 / 22110</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Connector</div><div class="gw-pcie-value">Socket 3, M key</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Supported Lengths</div><div class="gw-pcie-value">25110 / 22110 / 2580 / 2280</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Interface</div><div class="gw-pcie-value">PCIe 5.0 x4/x2 (Ryzen 9000/7000), PCIe 4.0 x4/x2 (Ryzen 8000 Phoenix 1/2)</div></div>
           <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Lane Source</div><div class="gw-pcie-value">Direct CPU lanes</div></div>
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Best Use</div><div class="gw-pcie-value">Primary high-speed NVMe SSD</div></div>
         </div>
       </article>
 
       <article id="gw-slot-m2-2" class="gw-pcie-panel" role="tabpanel">
-        <h3 class="gw-pcie-title">M2_2 (PCIe 5.0 x4)</h3>
+        <h3 class="gw-pcie-title">M2B_CPU</h3>
         <div class="gw-pcie-specs">
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Interface</div><div class="gw-pcie-value">PCIe 5.0 x4</div></div>
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Max Throughput</div><div class="gw-pcie-value">~15.8 GB/s</div></div>
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Typical Lengths</div><div class="gw-pcie-value">2280</div></div>
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Lane Source</div><div class="gw-pcie-value">CPU/chipset dependent on board routing</div></div>
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Best Use</div><div class="gw-pcie-value">Secondary Gen5 NVMe SSD</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Connector</div><div class="gw-pcie-value">Socket 3, M key</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Supported Lengths</div><div class="gw-pcie-value">22110 / 2280</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Interface</div><div class="gw-pcie-value">PCIe 5.0 x4/x2 (Ryzen 9000/7000), PCIe 4.0 x4/x2 (Ryzen 8000 Phoenix 1)</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Lane Source</div><div class="gw-pcie-value">Direct CPU lanes</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Notes</div><div class="gw-pcie-value">Unavailable with Ryzen 8000 Series Phoenix 2 processors.</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">USB4 Interaction</div><div class="gw-pcie-value">Shares bandwidth with rear USB4 Type-C ports. With M2B installed, both run at up to PCIe 5.0 x2. Setting M2B to PCIe 5.0 x4 in BIOS disables the USB4 ports.</div></div>
         </div>
       </article>
 
       <article id="gw-slot-m2-3" class="gw-pcie-panel" role="tabpanel">
-        <h3 class="gw-pcie-title">M2_3 (PCIe 4.0 x4)</h3>
+        <h3 class="gw-pcie-title">M2C_SB</h3>
         <div class="gw-pcie-specs">
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Interface</div><div class="gw-pcie-value">PCIe 4.0 x4</div></div>
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Max Throughput</div><div class="gw-pcie-value">~7.9 GB/s</div></div>
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Typical Lengths</div><div class="gw-pcie-value">2280</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Connector</div><div class="gw-pcie-value">Socket 3, M key</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Supported Lengths</div><div class="gw-pcie-value">22110 / 2280</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Interface</div><div class="gw-pcie-value">PCIe 4.0 x4/x2</div></div>
           <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Lane Source</div><div class="gw-pcie-value">Chipset lanes</div></div>
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Best Use</div><div class="gw-pcie-value">Game/library SSD or scratch drive</div></div>
         </div>
       </article>
 
       <article id="gw-slot-m2-4" class="gw-pcie-panel" role="tabpanel">
-        <h3 class="gw-pcie-title">M2_4 (PCIe 4.0 x4)</h3>
+        <h3 class="gw-pcie-title">M2D_SB</h3>
         <div class="gw-pcie-specs">
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Interface</div><div class="gw-pcie-value">PCIe 4.0 x4</div></div>
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Max Throughput</div><div class="gw-pcie-value">~7.9 GB/s</div></div>
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Typical Lengths</div><div class="gw-pcie-value">2280</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Connector</div><div class="gw-pcie-value">Socket 3, M key</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Supported Lengths</div><div class="gw-pcie-value">22110 / 2280</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Interface</div><div class="gw-pcie-value">PCIe 4.0 x4/x2</div></div>
           <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Lane Source</div><div class="gw-pcie-value">Chipset lanes</div></div>
-          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Best Use</div><div class="gw-pcie-value">Mass storage / project drive</div></div>
+          <div class="gw-pcie-spec-row"><div class="gw-pcie-label">Notes</div><div class="gw-pcie-value">Shares bandwidth with PCIEX4. Installing a device in M2D_SB disables PCIEX4.</div></div>
         </div>
       </article>
     </div>

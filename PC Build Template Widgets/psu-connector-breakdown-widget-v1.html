@@ -157,52 +157,56 @@ Paste into a Gutenberg "Custom HTML" block.
 
 <section class="gw-psu-widget" aria-label="PSU connector breakdown">
   <div class="gw-psu-head">
-    <h3 class="gw-psu-widget-title">Included Cables</h3>
+    <h3 class="gw-psu-widget-title">Corsair RM750e Connector Reference</h3>
   </div>
   <div class="gw-psu-layout">
     <div class="gw-psu-menu" role="tablist" aria-label="PSU Connectors">
-      <button class="gw-psu-tab is-active" type="button" role="tab" aria-selected="true" data-target="gw-psu-124pin">12+4-pin PCIe</button>
+      <button class="gw-psu-tab is-active" type="button" role="tab" aria-selected="true" data-target="gw-psu-pcie62">PCIe (6+2 pin)</button>
       <button class="gw-psu-tab" type="button" role="tab" aria-selected="false" data-target="gw-psu-12v2x6">12V-2x6</button>
-      <button class="gw-psu-tab" type="button" role="tab" aria-selected="false" data-target="gw-psu-atx12v">ATX 12V (4+4)</button>
-      <button class="gw-psu-tab" type="button" role="tab" aria-selected="false" data-target="gw-psu-pcie62">PCIe (6+2 pin)</button>
+      <button class="gw-psu-tab" type="button" role="tab" aria-selected="false" data-target="gw-psu-atx24">ATX 24-pin</button>
+      <button class="gw-psu-tab" type="button" role="tab" aria-selected="false" data-target="gw-psu-atx12v">CPU EPS (4+4)</button>
       <button class="gw-psu-tab" type="button" role="tab" aria-selected="false" data-target="gw-psu-sata">SATA (15-pin)</button>
       <button class="gw-psu-tab" type="button" role="tab" aria-selected="false" data-target="gw-psu-molex">Peripheral (Molex 4-pin)</button>
     </div>
 
     <div class="gw-psu-content">
-      <article id="gw-psu-124pin" class="gw-psu-panel is-active" role="tabpanel">
-        <h3 class="gw-psu-title">12+4-pin PCIe</h3>
+      <article id="gw-psu-pcie62" class="gw-psu-panel is-active" role="tabpanel">
+        <h3 class="gw-psu-title">PCIe (6+2 pin)</h3>
         <div class="gw-psu-specs">
-          <div class="gw-psu-spec-row"><div class="gw-psu-label">Connector Type</div><div class="gw-psu-value">12+4-pin PCIe</div></div>
-          <div class="gw-psu-spec-row"><div class="gw-psu-label">Quantity Included</div><div class="gw-psu-value">1</div></div>
-          <div class="gw-psu-spec-row"><div class="gw-psu-label">Primary Use</div><div class="gw-psu-value">High-power PCIe/GPU connection</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Connector Type</div><div class="gw-psu-value">PCIe 6+2-pin</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Build Usage</div><div class="gw-psu-value">Sapphire PURE Radeon RX 9070 XT (2 x 8-pin PCIe)</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Recommended Setup</div><div class="gw-psu-value">Use two separate PCIe leads from the PSU</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Notes</div><div class="gw-psu-value">This is the active GPU power connector for this build.</div></div>
         </div>
       </article>
 
       <article id="gw-psu-12v2x6" class="gw-psu-panel" role="tabpanel">
         <h3 class="gw-psu-title">12V-2x6</h3>
         <div class="gw-psu-specs">
-          <div class="gw-psu-spec-row"><div class="gw-psu-label">Connector Type</div><div class="gw-psu-value">12V-2x6</div></div>
-          <div class="gw-psu-spec-row"><div class="gw-psu-label">Quantity Included</div><div class="gw-psu-value">2</div></div>
-          <div class="gw-psu-spec-row"><div class="gw-psu-label">Primary Use</div><div class="gw-psu-value">Modern GPU power connectors</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Connector Type</div><div class="gw-psu-value">12V-2x6 (ATX 3.1 / PCIe 5.1)</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Typical Output</div><div class="gw-psu-value">Up to 600W (GPU dependent)</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Build Usage</div><div class="gw-psu-value">Not used in this build</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Notes</div><div class="gw-psu-value">Available for GPUs that use a native 12V-2x6 input.</div></div>
+        </div>
+      </article>
+
+      <article id="gw-psu-atx24" class="gw-psu-panel" role="tabpanel">
+        <h3 class="gw-psu-title">ATX 24-pin</h3>
+        <div class="gw-psu-specs">
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Connector Type</div><div class="gw-psu-value">ATX 24-pin</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Quantity Included</div><div class="gw-psu-value">1</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Primary Use</div><div class="gw-psu-value">Motherboard power (GIGABYTE B850 EAGLE WIFI 7 ICE)</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Notes</div><div class="gw-psu-value">Required for all standard desktop builds.</div></div>
         </div>
       </article>
 
       <article id="gw-psu-atx12v" class="gw-psu-panel" role="tabpanel">
-        <h3 class="gw-psu-title">ATX 12V (4+4)</h3>
+        <h3 class="gw-psu-title">CPU EPS (4+4)</h3>
         <div class="gw-psu-specs">
-          <div class="gw-psu-spec-row"><div class="gw-psu-label">Connector Type</div><div class="gw-psu-value">4+4-pin ATX 12V</div></div>
-          <div class="gw-psu-spec-row"><div class="gw-psu-label">Quantity Included</div><div class="gw-psu-value">2</div></div>
-          <div class="gw-psu-spec-row"><div class="gw-psu-label">Primary Use</div><div class="gw-psu-value">CPU power (motherboard EPS headers)</div></div>
-        </div>
-      </article>
-
-      <article id="gw-psu-pcie62" class="gw-psu-panel" role="tabpanel">
-        <h3 class="gw-psu-title">PCIe (6+2 pin)</h3>
-        <div class="gw-psu-specs">
-          <div class="gw-psu-spec-row"><div class="gw-psu-label">Connector Type</div><div class="gw-psu-value">Standard GPU power</div></div>
-          <div class="gw-psu-spec-row"><div class="gw-psu-label">Quantity Included</div><div class="gw-psu-value">3</div></div>
-          <div class="gw-psu-spec-row"><div class="gw-psu-label">Primary Use</div><div class="gw-psu-value">Additional GPUs / PCIe devices</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Connector Type</div><div class="gw-psu-value">4+4-pin EPS 12V</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Quantity Included</div><div class="gw-psu-value">2 cables</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Primary Use</div><div class="gw-psu-value">CPU power for AMD Ryzen 7 7800X3D</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Notes</div><div class="gw-psu-value">One EPS cable is sufficient for this CPU; second is optional headroom.</div></div>
         </div>
       </article>
 
@@ -210,8 +214,8 @@ Paste into a Gutenberg "Custom HTML" block.
         <h3 class="gw-psu-title">SATA (15-pin)</h3>
         <div class="gw-psu-specs">
           <div class="gw-psu-spec-row"><div class="gw-psu-label">Connector Type</div><div class="gw-psu-value">SATA</div></div>
-          <div class="gw-psu-spec-row"><div class="gw-psu-label">Quantity Included</div><div class="gw-psu-value">8</div></div>
-          <div class="gw-psu-spec-row"><div class="gw-psu-label">Primary Use</div><div class="gw-psu-value">SATA storage devices</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Primary Use</div><div class="gw-psu-value">SATA storage, fan/ARGB hubs, accessories</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Build Usage</div><div class="gw-psu-value">Optional (build storage is M.2 NVMe)</div></div>
         </div>
       </article>
 
@@ -219,8 +223,8 @@ Paste into a Gutenberg "Custom HTML" block.
         <h3 class="gw-psu-title">Peripheral (Molex 4-pin)</h3>
         <div class="gw-psu-specs">
           <div class="gw-psu-spec-row"><div class="gw-psu-label">Connector Type</div><div class="gw-psu-value">Molex</div></div>
-          <div class="gw-psu-spec-row"><div class="gw-psu-label">Quantity Included</div><div class="gw-psu-value">4</div></div>
-          <div class="gw-psu-spec-row"><div class="gw-psu-label">Primary Use</div><div class="gw-psu-value">Fans / legacy devices</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Primary Use</div><div class="gw-psu-value">Legacy accessories and older peripherals</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Build Usage</div><div class="gw-psu-value">Not required</div></div>
         </div>
       </article>
     </div>
@@ -230,9 +234,7 @@ Paste into a Gutenberg "Custom HTML" block.
 <script>
   (function () {
     var root = document.currentScript && document.currentScript.previousElementSibling;
-    if (!root || !root.classList.contains("gw-psu-widget")) {
-      root = document.querySelector(".gw-psu-widget");
-    }
+    if (!root || !root.classList.contains("gw-psu-widget")) return;
     if (!root) return;
 
     var tabs = root.querySelectorAll(".gw-psu-tab");
