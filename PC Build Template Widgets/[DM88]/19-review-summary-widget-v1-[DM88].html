@@ -1,0 +1,278 @@
+<!--
+GeekaWhat Review Summary Widget v1 (HTML + CSS only)
+Paste into a Gutenberg "Custom HTML" block.
+-->
+
+<style>
+  .gw-review-widget {
+    --gw-accent: #037cff;
+    --gw-star: #037cff;
+    width: 100%;
+    margin: 18px 0;
+    padding: 18px;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-sizing: border-box;
+  }
+
+  .gw-review-header {
+    margin: -18px -18px 14px;
+    padding: 10px 14px;
+    border-radius: 16px 16px 0 0;
+    background: #037cff;
+    color: #ffffff;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .gw-review-top {
+    display: flex;
+    gap: 14px;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: -6px;
+  }
+
+  .gw-review-title {
+    margin: 2px 0 -2px;
+    font-size: 1.2rem;
+    line-height: 1.3;
+    font-weight: 700;
+  }
+
+  .gw-review-title a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .gw-review-title a:hover,
+  .gw-review-title a:focus {
+    text-decoration: underline;
+  }
+
+  .gw-review-stars {
+    flex: 0 0 auto;
+    padding: 8px 10px;
+    border-radius: 10px;
+    background: #f7faff;
+    border: 1px solid #d9e8ff;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+
+  .gw-stars-row {
+    margin: 0;
+    color: var(--gw-star);
+    letter-spacing: 1px;
+    font-size: 15px;
+    line-height: 1;
+  }
+
+  .gw-stars-score {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .gw-review-meta {
+    margin: 0 0 12px;
+    font-size: 0.92rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .gw-review-author-photo {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex: 0 0 28px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .gw-review-meta a {
+    color: var(--gw-accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .gw-review-meta a:hover,
+  .gw-review-meta a:focus {
+    text-decoration: underline;
+  }
+
+  .gw-review-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .gw-review-col {
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #fbfcff;
+    border: 1px solid #ecf1fa;
+  }
+
+  .gw-review-col h4 {
+    margin: 0 0 8px;
+    font-size: 0.95rem;
+    line-height: 1.2;
+  }
+
+  .gw-review-pros h4 {
+    color: #057a3f;
+  }
+
+  .gw-review-cons h4 {
+    color: #b42318;
+  }
+
+  .gw-review-col ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+
+  .gw-review-col li {
+    margin: 0 0 6px;
+    font-size: 0.92rem;
+    line-height: 1.35;
+  }
+
+  .gw-review-summary-label {
+    margin: 0 0 5px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    opacity: 0.75;
+  }
+
+  .gw-review-section-label {
+    margin: 0 0 6px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    opacity: 0.75;
+  }
+
+  .gw-review-summary {
+    margin: 0 0 12px;
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+
+  .gw-review-cta {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #037cff;
+    background: #037cff;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  .gw-review-cta:hover,
+  .gw-review-cta:focus {
+    background: #026fe5;
+    border-color: #026fe5;
+  }
+
+  @media (max-width: 700px) {
+    .gw-review-widget {
+      padding: 14px;
+      border-radius: 14px;
+    }
+
+    .gw-review-header {
+      margin: -14px -14px 12px;
+      border-radius: 14px 14px 0 0;
+    }
+
+    .gw-review-top {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+    }
+
+    .gw-review-stars {
+      align-self: flex-start;
+    }
+
+    .gw-review-meta {
+      align-items: flex-start;
+    }
+
+    .gw-review-grid {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+  }
+</style>
+
+<section class="gw-review-widget" aria-label="Review summary">
+  <p class="gw-review-header">From Our Full Review</p>
+  <div class="gw-review-top">
+    <div>
+      <h3 class="gw-review-title">
+        <a href="https://geekawhat.com/microatx-budget-low-end-1440p-gaming-pc-build/" target="_blank" rel="noopener noreferrer">
+          DM88 Micro-ATX Budget 1440p Gaming Build
+        </a>
+      </h3>
+    </div>
+    <div class="gw-review-stars" aria-label="Build summary snapshot">
+      <p class="gw-stars-row">★★★★★</p>
+      <p class="gw-stars-score">Test build</p>
+    </div>
+  </div>
+
+  <p class="gw-review-meta">
+    <img class="gw-review-author-photo" src="https://geekawhat.com/wp-content/uploads/2025/10/GeekaWhat-Logo-Blue.jpg" alt="GeekaWhat Team">
+    <span>
+      Reviewed by
+      <a href="https://geekawhat.com">GeekaWhat Team</a>
+      · Test run: DM88
+    </span>
+  </p>
+
+  <p class="gw-review-section-label">Pros and Cons</p>
+  <div class="gw-review-grid">
+    <div class="gw-review-col gw-review-pros">
+      <h4>Pros</h4>
+      <ul>
+        <li>Compact Micro-ATX footprint</li>
+        <li>Great value-to-performance focus</li>
+        <li>Strong 1080p and light 1440p results</li>
+      </ul>
+    </div>
+    <div class="gw-review-col gw-review-cons">
+      <h4>Cons</h4>
+      <ul>
+        <li>16GB RAM is entry-level for newer titles</li>
+        <li>No modular PSU cable management</li>
+        <li>GPU choice is best for 1080p-first targets</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="gw-review-summary-label">Bottom Line</p>
+  <p class="gw-review-summary">
+    This DM88 build pairs a Ryzen 5 7600X with a Sapphire Pulse RX 9060 XT 8GB in a compact Micro-ATX case. The result is a budget-conscious system that handles 1080p very well and can push into 1440p in many games while keeping overall part cost sensible.
+  </p>
+
+  <a class="gw-review-cta" href="https://geekawhat.com/microatx-budget-low-end-1440p-gaming-pc-build/" target="_blank" rel="noopener noreferrer">
+    Read The Full Build Guide
+  </a>
+</section>
