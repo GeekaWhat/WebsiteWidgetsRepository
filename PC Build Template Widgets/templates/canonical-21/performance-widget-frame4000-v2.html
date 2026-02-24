@@ -1,0 +1,564 @@
+<!--
+GeekaWhat Performance Widget — Sleek FRAME 4000D Build
+Ryzen 7 7800X3D + Sapphire Pure RX 9070 XT OC
+Driver: AMD Software Adrenalin Edition 26.1.1 (January 21, 2026)
+
+Games on top, resolution tabs per game, and FPS metric pills.
+-->
+
+<style>
+  .gw-perf-widget {
+    width: 100%;
+    margin: 18px 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+  }
+
+  .gw-perf-head {
+    padding: 12px 13px 10px;
+    border-bottom: 1px solid #edf2fa;
+  }
+
+  .gw-perf-kicker {
+    margin: 0 0 5px;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0.72;
+    font-weight: 700;
+  }
+
+  .gw-perf-title {
+    margin: 0;
+    font-size: 1.02rem;
+    line-height: 1.3;
+    font-weight: 700;
+  }
+
+  .gw-perf-game-nav-wrap {
+    padding: 10px 13px 6px;
+    border-bottom: 1px solid #edf2fa;
+  }
+
+  .gw-perf-game-nav {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .gw-perf-game-nav::-webkit-scrollbar { height: 6px; }
+  .gw-perf-game-nav::-webkit-scrollbar-thumb {
+    background: rgba(3, 124, 255, 0.25);
+    border-radius: 999px;
+  }
+
+  .gw-perf-game-btn {
+    border: 1px solid #d6e6ff;
+    background: #ffffff;
+    color: #122033;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    white-space: nowrap;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .gw-perf-game-btn.is-active { background: #037cff; border-color: #037cff; color: #ffffff; }
+  .gw-perf-game-btn:hover,
+  .gw-perf-game-btn:focus { outline: none; border-color: #037cff; background: #eef5ff; color: #122033; }
+  .gw-perf-game-btn.is-active:hover,
+  .gw-perf-game-btn.is-active:focus { background: #026fe5; border-color: #026fe5; color: #ffffff; }
+
+  .gw-perf-body { padding: 12px 13px 0; }
+
+  .gw-perf-game-panel { display: none; }
+  .gw-perf-game-panel.is-active { display: block; }
+
+  .gw-perf-sub { display: none; }
+
+  .gw-perf-res-nav {
+    display: flex;
+    gap: 8px;
+    margin: 0 0 10px;
+  }
+
+  .gw-perf-res-btn {
+    border: 1px solid #d6e6ff;
+    background: #ffffff;
+    color: #122033;
+    border-radius: 999px;
+    padding: 5px 10px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .gw-perf-res-btn.is-active {
+    background: #037cff;
+    border-color: #037cff;
+    color: #ffffff;
+  }
+
+  .gw-perf-res-btn:hover,
+  .gw-perf-res-btn:focus {
+    outline: none;
+    border-color: #037cff;
+    background: #eef5ff;
+    color: #122033;
+  }
+
+  .gw-perf-res-btn.is-active:hover,
+  .gw-perf-res-btn.is-active:focus {
+    background: #026fe5;
+    border-color: #026fe5;
+    color: #ffffff;
+  }
+
+  .gw-perf-res-panel { display: none; }
+  .gw-perf-res-panel.is-active { display: block; }
+
+  .gw-perf-tiles {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin: 0 0 10px;
+  }
+
+  .gw-perf-tile {
+    border: 1px solid #d8e7ff;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+    padding: 10px;
+    text-align: center;
+  }
+
+  .gw-perf-label {
+    margin: 0 0 6px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #1f4f98;
+    font-weight: 700;
+  }
+
+  .gw-perf-fps {
+    margin: 0;
+    font-size: 1.7rem;
+    line-height: 1.05;
+    color: #037cff;
+    font-weight: 800;
+  }
+
+  .gw-perf-unit {
+    margin-left: 4px;
+    font-size: 0.7em;
+    font-weight: 700;
+    opacity: 0.8;
+  }
+
+  .res-4k-panel .gw-perf-tile {
+    border-color: #ddb8ff;
+    background: linear-gradient(180deg, #fdf8ff 0%, #f5eaff 100%);
+  }
+
+  .res-4k-panel .gw-perf-label { color: #6600aa; }
+  .res-4k-panel .gw-perf-fps { color: #9900ff; }
+
+  .gw-perf-settings-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid #037cff;
+    background: #ffffff;
+    color: #037cff;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 0.84rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    margin-top: 2px;
+  }
+
+  .gw-perf-settings-toggle:hover,
+  .gw-perf-settings-toggle:focus {
+    background: #eef5ff;
+    outline: none;
+  }
+
+  .gw-perf-settings-body {
+    margin: 10px 0 0;
+    padding: 10px;
+    border: 1px solid #e1ecff;
+    border-radius: 8px;
+    background: #f9fbff;
+    display: none;
+  }
+
+  .gw-perf-settings-body.is-open { display: block; }
+
+  .gw-perf-settings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .gw-perf-settings-item {
+    border: 1px solid #deebff;
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 7px 8px;
+  }
+
+  .gw-perf-settings-label {
+    margin: 0 0 2px;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #1f4f98;
+    font-weight: 700;
+  }
+
+  .gw-perf-settings-value {
+    margin: 0;
+    font-size: 0.84rem;
+    line-height: 1.35;
+    font-weight: 500;
+  }
+
+  .gw-driver-bar {
+    margin: 10px -13px 0;
+    padding: 8px 10px;
+    border-radius: 0 0 16px 16px;
+    color: #ffffff;
+    font-size: 0.84rem;
+    font-weight: 700;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    width: calc(100% + 26px);
+    max-width: none;
+    flex: 0 0 auto;
+    box-sizing: border-box;
+  }
+
+  .gw-driver-logo {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.62rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .gw-driver-bar.amd { background: #d44141; }
+
+  @media (max-width: 760px) {
+    .gw-perf-tiles { gap: 6px; }
+    .gw-perf-fps { font-size: 1.35rem; }
+    .gw-perf-settings-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .gw-perf-tiles { grid-template-columns: 1fr; }
+  }
+</style>
+
+<section class="gw-perf-widget" id="gw-perf-widget-frame4000-v2" aria-label="Performance results">
+  <div class="gw-perf-head">
+    <p class="gw-perf-kicker">Performance Snapshot</p>
+    <h3 class="gw-perf-title">Ryzen 7 7800X3D + Sapphire Pure RX 9070 XT OC — Gaming Benchmarks</h3>
+  </div>
+
+  <div class="gw-perf-game-nav-wrap">
+    <div class="gw-perf-game-nav" role="tablist" aria-label="Games">
+      <button class="gw-perf-game-btn is-active" type="button" role="tab" aria-selected="true" data-target="gw-game-arc">Arc Raiders</button>
+      <button class="gw-perf-game-btn" type="button" role="tab" aria-selected="false" data-target="gw-game-bf6">Battlefield 6</button>
+      <button class="gw-perf-game-btn" type="button" role="tab" aria-selected="false" data-target="gw-game-cod">COD: Black Ops 7</button>
+      <button class="gw-perf-game-btn" type="button" role="tab" aria-selected="false" data-target="gw-game-cyber">Cyberpunk 2077</button>
+      <button class="gw-perf-game-btn" type="button" role="tab" aria-selected="false" data-target="gw-game-marvel">Marvel Rivals</button>
+    </div>
+  </div>
+
+  <div class="gw-perf-body">
+
+    <article id="gw-game-arc" class="gw-perf-game-panel is-active" role="tabpanel">
+      <div class="gw-perf-res-nav" role="tablist" aria-label="Arc Raiders resolutions">
+        <button class="gw-perf-res-btn is-active" type="button" data-res-target="arc-1440p">1440p</button>
+        <button class="gw-perf-res-btn" type="button" data-res-target="arc-4k">4K</button>
+      </div>
+
+      <div class="gw-perf-res-panel is-active" data-res-panel="arc-1440p">
+        <div class="gw-perf-tiles">
+          <div class="gw-perf-tile"><p class="gw-perf-label">Average</p><p class="gw-perf-fps">176.4<span class="gw-perf-unit">FPS</span></p></div>
+          <div class="gw-perf-tile"><p class="gw-perf-label">1% Low</p><p class="gw-perf-fps">116.6<span class="gw-perf-unit">FPS</span></p></div>
+          <div class="gw-perf-tile"><p class="gw-perf-label">0.1% Low</p><p class="gw-perf-fps">88.2<span class="gw-perf-unit">FPS</span></p></div>
+        </div>
+      </div>
+
+      <div class="gw-perf-res-panel res-4k-panel" data-res-panel="arc-4k">
+        <div class="gw-perf-tiles">
+          <div class="gw-perf-tile"><p class="gw-perf-label">Average</p><p class="gw-perf-fps">111<span class="gw-perf-unit">FPS</span></p></div>
+          <div class="gw-perf-tile"><p class="gw-perf-label">1% Low</p><p class="gw-perf-fps">82.1<span class="gw-perf-unit">FPS</span></p></div>
+          <div class="gw-perf-tile"><p class="gw-perf-label">0.1% Low</p><p class="gw-perf-fps">71.8<span class="gw-perf-unit">FPS</span></p></div>
+        </div>
+      </div>
+
+      <button type="button" class="gw-perf-settings-toggle" aria-expanded="false">View Test Settings</button>
+      <div class="gw-perf-settings-body">
+        <div class="gw-perf-settings-grid">
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Map</p><p class="gw-perf-settings-value">Dam Battlegrounds</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Capture Length</p><p class="gw-perf-settings-value">4-7 mins</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Window / Resolution</p><p class="gw-perf-settings-value">Fullscreen, 3840x2160</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Frame Generation</p><p class="gw-perf-settings-value">Off</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">VSync / Reflex</p><p class="gw-perf-settings-value">VSync Off, NVIDIA Reflex On</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Frame Rate Limit</p><p class="gw-perf-settings-value">Unlimited</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Resolution Scaling</p><p class="gw-perf-settings-value">TAAU, 100% (3840x2160), Manual</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Field of View</p><p class="gw-perf-settings-value">90</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Motion Blur</p><p class="gw-perf-settings-value">Off, Intensity 0</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">RTX GI</p><p class="gw-perf-settings-value">Static</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Overall Quality</p><p class="gw-perf-settings-value">High</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Graphics Breakdown</p><p class="gw-perf-settings-value">View Distance / AA / Shadows / Post / Texture / Effects / Reflections / Foliage / GI all High</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Energy Saving</p><p class="gw-perf-settings-value">Idle On, Inactive Window On</p></div>
+        </div>
+      </div>
+
+      <div class="gw-driver-bar amd"><span class="gw-driver-logo">A</span>AMD Software: Adrenalin Edition 26.1.1 - Released January 21, 2026</div>
+    </article>
+
+    <article id="gw-game-bf6" class="gw-perf-game-panel" role="tabpanel">
+      <div class="gw-perf-res-nav" role="tablist" aria-label="Battlefield 6 resolutions">
+        <button class="gw-perf-res-btn is-active" type="button" data-res-target="bf6-1440p">1440p</button>
+        <button class="gw-perf-res-btn" type="button" data-res-target="bf6-4k">4K</button>
+      </div>
+
+      <div class="gw-perf-res-panel is-active" data-res-panel="bf6-1440p">
+        <div class="gw-perf-tiles">
+          <div class="gw-perf-tile"><p class="gw-perf-label">Average</p><p class="gw-perf-fps">157.5<span class="gw-perf-unit">FPS</span></p></div>
+          <div class="gw-perf-tile"><p class="gw-perf-label">1% Low</p><p class="gw-perf-fps">99.9<span class="gw-perf-unit">FPS</span></p></div>
+          <div class="gw-perf-tile"><p class="gw-perf-label">0.1% Low</p><p class="gw-perf-fps">92.8<span class="gw-perf-unit">FPS</span></p></div>
+        </div>
+      </div>
+
+      <div class="gw-perf-res-panel res-4k-panel" data-res-panel="bf6-4k">
+        <div class="gw-perf-tiles">
+          <div class="gw-perf-tile"><p class="gw-perf-label">Average</p><p class="gw-perf-fps">95.3<span class="gw-perf-unit">FPS</span></p></div>
+          <div class="gw-perf-tile"><p class="gw-perf-label">1% Low</p><p class="gw-perf-fps">73.3<span class="gw-perf-unit">FPS</span></p></div>
+          <div class="gw-perf-tile"><p class="gw-perf-label">0.1% Low</p><p class="gw-perf-fps">65.8<span class="gw-perf-unit">FPS</span></p></div>
+        </div>
+      </div>
+
+      <button type="button" class="gw-perf-settings-toggle" aria-expanded="false">View Test Settings</button>
+      <div class="gw-perf-settings-body">
+        <div class="gw-perf-settings-grid">
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Map / Mode</p><p class="gw-perf-settings-value">Empire State, Conquest</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Capture Length</p><p class="gw-perf-settings-value">4-7 mins</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Fullscreen Mode</p><p class="gw-perf-settings-value">Windowed (Fullscreen Device Monitor 1)</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Resolution / Refresh</p><p class="gw-perf-settings-value">3840x2160, 120Hz, Aspect Auto</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">VSync / FOV</p><p class="gw-perf-settings-value">VSync Off, FOV 90, Vehicle FOV 79</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Blur / Camera</p><p class="gw-perf-settings-value">Weapon + World blur 0, Camera shake 50</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Visual Effects</p><p class="gw-perf-settings-value">Chromatic Aberration On, Vignette On, Film Grain On</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Preset</p><p class="gw-perf-settings-value">Custom, Graphics Quality High</p></div>
+        </div>
+      </div>
+
+      <div class="gw-driver-bar amd"><span class="gw-driver-logo">A</span>AMD Software: Adrenalin Edition 26.1.1 - Released January 21, 2026</div>
+    </article>
+
+    <article id="gw-game-cod" class="gw-perf-game-panel" role="tabpanel">
+      <div class="gw-perf-res-nav" role="tablist" aria-label="COD Black Ops 7 resolutions">
+        <button class="gw-perf-res-btn is-active" type="button" data-res-target="cod-1440p">1440p</button>
+        <button class="gw-perf-res-btn" type="button" data-res-target="cod-4k">4K</button>
+      </div>
+
+      <div class="gw-perf-res-panel is-active" data-res-panel="cod-1440p">
+        <div class="gw-perf-tiles">
+          <div class="gw-perf-tile"><p class="gw-perf-label">Average</p><p class="gw-perf-fps">112.1<span class="gw-perf-unit">FPS</span></p></div>
+          <div class="gw-perf-tile"><p class="gw-perf-label">1% Low</p><p class="gw-perf-fps">84.7<span class="gw-perf-unit">FPS</span></p></div>
+          <div class="gw-perf-tile"><p class="gw-perf-label">0.1% Low</p><p class="gw-perf-fps">76.9<span class="gw-perf-unit">FPS</span></p></div>
+        </div>
+      </div>
+
+      <div class="gw-perf-res-panel res-4k-panel" data-res-panel="cod-4k">
+        <div class="gw-perf-tiles">
+          <div class="gw-perf-tile"><p class="gw-perf-label">Average</p><p class="gw-perf-fps">110<span class="gw-perf-unit">FPS</span></p></div>
+          <div class="gw-perf-tile"><p class="gw-perf-label">1% Low</p><p class="gw-perf-fps">80.9<span class="gw-perf-unit">FPS</span></p></div>
+          <div class="gw-perf-tile"><p class="gw-perf-label">0.1% Low</p><p class="gw-perf-fps">74.9<span class="gw-perf-unit">FPS</span></p></div>
+        </div>
+      </div>
+
+      <button type="button" class="gw-perf-settings-toggle" aria-expanded="false">View Test Settings</button>
+      <div class="gw-perf-settings-body">
+        <div class="gw-perf-settings-grid">
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Mode / Map</p><p class="gw-perf-settings-value">Zombies Solo, Ashes of the Damned (Spawn Area)</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Capture Length</p><p class="gw-perf-settings-value">4-7 mins</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Display / Resolution</p><p class="gw-perf-settings-value">Fullscreen, 1920x1080, Aspect Auto</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Render Resolution</p><p class="gw-perf-settings-value">100% (3840x2160), Dynamic Resolution Off</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">VSync / Frame Cap</p><p class="gw-perf-settings-value">VSync Off (Gameplay + Menus), Unlimited FPS</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Reflex / Frame Gen</p><p class="gw-perf-settings-value">NVIDIA Reflex On, DLSS FG Off, FSR FG Off</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">HDR / Gamma</p><p class="gw-perf-settings-value">HDR Automatic, Gamma 2.2 (sRGB)</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Preset</p><p class="gw-perf-settings-value">Custom (Eco preset Efficiency baseline)</p></div>
+        </div>
+      </div>
+
+      <div class="gw-driver-bar amd"><span class="gw-driver-logo">A</span>AMD Software: Adrenalin Edition 26.1.1 - Released January 21, 2026</div>
+    </article>
+
+    <article id="gw-game-cyber" class="gw-perf-game-panel" role="tabpanel">
+      <div class="gw-perf-res-nav" role="tablist" aria-label="Cyberpunk 2077 resolutions">
+        <button class="gw-perf-res-btn is-active" type="button" data-res-target="cyber-1440p">1440p</button>
+        <button class="gw-perf-res-btn" type="button" data-res-target="cyber-4k">4K</button>
+      </div>
+
+      <div class="gw-perf-res-panel is-active" data-res-panel="cyber-1440p">
+        <div class="gw-perf-tiles">
+          <div class="gw-perf-tile"><p class="gw-perf-label">Average</p><p class="gw-perf-fps">145.7<span class="gw-perf-unit">FPS</span></p></div>
+          <div class="gw-perf-tile"><p class="gw-perf-label">1% Low</p><p class="gw-perf-fps">100<span class="gw-perf-unit">FPS</span></p></div>
+          <div class="gw-perf-tile"><p class="gw-perf-label">0.1% Low</p><p class="gw-perf-fps">87.3<span class="gw-perf-unit">FPS</span></p></div>
+        </div>
+      </div>
+
+      <div class="gw-perf-res-panel res-4k-panel" data-res-panel="cyber-4k">
+        <div class="gw-perf-tiles">
+          <div class="gw-perf-tile"><p class="gw-perf-label">Average</p><p class="gw-perf-fps">78.6<span class="gw-perf-unit">FPS</span></p></div>
+          <div class="gw-perf-tile"><p class="gw-perf-label">1% Low</p><p class="gw-perf-fps">63.6<span class="gw-perf-unit">FPS</span></p></div>
+          <div class="gw-perf-tile"><p class="gw-perf-label">0.1% Low</p><p class="gw-perf-fps">59.9<span class="gw-perf-unit">FPS</span></p></div>
+        </div>
+      </div>
+
+      <button type="button" class="gw-perf-settings-toggle" aria-expanded="false">View Test Settings</button>
+      <div class="gw-perf-settings-body">
+        <div class="gw-perf-settings-grid">
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Benchmark Mode</p><p class="gw-perf-settings-value">Built-in benchmark ran 2x</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Display</p><p class="gw-perf-settings-value">Fullscreen, 3840x2160, VSync Off, FPS cap Off</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Preset</p><p class="gw-perf-settings-value">Custom, Texture High</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Upscaling / Frame Gen</p><p class="gw-perf-settings-value">Resolution Scaling Off, Frame Generation Off</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Ray Tracing / Path Tracing</p><p class="gw-perf-settings-value">All Off</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Crowd / FOV</p><p class="gw-perf-settings-value">Crowd Density Medium, FOV 80</p></div>
+        </div>
+      </div>
+
+      <div class="gw-driver-bar amd"><span class="gw-driver-logo">A</span>AMD Software: Adrenalin Edition 26.1.1 - Released January 21, 2026</div>
+    </article>
+
+    <article id="gw-game-marvel" class="gw-perf-game-panel" role="tabpanel">
+      <div class="gw-perf-res-nav" role="tablist" aria-label="Marvel Rivals resolutions">
+        <button class="gw-perf-res-btn is-active" type="button" data-res-target="marvel-1440p">1440p</button>
+        <button class="gw-perf-res-btn" type="button" data-res-target="marvel-4k">4K</button>
+      </div>
+
+      <div class="gw-perf-res-panel is-active" data-res-panel="marvel-1440p">
+        <div class="gw-perf-tiles">
+          <div class="gw-perf-tile"><p class="gw-perf-label">Average</p><p class="gw-perf-fps">131.6<span class="gw-perf-unit">FPS</span></p></div>
+          <div class="gw-perf-tile"><p class="gw-perf-label">1% Low</p><p class="gw-perf-fps">100.3<span class="gw-perf-unit">FPS</span></p></div>
+          <div class="gw-perf-tile"><p class="gw-perf-label">0.1% Low</p><p class="gw-perf-fps">90.7<span class="gw-perf-unit">FPS</span></p></div>
+        </div>
+      </div>
+
+      <div class="gw-perf-res-panel res-4k-panel" data-res-panel="marvel-4k">
+        <div class="gw-perf-tiles">
+          <div class="gw-perf-tile"><p class="gw-perf-label">Average</p><p class="gw-perf-fps">81<span class="gw-perf-unit">FPS</span></p></div>
+          <div class="gw-perf-tile"><p class="gw-perf-label">1% Low</p><p class="gw-perf-fps">62.6<span class="gw-perf-unit">FPS</span></p></div>
+          <div class="gw-perf-tile"><p class="gw-perf-label">0.1% Low</p><p class="gw-perf-fps">56.2<span class="gw-perf-unit">FPS</span></p></div>
+        </div>
+      </div>
+
+      <button type="button" class="gw-perf-settings-toggle" aria-expanded="false">View Test Settings</button>
+      <div class="gw-perf-settings-body">
+        <div class="gw-perf-settings-grid">
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Capture Length</p><p class="gw-perf-settings-value">4-7 mins</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Display</p><p class="gw-perf-settings-value">Fullscreen, 3840x2160, Aspect 16:9</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">AA / Upscaling</p><p class="gw-perf-settings-value">TAAU, Render Scale 100</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Frame Gen / Latency</p><p class="gw-perf-settings-value">Frame Generation Off, Low Latency Off</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">VSync / FPS Cap</p><p class="gw-perf-settings-value">VSync Off, Match/Lobby/Background FPS No Limit</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Preset</p><p class="gw-perf-settings-value">Graphics Quality High</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">GI / Reflections</p><p class="gw-perf-settings-value">Lumen GI High Quality, SSR reflections</p></div>
+          <div class="gw-perf-settings-item"><p class="gw-perf-settings-label">Detail Settings</p><p class="gw-perf-settings-value">Model / Post / Shadows / Texture / Effects / Foliage all High</p></div>
+        </div>
+      </div>
+
+      <div class="gw-driver-bar amd"><span class="gw-driver-logo">A</span>AMD Software: Adrenalin Edition 26.1.1 - Released January 21, 2026</div>
+    </article>
+
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById("gw-perf-widget-frame4000-v2");
+    if (!root || !root.classList.contains("gw-perf-widget")) {
+      root = document.currentScript && document.currentScript.previousElementSibling;
+    }
+    if (!root || !root.classList.contains("gw-perf-widget")) return;
+
+    var gameBtns = root.querySelectorAll(".gw-perf-game-btn");
+    var gamePanels = root.querySelectorAll(".gw-perf-game-panel");
+
+    function setActiveGame(targetId) {
+      gameBtns.forEach(function (btn) {
+        var active = btn.getAttribute("data-target") === targetId;
+        btn.classList.toggle("is-active", active);
+        btn.setAttribute("aria-selected", active ? "true" : "false");
+      });
+      gamePanels.forEach(function (panel) {
+        panel.classList.toggle("is-active", panel.id === targetId);
+      });
+    }
+
+    gameBtns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        setActiveGame(btn.getAttribute("data-target"));
+      });
+    });
+
+    gamePanels.forEach(function (panel) {
+      var resBtns = panel.querySelectorAll(".gw-perf-res-btn");
+      var resPanels = panel.querySelectorAll(".gw-perf-res-panel");
+      if (!resBtns.length || !resPanels.length) return;
+
+      function setActiveRes(target) {
+        resBtns.forEach(function (btn) {
+          var active = btn.getAttribute("data-res-target") === target;
+          btn.classList.toggle("is-active", active);
+        });
+        resPanels.forEach(function (rp) {
+          var active = rp.getAttribute("data-res-panel") === target;
+          rp.classList.toggle("is-active", active);
+        });
+      }
+
+      resBtns.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          setActiveRes(btn.getAttribute("data-res-target"));
+        });
+      });
+    });
+
+    var toggles = root.querySelectorAll(".gw-perf-settings-toggle");
+    toggles.forEach(function (toggle) {
+      toggle.addEventListener("click", function () {
+        var panel = toggle.closest(".gw-perf-game-panel");
+        if (!panel) return;
+        var body = panel.querySelector(".gw-perf-settings-body");
+        if (!body) return;
+        var open = body.classList.toggle("is-open");
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+        toggle.textContent = open ? "Hide Test Settings" : "View Test Settings";
+      });
+    });
+  })();
+</script>

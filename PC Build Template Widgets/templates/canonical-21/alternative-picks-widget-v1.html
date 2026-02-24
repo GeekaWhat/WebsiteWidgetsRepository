@@ -1,0 +1,269 @@
+<!--
+GeekaWhat Alternative Picks Widget v1 (HTML + CSS + JS)
+Paste into a Gutenberg "Custom HTML" block.
+-->
+
+<style>
+  .gw-alt-widget {
+    width: 100%;
+    margin: 18px 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+  }
+
+  .gw-alt-layout {
+    display: grid;
+    grid-template-columns: 290px minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .gw-alt-menu {
+    border-right: 1px solid #e6edf7;
+    background: #f8fbff;
+    padding: 8px;
+  }
+
+  .gw-alt-tab {
+    width: 100%;
+    display: block;
+    border: 1px solid #d9e8ff;
+    background: #ffffff;
+    color: #111111;
+    border-radius: 10px;
+    padding: 10px 11px;
+    margin: 0 0 8px;
+    text-align: left;
+    font-size: 0.92rem;
+    font-weight: 600;
+    line-height: 1.25;
+    cursor: pointer;
+  }
+
+  .gw-alt-tab:last-child {
+    margin-bottom: 0;
+  }
+
+  .gw-alt-tab.is-active {
+    background: #037cff;
+    border-color: #037cff;
+    color: #ffffff;
+  }
+
+  .gw-alt-tab:not(.is-active):hover,
+  .gw-alt-tab:not(.is-active):focus {
+    background: #eef5ff;
+    border-color: #037cff;
+    color: #111111;
+    outline: none;
+  }
+
+  .gw-alt-tab.is-active:hover,
+  .gw-alt-tab.is-active:focus {
+    background: #026fe5;
+    border-color: #026fe5;
+    color: #ffffff;
+    outline: none;
+  }
+
+  .gw-alt-content {
+    padding: 14px;
+  }
+
+  .gw-alt-panel {
+    display: none;
+  }
+
+  .gw-alt-panel.is-active {
+    display: block;
+  }
+
+  .gw-alt-kicker {
+    margin: 0 0 6px;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    opacity: 0.72;
+    font-weight: 700;
+  }
+
+  .gw-alt-title {
+    margin: 0 0 8px;
+    font-size: 1.02rem;
+    line-height: 1.25;
+    font-weight: 700;
+  }
+
+  .gw-alt-title a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .gw-alt-title a:hover,
+  .gw-alt-title a:focus {
+    text-decoration: underline;
+  }
+
+  .gw-alt-summary {
+    margin: 0 0 10px;
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  .gw-alt-specs {
+    margin: 0 0 12px;
+    border: 1px solid #e6edf7;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .gw-alt-spec-row {
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr);
+    border-bottom: 1px solid #e6edf7;
+    background: #ffffff;
+  }
+
+  .gw-alt-spec-row:last-child {
+    border-bottom: 0;
+  }
+
+  .gw-alt-label,
+  .gw-alt-value {
+    padding: 9px 10px;
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+
+  .gw-alt-label {
+    background: #f4f8ff;
+    font-weight: 700;
+  }
+
+  .gw-alt-value {
+    font-weight: 500;
+  }
+
+  .gw-alt-buy {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.35;
+  }
+
+  @media (max-width: 760px) {
+    .gw-alt-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-alt-menu {
+      border-right: 0;
+      border-bottom: 1px solid #e6edf7;
+    }
+
+    .gw-alt-spec-row {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-alt-label {
+      border-bottom: 1px solid #e6edf7;
+    }
+  }
+</style>
+
+<section class="gw-alt-widget" aria-label="Alternative picks">
+  <div class="gw-alt-layout">
+    <div class="gw-alt-menu" role="tablist" aria-label="Alternative scenarios">
+      <button class="gw-alt-tab is-active" type="button" role="tab" aria-selected="true" data-target="gw-alt-4k">Better 4K Performance</button>
+      <button class="gw-alt-tab" type="button" role="tab" aria-selected="false" data-target="gw-alt-value">Better Value Per Dollar</button>
+      <button class="gw-alt-tab" type="button" role="tab" aria-selected="false" data-target="gw-alt-quiet">Quieter + Cooler Build</button>
+      <button class="gw-alt-tab" type="button" role="tab" aria-selected="false" data-target="gw-alt-stream">Better Streaming/Creator Headroom</button>
+    </div>
+
+    <div class="gw-alt-content">
+      <article id="gw-alt-4k" class="gw-alt-panel is-active" role="tabpanel">
+        <p class="gw-alt-kicker">Buy This Instead If You Want</p>
+        <h3 class="gw-alt-title"><a href="#GPU">Better 4K Performance: RTX 5080 Class</a></h3>
+        <p class="gw-alt-summary">If your target is high settings at 4K with stronger minimum FPS, step up from a 5070-class card to a 5080-tier option. This improves headroom for heavier ray tracing and reduces the need to compromise settings.</p>
+        <div class="gw-alt-specs">
+          <div class="gw-alt-spec-row"><div class="gw-alt-label">Main Upgrade</div><div class="gw-alt-value">GPU tier jump (RTX 5070 -> RTX 5080 class)</div></div>
+          <div class="gw-alt-spec-row"><div class="gw-alt-label">Best For</div><div class="gw-alt-value">Native 4K, higher RT settings, longer lifespan</div></div>
+          <div class="gw-alt-spec-row"><div class="gw-alt-label">Expected Tradeoff</div><div class="gw-alt-value">Higher upfront GPU spend</div></div>
+          <div class="gw-alt-spec-row"><div class="gw-alt-label">PSU Check</div><div class="gw-alt-value">Prefer quality 850W+ for extra power headroom</div></div>
+        </div>
+        <p class="gw-alt-buy">Add buy shortcode here: <code>[your-buy-shortcode]</code></p>
+      </article>
+
+      <article id="gw-alt-value" class="gw-alt-panel" role="tabpanel">
+        <p class="gw-alt-kicker">Buy This Instead If You Want</p>
+        <h3 class="gw-alt-title"><a href="#GPU">Better Value Per Dollar: RX 9070 Class</a></h3>
+        <p class="gw-alt-summary">For buyers focused on price-to-performance at 1440p, an RX 9070-tier alternative can offer stronger value in many raster-heavy titles. It is a practical pick when maximizing FPS per pound/dollar matters most.</p>
+        <div class="gw-alt-specs">
+          <div class="gw-alt-spec-row"><div class="gw-alt-label">Main Upgrade</div><div class="gw-alt-value">Swap to value-focused GPU tier</div></div>
+          <div class="gw-alt-spec-row"><div class="gw-alt-label">Best For</div><div class="gw-alt-value">Budget-conscious 1440p gaming</div></div>
+          <div class="gw-alt-spec-row"><div class="gw-alt-label">Expected Tradeoff</div><div class="gw-alt-value">Feature stack differences vs NVIDIA ecosystem</div></div>
+          <div class="gw-alt-spec-row"><div class="gw-alt-label">PSU Check</div><div class="gw-alt-value">750W ATX 3.0 usually remains sufficient</div></div>
+        </div>
+        <p class="gw-alt-buy">Add buy shortcode here: <code>[your-buy-shortcode]</code></p>
+      </article>
+
+      <article id="gw-alt-quiet" class="gw-alt-panel" role="tabpanel">
+        <p class="gw-alt-kicker">Buy This Instead If You Want</p>
+        <h3 class="gw-alt-title"><a href="#cpu-cooler">Quieter + Cooler Build: Higher-End Air Cooler / 240mm AIO</a></h3>
+        <p class="gw-alt-summary">If low noise is a priority, moving to a stronger cooler and optimized fan curve makes a clear day-to-day difference. You retain performance while lowering sustained thermals and acoustic spikes under long gaming sessions.</p>
+        <div class="gw-alt-specs">
+          <div class="gw-alt-spec-row"><div class="gw-alt-label">Main Upgrade</div><div class="gw-alt-value">Cooler class + case fan tuning</div></div>
+          <div class="gw-alt-spec-row"><div class="gw-alt-label">Best For</div><div class="gw-alt-value">Low-noise desks, long gaming/render loads</div></div>
+          <div class="gw-alt-spec-row"><div class="gw-alt-label">Expected Tradeoff</div><div class="gw-alt-value">Slightly higher cost and installation time</div></div>
+          <div class="gw-alt-spec-row"><div class="gw-alt-label">Clearance Check</div><div class="gw-alt-value">Verify case height/radiator support before purchase</div></div>
+        </div>
+        <p class="gw-alt-buy">Add buy shortcode here: <code>[your-buy-shortcode]</code></p>
+      </article>
+
+      <article id="gw-alt-stream" class="gw-alt-panel" role="tabpanel">
+        <p class="gw-alt-kicker">Buy This Instead If You Want</p>
+        <h3 class="gw-alt-title"><a href="#CPU">Better Streaming/Creator Headroom: 8-Core Ryzen Upgrade</a></h3>
+        <p class="gw-alt-summary">For simultaneous gaming, streaming, and heavier productivity apps, an 8-core Ryzen option gives smoother multitasking headroom. This improves consistency in background-heavy workflows without changing the rest of the platform.</p>
+        <div class="gw-alt-specs">
+          <div class="gw-alt-spec-row"><div class="gw-alt-label">Main Upgrade</div><div class="gw-alt-value">CPU step-up to 8-core AM5 part</div></div>
+          <div class="gw-alt-spec-row"><div class="gw-alt-label">Best For</div><div class="gw-alt-value">Stream + gameplay, editing, productivity stacks</div></div>
+          <div class="gw-alt-spec-row"><div class="gw-alt-label">Expected Tradeoff</div><div class="gw-alt-value">Higher CPU cost, potentially more cooling demand</div></div>
+          <div class="gw-alt-spec-row"><div class="gw-alt-label">Cooling Check</div><div class="gw-alt-value">Pair with a stronger tower or AIO for sustained boosts</div></div>
+        </div>
+        <p class="gw-alt-buy">Add buy shortcode here: <code>[your-buy-shortcode]</code></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.currentScript && document.currentScript.previousElementSibling;
+    if (!root || !root.classList.contains("gw-alt-widget")) {
+      root = document.querySelector(".gw-alt-widget");
+    }
+    if (!root) return;
+
+    var tabs = root.querySelectorAll(".gw-alt-tab");
+    var panels = root.querySelectorAll(".gw-alt-panel");
+
+    function activate(targetId) {
+      tabs.forEach(function (tab) {
+        var isActive = tab.getAttribute("data-target") === targetId;
+        tab.classList.toggle("is-active", isActive);
+        tab.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+
+      panels.forEach(function (panel) {
+        panel.classList.toggle("is-active", panel.id === targetId);
+      });
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        activate(tab.getAttribute("data-target"));
+      });
+    });
+  })();
+</script>
