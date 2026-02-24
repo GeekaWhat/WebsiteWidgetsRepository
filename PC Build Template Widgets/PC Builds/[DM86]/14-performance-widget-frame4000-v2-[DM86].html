@@ -1,0 +1,255 @@
+<!--
+GeekaWhat Performance Widget v2 (DM86 - 4K)
+Paste into a Gutenberg "Custom HTML" block.
+-->
+
+<style>
+  #gw-perf-4k-dm86.gw-perf-widget {
+    width: 100%;
+    margin: 18px 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+  }
+
+  #gw-perf-4k-dm86 .gw-perf-head {
+    padding: 12px 14px;
+    border-bottom: 1px solid #edf2fa;
+    background: #f8fbff;
+  }
+
+  #gw-perf-4k-dm86 .gw-perf-kicker {
+    margin: 0;
+    color: #037cff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  #gw-perf-4k-dm86 .gw-perf-title {
+    margin: 3px 0 0;
+    font-size: 1.05rem;
+    line-height: 1.3;
+    font-weight: 800;
+    color: #142033;
+  }
+
+  #gw-perf-4k-dm86 .gw-perf-game-nav-wrap {
+    padding: 10px 12px 0;
+  }
+
+  #gw-perf-4k-dm86 .gw-perf-game-nav {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+  }
+
+  #gw-perf-4k-dm86 .gw-perf-game-btn {
+    border: 1px solid #d9e8ff;
+    background: #ffffff;
+    color: #1f2937;
+    border-radius: 999px;
+    padding: 7px 12px;
+    font-size: 0.84rem;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  #gw-perf-4k-dm86 .gw-perf-game-btn.is-active {
+    background: #037cff;
+    border-color: #037cff;
+    color: #ffffff;
+  }
+
+  #gw-perf-4k-dm86 .gw-perf-body {
+    padding: 8px 12px 12px;
+  }
+
+  #gw-perf-4k-dm86 .gw-perf-game-panel {
+    display: none;
+  }
+
+  #gw-perf-4k-dm86 .gw-perf-game-panel.is-active {
+    display: block;
+  }
+
+  #gw-perf-4k-dm86 .gw-perf-tiles {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  #gw-perf-4k-dm86 .gw-perf-tile {
+    border: 1px solid #d9e8ff;
+    border-radius: 10px;
+    background: #f7faff;
+    padding: 10px;
+  }
+
+  #gw-perf-4k-dm86 .gw-perf-label {
+    margin: 0;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #4b5563;
+    font-weight: 700;
+  }
+
+  #gw-perf-4k-dm86 .gw-perf-fps {
+    margin: 5px 0 0;
+    font-size: 1.2rem;
+    line-height: 1;
+    font-weight: 800;
+    color: #111827;
+  }
+
+  #gw-perf-4k-dm86 .gw-perf-unit {
+    margin-left: 4px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #4b5563;
+  }
+
+  #gw-perf-4k-dm86 .gw-perf-settings {
+    margin-top: 10px;
+    border: 1px solid #d9e8ff;
+    border-radius: 10px;
+    background: #fbfdff;
+  }
+
+  #gw-perf-4k-dm86 .gw-perf-settings > summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 8px 10px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #037cff;
+  }
+
+  #gw-perf-4k-dm86 .gw-perf-settings > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  #gw-perf-4k-dm86 .gw-perf-settings-grid {
+    padding: 0 10px 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 10px;
+  }
+
+  #gw-perf-4k-dm86 .gw-perf-settings-item {
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  #gw-perf-4k-dm86 .gw-perf-settings-item strong {
+    color: #1f2937;
+  }
+
+  #gw-perf-4k-dm86 .gw-perf-caption {
+    margin: 10px 2px 0;
+    font-size: 0.8rem;
+    color: #4b5563;
+    font-weight: 600;
+  }
+
+  @media (max-width: 700px) {
+    #gw-perf-4k-dm86 .gw-perf-tiles,
+    #gw-perf-4k-dm86 .gw-perf-settings-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<section id="gw-perf-4k-dm86" class="gw-perf-widget" aria-label="4K performance results">
+  <div class="gw-perf-head">
+    <p class="gw-perf-kicker">Average Framerate</p>
+    <h3 class="gw-perf-title">@ 4K High Graphics</h3>
+  </div>
+
+  <div class="gw-perf-game-nav-wrap">
+    <div class="gw-perf-game-nav" role="tablist" aria-label="Games">
+      <button class="gw-perf-game-btn is-active" type="button" role="tab" aria-selected="true" data-target="gw-4k-f1">F1 25</button>
+      <button class="gw-perf-game-btn" type="button" role="tab" aria-selected="false" data-target="gw-4k-cyber">Cyberpunk 2077</button>
+      <button class="gw-perf-game-btn" type="button" role="tab" aria-selected="false" data-target="gw-4k-bf6">Battlefield 6</button>
+      <button class="gw-perf-game-btn" type="button" role="tab" aria-selected="false" data-target="gw-4k-arc">Arc Raiders</button>
+      <button class="gw-perf-game-btn" type="button" role="tab" aria-selected="false" data-target="gw-4k-marvel">Marvel Rivals</button>
+    </div>
+  </div>
+
+  <div class="gw-perf-body">
+    <article id="gw-4k-f1" class="gw-perf-game-panel is-active" role="tabpanel">
+      <div class="gw-perf-tiles">
+        <div class="gw-perf-tile"><p class="gw-perf-label">Average</p><p class="gw-perf-fps">127<span class="gw-perf-unit">FPS</span></p></div>
+        <div class="gw-perf-tile"><p class="gw-perf-label">1% Low</p><p class="gw-perf-fps">93<span class="gw-perf-unit">FPS</span></p></div>
+        <div class="gw-perf-tile"><p class="gw-perf-label">0.1% Low</p><p class="gw-perf-fps">64.2<span class="gw-perf-unit">FPS</span></p></div>
+      </div>
+    </article>
+
+    <article id="gw-4k-cyber" class="gw-perf-game-panel" role="tabpanel">
+      <div class="gw-perf-tiles">
+        <div class="gw-perf-tile"><p class="gw-perf-label">Average</p><p class="gw-perf-fps">70<span class="gw-perf-unit">FPS</span></p></div>
+        <div class="gw-perf-tile"><p class="gw-perf-label">1% Low</p><p class="gw-perf-fps">54.5<span class="gw-perf-unit">FPS</span></p></div>
+        <div class="gw-perf-tile"><p class="gw-perf-label">0.1% Low</p><p class="gw-perf-fps">50.6<span class="gw-perf-unit">FPS</span></p></div>
+      </div>
+    </article>
+
+    <article id="gw-4k-bf6" class="gw-perf-game-panel" role="tabpanel">
+      <div class="gw-perf-tiles">
+        <div class="gw-perf-tile"><p class="gw-perf-label">Average</p><p class="gw-perf-fps">88.2<span class="gw-perf-unit">FPS</span></p></div>
+        <div class="gw-perf-tile"><p class="gw-perf-label">1% Low</p><p class="gw-perf-fps">55.3<span class="gw-perf-unit">FPS</span></p></div>
+        <div class="gw-perf-tile"><p class="gw-perf-label">0.1% Low</p><p class="gw-perf-fps">22.8<span class="gw-perf-unit">FPS</span></p></div>
+      </div>
+    </article>
+
+    <article id="gw-4k-arc" class="gw-perf-game-panel" role="tabpanel">
+      <div class="gw-perf-tiles">
+        <div class="gw-perf-tile"><p class="gw-perf-label">Average</p><p class="gw-perf-fps">85<span class="gw-perf-unit">FPS</span></p></div>
+        <div class="gw-perf-tile"><p class="gw-perf-label">1% Low</p><p class="gw-perf-fps">69.5<span class="gw-perf-unit">FPS</span></p></div>
+        <div class="gw-perf-tile"><p class="gw-perf-label">0.1% Low</p><p class="gw-perf-fps">58.8<span class="gw-perf-unit">FPS</span></p></div>
+      </div>
+    </article>
+
+    <article id="gw-4k-marvel" class="gw-perf-game-panel" role="tabpanel">
+      <div class="gw-perf-tiles">
+        <div class="gw-perf-tile"><p class="gw-perf-label">Average</p><p class="gw-perf-fps">74.5<span class="gw-perf-unit">FPS</span></p></div>
+        <div class="gw-perf-tile"><p class="gw-perf-label">1% Low</p><p class="gw-perf-fps">56.4<span class="gw-perf-unit">FPS</span></p></div>
+        <div class="gw-perf-tile"><p class="gw-perf-label">0.1% Low</p><p class="gw-perf-fps">53.4<span class="gw-perf-unit">FPS</span></p></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById("gw-perf-4k-dm86");
+    if (!root) return;
+
+    var tabs = root.querySelectorAll(".gw-perf-game-btn");
+    var panels = root.querySelectorAll(".gw-perf-game-panel");
+
+    function activate(targetId) {
+      tabs.forEach(function (tab) {
+        var active = tab.getAttribute("data-target") === targetId;
+        tab.classList.toggle("is-active", active);
+        tab.setAttribute("aria-selected", active ? "true" : "false");
+      });
+
+      panels.forEach(function (panel) {
+        panel.classList.toggle("is-active", panel.id === targetId);
+      });
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        activate(tab.getAttribute("data-target"));
+      });
+    });
+  })();
+</script>

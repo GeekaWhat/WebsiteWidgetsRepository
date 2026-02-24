@@ -1,0 +1,182 @@
+<!--
+GeekaWhat Noise + Thermals Widget v1 (HTML + CSS only)
+Paste into a Gutenberg "Custom HTML" block.
+
+Color modes:
+- mode-brand (default): blue brand gradient
+- mode-risk: green->amber->red
+-->
+
+<style>
+  .gw-nt-widget {
+    --brand-1: #9fd0ff;
+    --brand-2: #037cff;
+    --brand-3: #7a42d8;
+    --brand-4: #e14747;
+    --risk-1: #26b36a;
+    --risk-2: #f2b840;
+    --risk-3: #df4c4c;
+    width: 100%;
+    margin: 18px 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+  }
+
+  .gw-nt-head {
+    margin: 0;
+    padding: 10px 12px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    color: #ffffff;
+    background: #037cff;
+  }
+
+  .gw-nt-sub {
+    margin: 0;
+    padding: 10px 12px 0;
+    font-size: 0.84rem;
+    line-height: 1.45;
+    opacity: 0.82;
+  }
+
+  .gw-nt-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .gw-nt-card {
+    border: 1px solid #e2ecfb;
+    border-radius: 10px;
+    padding: 10px;
+    background: #fbfdff;
+  }
+
+  .gw-nt-label {
+    margin: 0 0 8px;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    opacity: 0.8;
+  }
+
+  .gw-nt-track {
+    position: relative;
+    width: 100%;
+    height: 14px;
+    border-radius: 999px;
+    background: #e9f2ff;
+    overflow: visible;
+    border: 1px solid #d7e8ff;
+  }
+
+  .gw-nt-fill {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--brand-1), var(--brand-2), var(--brand-3), var(--brand-4));
+  }
+
+  .gw-nt-marker {
+    position: absolute;
+    top: 50%;
+    left: var(--at, 50%);
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #3d4b63;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    z-index: 2;
+  }
+
+  .gw-nt-marker.idle {
+    border-color: #1f5fb0;
+  }
+
+  .gw-nt-marker.load {
+    border-color: #6f2fd3;
+  }
+
+  .gw-nt-widget.mode-risk .gw-nt-fill {
+    background: linear-gradient(90deg, var(--risk-1), var(--risk-2), var(--risk-3));
+  }
+
+  .gw-nt-values {
+    position: relative;
+    margin: 9px 0 0;
+    min-height: 22px;
+  }
+
+  .gw-nt-value {
+    margin: 0;
+    position: absolute;
+    left: var(--at, 50%);
+    top: 0;
+    transform: translateX(-50%);
+    width: max-content;
+    font-size: 1.08rem;
+    font-weight: 800;
+    color: #133a70;
+  }
+
+  .gw-nt-foot {
+    margin: 0;
+    padding: 0 12px 12px;
+    font-size: 0.8rem;
+    opacity: 0.72;
+  }
+
+  @media (max-width: 760px) {
+    .gw-nt-grid {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+  }
+</style>
+
+<section class="gw-nt-widget mode-brand" aria-label="Noise and thermals">
+  <p class="gw-nt-head">Test Results</p>
+  <p class="gw-nt-sub">Testing was run after a 20-minute sustained load in a 21°C ambient room. Temperature is peak package temperature, and noise was measured at approximately 40cm from the front panel at seated ear height.</p>
+
+  <div class="gw-nt-grid">
+    <article class="gw-nt-card" style="--idle: 42%; --load: 75%;">
+      <p class="gw-nt-label">Load Temperature</p>
+      <div class="gw-nt-track">
+        <div class="gw-nt-fill">
+          <span class="gw-nt-marker idle" style="--at: var(--idle);"></span>
+          <span class="gw-nt-marker load" style="--at: var(--load);"></span>
+        </div>
+      </div>
+      <div class="gw-nt-values">
+        <p class="gw-nt-value" style="--at: var(--idle);">42°C</p>
+        <p class="gw-nt-value" style="--at: var(--load);">75°C</p>
+      </div>
+    </article>
+
+    <article class="gw-nt-card" style="--idle: 38%; --load: 64%;">
+      <p class="gw-nt-label">System Noise</p>
+      <div class="gw-nt-track">
+        <div class="gw-nt-fill">
+          <span class="gw-nt-marker idle" style="--at: var(--idle);"></span>
+          <span class="gw-nt-marker load" style="--at: var(--load);"></span>
+        </div>
+      </div>
+      <div class="gw-nt-values">
+        <p class="gw-nt-value" style="--at: var(--idle);">38 dB</p>
+        <p class="gw-nt-value" style="--at: var(--load);">64 dB</p>
+      </div>
+    </article>
+  </div>
+
+  <p class="gw-nt-foot">Tip: switch to <code>mode-risk</code> on <code>.gw-nt-widget</code> if you want green-to-red scale.</p>
+</section>

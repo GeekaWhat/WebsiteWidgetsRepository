@@ -1,0 +1,113 @@
+<!--
+GeekaWhat Review Summary Widget v1 (DM86)
+Paste into a Gutenberg "Custom HTML" block.
+-->
+
+<style>
+  .gw-review-widget {
+    margin: 18px 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+    padding: 14px;
+  }
+
+  .gw-review-header {
+    margin: -14px -14px 12px;
+    padding: 10px 14px;
+    background: #037cff;
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .gw-review-title {
+    margin: 0 0 8px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #101828;
+  }
+
+  .gw-review-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 0 0 12px;
+  }
+
+  .gw-review-col {
+    border: 1px solid #e6edf7;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .gw-review-col h4 {
+    margin: 0 0 6px;
+    font-size: 0.9rem;
+  }
+
+  .gw-review-col ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+
+  .gw-review-col li {
+    margin: 0 0 6px;
+    font-size: 0.9rem;
+    line-height: 1.35;
+  }
+
+  .gw-review-summary-label {
+    margin: 0 0 5px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    color: #475467;
+  }
+
+  .gw-review-summary {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+
+  @media (max-width: 760px) {
+    .gw-review-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<section class="gw-review-widget" aria-label="Build summary">
+  <p class="gw-review-header">Final Verdict</p>
+  <h3 class="gw-review-title">Affordable 4K Gaming PC in 2026</h3>
+
+  <div class="gw-review-grid">
+    <div class="gw-review-col">
+      <h4>Pros</h4>
+      <ul>
+        <li>Excellent 1440p performance in modern titles</li>
+        <li>Strong 4K high-settings capability for this budget</li>
+        <li>Clean and cohesive aesthetic with balanced component choices</li>
+      </ul>
+    </div>
+    <div class="gw-review-col">
+      <h4>Cons</h4>
+      <ul>
+        <li>RAM and SSD pricing remains volatile</li>
+        <li>Only 1TB of storage out of the box</li>
+        <li>Some games show low 0.1% FPS dips at 4K</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="gw-review-summary-label">Bottom Line</p>
+  <p class="gw-review-summary">
+    This DM86 build strikes a strong balance of value, aesthetics, and real gaming performance. It comfortably exceeds 100 FPS at 1440p in demanding games and stays highly playable at 4K High, making it a practical high-value option with a clear AM5 upgrade path.
+  </p>
+</section>

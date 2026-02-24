@@ -1,0 +1,504 @@
+<!-- GeekaWhat Peripherals Recommendations Widget v1 (Updated) -->
+
+<style>
+  .gw-peri-widget {
+    width: 100%;
+    margin: 18px 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+    color: inherit;
+    font: inherit;
+  }
+
+  .gw-peri-list {
+    padding: 10px;
+    display: grid;
+    gap: 9px;
+  }
+
+  .gw-peri-item {
+    border: 1px solid #e6edf7;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .gw-peri-item.is-open {
+    border-color: #037cff;
+    box-shadow: 0 6px 14px rgba(3, 124, 255, 0.12);
+  }
+
+  .gw-peri-trigger {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 62px minmax(0, 1fr) auto;
+    gap: 10px;
+    align-items: center;
+    border: 0;
+    background: #ffffff;
+    padding: 10px 11px;
+    text-align: left;
+    cursor: pointer;
+    min-height: 70px;
+    color: inherit;
+    font: inherit;
+  }
+
+  .gw-peri-item.is-open .gw-peri-trigger { background: #eef5ff; }
+  .gw-peri-trigger:hover, .gw-peri-trigger:focus { outline: none; background: #f5f9ff; }
+
+  .gw-peri-thumb {
+    width: 62px;
+    height: 62px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid #cde2ff;
+    background: #f2f7ff;
+    cursor: zoom-in;
+  }
+
+  .gw-peri-main { min-width: 0; }
+  .gw-peri-type {
+    margin: 0 0 3px;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    color: #037cff;
+  }
+
+  .gw-peri-name {
+    margin: 0 0 2px;
+    font-size: 0.95rem;
+    line-height: 1.25;
+    font-weight: 700;
+  }
+
+  .gw-peri-reason { margin: 0; font-size: 0.82rem; line-height: 1.35; opacity: 0.82; }
+
+  .gw-peri-side {
+    text-align: right;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    justify-self: end;
+  }
+
+  .gw-peri-rating {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 54px;
+    min-height: 32px;
+    font-size: 0.82rem;
+    line-height: 1;
+    padding: 6px 9px;
+    border-radius: 10px;
+    border: 1px solid #037cff;
+    background: #037cff;
+    color: #ffffff;
+    font-weight: 700;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  .gw-peri-rating:hover, .gw-peri-rating:focus {
+    color: #ffffff;
+    background: #026fe5;
+    border-color: #026fe5;
+    text-decoration: none;
+    outline: none;
+  }
+
+  .gw-peri-chevron {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 1px solid #c8dcff;
+    color: #1f4f98;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  .gw-peri-chevron::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+  }
+
+  .gw-peri-item.is-open .gw-peri-chevron::before { transform: rotate(225deg); }
+
+  .gw-peri-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.24s ease; }
+  .gw-peri-item.is-open .gw-peri-panel { grid-template-rows: 1fr; }
+  .gw-peri-panel-inner { overflow: hidden; }
+
+  .gw-peri-panel-content {
+    border-top: 1px solid #e6edf7;
+    padding: 10px 11px 11px;
+    background: #ffffff;
+  }
+
+  .gw-peri-specs {
+    margin: 0 0 10px;
+    border: 1px solid #dfeaff;
+    border-radius: 9px;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  .gw-peri-summary { margin: 0 0 10px; font-size: 0.86rem; line-height: 1.45; opacity: 0.84; }
+
+  .gw-peri-spec-row {
+    display: grid;
+    grid-template-columns: 160px minmax(0, 1fr);
+    border-bottom: 1px solid #edf3ff;
+  }
+
+  .gw-peri-spec-row:last-child { border-bottom: 0; }
+
+  .gw-peri-spec-label, .gw-peri-spec-value {
+    padding: 8px 10px;
+    font-size: 0.84rem;
+    line-height: 1.3;
+  }
+
+  .gw-peri-spec-label { background: #f4f8ff; color: #173a72; font-weight: 700; }
+  .gw-peri-spec-value { font-weight: 500; }
+
+  .gw-peri-actions {
+    margin-top: 0;
+    border-top: 1px dashed #bdd3fa;
+    padding-top: 8px;
+    display: block;
+  }
+
+  .gw-peri-buy { margin: 0; font-size: 0.84rem; }
+
+  .gw-peri-review-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    white-space: nowrap;
+    color: #037cff;
+    text-decoration: none;
+    line-height: 1.35;
+    min-height: 32px;
+  }
+
+  .gw-peri-review-link:hover, .gw-peri-review-link:focus { color: #037cff; text-decoration: underline; outline: none; }
+  .gw-peri-review-link-wrap { margin: 8px 0 0; text-align: center; }
+
+  .gw-peri-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(8, 14, 26, 0.88);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+  }
+
+  .gw-peri-lightbox.is-open { display: flex; }
+  .gw-peri-lightbox-inner { width: min(1200px, 95vw); position: relative; }
+
+  .gw-peri-lightbox-img {
+    width: 100%;
+    max-height: 86vh;
+    object-fit: contain;
+    border-radius: 10px;
+    background: #0b162a;
+    display: block;
+  }
+
+  .gw-peri-lightbox-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    appearance: none;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(0, 0, 0, 0.48);
+    color: #ffffff;
+    border-radius: 8px;
+    padding: 6px 9px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  @media (max-width: 760px) {
+    .gw-peri-trigger {
+      grid-template-columns: 56px minmax(0, 1fr);
+      grid-template-areas: "thumb main" "side side";
+      gap: 8px;
+      min-height: 78px;
+      padding: 11px;
+    }
+
+    .gw-peri-thumb { width: 56px; height: 56px; grid-area: thumb; }
+    .gw-peri-main { grid-area: main; }
+    .gw-peri-side { grid-area: side; justify-self: start; }
+    .gw-peri-spec-row { grid-template-columns: 1fr; }
+    .gw-peri-spec-label { border-bottom: 1px solid #e6edf7; }
+  }
+</style>
+
+<section class="gw-peri-widget" aria-label="Recommended peripherals">
+  <div class="gw-peri-list" role="tablist" aria-label="Peripheral recommendations">
+
+    <!-- Keyboard -->
+    <article class="gw-peri-item">
+      <button class="gw-peri-trigger" type="button" aria-expanded="false" data-target="gw-peri-keyboard" role="tab" aria-selected="false">
+        <img class="gw-peri-thumb" src="/wp-content/uploads/2026/02/TBSI_ASUS-ROG-Azoth-X.jpg" alt="TBSI_ASUS ROG Azoth X" width="124" height="124" decoding="async">
+        <div class="gw-peri-main">
+          <p class="gw-peri-type">Keyboard</p>
+          <p class="gw-peri-name">ASUS ROG Azoth X</p>
+          <p class="gw-peri-reason">Compact custom-style board with premium feel and tri-mode flexibility.</p>
+        </div>
+        <div class="gw-peri-side">
+          <a class="gw-peri-rating" href="https://geekawhat.com/asus-rog-azoth-review/" target="_blank" rel="noopener noreferrer">4.6/5</a>
+          <span class="gw-peri-chevron" aria-hidden="true"></span>
+        </div>
+      </button>
+
+      <div id="gw-peri-keyboard" class="gw-peri-panel" role="tabpanel">
+        <div class="gw-peri-panel-inner">
+          <div class="gw-peri-panel-content">
+            <p class="gw-peri-summary">A premium 75% pick with enthusiast-level build quality, smooth switches, and strong all-around gaming + daily use performance.</p>
+            <div class="gw-peri-specs">
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Switch Type</div><div class="gw-peri-spec-value">ROG NX Snow V2 (hot-swappable)</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Layout</div><div class="gw-peri-spec-value">75% compact</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Connectivity</div><div class="gw-peri-spec-value">2.4GHz / Bluetooth / USB-C</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Best For</div><div class="gw-peri-spec-value">Premium gaming + typing setups</div></div>
+            </div>
+            <div class="gw-peri-actions">
+              <p class="gw-peri-buy">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/xfNl8r" AMAZON-US-ASIN="B0FCPMS1R3" AMAZON-GB-ASIN="B0FDBDPL1W" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fasus-rog-azoth-x-75-custom-gaming-keyboard-rog-nx-snow-v2-mechanical-switc-per-asu-05909.html" overclockers-awin-gb-itemid="PER-ASU-05909"]</p>
+              <p class="gw-peri-review-link-wrap"><a class="gw-peri-review-link" href="https://geekawhat.com/asus-rog-azoth-review/" target="_blank" rel="noopener noreferrer">Read Full Review <span aria-hidden="true">↗</span></a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Mouse -->
+    <article class="gw-peri-item">
+      <button class="gw-peri-trigger" type="button" aria-expanded="false" data-target="gw-peri-mouse" role="tab" aria-selected="false">
+        <img class="gw-peri-thumb" src="/wp-content/uploads/2026/02/TBSI_Logitech-PRO-X2-SUPERSTRIKE.jpg" alt="TBSI_Logitech PRO X2 SUPERSTRIKE" width="124" height="124" loading="lazy" decoding="async">
+        <div class="gw-peri-main">
+          <p class="gw-peri-type">Mouse</p>
+          <p class="gw-peri-name">Logitech PRO X2 SUPERSTRIKE</p>
+          <p class="gw-peri-reason">Lightweight competitive shape tuned for fast flicks and low-latency input.</p>
+        </div>
+        <div class="gw-peri-side">
+          <span class="gw-peri-rating" aria-label="Awaiting review">Awaiting review</span>
+          <span class="gw-peri-chevron" aria-hidden="true"></span>
+        </div>
+      </button>
+
+      <div id="gw-peri-mouse" class="gw-peri-panel" role="tabpanel">
+        <div class="gw-peri-panel-inner">
+          <div class="gw-peri-panel-content">
+            <p class="gw-peri-summary">Esports-focused wireless mouse with strong sensor consistency and responsive click feel for FPS-heavy playstyles.</p>
+            <div class="gw-peri-specs">
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Sensor</div><div class="gw-peri-spec-value">High-performance optical sensor</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Weight</div><div class="gw-peri-spec-value">Ultra-light class</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Connectivity</div><div class="gw-peri-spec-value">Low-latency wireless + USB</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Best For</div><div class="gw-peri-spec-value">Competitive shooters</div></div>
+            </div>
+            <div class="gw-peri-actions">
+              <p class="gw-peri-buy">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/5Q60aU" AMAZON-US-ASIN="B0G12HGHGM" AMAZON-GB-ASIN="B0G3QGG18R"]</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Headset -->
+    <article class="gw-peri-item">
+      <button class="gw-peri-trigger" type="button" aria-expanded="false" data-target="gw-peri-headset" role="tab" aria-selected="false">
+        <img class="gw-peri-thumb" src="/wp-content/uploads/2026/02/TBSI_Corsair-VIRTUOSO-MAX-WIRELESS.png" alt="TBSI_Corsair VIRTUOSO MAX WIRELESS" width="124" height="124" loading="lazy" decoding="async">
+        <div class="gw-peri-main">
+          <p class="gw-peri-type">Headset</p>
+          <p class="gw-peri-name">Corsair VIRTUOSO MAX WIRELESS</p>
+          <p class="gw-peri-reason">Premium dual-wireless headset with ANC, graphene drivers, and immersive spatial audio support.</p>
+        </div>
+        <div class="gw-peri-side">
+          <span class="gw-peri-rating" aria-label="Awaiting review">Awaiting review</span>
+          <span class="gw-peri-chevron" aria-hidden="true"></span>
+        </div>
+      </button>
+
+      <div id="gw-peri-headset" class="gw-peri-panel" role="tabpanel">
+        <div class="gw-peri-panel-inner">
+          <div class="gw-peri-panel-content">
+            <p class="gw-peri-summary">The VIRTUOSO MAX WIRELESS adds active noise cancellation, simultaneous 2.4GHz + Bluetooth, and 50mm graphene drivers for a more premium all-round experience.</p>
+            <div class="gw-peri-specs">
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Connection</div><div class="gw-peri-spec-value">2.4GHz low-latency wireless + Bluetooth (simultaneous dual wireless)</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Noise Control</div><div class="gw-peri-spec-value">Active Noise Cancellation + transparency mode</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Audio</div><div class="gw-peri-spec-value">50mm graphene drivers, Dolby Atmos support, 20Hz-40kHz response</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Battery</div><div class="gw-peri-spec-value">Up to 30 hours wireless (RGB off), plus fast-charge support</div></div>
+            </div>
+            <div class="gw-peri-actions">
+              <p class="gw-peri-buy">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/kOtsP3q" AMAZON-US-ASIN="B0DG8WY6MX" AMAZON-GB-ASIN="B0DG8WY6MX"]</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Monitor -->
+    <article class="gw-peri-item">
+      <button class="gw-peri-trigger" type="button" aria-expanded="false" data-target="gw-peri-monitor" role="tab" aria-selected="false">
+        <img class="gw-peri-thumb" src="/wp-content/uploads/2026/02/TBSI_MSI-MPG-321URXW-QD-OLED.jpg" alt="TBSI_MSI MPG 321URXW QD-OLED" width="124" height="124" loading="lazy" decoding="async">
+        <div class="gw-peri-main">
+          <p class="gw-peri-type">Monitor</p>
+          <p class="gw-peri-name">MSI MPG 321URXW QD-OLED</p>
+          <p class="gw-peri-reason">4K 240Hz QD‑OLED performance with elite motion clarity and contrast.</p>
+        </div>
+        <div class="gw-peri-side">
+          <a class="gw-peri-rating" href="https://geekawhat.com/msi-mpg-321urxw-qd-oled-review/" target="_blank" rel="noopener noreferrer">4.8/5</a>
+          <span class="gw-peri-chevron" aria-hidden="true"></span>
+        </div>
+      </button>
+
+      <div id="gw-peri-monitor" class="gw-peri-panel" role="tabpanel">
+        <div class="gw-peri-panel-inner">
+          <div class="gw-peri-panel-content">
+            <p class="gw-peri-summary">Top-end 32-inch 4K gaming display with OLED-level response times and excellent HDR impact.</p>
+            <div class="gw-peri-specs">
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Panel</div><div class="gw-peri-spec-value">32-inch 3840x2160 QD-OLED</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Refresh Rate</div><div class="gw-peri-spec-value">240Hz</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Response Time</div><div class="gw-peri-spec-value">0.03ms class</div></div>
+              <div class="gw-peri-spec-row"><div class="gw-peri-spec-label">Best For</div><div class="gw-peri-spec-value">High-end 4K gaming builds</div></div>
+            </div>
+            <div class="gw-peri-actions">
+              <p class="gw-peri-buy">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/7UdX" AMAZON-US-ASIN="B0DPXYZYPT" AMAZON-GB-ASIN="B0BSN2BXC5" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fmsi-32-mpg-321urxw-qd-oled-3840x2160-qd-oled-240hz-0.03ms-true-black-400-a-mon-msi-04652.html" overclockers-awin-gb-itemid="MON-MSI-04652"]</p>
+              <p class="gw-peri-review-link-wrap"><a class="gw-peri-review-link" href="https://geekawhat.com/msi-mpg-321urxw-qd-oled-review/" target="_blank" rel="noopener noreferrer">Read Full Review <span aria-hidden="true">↗</span></a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <div class="gw-peri-lightbox" aria-hidden="true">
+    <div class="gw-peri-lightbox-inner">
+      <img class="gw-peri-lightbox-img" src="" alt="">
+      <button class="gw-peri-lightbox-close" type="button" aria-label="Close image">Close</button>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    function initWidget(root) {
+      if (!root || root.getAttribute("data-gw-peri-ready") === "1") return;
+      root.setAttribute("data-gw-peri-ready", "1");
+
+      var items = root.querySelectorAll(".gw-peri-item");
+      var triggers = root.querySelectorAll(".gw-peri-trigger");
+      var lightbox = root.querySelector(".gw-peri-lightbox");
+      var lightboxImg = lightbox ? lightbox.querySelector(".gw-peri-lightbox-img") : null;
+      var lightboxClose = lightbox ? lightbox.querySelector(".gw-peri-lightbox-close") : null;
+
+      function toFullImagePath(src) {
+        if (!src) return "";
+        if (/\.(jpg|jpeg)$/i.test(src)) return src.replace(/\.(jpg|jpeg)$/i, "-full.$1");
+        return src;
+      }
+
+      function openImage(src, alt) {
+        if (!lightbox || !lightboxImg) return;
+        lightboxImg.src = toFullImagePath(src);
+        lightboxImg.alt = alt || "";
+        lightbox.classList.add("is-open");
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeImage() {
+        if (!lightbox || !lightboxImg) return;
+        lightbox.classList.remove("is-open");
+        lightbox.setAttribute("aria-hidden", "true");
+        lightboxImg.src = "";
+        document.body.style.overflow = "";
+      }
+
+      function closeAll() {
+        items.forEach(function (item) {
+          var btn = item.querySelector(".gw-peri-trigger");
+          if (!btn) return;
+          item.classList.remove("is-open");
+          btn.setAttribute("aria-expanded", "false");
+          btn.setAttribute("aria-selected", "false");
+        });
+      }
+
+      function openItem(targetId) {
+        items.forEach(function (item) {
+          var btn = item.querySelector(".gw-peri-trigger");
+          if (!btn) return;
+          var isActive = btn.getAttribute("data-target") === targetId;
+          item.classList.toggle("is-open", isActive);
+          btn.setAttribute("aria-expanded", isActive ? "true" : "false");
+          btn.setAttribute("aria-selected", isActive ? "true" : "false");
+        });
+      }
+
+      triggers.forEach(function (btn) {
+        btn.addEventListener("click", function (event) {
+          var img = event.target.closest(".gw-peri-thumb");
+          if (img) {
+            event.preventDefault();
+            event.stopPropagation();
+            openImage(img.getAttribute("src"), img.getAttribute("alt"));
+            return;
+          }
+
+          var target = btn.getAttribute("data-target");
+          var item = btn.closest(".gw-peri-item");
+          if (!target || !item) return;
+
+          if (item.classList.contains("is-open")) {
+            closeAll();
+            return;
+          }
+          openItem(target);
+        });
+      });
+
+      if (lightboxClose) lightboxClose.addEventListener("click", closeImage);
+      if (lightbox) {
+        lightbox.addEventListener("click", function (event) {
+          if (event.target === lightbox) closeImage();
+        });
+      }
+
+      document.addEventListener("keydown", function (event) {
+        if (!lightbox || !lightbox.classList.contains("is-open")) return;
+        if (event.key === "Escape") closeImage();
+      });
+    }
+
+    function initAll() {
+      var widgets = document.querySelectorAll(".gw-peri-widget");
+      widgets.forEach(initWidget);
+    }
+
+    initAll();
+    document.addEventListener("DOMContentLoaded", initAll);
+    window.addEventListener("load", initAll);
+  })();
+</script>

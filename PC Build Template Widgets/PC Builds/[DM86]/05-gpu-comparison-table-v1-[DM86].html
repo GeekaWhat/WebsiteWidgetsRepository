@@ -1,0 +1,652 @@
+<!--
+GeekaWhat GPU Comparison Table v1
+Paste into a Gutenberg "Custom HTML" block.
+
+Features:
+- Sticky top header row
+- Sticky first column (image + name + subtitle)
+- Horizontal and vertical scrolling container
+- Lighter blue row hover state
+- Drag and drop column reordering (except first column)
+-->
+
+<style>
+  .gw-gpu-table-widget {
+    --gw-brand: #037cff;
+    --gw-brand-soft: #e8f5ff;
+    --gw-surface: #ffffff;
+    --gw-border: #d8e7ff;
+    --gw-text: #142033;
+    --gw-subtext: #516078;
+
+    width: 100%;
+    margin: 18px 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    background: var(--gw-surface);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .gw-gpu-table-head {
+    padding: 12px 13px 10px;
+    border-bottom: 1px solid #edf2fa;
+    background: #ffffff;
+  }
+
+  .gw-gpu-table-kicker {
+    margin: 0 0 5px;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0.72;
+    font-weight: 700;
+  }
+
+  .gw-gpu-table-title {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.3;
+    font-weight: 800;
+    color: var(--gw-text);
+  }
+
+  .gw-gpu-table-note {
+    margin: 6px 0 0;
+    font-size: 0.82rem;
+    line-height: 1.35;
+    color: var(--gw-subtext);
+  }
+
+  .gw-gpu-table-scroll {
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    border-top: 1px solid #edf2fa;
+  }
+
+  .gw-gpu-table-scroll::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+
+  .gw-gpu-table-scroll::-webkit-scrollbar-thumb {
+    background: rgba(3, 124, 255, 0.28);
+    border-radius: 999px;
+  }
+
+  .gw-gpu-table {
+    width: 100%;
+    min-width: 1100px;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .gw-gpu-table th,
+  .gw-gpu-table td {
+    border-right: 1px solid var(--gw-border);
+    border-bottom: 1px solid var(--gw-border);
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: middle;
+    background: #ffffff;
+    color: var(--gw-text);
+  }
+
+  .gw-gpu-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 4;
+    background: #f5f9ff;
+    font-size: 0.79rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .gw-gpu-table thead th[aria-sort="ascending"],
+  .gw-gpu-table thead th[aria-sort="descending"] {
+    background: #eaf4ff;
+  }
+
+  .gw-gpu-table .gw-sticky-col {
+    position: sticky;
+    left: 0;
+    z-index: 3;
+    min-width: 250px;
+    width: 250px;
+    background: #ffffff;
+  }
+
+  .gw-gpu-table thead .gw-sticky-col {
+    z-index: 5;
+    background: #eef5ff;
+  }
+
+  .gw-gpu-table .gw-buy-col {
+    min-width: 280px;
+    width: 280px;
+  }
+
+  .gw-gpu-table .gw-buy-col {
+    font-size: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .gw-gpu-table .gw-buy-col a,
+  .gw-gpu-table .gw-buy-col button,
+  .gw-gpu-table .gw-buy-col .button,
+  .gw-gpu-table .gw-buy-col .btn,
+  .gw-gpu-table .gw-buy-col [class*="price"] a,
+  .gw-gpu-table .gw-buy-col [class*="price"] button {
+    font-size: 0.82rem !important;
+    padding: 6px 10px !important;
+    min-height: 0 !important;
+    line-height: 1.2 !important;
+    border-radius: 6px !important;
+  }
+
+  .gw-gpu-table tbody tr:hover td {
+    background: var(--gw-brand-soft);
+  }
+
+  .gw-gpu-table tbody tr:hover .gw-sticky-col {
+    background: #dff0ff;
+  }
+
+  .gw-col-header {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .gw-gpu-table thead th[aria-sort="ascending"] .gw-col-header::after {
+    content: " (asc)";
+    font-size: 0.72rem;
+    color: #1d4c8e;
+  }
+
+  .gw-gpu-table thead th[aria-sort="descending"] .gw-col-header::after {
+    content: " (desc)";
+    font-size: 0.72rem;
+    color: #1d4c8e;
+  }
+
+  .gw-col-handle {
+    font-size: 0.8rem;
+    opacity: 0.6;
+    user-select: none;
+    touch-action: none;
+    cursor: grab;
+  }
+
+  .gw-col-handle:active {
+    cursor: grabbing;
+  }
+
+  .gw-draggable-col {
+    cursor: pointer;
+  }
+
+  .gw-draggable-col:active {
+    cursor: grabbing;
+  }
+
+  .gw-dragging {
+    opacity: 0.5;
+  }
+
+  .gw-drop-target {
+    outline: 2px dashed #6ab2ff;
+    outline-offset: -3px;
+    background: #e8f3ff !important;
+  }
+
+  .gw-gpu-id {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .gw-gpu-thumb {
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
+    border: 1px solid #cde2ff;
+    object-fit: cover;
+    flex: 0 0 auto;
+    background: #f2f7ff;
+  }
+
+  .gw-gpu-main {
+    margin: 0;
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: var(--gw-text);
+    line-height: 1.25;
+  }
+
+  .gw-gpu-sub {
+    margin: 2px 0 0;
+    font-size: 0.8rem;
+    color: var(--gw-subtext);
+    line-height: 1.3;
+  }
+
+  @media (max-width: 760px) {
+    .gw-gpu-table-widget {
+      border-radius: 14px;
+    }
+
+    .gw-gpu-table .gw-sticky-col {
+      min-width: 220px;
+      width: 220px;
+    }
+
+    .gw-gpu-thumb {
+      width: 50px;
+      height: 50px;
+    }
+
+    .gw-gpu-main {
+      font-size: 0.88rem;
+    }
+
+    .gw-gpu-table .gw-buy-col {
+      min-width: 240px;
+      width: 240px;
+    }
+  }
+</style>
+
+<div class="gw-gpu-table-widget" id="gw-gpu-table-widget-v1">
+  <div class="gw-gpu-table-head">
+    <p class="gw-gpu-table-kicker">CPU Comparison</p>
+    <h3 class="gw-gpu-table-title">AMD Ryzen X3D Lineup Comparison</h3>
+    <p class="gw-gpu-table-note">Hover rows for highlight. Drag the :: handle to reorder specs, or tap/click a header title to sort.</p>
+  </div>
+
+  <div class="gw-gpu-table-scroll" role="region" aria-label="AMD Ryzen X3D comparison table" tabindex="0">
+    <table class="gw-gpu-table">
+      <thead>
+        <tr>
+          <th class="gw-sticky-col">CPU</th>
+          <th class="gw-draggable-col"><span class="gw-col-header"><span class="gw-col-handle">::</span>Cores</span></th>
+          <th class="gw-draggable-col"><span class="gw-col-header"><span class="gw-col-handle">::</span>Threads</span></th>
+          <th class="gw-draggable-col"><span class="gw-col-header"><span class="gw-col-handle">::</span>Base Clock Speed</span></th>
+          <th class="gw-draggable-col"><span class="gw-col-header"><span class="gw-col-handle">::</span>Boost Clock Speed</span></th>
+          <th class="gw-draggable-col"><span class="gw-col-header"><span class="gw-col-handle">::</span>TDP</span></th>
+          <th class="gw-draggable-col"><span class="gw-col-header"><span class="gw-col-handle">::</span>L3 Cache</span></th>
+          <th class="gw-draggable-col gw-buy-col"><span class="gw-col-header"><span class="gw-col-handle">::</span>Where to Buy</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="gw-sticky-col">
+            <div class="gw-gpu-id">
+              <img class="gw-gpu-thumb" alt="AMD Ryzen 9 9950X3D product image" src="/wp-content/uploads/2026/02/TBSI_9950X3D.png" />
+              <div>
+                <p class="gw-gpu-main">AMD Ryzen 9 9950X3D</p>
+                <p class="gw-gpu-sub">Flagship gaming + productivity X3D CPU</p>
+              </div>
+            </div>
+          </td>
+          <td>16</td>
+          <td>32</td>
+          <td>4.3 GHz</td>
+          <td>5.7 GHz</td>
+          <td>170W</td>
+          <td>128MB</td>
+          <td class="gw-buy-col">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/JKLu7Wb" AMAZON-US-ASIN="B0D6NN6TM7" AMAZON-GB-ASIN="B0D6NN6TM7"  overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Famd-ryzen-5-9600x-six-core-5.40ghz-socket-am5-processor-retail-pro-amd-02677.html%3F_gl%3D1%2A4bwzn8%2A_up%2AMQ..%26gclid%3DCjwKCAjw88yxBhBWEiwA7cm6pUaGLINOoTnXMXXNULHQDnW-L6Dmiqd7Bys2SxdjXYegU5glFKU0ghoC2V0QAvD_BwE" overclockers-awin-gb-itemid="PRO-AMD-02677"]</td>
+        </tr>
+        <tr>
+          <td class="gw-sticky-col">
+            <div class="gw-gpu-id">
+              <img class="gw-gpu-thumb" alt="TBSI_AMD Ryzen 9 9900X3D" src="/wp-content/uploads/2026/02/TBSI_AMD-Ryzen-9-9900X3D.png" />
+              <div>
+                <p class="gw-gpu-main">AMD Ryzen 9 9900X3D</p>
+                <p class="gw-gpu-sub">12-core X3D option for gaming + creator builds</p>
+              </div>
+            </div>
+          </td>
+          <td>12</td>
+          <td>24</td>
+          <td>4.4 GHz</td>
+          <td>5.5 GHz</td>
+          <td>120W</td>
+          <td>128MB</td>
+          <td class="gw-buy-col">[your-shortcode-9900x3d]</td>
+        </tr>
+        <tr>
+          <td class="gw-sticky-col">
+            <div class="gw-gpu-id">
+              <img class="gw-gpu-thumb" alt="TBSI_AMD Ryzen 7 9850X3D" src="/wp-content/uploads/2026/02/TBSI_AMD-Ryzen-7-9850X3D.png" />
+              <div>
+                <p class="gw-gpu-main">AMD Ryzen 7 9850X3D</p>
+                <p class="gw-gpu-sub">Balanced X3D gaming CPU tier</p>
+              </div>
+            </div>
+          </td>
+          <td>8</td>
+          <td>16</td>
+          <td>4.7 GHz</td>
+          <td>5.6 GHz</td>
+          <td>120W</td>
+          <td>96MB</td>
+          <td class="gw-buy-col">[your-shortcode-9850x3d]</td>
+        </tr>
+        <tr>
+          <td class="gw-sticky-col">
+            <div class="gw-gpu-id">
+              <img class="gw-gpu-thumb" alt="TBSI_AMD Ryzen 7 9800X3D" src="/wp-content/uploads/2026/02/TBSI_AMD-Ryzen-7-9800X3D.png" />
+              <div>
+                <p class="gw-gpu-main">AMD Ryzen 7 9800X3D</p>
+                <p class="gw-gpu-sub">High-efficiency X3D gaming favorite</p>
+              </div>
+            </div>
+          </td>
+          <td>8</td>
+          <td>16</td>
+          <td>4.7 GHz</td>
+          <td>5.2 GHz</td>
+          <td>120W</td>
+          <td>96MB</td>
+          <td class="gw-buy-col">[your-shortcode-9800x3d]</td>
+        </tr>
+        <tr>
+          <td class="gw-sticky-col">
+            <div class="gw-gpu-id">
+              <img class="gw-gpu-thumb" alt="TBSI_AMD Ryzen 5 9600X" src="https://geekawhat.com/wp-content/uploads/2025/12/MPI_AMD-Ryzen-5-9600X-Box.jpg" />
+              <div>
+                <p class="gw-gpu-main">AMD Ryzen 5 9600X</p>
+                <p class="gw-gpu-sub">Efficient Zen 5 gaming chip</p>
+              </div>
+            </div>
+          </td>
+          <td>6</td>
+          <td>12</td>
+          <td>3.9 GHz</td>
+          <td>5.4 GHz</td>
+          <td>65W</td>
+          <td>38MB</td>
+          <td class="gw-buy-col">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/JKLu7Wb" AMAZON-US-ASIN="B0D6NN6TM7" AMAZON-GB-ASIN="B0D6NN6TM7"]</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  (function () {
+    function initWidget(widget) {
+      if (!widget || widget.getAttribute("data-gw-table-ready") === "1") return;
+
+      var table = widget.querySelector(".gw-gpu-table");
+      if (!table) return;
+
+      widget.setAttribute("data-gw-table-ready", "1");
+
+      var draggedHeader = null;
+      var suppressSortClick = false;
+      var pointerDrag = {
+        active: false,
+        moved: false,
+        startX: 0,
+        startY: 0,
+        pointerId: null,
+        targetHeader: null
+      };
+
+      function getCellIndex(cell) {
+        return Array.prototype.indexOf.call(cell.parentNode.children, cell);
+      }
+
+      function moveColumn(fromIndex, toIndex) {
+        if (fromIndex === toIndex || fromIndex <= 0 || toIndex <= 0) return;
+
+        var rows = table.rows;
+        for (var i = 0; i < rows.length; i += 1) {
+          var cells = rows[i].children;
+          var movingCell = cells[fromIndex];
+          var targetCell = cells[toIndex];
+          if (!movingCell || !targetCell) continue;
+
+          if (fromIndex < toIndex) {
+            rows[i].insertBefore(movingCell, targetCell.nextSibling);
+          } else {
+            rows[i].insertBefore(movingCell, targetCell);
+          }
+        }
+      }
+
+      function clearDropTargets() {
+        var drops = table.querySelectorAll(".gw-drop-target");
+        for (var i = 0; i < drops.length; i += 1) {
+          drops[i].classList.remove("gw-drop-target");
+        }
+      }
+
+      function findSortableValue(text) {
+        var raw = (text || "").trim();
+        if (!raw) return { type: "text", value: "" };
+
+        var hasDigit = /\d/.test(raw);
+        var numericCandidate = raw.replace(/[^0-9.\-]/g, "");
+        var parsedNumber = hasDigit ? Number.parseFloat(numericCandidate) : Number.NaN;
+
+        if (!Number.isNaN(parsedNumber)) {
+          return { type: "number", value: parsedNumber };
+        }
+
+        return { type: "text", value: raw.toLowerCase() };
+      }
+
+      function clearSortState() {
+        var allHeaders = table.querySelectorAll("thead th");
+        for (var i = 0; i < allHeaders.length; i += 1) {
+          allHeaders[i].removeAttribute("aria-sort");
+        }
+      }
+
+      function sortByColumn(header) {
+        var columnIndex = getCellIndex(header);
+        if (columnIndex <= 0) return;
+
+        var tbody = table.tBodies[0];
+        if (!tbody) return;
+
+        var rows = Array.prototype.slice.call(tbody.rows);
+        if (!rows.length) return;
+
+        var typedValues = rows.map(function (row) {
+          var cell = row.cells[columnIndex];
+          var parsed = findSortableValue(cell ? cell.textContent : "");
+          return parsed;
+        });
+
+        var isNumericColumn = typedValues.every(function (item) {
+          return item.type === "number";
+        });
+
+        var currentDir = header.getAttribute("aria-sort");
+        var nextDir = currentDir === "ascending" ? "descending" : "ascending";
+        clearSortState();
+        header.setAttribute("aria-sort", nextDir);
+
+        rows.sort(function (rowA, rowB) {
+          var valueA = findSortableValue(rowA.cells[columnIndex] ? rowA.cells[columnIndex].textContent : "");
+          var valueB = findSortableValue(rowB.cells[columnIndex] ? rowB.cells[columnIndex].textContent : "");
+          var result = 0;
+
+          if (isNumericColumn) {
+            result = valueA.value - valueB.value;
+          } else {
+            result = String(valueA.value).localeCompare(String(valueB.value), undefined, {
+              numeric: true,
+              sensitivity: "base"
+            });
+          }
+
+          return nextDir === "ascending" ? result : -result;
+        });
+
+        for (var i = 0; i < rows.length; i += 1) {
+          tbody.appendChild(rows[i]);
+        }
+      }
+
+      function getHeaderFromPoint(clientX, clientY) {
+        var target = document.elementFromPoint(clientX, clientY);
+        if (!target) return null;
+        var header = target.closest("th");
+        if (!header || !table.contains(header)) return null;
+        if (getCellIndex(header) <= 0) return null;
+        return header;
+      }
+
+      function resetPointerDrag() {
+        if (pointerDrag.active && draggedHeader) {
+          draggedHeader.classList.remove("gw-dragging");
+        }
+        clearDropTargets();
+        pointerDrag.active = false;
+        pointerDrag.moved = false;
+        pointerDrag.startX = 0;
+        pointerDrag.startY = 0;
+        pointerDrag.pointerId = null;
+        pointerDrag.targetHeader = null;
+        draggedHeader = null;
+      }
+
+      var headers = table.querySelectorAll("thead th");
+      for (var h = 0; h < headers.length; h += 1) {
+        var header = headers[h];
+        var isFirstColumn = h === 0;
+        if (isFirstColumn) continue;
+
+        var dragHandle = header.querySelector(".gw-col-handle");
+        if (!dragHandle) continue;
+
+        dragHandle.setAttribute("draggable", "true");
+
+        dragHandle.addEventListener("dragstart", function (event) {
+          var ownerHeader = event.currentTarget.closest("th");
+          if (!ownerHeader) {
+            event.preventDefault();
+            return;
+          }
+          draggedHeader = ownerHeader;
+          event.dataTransfer.effectAllowed = "move";
+          event.dataTransfer.setData("text/plain", "drag-column");
+          ownerHeader.classList.add("gw-dragging");
+        });
+
+        header.addEventListener("dragover", function (event) {
+          event.preventDefault();
+          if (!draggedHeader || event.currentTarget === draggedHeader) return;
+          clearDropTargets();
+          event.currentTarget.classList.add("gw-drop-target");
+        });
+
+        header.addEventListener("drop", function (event) {
+          event.preventDefault();
+          if (!draggedHeader) return;
+
+          var fromIndex = getCellIndex(draggedHeader);
+          var toIndex = getCellIndex(event.currentTarget);
+          moveColumn(fromIndex, toIndex);
+
+          clearDropTargets();
+        });
+
+        dragHandle.addEventListener("dragend", function () {
+          if (draggedHeader) draggedHeader.classList.remove("gw-dragging");
+          clearDropTargets();
+          draggedHeader = null;
+        });
+
+        header.addEventListener("pointerdown", function (event) {
+          if (event.pointerType !== "touch" && event.pointerType !== "pen") return;
+          if (event.button !== 0) return;
+          if (!event.target.closest(".gw-col-handle")) return;
+
+          draggedHeader = event.currentTarget;
+          pointerDrag.active = true;
+          pointerDrag.moved = false;
+          pointerDrag.startX = event.clientX;
+          pointerDrag.startY = event.clientY;
+          pointerDrag.pointerId = event.pointerId;
+          pointerDrag.targetHeader = null;
+          suppressSortClick = false;
+          draggedHeader.setPointerCapture(event.pointerId);
+        });
+
+        header.addEventListener("pointermove", function (event) {
+          if (!pointerDrag.active || event.pointerId !== pointerDrag.pointerId) return;
+
+          var deltaX = Math.abs(event.clientX - pointerDrag.startX);
+          var deltaY = Math.abs(event.clientY - pointerDrag.startY);
+          if (!pointerDrag.moved && (deltaX > 8 || deltaY > 8)) {
+            pointerDrag.moved = true;
+            suppressSortClick = true;
+            draggedHeader.classList.add("gw-dragging");
+          }
+
+          if (!pointerDrag.moved) return;
+          event.preventDefault();
+
+          clearDropTargets();
+          var dropHeader = getHeaderFromPoint(event.clientX, event.clientY);
+          if (!dropHeader || dropHeader === draggedHeader) return;
+          dropHeader.classList.add("gw-drop-target");
+          pointerDrag.targetHeader = dropHeader;
+        });
+
+        header.addEventListener("pointerup", function (event) {
+          if (!pointerDrag.active || event.pointerId !== pointerDrag.pointerId) return;
+
+          if (pointerDrag.moved && pointerDrag.targetHeader && draggedHeader) {
+            var fromIndex = getCellIndex(draggedHeader);
+            var toIndex = getCellIndex(pointerDrag.targetHeader);
+            moveColumn(fromIndex, toIndex);
+          }
+
+          try {
+            if (draggedHeader) draggedHeader.releasePointerCapture(event.pointerId);
+          } catch (error) {}
+
+          resetPointerDrag();
+        });
+
+        header.addEventListener("pointercancel", function () {
+          resetPointerDrag();
+        });
+
+        header.addEventListener("click", function (event) {
+          if (suppressSortClick) {
+            suppressSortClick = false;
+            event.preventDefault();
+            return;
+          }
+          sortByColumn(event.currentTarget);
+        });
+      }
+    }
+
+    function initAllWidgets() {
+      var widgets = document.querySelectorAll(".gw-gpu-table-widget");
+      for (var i = 0; i < widgets.length; i += 1) {
+        initWidget(widgets[i]);
+      }
+    }
+
+    initAllWidgets();
+    document.addEventListener("DOMContentLoaded", initAllWidgets);
+    window.addEventListener("load", initAllWidgets);
+    window.setTimeout(initAllWidgets, 350);
+    window.setTimeout(initAllWidgets, 1000);
+  })();
+</script>

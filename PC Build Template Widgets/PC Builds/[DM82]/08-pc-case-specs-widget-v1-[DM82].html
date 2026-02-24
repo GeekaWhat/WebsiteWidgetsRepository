@@ -1,0 +1,291 @@
+<!--
+GeekaWhat PC Case Specs Widget v1 (Thermaltake View 600 TG)
+Paste into a Gutenberg "Custom HTML" block.
+-->
+
+<style>
+  .gw-case-widget {
+    width: 100%;
+    margin: 18px 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+  }
+
+  .gw-case-layout {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .gw-case-head {
+    padding: 12px 13px 10px;
+    border-bottom: 1px solid #edf2fa;
+    background: #ffffff;
+  }
+
+  .gw-case-widget-title {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.3;
+    font-weight: 800;
+    color: #142033;
+  }
+
+  .gw-case-menu {
+    border-right: 1px solid #e6edf7;
+    background: #f8fbff;
+    padding: 8px;
+  }
+
+  .gw-case-tab {
+    width: 100%;
+    display: block;
+    border: 1px solid #d9e8ff;
+    background: #ffffff;
+    color: #111111;
+    border-radius: 10px;
+    padding: 10px 11px;
+    margin: 0 0 8px;
+    text-align: left;
+    font-size: 0.93rem;
+    font-weight: 600;
+    line-height: 1.25;
+    cursor: pointer;
+  }
+
+  .gw-case-tab:last-child {
+    margin-bottom: 0;
+  }
+
+  .gw-case-tab.is-active {
+    background: #037cff;
+    border-color: #037cff;
+    color: #ffffff;
+  }
+
+  .gw-case-tab:not(.is-active):hover,
+  .gw-case-tab:not(.is-active):focus {
+    background: #eef5ff;
+    border-color: #037cff;
+    color: #111111;
+    outline: none;
+  }
+
+  .gw-case-tab.is-active:hover,
+  .gw-case-tab.is-active:focus {
+    background: #026fe5;
+    border-color: #026fe5;
+    color: #ffffff;
+    outline: none;
+  }
+
+  .gw-case-content {
+    padding: 14px;
+  }
+
+  .gw-case-panel {
+    display: none;
+  }
+
+  .gw-case-panel.is-active {
+    display: block;
+  }
+
+  .gw-case-title {
+    margin: 0 0 8px;
+    font-size: 1.02rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .gw-case-specs {
+    margin: 0 0 12px;
+    border: 1px solid #e6edf7;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .gw-case-spec-row {
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr);
+    border-bottom: 1px solid #e6edf7;
+    background: #ffffff;
+  }
+
+  .gw-case-spec-row:last-child {
+    border-bottom: 0;
+  }
+
+  .gw-case-label,
+  .gw-case-value {
+    padding: 9px 10px;
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+
+  .gw-case-label {
+    background: #f4f8ff;
+    font-weight: 700;
+  }
+
+  .gw-case-value {
+    font-weight: 500;
+  }
+
+  .gw-case-note {
+    margin: 0;
+    font-size: 0.84rem;
+    line-height: 1.4;
+    color: #445166;
+  }
+
+  @media (max-width: 760px) {
+    .gw-case-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-case-menu {
+      border-right: 0;
+      border-bottom: 1px solid #e6edf7;
+    }
+
+    .gw-case-spec-row {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-case-label {
+      border-bottom: 1px solid #e6edf7;
+    }
+  }
+</style>
+
+<section class="gw-case-widget" aria-label="PC case specifications">
+  <div class="gw-case-head">
+    <h3 class="gw-case-widget-title">Thermaltake View 600 TG Specs</h3>
+  </div>
+
+  <div class="gw-case-layout">
+    <div class="gw-case-menu" role="tablist" aria-label="Case Spec Sections">
+      <button class="gw-case-tab is-active" type="button" role="tab" aria-selected="true" data-target="gw-case-general">General</button>
+      <button class="gw-case-tab" type="button" role="tab" aria-selected="false" data-target="gw-case-support">Compatibility</button>
+      <button class="gw-case-tab" type="button" role="tab" aria-selected="false" data-target="gw-case-cooling">Cooling</button>
+      <button class="gw-case-tab" type="button" role="tab" aria-selected="false" data-target="gw-case-storage">Storage</button>
+      <button class="gw-case-tab" type="button" role="tab" aria-selected="false" data-target="gw-case-clearance">Clearance</button>
+      <button class="gw-case-tab" type="button" role="tab" aria-selected="false" data-target="gw-case-matrix">Matrix Display</button>
+      <button class="gw-case-tab" type="button" role="tab" aria-selected="false" data-target="gw-case-extra">Extra</button>
+    </div>
+
+    <div class="gw-case-content">
+      <article id="gw-case-general" class="gw-case-panel is-active" role="tabpanel">
+        <h3 class="gw-case-title">General</h3>
+        <div class="gw-case-specs">
+          <div class="gw-case-spec-row"><div class="gw-case-label">Form Factor</div><div class="gw-case-value">Full Tower</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Dimensions</div><div class="gw-case-value">560 x 249 x 584 mm (22.06 x 9.8 x 22.98 in)</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Materials</div><div class="gw-case-value">Tempered glass, steel chassis, high-airflow panel layout</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Color</div><div class="gw-case-value">Multiple colour options (Black, Butter Caramel, Future Dusk, Mint Strawberry, Snow)</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Expansion Slots</div><div class="gw-case-value">8</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Vertical GPU</div><div class="gw-case-value">Supported (riser cable sold separately)</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Front I/O</div><div class="gw-case-value">2 x USB 3.0 Type-A, 1 x USB 3.2 Gen 2 Type-C, headphone jack, microphone jack, power/reset</div></div>
+        </div>
+      </article>
+
+      <article id="gw-case-support" class="gw-case-panel" role="tabpanel">
+        <h3 class="gw-case-title">Mainboard Compatibility</h3>
+        <div class="gw-case-specs">
+          <div class="gw-case-spec-row"><div class="gw-case-label">Supported Boards</div><div class="gw-case-value">Mini-ITX, MicroATX, ATX, E-ATX, back-connector compatible</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Max Board Width</div><div class="gw-case-value">Full-width ATX/E-ATX fitment</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Rear-Connect</div><div class="gw-case-value">Back-connector motherboard support included</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Layout Notes</div><div class="gw-case-value">Bold showcase chassis with broad radiator and fan flexibility</div></div>
+        </div>
+      </article>
+
+      <article id="gw-case-cooling" class="gw-case-panel" role="tabpanel">
+        <h3 class="gw-case-title">Cooling Support</h3>
+        <div class="gw-case-specs">
+          <div class="gw-case-spec-row"><div class="gw-case-label">Total Fans</div><div class="gw-case-value">Up to 10 fans (120mm or 140mm mount patterns)</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Fan Mounts</div><div class="gw-case-value">Top: 3x140, Side: 3x140, Rear: 1x140, PSU Shroud: 3x140</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Radiator Support</div><div class="gw-case-value">Top: up to 420mm, Side: up to 420mm, Rear: up to 140mm</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Top Rad Max Size</div><div class="gw-case-value">Large custom-loop and AIO support zones</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Airflow Design</div><div class="gw-case-value">High-volume airflow path across side, top, and PSU-shroud zones</div></div>
+        </div>
+      </article>
+
+      <article id="gw-case-storage" class="gw-case-panel" role="tabpanel">
+        <h3 class="gw-case-title">Storage</h3>
+        <div class="gw-case-specs">
+          <div class="gw-case-spec-row"><div class="gw-case-label">Internal 2.5&quot; Positions</div><div class="gw-case-value">3 x 3.5" + 1 x 2.5"</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Internal 3.5&quot; Positions</div><div class="gw-case-value">3 x 2.5" + 1 x 3.5"</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Side Bracket</div><div class="gw-case-value">Flexible mixed 2.5" and 3.5" placement</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Bottom Bracket</div><div class="gw-case-value">Drive mounts vary by internal bracket config</div></div>
+        </div>
+      </article>
+
+      <article id="gw-case-clearance" class="gw-case-panel" role="tabpanel">
+        <h3 class="gw-case-title">Clearance</h3>
+        <div class="gw-case-specs">
+          <div class="gw-case-spec-row"><div class="gw-case-label">CPU Cooler Height</div><div class="gw-case-value">175mm</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">GPU Length</div><div class="gw-case-value">480mm</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">GPU Width</div><div class="gw-case-value">175mm</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">PSU Length</div><div class="gw-case-value">220mm</div></div>
+        </div>
+      </article>
+
+      <article id="gw-case-matrix" class="gw-case-panel" role="tabpanel">
+        <h3 class="gw-case-title">6" LCD Panel Kit (Optional)</h3>
+        <div class="gw-case-specs">
+          <div class="gw-case-spec-row"><div class="gw-case-label">LED Count</div><div class="gw-case-value">Optional 6.0" LCD panel accessory</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Power Input</div><div class="gw-case-value">Controlled via TT RGB Plus software</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Placement</div><div class="gw-case-value">Installs into dedicated View 600 TG panel location</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Fabric Material</div><div class="gw-case-value">LCD panel sold separately</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Connectors</div><div class="gw-case-value">Connects through TT RGB Plus compatible control path</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Controls</div><div class="gw-case-value">Managed in TT RGB Plus software</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Widget Types</div><div class="gw-case-value">System telemetry, GIFs, and custom image playback</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">RGB Integration</div><div class="gw-case-value">Designed to match View 600 TG colourways</div></div>
+        </div>
+      </article>
+
+      <article id="gw-case-extra" class="gw-case-panel" role="tabpanel">
+        <h3 class="gw-case-title">Extra</h3>
+        <div class="gw-case-specs">
+          <div class="gw-case-spec-row"><div class="gw-case-label">Net Weight</div><div class="gw-case-value">Full-tower class chassis mass</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Gross Weight</div><div class="gw-case-value">Shipping weight varies by colour and region</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Warranty</div><div class="gw-case-value">Warranty depends on retailer and region</div></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.currentScript && document.currentScript.previousElementSibling;
+    if (!root || !root.classList.contains("gw-case-widget")) {
+      root = document.querySelector(".gw-case-widget");
+    }
+    if (!root) return;
+
+    var tabs = root.querySelectorAll(".gw-case-tab");
+    var panels = root.querySelectorAll(".gw-case-panel");
+
+    function activate(targetId) {
+      tabs.forEach(function (tab) {
+        var isActive = tab.getAttribute("data-target") === targetId;
+        tab.classList.toggle("is-active", isActive);
+        tab.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+
+      panels.forEach(function (panel) {
+        panel.classList.toggle("is-active", panel.id === targetId);
+      });
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        activate(tab.getAttribute("data-target"));
+      });
+    });
+  })();
+</script>

@@ -1,0 +1,132 @@
+<!-- GeekaWhat PC Case Specs Widget v1 - DM88 -->
+<style>
+  .gw-case-widget {
+    width: 100%;
+    margin: 18px 0;
+    border: 1px solid #d9e6f9;
+    border-radius: 14px;
+    background: #fff;
+    overflow: hidden;
+  }
+  .gw-case-head { padding: 12px 14px; border-bottom: 1px solid #e6edf7; }
+  .gw-case-widget-title { margin: 0; font-size: 1.05rem; font-weight: 800; }
+  .gw-case-layout { display: grid; grid-template-columns: 240px minmax(0,1fr); }
+  .gw-case-menu { border-right: 1px solid #e6edf7; background: #fbfdff; }
+  .gw-case-tab {
+    width: 100%; border: 0; border-bottom: 1px solid #e6edf7; background: transparent;
+    padding: 10px 12px; text-align: left; font-weight: 700; cursor: pointer;
+  }
+  .gw-case-tab.is-active { background: #037cff; color: #fff; }
+  .gw-case-content { padding: 12px; }
+  .gw-case-panel { display: none; }
+  .gw-case-panel.is-active { display: block; }
+  .gw-case-title { margin: 0 0 10px; font-size: 1rem; }
+  .gw-case-specs { display: grid; gap: 8px; }
+  .gw-case-spec-row { display: grid; grid-template-columns: 220px minmax(0,1fr); gap: 10px; padding: 8px; border: 1px solid #e6edf7; border-radius: 8px; }
+  .gw-case-label { font-weight: 700; color: #24456f; }
+  .gw-case-value { color: #122033; }
+  @media (max-width: 760px) {
+    .gw-case-layout { grid-template-columns: 1fr; }
+    .gw-case-menu { border-right: 0; border-bottom: 1px solid #e6edf7; display: grid; grid-template-columns: 1fr 1fr; }
+    .gw-case-spec-row { grid-template-columns: 1fr; }
+  }
+</style>
+
+<section class="gw-case-widget" aria-label="PC case specifications">
+  <div class="gw-case-head">
+    <h3 class="gw-case-widget-title">Phanteks XT M3 Specs</h3>
+  </div>
+
+  <div class="gw-case-layout">
+    <div class="gw-case-menu" role="tablist" aria-label="Case Spec Sections">
+      <button class="gw-case-tab is-active" type="button" role="tab" aria-selected="true" data-target="gw-case-general">General</button>
+      <button class="gw-case-tab" type="button" role="tab" aria-selected="false" data-target="gw-case-support">Compatibility</button>
+      <button class="gw-case-tab" type="button" role="tab" aria-selected="false" data-target="gw-case-cooling">Cooling</button>
+      <button class="gw-case-tab" type="button" role="tab" aria-selected="false" data-target="gw-case-storage">Storage</button>
+      <button class="gw-case-tab" type="button" role="tab" aria-selected="false" data-target="gw-case-clearance">Clearance</button>
+      <button class="gw-case-tab" type="button" role="tab" aria-selected="false" data-target="gw-case-extra">Extra</button>
+    </div>
+
+    <div class="gw-case-content">
+      <article id="gw-case-general" class="gw-case-panel is-active" role="tabpanel">
+        <h3 class="gw-case-title">General</h3>
+        <div class="gw-case-specs">
+          <div class="gw-case-spec-row"><div class="gw-case-label">Form Factor</div><div class="gw-case-value">Compact Micro-ATX Tower</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Dimensions</div><div class="gw-case-value">460 x 235 x 370 mm</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Colours</div><div class="gw-case-value">Black / White</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">PCIe Slots</div><div class="gw-case-value">4</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Front I/O</div><div class="gw-case-value">1x USB 3.0 Type-A, 1x USB-C 3.2 Gen2x2, 1x headset combo, power button</div></div>
+        </div>
+      </article>
+
+      <article id="gw-case-support" class="gw-case-panel" role="tabpanel">
+        <h3 class="gw-case-title">Compatibility</h3>
+        <div class="gw-case-specs">
+          <div class="gw-case-spec-row"><div class="gw-case-label">Motherboard Support</div><div class="gw-case-value">Micro-ATX, Mini-ITX</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Recommended GPU Fit</div><div class="gw-case-value">Smaller cards if using front intake fan setup</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Build Note</div><div class="gw-case-value">Great pairing with compact GPUs like Sapphire Pulse RX 9060 XT 8GB</div></div>
+        </div>
+      </article>
+
+      <article id="gw-case-cooling" class="gw-case-panel" role="tabpanel">
+        <h3 class="gw-case-title">Cooling Support</h3>
+        <div class="gw-case-specs">
+          <div class="gw-case-spec-row"><div class="gw-case-label">Fan Mounts</div><div class="gw-case-value">Top: 3x120mm, Front: 2x120mm, Bottom: 3x120mm, Rear: 1x120mm, Side: none</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Radiator Support</div><div class="gw-case-value">Top: up to 360mm, Front/Side/Bottom/Rear: no support</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Airflow Direction</div><div class="gw-case-value">Best results with front/bottom intake and top/rear exhaust</div></div>
+        </div>
+      </article>
+
+      <article id="gw-case-storage" class="gw-case-panel" role="tabpanel">
+        <h3 class="gw-case-title">Storage</h3>
+        <div class="gw-case-specs">
+          <div class="gw-case-spec-row"><div class="gw-case-label">2.5 inch</div><div class="gw-case-value">Up to 2 drives</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">3.5 inch</div><div class="gw-case-value">Up to 1 drive</div></div>
+        </div>
+      </article>
+
+      <article id="gw-case-clearance" class="gw-case-panel" role="tabpanel">
+        <h3 class="gw-case-title">Clearance</h3>
+        <div class="gw-case-specs">
+          <div class="gw-case-spec-row"><div class="gw-case-label">CPU Cooler Height</div><div class="gw-case-value">175mm max</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">GPU Length</div><div class="gw-case-value">430mm max (without front fans)</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">GPU Width</div><div class="gw-case-value">175mm max</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">PSU Length</div><div class="gw-case-value">150mm max</div></div>
+        </div>
+      </article>
+
+      <article id="gw-case-extra" class="gw-case-panel" role="tabpanel">
+        <h3 class="gw-case-title">Extra</h3>
+        <div class="gw-case-specs">
+          <div class="gw-case-spec-row"><div class="gw-case-label">Models</div><div class="gw-case-value">Linked model includes fans; another variant is fanless</div></div>
+          <div class="gw-case-spec-row"><div class="gw-case-label">Best Use</div><div class="gw-case-value">Small-footprint gaming PCs with airflow focus</div></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.currentScript && document.currentScript.previousElementSibling;
+    if (!root || !root.classList.contains("gw-case-widget")) return;
+
+    var tabs = root.querySelectorAll(".gw-case-tab");
+    var panels = root.querySelectorAll(".gw-case-panel");
+
+    function activate(targetId) {
+      tabs.forEach(function (tab) {
+        var active = tab.getAttribute("data-target") === targetId;
+        tab.classList.toggle("is-active", active);
+        tab.setAttribute("aria-selected", active ? "true" : "false");
+      });
+      panels.forEach(function (panel) {
+        panel.classList.toggle("is-active", panel.id === targetId);
+      });
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () { activate(tab.getAttribute("data-target")); });
+    });
+  })();
+</script>

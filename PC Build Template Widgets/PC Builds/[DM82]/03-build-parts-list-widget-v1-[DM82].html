@@ -1,0 +1,363 @@
+<!--
+GeekaWhat Build Parts List Widget v1 (HTML + CSS + JS)
+Paste into a Gutenberg "Custom HTML" block.
+Add/remove parts by duplicating or removing:
+1) a left menu .gw-build-tab button
+2) its matching right panel .gw-build-panel with the same data-target/id.
+-->
+
+<style>
+  .gw-build-widget {
+    width: 100%;
+    margin: 18px 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+  }
+
+  .gw-build-layout {
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .gw-build-menu {
+    border-right: 1px solid #e6edf7;
+    background: #f8fbff;
+    padding: 8px;
+  }
+
+  .gw-build-tab {
+    width: 100%;
+    display: block;
+    border: 1px solid #d9e8ff;
+    background: #ffffff;
+    color: #111111;
+    border-radius: 10px;
+    padding: 10px 11px;
+    margin: 0 0 8px;
+    text-align: left;
+    font-size: 0.92rem;
+    font-weight: 400;
+    line-height: 1.25;
+    cursor: pointer;
+  }
+
+  .gw-build-tab:last-child {
+    margin-bottom: 0;
+  }
+
+  .gw-build-tab.is-active {
+    background: #037cff;
+    border-color: #037cff;
+    color: #ffffff;
+  }
+
+  .gw-build-tab strong {
+    font-weight: 700;
+  }
+
+  .gw-build-tab:not(.is-active):hover,
+  .gw-build-tab:not(.is-active):focus {
+    background: #eef5ff;
+    border-color: #037cff;
+    color: #111111;
+    outline: none;
+  }
+
+  .gw-build-tab.is-active:hover,
+  .gw-build-tab.is-active:focus {
+    background: #026fe5;
+    border-color: #026fe5;
+    color: #ffffff;
+    outline: none;
+  }
+
+  .gw-build-content {
+    padding: 14px;
+  }
+
+  .gw-build-panel {
+    display: none;
+  }
+
+  .gw-build-panel.is-active {
+    display: block;
+  }
+
+  .gw-build-title {
+    margin: 0;
+    font-size: 1.02rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .gw-build-media {
+    margin: 0 0 10px;
+    border: 1px solid #e6edf7;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  .gw-build-media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 260px;
+    object-fit: cover;
+  }
+
+  .gw-build-head-row {
+    margin: 0 0 8px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .gw-build-skip {
+    white-space: nowrap;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #037cff;
+    text-decoration: none;
+  }
+
+  .gw-build-skip:hover,
+  .gw-build-skip:focus {
+    text-decoration: underline;
+  }
+
+  .gw-build-summary {
+    margin: 0 0 10px;
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  .gw-build-specs {
+    margin: 0 0 12px;
+    border: 1px solid #e6edf7;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .gw-build-spec-row {
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr);
+    border-bottom: 1px solid #e6edf7;
+    background: #ffffff;
+  }
+
+  .gw-build-spec-row:last-child {
+    border-bottom: 0;
+  }
+
+  .gw-build-label,
+  .gw-build-value {
+    padding: 9px 10px;
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+
+  .gw-build-label {
+    background: #f4f8ff;
+    font-weight: 700;
+  }
+
+  .gw-build-value {
+    font-weight: 500;
+  }
+
+  .gw-buy-placeholder {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    font-size: 0.9rem;
+    line-height: 1.35;
+    color: inherit;
+  }
+
+  @media (max-width: 760px) {
+    .gw-build-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-build-menu {
+      border-right: 0;
+      border-bottom: 1px solid #e6edf7;
+    }
+
+    .gw-build-spec-row {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-build-label {
+      border-bottom: 1px solid #e6edf7;
+    }
+  }
+</style>
+
+<section class="gw-build-widget" aria-label="Build parts list">
+  <div class="gw-build-layout">
+    <div class="gw-build-menu" role="tablist" aria-label="Build Components">
+      <button class="gw-build-tab is-active" type="button" role="tab" aria-selected="true" data-target="gw-part-cpu"><strong>CPU:</strong> AMD Ryzen 7 9800X3D</button>
+      <button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-cooler"><strong>CPU Cooler:</strong> Thermaltake MINECUBE 360 Ultra ARGB Sync</button>
+      <button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-mobo"><strong>Motherboard:</strong> GIGABYTE X870E AORUS ELITE X3D</button>
+      <button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-ram"><strong>RAM:</strong> Thermaltake Toughram XG RGB D5 32GB</button>
+      <button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-ssd"><strong>SSD:</strong> Samsung 9100 PRO</button>
+      <button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-gpu"><strong>GPU:</strong> NVIDIA GeForce RTX 5080 FE</button>
+      <button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-case"><strong>Case:</strong> Thermaltake View 600 TG</button>
+      <button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-psu"><strong>PSU:</strong> Thermaltake Toughpower PT 1000W</button>
+    </div>
+
+    <div class="gw-build-content">
+      <article id="gw-part-cpu" class="gw-build-panel is-active" role="tabpanel">
+        <div class="gw-build-head-row"><h3 class="gw-build-title">AMD Ryzen 7 9800X3D</h3><a class="gw-build-skip" href="#CPU">Skip to Section</a></div>
+        <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2024/11/MPI_Ryzen-9800X3D-with-box.jpg" alt="AMD Ryzen 7 9800X3D"></div>
+        <p class="gw-build-summary">The AMD Ryzen 7 9800X3D is built for high-refresh gaming, with 3D V-Cache accelerating cache-sensitive workloads and keeping frame pacing smooth in demanding titles.</p>
+        <div class="gw-build-specs">
+          <div class="gw-build-spec-row"><div class="gw-build-label">Architecture</div><div class="gw-build-value">Zen 5 with 3D V-Cache (AM5)</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Core/Thread Count</div><div class="gw-build-value">8 Cores / 16 Threads</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Boost Clock</div><div class="gw-build-value">Up to 5.2 GHz</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Default TDP</div><div class="gw-build-value">120W</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Platform Support</div><div class="gw-build-value">DDR5 + PCIe 5.0</div></div>
+        </div>
+        <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/rcnsQla" AMAZON-US-ASIN="B0DKFMSMYK" AMAZON-GB-ASIN="B0DKFMSMYK" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Famd-ryzen-7-9800x3d-eight-core-5.20ghz-socket-am5-processor-retail-pro-amd-03517.html" overclockers-awin-gb-itemid="PRO-AMD-03517"]</p>
+      </article>
+
+      <article id="gw-part-cooler" class="gw-build-panel" role="tabpanel">
+        <div class="gw-build-head-row"><h3 class="gw-build-title">Thermaltake MINECUBE 360 Ultra ARGB Sync</h3><a class="gw-build-skip" href="#cpu-cooler">Skip to Section</a></div>
+        <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2025/12/MPI_ThermalTake-MINECUBE-360-Ultra-ARGB-Sync.jpg" alt="Thermaltake MINECUBE 360 Ultra ARGB Sync"></div>
+        <p class="gw-build-summary">Thermaltake's MINECUBE 360 Ultra ARGB Sync is an enthusiast 360mm AIO featuring a patented quad-LCD cube display with support for system telemetry and custom visuals.</p>
+        <div class="gw-build-specs">
+          <div class="gw-build-spec-row"><div class="gw-build-label">Cooler Type</div><div class="gw-build-value">360mm AIO liquid cooler</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Fan Size</div><div class="gw-build-value">3 x 120mm SWAFAN EX (MAGForce 2.0)</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Heat Pipes</div><div class="gw-build-value">Quad 3.95-inch TFT LCD cube + swappable fan orientation</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Height</div><div class="gw-build-value">360mm radiator class</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Socket Compatibility</div><div class="gw-build-value">AM5 / AM4 / Intel mainstream (check SKU bundle)</div></div>
+        </div>
+        <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/wAiLs" AMAZON-US-ASIN="B0G1XJ6RJP" AMAZON-GB-ASIN=""]</p>
+      </article>
+
+      <article id="gw-part-mobo" class="gw-build-panel" role="tabpanel">
+        <div class="gw-build-head-row"><h3 class="gw-build-title">GIGABYTE X870E AORUS ELITE X3D</h3><a class="gw-build-skip" href="#motherboard">Skip to Section</a></div>
+        <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2025/11/MPI_Gigabyte-X870E-AORUS-ELITE-X3D.jpg" alt="GIGABYTE X870E AORUS ELITE X3D"></div>
+        <p class="gw-build-summary">The X870E AORUS ELITE X3D is tuned for AMD's 3D V-Cache chips, with high-end connectivity, strong power delivery, and one-click optimisation features.</p>
+        <div class="gw-build-specs">
+          <div class="gw-build-spec-row"><div class="gw-build-label">Chipset / Socket</div><div class="gw-build-value">X870E / AM5</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Form Factor</div><div class="gw-build-value">ATX</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Memory Support</div><div class="gw-build-value">Up to 256GB DDR5, up to 9000MT/s (OC), EXPO</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Primary GPU Slot</div><div class="gw-build-value">PCIe 5.0 x16</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Networking</div><div class="gw-build-value">Wi-Fi 7 + 5GbE LAN</div></div>
+        </div>
+        <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/hZhtZWM" AMAZON-US-ASIN="B0FRTKQCLH" AMAZON-GB-ASIN="B0FRFKRSTV"]</p>
+      </article>
+
+      <article id="gw-part-ram" class="gw-build-panel" role="tabpanel">
+        <div class="gw-build-head-row"><h3 class="gw-build-title">Thermaltake Toughram XG RGB D5 32GB</h3><a class="gw-build-skip" href="#ram">Skip to Section</a></div>
+        <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2023/12/MPI_Thermaltake-ToughRAM-XG-RGB-D5-Black.jpg" alt="Thermaltake Toughram XG RGB D5 32GB"></div>
+        <p class="gw-build-summary">Thermaltake TOUGHRAM XG RGB D5 pairs strong aesthetics with modern DDR5 throughput, including EXPO and XMP 3.0 support for straightforward tuning.</p>
+        <div class="gw-build-specs">
+          <div class="gw-build-spec-row"><div class="gw-build-label">Capacity</div><div class="gw-build-value">32GB (2x16GB)</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Memory Type</div><div class="gw-build-value">DDR5 RGB UDIMM</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Speed Class</div><div class="gw-build-value">High-speed DDR5 class (kit dependent)</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Profile Support</div><div class="gw-build-value">Intel XMP 3.0 and AMD EXPO</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Latency Class</div><div class="gw-build-value">Latency class depends on selected kit</div></div>
+        </div>
+        <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/dxGOmB" AMAZON-US-ASIN="B0BHJN7NF9" AMAZON-GB-ASIN="B0BHJN7NF9"]</p>
+      </article>
+
+      <article id="gw-part-ssd" class="gw-build-panel" role="tabpanel">
+        <div class="gw-build-head-row"><h3 class="gw-build-title">Samsung 9100 PRO</h3><a class="gw-build-skip" href="#ssd">Skip to Section</a></div>
+        <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2025/08/MPI_Samsung-9100-PRO-2TB.jpg" alt="Samsung 9100 PRO"></div>
+        <p class="gw-build-summary">Samsung's 9100 PRO is a high-end PCIe Gen5 SSD delivering exceptional throughput for gaming and creator workloads, with 2TB as a practical baseline for modern libraries.</p>
+        <div class="gw-build-specs">
+          <div class="gw-build-spec-row"><div class="gw-build-label">Capacity</div><div class="gw-build-value">2TB (recommended build capacity)</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Form Factor</div><div class="gw-build-value">M.2 2280</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Interface</div><div class="gw-build-value">PCIe 5.0 x4 NVMe</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Read/Write (Seq)</div><div class="gw-build-value">Up to 14054MB/s read and 13189MB/s write (2TB sample)</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Best Use</div><div class="gw-build-value">Fast game loads, large libraries, creator scratch disk</div></div>
+        </div>
+        <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/pJ5f5c" AMAZON-US-ASIN="B0DWFLPMM5" AMAZON-GB-ASIN="B0DWFLPMM5" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fsamsung-9100-pro-2tb-m.2-2280-pcie-5.0-x4-nvme-solid-state-drive-sto-sam-04766.html" overclockers-awin-gb-itemid="STO-SAM-04766"]</p>
+      </article>
+
+      <article id="gw-part-gpu" class="gw-build-panel" role="tabpanel">
+        <div class="gw-build-head-row"><h3 class="gw-build-title">NVIDIA GeForce RTX 5080 FE</h3><a class="gw-build-skip" href="#GPU">Skip to Section</a></div>
+        <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2025/01/MPI_RTX-5080-Founders-Wide-e1765538700698.jpg" alt="NVIDIA GeForce RTX 5080 FE"></div>
+        <p class="gw-build-summary">The GeForce RTX 5080 FE delivers flagship-class 4K gaming performance with 16GB of GDDR7, advanced ray tracing, and DLSS 4 acceleration.</p>
+        <div class="gw-build-specs">
+          <div class="gw-build-spec-row"><div class="gw-build-label">VRAM</div><div class="gw-build-value">16GB GDDR7</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Bus / Interface</div><div class="gw-build-value">PCIe x16</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Power Connector</div><div class="gw-build-value">16-pin 12V-2x6 / 12VHPWR class</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Target Resolution</div><div class="gw-build-value">4K high settings, high-refresh 1440p</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Feature Stack</div><div class="gw-build-value">Ray tracing + DLSS 4 + AI-assisted rendering</div></div>
+        </div>
+        <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/WMfY0dH" AMAZON-US-ASIN="B0DS65KD1C" AMAZON-GB-ASIN="B0DS65KD1C" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fasus-geforce-rtx-5080-tuf-gaming-oc-16gb-gddr7-pci-express-graphics-card-gra-asu-03930.html" overclockers-awin-gb-itemid="GRA-ASU-03930"]</p>
+      </article>
+
+      <article id="gw-part-case" class="gw-build-panel" role="tabpanel">
+        <div class="gw-build-head-row"><h3 class="gw-build-title">Thermaltake View 600 TG</h3><a class="gw-build-skip" href="#case">Skip to Section</a></div>
+        <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2025/12/MPI_Thermaltake-View-600-TG.jpg" alt="Thermaltake View 600 TG"></div>
+        <p class="gw-build-summary">The Thermaltake View 600 TG is a bold full-tower chassis with broad compatibility and extensive cooling support, built to showcase premium components.</p>
+        <div class="gw-build-specs">
+          <div class="gw-build-spec-row"><div class="gw-build-label">Case Type</div><div class="gw-build-value">Full tower</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Airflow Design</div><div class="gw-build-value">Supports up to ten 120/140mm fans</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Motherboard Support</div><div class="gw-build-value">Mini-ITX / MicroATX / ATX / E-ATX / back-connector boards</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">GPU Clearance</div><div class="gw-build-value">Up to 480mm GPU length clearance</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Radiator Support</div><div class="gw-build-value">Up to 420mm top or side radiators</div></div>
+        </div>
+        <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/8GgfrP" AMAZON-US-ASIN="B0FNQBGJZ2" AMAZON-GB-ASIN="B0CQX1MGH4"]</p>
+      </article>
+
+      <article id="gw-part-psu" class="gw-build-panel" role="tabpanel">
+        <div class="gw-build-head-row"><h3 class="gw-build-title">Thermaltake Toughpower PT 1000W</h3><a class="gw-build-skip" href="#psu">Skip to Section</a></div>
+        <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2025/12/MPI_Thermaltake-Toughpower-PT-1000W.jpg" alt="Thermaltake Toughpower PT 1000W"></div>
+        <p class="gw-build-summary">Thermaltake's Toughpower PT 1000W provides ample headroom for RTX 5080 systems, with ATX 3.1/PCIe 5.0 support and Platinum-rated efficiency.</p>
+        <div class="gw-build-specs">
+          <div class="gw-build-spec-row"><div class="gw-build-label">Wattage</div><div class="gw-build-value">1000W</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Standard</div><div class="gw-build-value">ATX 3.1</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Efficiency</div><div class="gw-build-value">80 PLUS Platinum</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">PCIe 5 Power</div><div class="gw-build-value">Native 12+4-pin modular GPU power</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Best Fit</div><div class="gw-build-value">High-end gaming with upgrade headroom</div></div>
+        </div>
+        <p class="gw-buy-placeholder">PSU: Thermaltake Toughpower PT 1000W (link unavailable in brief)</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.currentScript && document.currentScript.previousElementSibling;
+    if (!root || !root.classList.contains("gw-build-widget")) {
+      root = document.querySelector(".gw-build-widget");
+    }
+    if (!root) return;
+
+    var tabs = root.querySelectorAll(".gw-build-tab");
+    var panels = root.querySelectorAll(".gw-build-panel");
+
+    function activate(targetId) {
+      tabs.forEach(function (tab) {
+        var isActive = tab.getAttribute("data-target") === targetId;
+        tab.classList.toggle("is-active", isActive);
+        tab.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+
+      panels.forEach(function (panel) {
+        panel.classList.toggle("is-active", panel.id === targetId);
+      });
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        activate(tab.getAttribute("data-target"));
+      });
+    });
+  })();
+</script>

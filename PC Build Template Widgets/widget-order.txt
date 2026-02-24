@@ -1,0 +1,21 @@
+01|section-title-h2-widget-v1.html
+02|build-component-heading-widget-v1.html
+03|build-parts-list-widget-v1.html
+04|cpu-comparison-table-v1.html
+05|gpu-comparison-table-v1.html
+06|mobo-spec-grid-widget-v1.html
+07|case-spec-grid-widget-v1.html
+08|pc-case-specs-widget-v1.html
+09|ram-speed-latency-visual-widget-v1.html
+10|ssd-speed-visual-widget-v1.html
+11|psu-connector-breakdown-widget-v1.html
+12|pcie-lane-breakdown-widget-v1.html
+13|performance-widget-v1.html
+14|performance-widget-frame4000-v2.html
+15|noise-thermals-widget-v1.html
+16|CPU cooler testing graph wiget.html
+17|testing-carousel-widget-v1.html
+18|peripherals-recommendations-widget-v1.html
+19|review-summary-widget-v1.html
+20|alternative-picks-widget-v1.html
+21|alternative-picks-single-widget-v1.html

@@ -1,0 +1,177 @@
+<!--
+GeekaWhat Alternative Picks (Single Product Cards) v1
+Paste into a Gutenberg "Custom HTML" block.
+Duplicate/remove .gw-alt-card blocks as needed per product.
+-->
+
+<style>
+  .gw-alt-single {
+    width: 100%;
+    margin: 18px 0;
+    display: grid;
+    gap: 14px;
+  }
+
+  .gw-alt-card {
+    border: 1px solid #d6e4ff;
+    border-left: 6px solid #037cff;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    box-shadow: 0 10px 22px rgba(3, 50, 120, 0.09);
+    padding: 13px 13px 12px;
+  }
+
+  .gw-alt-top {
+    display: grid;
+    grid-template-columns: 30% minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+    margin: 0 0 11px;
+  }
+
+  .gw-alt-media {
+    margin: 0;
+    border: 1px solid #dfeaff;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  .gw-alt-media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 150px;
+    object-fit: cover;
+  }
+
+  .gw-alt-body {
+    min-width: 0;
+  }
+
+  .gw-alt-kicker {
+    margin: 0 0 8px;
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: #037cff;
+    color: #ffffff;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+  }
+
+  .gw-alt-head {
+    margin: 0 0 8px;
+    font-size: 1.04rem;
+    line-height: 1.3;
+    font-weight: 700;
+  }
+
+  .gw-alt-copy {
+    margin: 0 0 11px;
+    font-size: 0.92rem;
+    line-height: 1.47;
+  }
+
+  .gw-alt-meta {
+    margin: 0 0 11px;
+    border: 1px solid #dfeaff;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  .gw-alt-row {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr);
+    border-bottom: 1px solid #edf3ff;
+  }
+
+  .gw-alt-row:last-child {
+    border-bottom: 0;
+  }
+
+  .gw-alt-label,
+  .gw-alt-value {
+    padding: 8px 10px;
+    font-size: 0.86rem;
+    line-height: 1.3;
+  }
+
+  .gw-alt-label {
+    background: #eef5ff;
+    font-weight: 700;
+    color: #173a72;
+  }
+
+  .gw-alt-value {
+    font-weight: 500;
+  }
+
+  .gw-alt-buy {
+    margin: 0;
+    font-size: 0.86rem;
+    border-top: 1px dashed #b5cefa;
+    padding-top: 9px;
+  }
+
+  .gw-alt-review-btn {
+    display: inline-block;
+    margin: 0 0 11px;
+    padding: 7px 11px;
+    border-radius: 8px;
+    border: 1px solid #037cff;
+    background: #037cff;
+    color: #ffffff;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+    line-height: 1;
+  }
+
+  .gw-alt-review-btn:hover,
+  .gw-alt-review-btn:focus {
+    background: #026fe5;
+    border-color: #026fe5;
+    color: #ffffff;
+  }
+
+  @media (max-width: 760px) {
+    .gw-alt-top {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-alt-row {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-alt-label {
+      border-bottom: 1px solid #e6edf7;
+    }
+  }
+</style>
+
+<section class="gw-alt-single" aria-label="Alternative picks">
+  <article class="gw-alt-card">
+    <div class="gw-alt-top">
+      <figure class="gw-alt-media">
+        <img src="https://geekawhat.com/wp-content/uploads/2024/02/PI_Gigabyte-Radeon-RX-9070-GAMING-OC-1.jpg" alt="Gigabyte Radeon RX 9070 XT Gaming">
+      </figure>
+      <div class="gw-alt-body">
+        <p class="gw-alt-kicker">Alternative GPU Choice</p>
+        <h3 class="gw-alt-head">Gigabyte Radeon RX 9070 XT Gaming</h3>
+        <p class="gw-alt-copy">If you want more GPU headroom at 1440p and stronger 4K throughput, the Gigabyte Radeon RX 9070 XT Gaming is a great step up with robust raster performance and 16GB of VRAM.</p>
+        <a class="gw-alt-review-btn" href="https://geekawhat.com/amd-radeon-rx-9070-xt-review/" target="_blank" rel="noopener noreferrer">Read Our Review</a>
+      </div>
+    </div>
+    <div class="gw-alt-lower">
+      <div class="gw-alt-meta">
+        <div class="gw-alt-row"><div class="gw-alt-label">Buy This If:</div><div class="gw-alt-value">You want higher frame rates at 1440p and better 4K longevity with a larger VRAM buffer.</div></div>
+        <div class="gw-alt-row"><div class="gw-alt-label">Main Tradeoff:</div><div class="gw-alt-value">Power draw and overall platform cost can be higher than non-XT alternatives.</div></div>
+      </div>
+      <p class="gw-alt-buy">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/cGel9" AMAZON-US-ASIN="B0DS2QG2KW" AMAZON-GB-ASIN="B0F3ZS44MH" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fgigabyte-radeon-rx-9070-xt-gaming-16gb-gddr6-pci-express-graphics-card-gra-gig-06380.html" overclockers-awin-gb-itemid="GRA-GIG-06380"]</p>
+    </div>
+  </article>
+</section>

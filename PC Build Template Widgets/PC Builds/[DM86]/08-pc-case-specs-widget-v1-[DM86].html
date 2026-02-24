@@ -1,0 +1,91 @@
+<!--
+GeekaWhat PC Case Specs Widget v1 (Montech KING 45 PRO)
+Paste into a Gutenberg "Custom HTML" block.
+-->
+
+<style>
+  .gw-case-widget {
+    width: 100%;
+    margin: 18px 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+  }
+
+  .gw-case-head {
+    padding: 12px 14px;
+    border-bottom: 1px solid #edf2fa;
+  }
+
+  .gw-case-widget-title {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.3;
+    font-weight: 800;
+    color: #142033;
+  }
+
+  .gw-case-specs {
+    margin: 0;
+    border-top: 0;
+  }
+
+  .gw-case-spec-row {
+    display: grid;
+    grid-template-columns: 190px minmax(0, 1fr);
+    border-bottom: 1px solid #e6edf7;
+    background: #ffffff;
+  }
+
+  .gw-case-spec-row:last-child {
+    border-bottom: 0;
+  }
+
+  .gw-case-label,
+  .gw-case-value {
+    padding: 9px 10px;
+    font-size: 0.9rem;
+    line-height: 1.35;
+  }
+
+  .gw-case-label {
+    background: #f4f8ff;
+    font-weight: 700;
+  }
+
+  .gw-case-value {
+    font-weight: 500;
+  }
+
+  @media (max-width: 760px) {
+    .gw-case-spec-row {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-case-label {
+      border-bottom: 1px solid #e6edf7;
+    }
+  }
+</style>
+
+<section class="gw-case-widget" aria-label="PC case specifications">
+  <div class="gw-case-head">
+    <h3 class="gw-case-widget-title">Montech KING 45 PRO Specs</h3>
+  </div>
+
+  <div class="gw-case-specs">
+    <div class="gw-case-spec-row"><div class="gw-case-label">Form Factor</div><div class="gw-case-value">Mid-Tower</div></div>
+    <div class="gw-case-spec-row"><div class="gw-case-label">Motherboard Support</div><div class="gw-case-value">ATX, Micro-ATX, Mini-ITX</div></div>
+    <div class="gw-case-spec-row"><div class="gw-case-label">Dimensions (L x W x H)</div><div class="gw-case-value">450 x 245 x 462 mm</div></div>
+    <div class="gw-case-spec-row"><div class="gw-case-label">Front I/O</div><div class="gw-case-value">1 x USB Type-C, 2 x USB 3.0 Type-A, 1 x Headset Audio Jack, Power Button, LED Button</div></div>
+    <div class="gw-case-spec-row"><div class="gw-case-label">PCI-E Slots</div><div class="gw-case-value">7</div></div>
+    <div class="gw-case-spec-row"><div class="gw-case-label">Colour</div><div class="gw-case-value">Black / White</div></div>
+    <div class="gw-case-spec-row"><div class="gw-case-label">Max Clearance</div><div class="gw-case-value">187mm CPU cooler, 435mm GPU, 180mm PSU</div></div>
+    <div class="gw-case-spec-row"><div class="gw-case-label">Drive Support</div><div class="gw-case-value">Up to 2 x 2.5 inch, up to 2 x 3.5 inch</div></div>
+    <div class="gw-case-spec-row"><div class="gw-case-label">Fan Support</div><div class="gw-case-value">Top: 3 x 120mm or 2 x 140mm, Bottom: 3 x 120mm or 2 x 140mm, Rear: 1 x 120mm or 1 x 140mm</div></div>
+    <div class="gw-case-spec-row"><div class="gw-case-label">Radiator Support</div><div class="gw-case-value">Top: up to 360mm, Rear: up to 120mm</div></div>
+    <div class="gw-case-spec-row"><div class="gw-case-label">Pre-Installed Fans</div><div class="gw-case-value">Bottom: 3 x 120mm (RX120 PRO), Rear: 1 x 120mm (AX120 PRO)</div></div>
+  </div>
+</section>
