@@ -1,0 +1,314 @@
+<!--
+GeekaWhat Performance Widget - [Template]
+Updated: All 8 games with full settings
+-->
+
+<style>
+  .gw-perf-widget-single {
+    width: 100%;
+    margin: 18px 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+  }
+
+  .gw-perf-widget-single .gw-perf-head { padding: 12px 13px 10px; border-bottom: 1px solid #edf2fa; }
+  .gw-perf-widget-single .gw-perf-kicker { margin: 0 0 5px; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.72; font-weight: 700; }
+  .gw-perf-widget-single .gw-perf-title { margin: 0; font-size: 1.02rem; line-height: 1.3; font-weight: 700; }
+
+  .gw-perf-widget-single .gw-perf-game-nav-wrap { padding: 10px 13px 6px; border-bottom: 1px solid #edf2fa; }
+  .gw-perf-widget-single .gw-perf-game-nav { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 2px; -webkit-overflow-scrolling: touch; }
+  .gw-perf-widget-single .gw-perf-game-btn {
+    border: 1px solid #d6e6ff; background: #ffffff; color: #122033; border-radius: 999px;
+    padding: 6px 10px; font-size: 0.82rem; font-weight: 700; white-space: nowrap; cursor: pointer;
+  }
+  .gw-perf-widget-single .gw-perf-game-btn.is-active { background: #037cff; border-color: #037cff; color: #ffffff; }
+
+  .gw-perf-widget-single .gw-perf-body { padding: 12px 13px 0; }
+  .gw-perf-widget-single .gw-perf-game-panel { display: none; margin-bottom: 10px; }
+  .gw-perf-widget-single .gw-perf-game-panel.is-active { display: block; }
+
+  .gw-perf-widget-single .gw-perf-resolution {
+    margin: 0 0 10px; font-size: 0.84rem; text-transform: uppercase; letter-spacing: 0.06em; color: #1f4f98; font-weight: 800;
+  }
+
+  .gw-perf-widget-single .gw-perf-metric-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0 0 10px; }
+  .gw-perf-widget-single .gw-perf-metric-pill {
+    border: 1px solid #d8e7ff; border-radius: 12px; background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%); padding: 10px; text-align: center;
+  }
+  .gw-perf-widget-single .gw-perf-metric-label { margin: 0 0 6px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: #1f4f98; font-weight: 700; }
+  .gw-perf-widget-single .gw-perf-metric-value { margin: 0; font-size: 1.45rem; line-height: 1.05; color: #037cff; font-weight: 800; }
+  .gw-perf-widget-single .gw-perf-metric-unit { margin-left: 4px; font-size: 0.68em; font-weight: 700; opacity: 0.8; }
+
+  .gw-perf-widget-single .gw-perf-settings-toggle {
+    display: inline-flex; align-items: center; gap: 6px; border: 1px solid #037cff; background: #ffffff; color: #037cff;
+    border-radius: 8px; padding: 6px 10px; font-size: 0.84rem; font-weight: 700; cursor: pointer;
+  }
+  .gw-perf-widget-single .gw-perf-settings-body {
+    margin: 10px 0 0; padding: 10px; border: 1px solid #e1ecff; border-radius: 8px; background: #f9fbff; display: none;
+  }
+  .gw-perf-widget-single .gw-perf-settings-body.is-open { display: block; }
+  .gw-perf-widget-single .gw-perf-settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .gw-perf-widget-single .gw-perf-settings-item { border: 1px solid #deebff; border-radius: 8px; background: #ffffff; padding: 7px 8px; }
+  .gw-perf-widget-single .gw-perf-settings-label { margin: 0 0 2px; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: #1f4f98; font-weight: 700; }
+  .gw-perf-widget-single .gw-perf-settings-value { margin: 0; font-size: 0.84rem; line-height: 1.35; font-weight: 500; }
+
+  .gw-how-test-link { margin: 9px 0 0; display: inline-flex; align-items: center; gap: 5px; color: #037cff; font-size: 0.82rem; font-weight: 700; text-decoration: none; }
+
+  .gw-perf-widget-single .gw-driver-bar {
+    margin: 10px -13px 0; padding: 8px 10px; border-radius: 0 0 16px 16px; color: #ffffff; font-size: 0.84rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+  }
+  .gw-perf-widget-single .gw-driver-logo {
+    width: 18px; height: 18px; border-radius: 4px; background: rgba(255,255,255,.2); display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.62rem; font-weight: 800;
+  }
+  .gw-perf-widget-single .gw-driver-bar.gpu { background: #2e689f; }
+  .gw-perf-widget-single .gw-driver-bar.nvidia { background: rgb(118, 185, 0); }
+  .gw-perf-widget-single .gw-driver-bar.amd { background: rgb(237, 28, 36); }
+
+  @media (max-width: 760px) {
+    .gw-perf-widget-single .gw-perf-metric-grid { grid-template-columns: 1fr; }
+    .gw-perf-widget-single .gw-perf-settings-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<section id="gw-perf-widget-5070" class="gw-perf-widget-single" aria-label="Performance results">
+  <div class="gw-perf-head">
+    <p class="gw-perf-kicker">Performance Snapshot</p>
+    <h3 class="gw-perf-title">Multi-Game Average FPS</h3>
+  </div>
+
+  <div class="gw-perf-game-nav-wrap">
+    <div class="gw-perf-game-nav" role="tablist" aria-label="Games"></div>
+  </div>
+
+  <div class="gw-perf-body"></div>
+  <div class="gw-driver-bar gpu"><span class="gw-driver-logo">?</span>Driver Version: ?? </div> 
+  <!-- <div class="gw-driver-bar gpu"><span class="gw-driver-logo">?</span>Driver Version: ?? </div> -->         
+  <!-- <div class="gw-driver-bar amd"><span class="gw-driver-logo">A</span>Driver Version: </div> -->
+  <!-- <div class="gw-driver-bar nvidia"><span class="gw-driver-logo">N</span>Driver Version: </div> -->
+</section>
+
+
+<script>
+  (function () {
+
+    // ─── RESOLUTION CONFIG ───────────────────────────────────────────────────
+    // Update these three values when setting up a new GPU review.
+    // R_UNSET will appear in the widget as a reminder to fill it in.
+    var R_1080  = "1920x1080";
+    var R_1440  = "2560x1440";
+    var R_4K    = "3840x2160";
+    var R_UNSET = "⚠ Resolution not defined yet";
+
+    // ─── GAME ORDER & LABELS ─────────────────────────────────────────────────
+    var GAME_ORDER = [
+      "arcraiders",
+      "marvelrivals",
+      "battlefield6",
+      "callofduty",
+      "fortnite",
+      "cyberpunk2077",
+      "hogwartslegacy",
+      "f125"
+    ];
+
+    var GAME_LABELS = {
+      arcraiders:     "ARC Raiders",
+      marvelrivals:   "Marvel Rivals",
+      battlefield6:   "Battlefield 6",
+      callofduty:     "Call of Duty: Black Ops 7",
+      fortnite:       "Fortnite",
+      cyberpunk2077:  "Cyberpunk 2077",
+      hogwartslegacy: "Hogwarts Legacy",
+      f125:           "F1 25"
+    };
+
+    // ─── FPS DATA ────────────────────────────────────────────────────────────
+    // HD1080p / UltraHD1440p / UHD4K — update these with your real numbers as needed
+    var GAME_DATA = {
+      arcraiders:     { resolution: "Resolution not set",          HD1080p: null, UltraHD1440p: null, UHD4K: null },
+      marvelrivals:   { resolution: "Resolution not set",          HD1080p: null, UltraHD1440p: null, UHD4K: null },
+      battlefield6:   { resolution: "Resolution not set",          HD1080p: null, UltraHD1440p: null, UHD4K: null },
+      callofduty:     { resolution: "Resolution not set",          HD1080p: null, UltraHD1440p: null, UHD4K: null },
+      fortnite:       { resolution: "1080p Competitive",           HD1080p: null, UltraHD1440p: null, UHD4K: null },
+      cyberpunk2077:  { resolution: "Resolution not set",          HD1080p: null, UltraHD1440p: null, UHD4K: null },
+      hogwartslegacy: { resolution: "Resolution not set",          HD1080p: null, UltraHD1440p: null, UHD4K: null },
+      f125:           { resolution: "Resolution not set",          HD1080p: null, UltraHD1440p: null, UHD4K: null }
+    };
+
+    // ─── TEST SETTINGS ───────────────────────────────────────────────────────
+    var SETTINGS = {
+      arcraiders: [
+        ["Map",                "Dam Battlegrounds"],
+        ["Capture Length",     "4-7 mins"],
+        ["Window Mode",        "Fullscreen"],
+        ["Resolution Scaling", "TAAU, 100% (" + R_UNSET + "), Manual"],
+        ["Frame Generation",   "Off"],
+        ["VSync / Reflex",     "VSync Off, NVIDIA Reflex On"],
+        ["Overall Quality",    "High"],
+        ["Graphics Breakdown", "View Distance / AA / Shadows / Post / Texture / Effects / Reflections / Foliage / GI all High"]
+      ],
+      marvelrivals: [
+        ["Capture Length",     "4-7 mins"],
+        ["Display",            "Fullscreen, " + R_UNSET + ", Aspect 16:9"],
+        ["AA / Upscaling",     "TAAU, Render Scale 100"],
+        ["Frame Gen / Latency","Frame Generation Off, Low Latency Off"],
+        ["VSync / FPS Cap",    "VSync Off, Match/Lobby/Background FPS No Limit"],
+        ["Preset",             "Graphics Quality High"],
+        ["GI / Reflections",   "Lumen GI High Quality, SSR Reflections"],
+        ["Graphics Breakdown", "Model / Post / Shadows / Texture / Effects / Foliage all High"]
+      ],
+      battlefield6: [
+        ["Map / Mode",         "Empire State, Conquest"],
+        ["Capture Length",     "4-7 mins"],
+        ["Fullscreen Mode",    "Windowed (Fullscreen Device Monitor 1)"],
+        ["Resolution / Refresh", R_UNSET + ", 120Hz, Aspect Auto"],
+        ["VSync / FOV",        "VSync Off, FOV 90, Vehicle FOV 79"],
+        ["Preset",             "Custom, Graphics Quality High"],
+        ["Texture / Mesh / Terrain", "All High"],
+        ["Graphics Breakdown", "Reflections / SSR / GTAO / Lighting / Shadows / Post Process all High"]
+      ],
+      callofduty: [
+        ["Mode / Map",         "Zombies Solo, Ashes of the Damned (Spawn Area)"],
+        ["Capture Length",     "4-7 mins"],
+        ["Display / Resolution","Fullscreen, " + R_UNSET],
+        ["Render Resolution",  "100%, Dynamic Resolution Off"],
+        ["VSync / Frame Cap",  "VSync Off, Unlimited FPS"],
+        ["Reflex / Frame Gen", "NVIDIA Reflex On, Frame Generation Off"],
+        ["Preset",             "Custom (Eco Preset Efficiency baseline)"],
+        ["Graphics Breakdown", "Textures / Detail / Particles / Shaders / Shadows / Terrain / Volumetrics all High"]
+      ],
+      fortnite: [
+        ["Game Mode",          "Zero-Build Battle Royale"],
+        ["Capture Length",     "4-7 mins"],
+        ["Display",            "Fullscreen, " + R_1080 + ", DirectX 12, VSync Off, Unlimited FPS"],
+        ["AA / Upscaling",     "TAA, TSR Quality, 3D Resolution 100%, Dynamic 3D Resolution Off"],
+        ["Frame Gen / Ray Tracing", "Both Off"],
+        ["Preset",             "Custom"],
+        ["Graphics Breakdown", "Nanite Off / GI Off / Reflections Off / Shadows Off / View Distance Far / Textures Low / Effects Low / Post Processing Low"]
+      ],
+      cyberpunk2077: [
+        ["Benchmark Mode",     "Built-in benchmark ran 2x"],
+        ["Display",            "Fullscreen, " + R_UNSET + ", VSync Off, FPS Cap Off"],
+        ["Preset",             "Custom, Texture High"],
+        ["Upscaling / Frame Gen", "Resolution Scaling Off, Frame Generation Off"],
+        ["Ray Tracing / Path Tracing", "All Off"],
+        ["Crowd / FOV",        "Crowd Density Medium, FOV 80"],
+        ["Post Effects",       "Film Grain On, DoF On, Lens Flare On, Motion Blur Off"],
+        ["Graphics Breakdown", "Local Shadow Mesh / Local Shadow / Cascaded Range / Cascaded Resolution all High"]
+      ],
+      hogwartslegacy: [
+        ["Capture Method",     "4-7 min loop through Hogwarts Castle"],
+        ["Display",            "Windowed Fullscreen, " + R_UNSET + ", VSync Off, Uncapped"],
+        ["AA / Upscaling",     "TAA High, Upscale Type None, Frame Generation Off"],
+        ["Low Latency / Ray Reconstruction", "Both Off"],
+        ["FOV / Motion Blur",  "FOV +20, Motion Blur Off"],
+        ["Post Effects",       "DoF On, Chromatic Aberration On, Film Grain On"],
+        ["Preset",             "Global Quality High"],
+        ["Graphics Breakdown", "Effects / Material / Fog / Sky / Foliage / Post / Shadows / Texture / View Distance / Population all High"]
+      ],
+      f125: [
+        ["Track / Mode",       "Belgium, Benchmark Mode, 2 Laps, Clear (Dry)"],
+        ["Capture Length",     "4-7 mins"],
+        ["Display",            "Fullscreen, " + R_UNSET + ", VSync Off, Frame Rate Limit Off"],
+        ["AA / Upscaling",     "TAA + FidelityFX Sharpening, Quality Mode, Dynamic Resolution Off"],
+        ["Frame Gen / Ray Tracing", "Frame Gen Off, All Ray Tracing Off"],
+        ["Preset",             "Custom, NVIDIA Reflex Off"],
+        ["Graphics Breakdown", "Lighting / Shadows / Crowd / Mirrors / Car & Helmet Reflections / Weather / Ground Cover / Trees / SSR / Textures all Ultra High"]
+      ]
+    };
+
+    // ─── HELPERS ─────────────────────────────────────────────────────────────
+    function formatFPS(v) {
+      if (typeof v !== "number" || isNaN(v) || v === null) return "--";
+      return v % 1 === 0 ? v.toFixed(0) : v.toFixed(1);
+    }
+
+    function buildSettingsHTML(key) {
+      return (SETTINGS[key] || []).map(function (row) {
+        return '<div class="gw-perf-settings-item">' +
+          '<p class="gw-perf-settings-label">' + row[0] + '</p>' +
+          '<p class="gw-perf-settings-value">' + row[1] + '</p>' +
+          '</div>';
+      }).join("");
+    }
+
+    function buildPanelHTML(panelId, gameKey, gameData) {
+      return '' +
+        '<article id="' + panelId + '" class="gw-perf-game-panel" role="tabpanel">' +
+          '<div class="gw-perf-metric-grid">' +
+            '<article class="gw-perf-metric-pill"><p class="gw-perf-metric-label">1080p</p><p class="gw-perf-metric-value">' + formatFPS(gameData.HD1080p) + '<span class="gw-perf-metric-unit">FPS</span></p></article>' +
+            '<article class="gw-perf-metric-pill"><p class="gw-perf-metric-label">1440p</p><p class="gw-perf-metric-value">' + formatFPS(gameData.UltraHD1440p) + '<span class="gw-perf-metric-unit">FPS</span></p></article>' +
+            '<article class="gw-perf-metric-pill"><p class="gw-perf-metric-label">4K</p><p class="gw-perf-metric-value">' + formatFPS(gameData.UHD4K) + '<span class="gw-perf-metric-unit">FPS</span></p></article>' +
+          '</div>' +
+          '<button type="button" class="gw-perf-settings-toggle" aria-expanded="false">View Test Settings</button>' +
+          '<div class="gw-perf-settings-body"><div class="gw-perf-settings-grid">' + buildSettingsHTML(gameKey) + '</div></div>' +
+        '</article>';
+    }
+
+    // ─── BUILD WIDGET ─────────────────────────────────────────────────────────
+    var root = document.getElementById("gw-perf-widget-5070");
+    if (!root) return;
+
+    var nav  = root.querySelector('.gw-perf-game-nav');
+    var body = root.querySelector('.gw-perf-body');
+
+    GAME_ORDER.forEach(function (key, idx) {
+      var panelId = 'gw-perf-5070-' + key;
+
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'gw-perf-game-btn' + (idx === 0 ? ' is-active' : '');
+      btn.setAttribute('role', 'tab');
+      btn.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
+      btn.setAttribute('data-target', panelId);
+      btn.textContent = GAME_LABELS[key];
+      nav.appendChild(btn);
+
+      var wrap = document.createElement('div');
+      wrap.innerHTML = buildPanelHTML(panelId, key, GAME_DATA[key]);
+      var panel = wrap.firstChild;
+      if (idx === 0) panel.classList.add('is-active');
+      body.appendChild(panel);
+    });
+
+    // ─── TAB SWITCHING ────────────────────────────────────────────────────────
+    var gameBtns = root.querySelectorAll('.gw-perf-game-btn');
+    var panels   = root.querySelectorAll('.gw-perf-game-panel');
+
+    function setActive(targetId) {
+      gameBtns.forEach(function (btn) {
+        var active = btn.getAttribute('data-target') === targetId;
+        btn.classList.toggle('is-active', active);
+        btn.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+      panels.forEach(function (panel) {
+        panel.classList.toggle('is-active', panel.id === targetId);
+      });
+    }
+
+    gameBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        setActive(btn.getAttribute('data-target'));
+      });
+    });
+
+    // ─── SETTINGS TOGGLE ─────────────────────────────────────────────────────
+    root.querySelectorAll('.gw-perf-settings-toggle').forEach(function (toggle) {
+      toggle.addEventListener('click', function () {
+        var panel = toggle.closest('.gw-perf-game-panel');
+        if (!panel) return;
+        var settingsBody = panel.querySelector('.gw-perf-settings-body');
+        if (!settingsBody) return;
+        var open = settingsBody.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.textContent = open ? 'Hide Test Settings' : 'View Test Settings';
+      });
+    });
+
+  })();
+</script>

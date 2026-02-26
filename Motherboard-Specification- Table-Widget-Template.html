@@ -1,0 +1,187 @@
+<!--
+  GeekaWhat Motherboard Spec Widget
+  MSI MAG B850 TOMAHAWK MAX WIFI II
+  Source: https://www.msi.com/Motherboard/MAG-B850-TOMAHAWK-MAX-WIFI-II/Specification
+-->
+
+<style>
+  .gw-mobo-specs {
+    width: 100%;
+    margin: 18px 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .gw-mobo-specs-head {
+    padding: 12px 14px 10px;
+    border-bottom: 1px solid #edf2fa;
+  }
+
+  .gw-mobo-specs-kicker {
+    margin: 0 0 4px;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0.72;
+    font-weight: 700;
+  }
+
+  .gw-mobo-specs-title {
+    margin: 0;
+    font-size: 1.02rem;
+    line-height: 1.3;
+    font-weight: 800;
+    color: #101828;
+  }
+
+  .gw-mobo-spec-grid {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .gw-mobo-spec-item {
+    margin: 0;
+    padding: 11px 14px;
+    border-bottom: 1px solid #edf2fa;
+    border-right: 1px solid #edf2fa;
+    display: grid;
+    gap: 4px;
+    background: #ffffff;
+  }
+
+  .gw-mobo-spec-item:nth-child(2n)        { border-right: none; }
+  .gw-mobo-spec-item:nth-last-child(-n+2) { border-bottom: none; }
+  .gw-mobo-spec-item:last-child           { border-bottom: none; }
+
+  .gw-mobo-spec-label {
+    margin: 0;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #475467;
+    font-weight: 700;
+  }
+
+  .gw-mobo-spec-value {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.4;
+    color: #101828;
+    font-weight: 600;
+  }
+
+  .gw-mobo-footer-bar {
+    padding: 8px 10px;
+    color: #ffffff;
+    font-size: 0.84rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+  }
+
+  .gw-mobo-footer-logo {
+    width: 18px; height: 18px; border-radius: 4px;
+    background: rgba(255,255,255,.2);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.62rem; font-weight: 800;
+  }
+
+  .gw-mobo-footer-bar.amd   { background: rgb(237, 28, 36); }
+  .gw-mobo-footer-bar.intel { background: #0068b5; }
+  .gw-mobo-footer-bar.other { background: #475467; }
+
+  .gw-mobo-spec-value.is-unset { color: rgb(237, 28, 36); font-style: italic; }
+
+  @media (max-width: 760px) {
+    .gw-mobo-spec-grid { grid-template-columns: 1fr; }
+    .gw-mobo-spec-item { border-right: none; border-bottom: 1px solid #edf2fa; }
+    .gw-mobo-spec-item:last-child { border-bottom: none; }
+    .gw-mobo-spec-item:nth-last-child(-n+2) { border-bottom: 1px solid #edf2fa; }
+  }
+</style>
+
+<section class="gw-mobo-specs" aria-label="Motherboard specifications" id="gw-mobo-widget-tomahawk"></section>
+
+<script>
+(function () {
+
+  // ════════════════════════════════════════════════════════
+  // ── MOBO CONFIG ─────────────────────────────────────────
+  // ════════════════════════════════════════════════════════
+
+  var MOBO_NAME    = " ";
+  var CHIPSET_TYPE = " ";   // "amd" | "intel" | "other"
+
+  var UNSET = "⚠ Not set";
+
+  var SPECS = [
+    ["Chipset / Socket",          " "],
+    ["Form Factor",               " "],
+    ["CPU Support",               " "],
+    ["VRM Design",                " "],
+    ["Memory Support",            " "],
+    ["Dual-Channel Support",      "Yes / No"],
+    ["PCIe (1 GPU Slot)",         " "],
+    ["PCIe (2 Expansion Slots)",  " "],
+    ["M.2 Slots (4 Slots)",       " "],
+    ["SATA",                      " "],
+    ["Front Panel Headers",       " "],
+    ["Rear IO",                   " "],
+    ["Networking",                " "],
+    ["Audio",                     " "],
+    ["Fan Headers",               " "],
+    ["MSRP",                      UNSET],   // ← Fill in before publishing
+  ];
+
+  // ════════════════════════════════════════════════════════
+  // ── BUILD ────────────────────────────────────────────────
+  // ════════════════════════════════════════════════════════
+
+  var root = document.getElementById("gw-mobo-widget-tomahawk");
+  if (!root) return;
+
+  var head = document.createElement("div");
+  head.className = "gw-mobo-specs-head";
+  head.innerHTML =
+    '<p class="gw-mobo-specs-kicker">Specification</p>' +
+    '<h3 class="gw-mobo-specs-title">' + MOBO_NAME + '</h3>';
+  root.appendChild(head);
+
+  var ul = document.createElement("ul");
+  ul.className = "gw-mobo-spec-grid";
+
+  SPECS.forEach(function (row) {
+    var isUnset = (row[1] === UNSET);
+    var li = document.createElement("li");
+    li.className = "gw-mobo-spec-item";
+    li.innerHTML =
+      '<p class="gw-mobo-spec-label">' + row[0] + '</p>' +
+      '<p class="gw-mobo-spec-value' + (isUnset ? ' is-unset' : '') + '">' + row[1] + '</p>';
+    ul.appendChild(li);
+  });
+
+  root.appendChild(ul);
+
+  var chipsetLabels = { amd: "AMD", intel: "Intel", other: "?" };
+  var chipsetLetter = { amd: "A",   intel: "I",     other: "?" };
+  var label  = chipsetLabels[CHIPSET_TYPE] || chipsetLabels.other;
+  var letter = chipsetLetter[CHIPSET_TYPE] || chipsetLetter.other;
+
+  var footer = document.createElement("div");
+  footer.className = "gw-mobo-footer-bar " + (CHIPSET_TYPE || "other");
+  footer.innerHTML =
+    '<span class="gw-mobo-footer-logo">' + letter + '</span>' +
+    label + ' Processors';
+  root.appendChild(footer);
+
+})();
+</script>
