@@ -46,6 +46,22 @@ HTML + JS only (no CSS), designed to reuse your existing testing widget styles a
     justify-content: space-between;
     margin: 0 0 10px;
   }
+
+.gw-testing-bench-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: -4px 0 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #d0e4ff;
+  background: #eef5ff;
+  color: #1a4ea6;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
   .gw-testing-nav {
     border: 1px solid #037cff;
     background: #ffffff;
@@ -198,11 +214,12 @@ HTML + JS only (no CSS), designed to reuse your existing testing widget styles a
 
 <!-- wp:html -->
 <section class="gw-testing-widget" id="gw-cooler-testing-widget-v2" aria-label="CPU cooler testing carousel">
-  <p class="gw-testing-header">From Our Full Review</p>
+  <p class="gw-testing-header">CPU Cooler Testing</p>
 
-  <h3 class="gw-testing-title">
-    <a href="https://geekawhat.com/corsair-nautilus-360-rs-argb-cpu-cooler-review/" target="_blank" rel="noopener noreferrer">CPU Cooler Testing</a>
-  </h3>
+<h3 class="gw-testing-title">TRYX STAGE 360 ARGB Benchmarks</h3>
+<p class="gw-testing-bench-badge">
+  <span class="gw-testing-bench-icon"></span> Tested with: Intel Core i7-14700K
+</p>
 
   <div class="gw-testing-controls" aria-label="Carousel navigation">
     <button type="button" class="gw-testing-nav gw-testing-prev" aria-label="Previous graph">← Previous Graph</button>
@@ -212,19 +229,30 @@ HTML + JS only (no CSS), designed to reuse your existing testing widget styles a
   <div class="gw-testing-carousel" aria-label="CPU cooler test charts carousel">
     <article class="gw-test-slide">
       <div class="gw-test-embed">
-        <p class="gw-test-chart-title">Cinebench 4 Thread (Avg / Max Temp)</p>
-        <p class="gw-test-note">Lower is better. Highlighted unit: Corsair NAUTILUS 360 RS ARGB.</p>
+        <p class="gw-test-chart-title">Cinebench 4 Thread - CPU Cooler Temperatures</p>
+        <p class="gw-test-note">Lower is better. (Avg / Max Temp).</p>
         <div class="gw-test-canvas-wrap">
           <button type="button" class="gw-chart-fullscreen" aria-label="View Cinebench chart fullscreen"></button>
-          <canvas class="gw-cinebench-chart" aria-label="Cinebench 4 thread temperatures"></canvas>
+          <canvas class="gw-cinebench4-chart" aria-label="Cinebench 4 thread temperatures"></canvas>
+        </div>
+      </div>
+    </article>
+
+        <article class="gw-test-slide">
+      <div class="gw-test-embed">
+        <p class="gw-test-chart-title">Cinebench 8 Thread - CPU Cooler Temperatures</p>
+        <p class="gw-test-note">Lower is better. (Avg / Max Temp).</p>
+        <div class="gw-test-canvas-wrap">
+          <button type="button" class="gw-chart-fullscreen" aria-label="View Cinebench chart fullscreen"></button>
+          <canvas class="gw-cinebench8-chart" aria-label="Cinebench 8 thread temperatures"></canvas>
         </div>
       </div>
     </article>
 
     <article class="gw-test-slide">
       <div class="gw-test-embed">
-        <p class="gw-test-chart-title">CPU-Z 8 Thread (Avg / Max Temp)</p>
-        <p class="gw-test-note">Lower is better. Highlighted unit: Corsair NAUTILUS 360 RS ARGB.</p>
+        <p class="gw-test-chart-title">CPU-Z 8 Thread - CPU Cooler Temperatures</p>
+        <p class="gw-test-note">Lower is better. (Avg / Max Temp).</p>
         <div class="gw-test-canvas-wrap">
           <button type="button" class="gw-chart-fullscreen" aria-label="View CPU-Z chart fullscreen"></button>
           <canvas class="gw-cpuz-chart" aria-label="CPU-Z 8 thread temperatures"></canvas>
@@ -232,8 +260,6 @@ HTML + JS only (no CSS), designed to reuse your existing testing widget styles a
       </div>
     </article>
   </div>
-
-  <a class="gw-testing-cta" href="https://geekawhat.com/corsair-nautilus-360-rs-argb-cpu-cooler-review/" target="_blank" rel="noopener noreferrer">See Full Testing</a>
 </section>
 
 <script>
@@ -268,9 +294,17 @@ HTML + JS only (no CSS), designed to reuse your existing testing widget styles a
       if (typeof Chart === "undefined") return;
       root.setAttribute("data-gw-init", "1");
 
-      var highlightName = "Corsair Nautilus 360 RS ARGB";
+      var highlightName = "TRYX STAGE 360 ARGB";
 
-    var cinebenchLabels = [
+    // ── Cinebench R23 4 Threads (from CSV, sorted best→worst by avg temp) ──
+    var cinebench4Labels = [
+      "ASUS ROG RYUJIN III 360 EXTREME",
+      "AORUS WATERFORCE X II 360 ICE",
+      "Thermaltake MAGFloe 360 Ultra ARGB Sync",
+      "ASUS PRIME LC 360 ARGB LCD",
+      "ASUS ROG RYUO IV SLC 360 ARGB",
+      "Antec Vortex Lum 360 RGB",
+      "Arctic Liquid Freezer III 360 Pro",
       "Montech HyperFlow ARGB 360",
       "Montech HyperFlow DIGITAL 360",
       "Endorfy Navis F360 RGB",
@@ -289,6 +323,7 @@ HTML + JS only (no CSS), designed to reuse your existing testing widget styles a
       "Cooler Master MasterLiquid 360 Atmos",
       "MSI MAG CoreLiquid E360",
       "MSI MAG CoreLiquid I360",
+      "TRYX STAGE 360 ARGB",
       "DeepCool LT720",
       "DeepCool LE720",
       "Lian Li GA II Trinity 360",
@@ -298,10 +333,58 @@ HTML + JS only (no CSS), designed to reuse your existing testing widget styles a
       "Thermaltake MINECUBE 360 Ultra ARGB Sync",
       "NZXT Kraken 360"
     ];
-    var cinebenchAvg = [58,58,59,59,60,60,60,60,60,60,60,60,60,61,61,61,61,62,63,63,63,64,64,65,66,67];
-    var cinebenchMax = [63,64,65,67,65,65,67,67,67,67,68,68,69,65,68,69,70,70,73,74,74,72,74,67,74,72];
+    var cinebench4Avg = [54,56,58,58,58,58,58,58,58,59,59,60,60,60,60,60,60,60,60,60,61,61,61,61,62,63,63,63,63,64,64,65,66,67];
+    var cinebench4Max = [59,62,61,62,62,63,63,63,64,65,67,65,65,67,67,67,67,68,68,69,65,68,69,70,70,67,73,74,74,72,74,67,74,72];
 
+    // ── Cinebench R23 8 Threads (from CSV, sorted best→worst by avg temp) ──
+    var cinebench8Labels = [
+      "Valkyrie V360 LCD",
+      "ASUS ROG RYUJIN III 360 EXTREME",
+      "Thermaltake MAGFloe 360 Ultra ARGB Sync",
+      "ASUS ROG RYUO IV SLC 360 ARGB",
+      "MPG CORELIQUID P13 360",
+      "Arctic Liquid Freezer III 360 Pro",
+      "AORUS WATERFORCE X II 360 ICE",
+      "Antec Vortex Lum 360 RGB",
+      "Montech HyperFlow DIGITAL 360",
+      "Montech HyperFlow ARGB 360",
+      "ASUS PRIME LC 360 ARGB LCD",
+      "Endorfy Navis F360 RGB",
+      "MSI MAG CoreLiquid A15 360",
+      "be quiet! Light Loop 360mm",
+      "be quiet! Pure Loop 2 360mm",
+      "Corsair Nautilus 360 RS ARGB",
+      "Corsair iCUE LINK TITAN 360 RX",
+      "ASUS PRIME LC 360 ARGB",
+      "Cooler Master MasterLiquid 360 Atmos",
+      "DeepCool Mystique 360",
+      "MSI MAG CoreLiquid E360",
+      "ASUS ROG STRIX LC III 360 ARGB",
+      "Cougar Poseidon Vistek Pro ARGB 360",
+      "MSI MAG CoreLiquid I360",
+      "Lian Li GA II Trinity 360",
+      "DeepCool LT720",
+      "Corsair iCUE LINK H150i LCD",
+      "Thermaltake MINECUBE 360 Ultra ARGB Sync",
+      "TRYX STAGE 360 ARGB",
+      "DeepCool LE720",
+      "Fractal Lumen S36 ARGB",
+      "NZXT Kraken Elite 360 RGB V2 (2024)",
+      "SAMA L70",
+      "NZXT Kraken 360"
+    ];
+    var cinebench8Avg = [62,64,66,66,67,67,67,67,67,67,68,69,69,69,70,70,70,71,71,72,72,72,73,73,74,75,75,77,77,77,77,78,78,81];
+    var cinebench8Max = [67,73,70,72,71,72,73,74,75,76,75,75,75,77,76,76,79,75,81,79,79,81,79,86,82,83,86,80,81,87,87,81,83,85];
+
+    // ── CPU-Z 8 Threads (from CSV, sorted best→worst by avg temp) ──
     var cpuzLabels = [
+      "Valkyrie V360 LCD",
+      "AORUS WATERFORCE X II 360 ICE",
+      "Thermaltake MAGFloe 360 Ultra ARGB Sync",
+      "ASUS ROG RYUJIN III 360 EXTREME",
+      "ASUS PRIME LC 360 ARGB LCD",
+      "ASUS ROG RYUO IV SLC 360 ARGB",
+      "Montech HyperFlow DIGITAL 360",
       "be quiet! Pure Loop 2 360mm",
       "Montech HyperFlow ARGB 360",
       "Antec Vortex Lum 360 RGB",
@@ -323,14 +406,15 @@ HTML + JS only (no CSS), designed to reuse your existing testing widget styles a
       "DeepCool LT720",
       "DeepCool LE720",
       "Fractal Lumen S36 ARGB",
+      "TRYX STAGE 360 ARGB",
       "NZXT Kraken Elite 360 RGB V2 (2024)",
       "Corsair iCUE LINK H150i LCD",
       "SAMA L70",
       "MSI MAG CoreLiquid E360",
       "NZXT Kraken 360"
     ];
-    var cpuzAvg = [69,69,69,69,69,70,70,70,70,70,71,72,72,72,72,72,73,73,74,74,74,76,77,78,78,82];
-    var cpuzMax = [72,72,74,75,75,72,73,73,75,77,77,75,75,79,79,80,75,79,79,81,82,78,84,80,86,85];
+    var cpuzAvg = [63,65,66,66,66,67,68,69,69,69,69,69,70,70,70,70,70,71,72,72,72,72,72,73,73,74,74,74,75,76,77,78,78,82];
+    var cpuzMax = [66,68,69,71,74,69,75,72,72,74,75,75,72,73,73,75,77,77,75,75,79,79,80,75,79,79,81,82,83,78,84,80,86,85];
 
     function colorByHighlight(labels, focus, base, hi) {
       return labels.map(function (n) { return n === focus ? hi : base; });
@@ -372,23 +456,47 @@ HTML + JS only (no CSS), designed to reuse your existing testing widget styles a
       wrap.style.height = target + "px";
     }
 
-      var cineCtx = root.querySelector(".gw-cinebench-chart");
-      if (cineCtx) {
-        setChartHeight(cineCtx, cinebenchLabels.length);
-        new Chart(cineCtx, {
+      var cineCtx4 = root.querySelector(".gw-cinebench4-chart");
+      if (cineCtx4) {
+        setChartHeight(cineCtx4, cinebench4Labels.length);
+        new Chart(cineCtx4, {
         type: "bar",
         data: {
-          labels: cinebenchLabels,
+          labels: cinebench4Labels,
           datasets: [
             {
               label: "Average Temp",
-              data: cinebenchAvg,
-              backgroundColor: colorByHighlight(cinebenchLabels, highlightName, "#3c8dff", "#7c3aed")
+              data: cinebench4Avg,
+              backgroundColor: colorByHighlight(cinebench4Labels, highlightName, "#3c8dff", "#7c3aed")
             },
             {
               label: "Max Temp",
-              data: cinebenchMax,
-              backgroundColor: colorByHighlight(cinebenchLabels, highlightName, "#8fc0ff", "#a06cf5")
+              data: cinebench4Max,
+              backgroundColor: colorByHighlight(cinebench4Labels, highlightName, "#8fc0ff", "#a06cf5")
+            }
+          ]
+        },
+        options: chartOptions()
+        });
+      }
+
+      var cineCtx8 = root.querySelector(".gw-cinebench8-chart");
+      if (cineCtx8) {
+        setChartHeight(cineCtx8, cinebench8Labels.length);
+        new Chart(cineCtx8, {
+        type: "bar",
+        data: {
+          labels: cinebench8Labels,
+          datasets: [
+            {
+              label: "Average Temp",
+              data: cinebench8Avg,
+              backgroundColor: colorByHighlight(cinebench8Labels, highlightName, "#3c8dff", "#7c3aed")
+            },
+            {
+              label: "Max Temp",
+              data: cinebench8Max,
+              backgroundColor: colorByHighlight(cinebench8Labels, highlightName, "#8fc0ff", "#a06cf5")
             }
           ]
         },
