@@ -1,0 +1,239 @@
+<!-- GeekaWhat | CPU Cooler Widget — CPU-Z 8 Thread -->
+
+<style>
+  .gw-testing-widget {
+    width: 100%;
+    margin: 18px 0;
+    padding: 18px;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-sizing: border-box;
+  }
+  .gw-testing-header {
+    margin: -18px -18px 14px;
+    padding: 10px 14px;
+    border-radius: 16px 16px 0 0;
+    background: #037cff;
+    color: #ffffff;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .gw-testing-title {
+    margin: 2px 0 6px;
+    font-size: 1.9rem;
+    line-height: 1.25;
+    font-weight: 700;
+  }
+  .gw-testing-bench-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0 0 14px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid #d0e4ff;
+    background: #eef5ff;
+    color: #1a4ea6;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .gw-test-embed {
+    border: 1px solid #d9e8ff;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 10px 10px 6px;
+    box-sizing: border-box;
+  }
+  .gw-test-chart-title {
+    margin: 0 0 8px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .gw-test-note {
+    margin: 8px 0 0;
+    font-size: 0.78rem;
+    line-height: 1.25;
+    opacity: 0.72;
+    text-align: center;
+  }
+  .gw-test-canvas-wrap {
+    height: 330px;
+    position: relative;
+  }
+  .gw-chart-fullscreen {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 3;
+    border: 1px solid #000000;
+    background: #000000;
+    color: #ffffff;
+    border-radius: 7px;
+    width: 34px;
+    height: 28px;
+    padding: 0;
+    font-weight: 700;
+    line-height: 1.1;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .gw-chart-fullscreen::before { content: "⛶"; font-size: 14px; line-height: 1; }
+  .gw-chart-fullscreen.is-active { background: #ffffff; color: #000000; border-color: #000000; }
+  .gw-test-embed:fullscreen {
+    background: #ffffff; padding: 14px; box-sizing: border-box;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .gw-test-embed:fullscreen .gw-test-canvas-wrap { flex: 1 1 auto; height: auto; min-height: 0; }
+  .gw-test-embed:fullscreen canvas { width: 100% !important; height: 100% !important; }
+  @media (max-width: 700px) {
+    .gw-testing-widget { padding: 14px; border-radius: 14px; }
+    .gw-testing-header { margin: -14px -14px 12px; border-radius: 14px 14px 0 0; }
+    .gw-test-canvas-wrap { height: 260px; }
+  }
+</style>
+
+<!-- wp:html -->
+<section class="gw-testing-widget" id="gw-cooler-cpuz-widget" aria-label="CPU-Z 8 Thread CPU cooler results">
+  <p class="gw-testing-header">CPU Cooler Testing</p>
+  <h3 class="gw-testing-title">TRYX STAGE 360 ARGB Benchmarks</h3>
+  <p class="gw-testing-bench-badge">Tested with: Intel Core i7-14700K</p>
+
+  <div class="gw-test-embed">
+    <p class="gw-test-chart-title">CPU-Z 8 Thread — CPU Cooler Temperatures</p>
+    <p class="gw-test-note">Lower is better. Average &amp; Max Temp shown. TRYX STAGE 360 ARGB highlighted in purple.</p>
+    <div class="gw-test-canvas-wrap">
+      <button type="button" class="gw-chart-fullscreen" aria-label="View chart fullscreen"></button>
+      <canvas class="gw-cpuz-canvas" aria-label="CPU-Z 8 thread temperatures"></canvas>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById("gw-cooler-cpuz-widget");
+    if (!root) return;
+
+    function ensureChartJs(done) {
+      if (typeof Chart !== "undefined") { done(); return; }
+      var existing = document.querySelector('script[data-gw-chartjs="1"]');
+      if (existing) { existing.addEventListener("load", done, { once: true }); return; }
+      var s = document.createElement("script");
+      s.src = "https://cdn.jsdelivr.net/npm/chart.js";
+      s.async = true;
+      s.setAttribute("data-gw-chartjs", "1");
+      s.addEventListener("load", done, { once: true });
+      document.head.appendChild(s);
+    }
+
+    function init() {
+      if (root.getAttribute("data-gw-init") === "1") return;
+      if (typeof Chart === "undefined") return;
+      root.setAttribute("data-gw-init", "1");
+
+      var highlightName = "TRYX STAGE 360 ARGB";
+
+      var labels = [
+        "Valkyrie V360 LCD",
+        "AORUS WATERFORCE X II 360 ICE",
+        "Thermaltake MAGFloe 360 Ultra ARGB Sync",
+        "ASUS ROG RYUJIN III 360 EXTREME",
+        "ASUS PRIME LC 360 ARGB LCD",
+        "ASUS ROG RYUO IV SLC 360 ARGB",
+        "Montech HyperFlow DIGITAL 360",
+        "be quiet! Pure Loop 2 360mm",
+        "Montech HyperFlow ARGB 360",
+        "Antec Vortex Lum 360 RGB",
+        "Arctic Liquid Freezer III 360 Pro",
+        "Endorfy Navis F360 RGB",
+        "MSI MAG CoreLiquid A15 360",
+        "MPG CORELIQUID P13 360",
+        "Corsair Nautilus 360 RS ARGB",
+        "Cooler Master MasterLiquid 360 Atmos",
+        "be quiet! Light Loop 360mm",
+        "ASUS ROG STRIX LC III 360 ARGB",
+        "ASUS PRIME LC 360 ARGB",
+        "Cougar Poseidon Vistek Pro ARGB 360",
+        "Corsair iCUE LINK TITAN 360 RX",
+        "DeepCool Mystique 360",
+        "MSI MAG CoreLiquid I360",
+        "Thermaltake MINECUBE 360 Ultra ARGB Sync",
+        "Lian Li GA II Trinity 360",
+        "DeepCool LT720",
+        "DeepCool LE720",
+        "Fractal Lumen S36 ARGB",
+        "TRYX STAGE 360 ARGB",
+        "NZXT Kraken Elite 360 RGB V2 (2024)",
+        "Corsair iCUE LINK H150i LCD",
+        "SAMA L70",
+        "MSI MAG CoreLiquid E360",
+        "NZXT Kraken 360"
+      ];
+      var avgTemps = [63,65,66,66,66,67,68,69,69,69,69,69,70,70,70,70,70,71,72,72,72,72,72,73,73,74,74,74,75,76,77,78,78,82];
+      var maxTemps = [66,68,69,71,74,69,75,72,72,74,75,75,72,73,73,75,77,77,75,75,79,79,80,75,79,79,81,82,83,78,84,80,86,85];
+
+      function highlight(arr, name, base, hi) {
+        return arr.map(function (n) { return n === name ? hi : base; });
+      }
+
+      var wrap = root.querySelector(".gw-test-canvas-wrap");
+      if (wrap) wrap.style.height = Math.max(330, labels.length * 22 + 70) + "px";
+
+      var ctx = root.querySelector(".gw-cpuz-canvas");
+      if (ctx) {
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: labels,
+            datasets: [
+              { label: "Average Temp", data: avgTemps, backgroundColor: highlight(labels, highlightName, "#3c8dff", "#7c3aed") },
+              { label: "Max Temp",     data: maxTemps, backgroundColor: highlight(labels, highlightName, "#8fc0ff", "#a06cf5") }
+            ]
+          },
+          options: {
+            indexAxis: "y",
+            maintainAspectRatio: false,
+            responsive: true,
+            plugins: {
+              legend: { position: "bottom" },
+              tooltip: { callbacks: { label: function (c) { return c.dataset.label + ": " + c.parsed.x + "°C"; } } }
+            },
+            scales: {
+              x: { min: 40, max: 90, ticks: { callback: function (v) { return v + "°C"; }, font: { size: 10 } }, grid: { color: "rgba(0,0,0,0.08)" } },
+              y: { ticks: { autoSkip: false, font: { size: 12 } }, grid: { display: false } }
+            }
+          }
+        });
+      }
+
+      var fsBtn = root.querySelector(".gw-chart-fullscreen");
+      var embed = root.querySelector(".gw-test-embed");
+      if (fsBtn && embed) {
+        fsBtn.addEventListener("click", function () {
+          var open = document.fullscreenElement === embed || document.webkitFullscreenElement === embed;
+          if (open) { (document.exitFullscreen || document.webkitExitFullscreen).call(document); }
+          else { (embed.requestFullscreen || embed.webkitRequestFullscreen).call(embed); }
+        });
+        function syncFs() {
+          var on = document.fullscreenElement === embed || document.webkitFullscreenElement === embed;
+          fsBtn.classList.toggle("is-active", on);
+          fsBtn.setAttribute("title", on ? "Exit fullscreen" : "View chart fullscreen");
+        }
+        document.addEventListener("fullscreenchange", syncFs);
+        document.addEventListener("webkitfullscreenchange", syncFs);
+      }
+    }
+
+    ensureChartJs(init);
+  })();
+</script>
+<!-- /wp:html -->
