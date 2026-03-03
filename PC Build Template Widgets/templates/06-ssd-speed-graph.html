@@ -1,0 +1,240 @@
+<!--
+GeekaWhat SSD Speed Visual Widget v1 (HTML + CSS only)
+Paste into a Gutenberg "Custom HTML" block.
+-->
+
+<style>
+  .gw-ssd-widget {
+    --brand-1: #9fd0ff;
+    --brand-2: #037cff;
+    --brand-3: #7a42d8;
+    --brand-4: #e14747;
+    width: 100%;
+    margin: 18px 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+  }
+
+  .gw-ssd-head {
+    margin: 0;
+    padding: 10px 12px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    color: #ffffff;
+    background: #037cff;
+  }
+
+  .gw-ssd-sub {
+    margin: 0;
+    padding: 10px 12px 0;
+    font-size: 0.84rem;
+    line-height: 1.45;
+    opacity: 0.85;
+  }
+
+  .gw-ssd-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .gw-ssd-metric {
+    border: 1px solid #e2ecfb;
+    border-radius: 10px;
+    background: #fbfdff;
+    padding: 10px;
+  }
+
+  .gw-ssd-metric-label {
+    margin: 0 0 6px;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    opacity: 0.78;
+  }
+
+  .gw-ssd-metric-value {
+    margin: 0;
+    font-size: 1.35rem;
+    line-height: 1.05;
+    font-weight: 800;
+    color: #133a70;
+  }
+
+  .gw-ssd-scale-wrap {
+    padding: 0 12px 12px;
+  }
+
+  .gw-ssd-scale-label {
+    margin: 0 0 8px;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    opacity: 0.8;
+  }
+
+  .gw-ssd-track {
+    position: relative;
+    width: 100%;
+    height: 14px;
+    border-radius: 999px;
+    border: 1px solid #d7e8ff;
+    background: #e9f2ff;
+    overflow: visible;
+  }
+
+  .gw-ssd-fill {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--brand-1), var(--brand-2), var(--brand-3), var(--brand-4));
+  }
+
+  .gw-ssd-marker {
+    position: absolute;
+    top: 50%;
+    left: var(--at, 50%);
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #3d4b63;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    z-index: 3;
+  }
+
+  .gw-ssd-dot-label {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 8px);
+    transform: translateX(-50%);
+    background: #ffffff;
+    border: 1px solid #cfe2ff;
+    border-radius: 7px;
+    padding: 3px 6px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.2;
+    white-space: nowrap;
+    color: #133a70;
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.08);
+  }
+
+  .gw-ssd-marker.read {
+    border-color: #1f5fb0;
+  }
+
+  .gw-ssd-marker.write {
+    border-color: #6f2fd3;
+  }
+
+  .gw-ssd-marker.write .gw-ssd-dot-label {
+    top: calc(100% + 8px);
+    bottom: auto;
+  }
+
+  .gw-ssd-gen-key {
+    position: relative;
+    margin: 22px 0 0;
+    min-height: 18px;
+  }
+
+  .gw-ssd-gen-tag {
+    position: absolute;
+    top: 0;
+    left: var(--at, 0%);
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #244a84;
+    white-space: nowrap;
+  }
+
+  .gw-ssd-gen-tag.start {
+    left: 0%;
+    transform: none;
+  }
+
+  .gw-ssd-gen-tag.end {
+    left: 100%;
+    transform: translateX(-100%);
+    text-align: right;
+  }
+
+  .gw-ssd-edge-tag {
+    position: absolute;
+    top: 0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #244a84;
+    white-space: nowrap;
+    opacity: 0.9;
+  }
+
+  .gw-ssd-edge-tag.right {
+    left: 100%;
+    transform: translateX(15%);
+    text-align: right;
+  }
+
+  .gw-ssd-foot {
+    margin: 0;
+    padding: 0 12px 12px;
+    font-size: 0.8rem;
+    opacity: 0.72;
+  }
+
+  @media (max-width: 760px) {
+    .gw-ssd-metrics {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-ssd-dot-label {
+      font-size: 0.68rem;
+    }
+  }
+</style>
+
+<section class="gw-ssd-widget" aria-label="SSD speed results">
+  <p class="gw-ssd-head">SSD Speed Results</p>
+  <p class="gw-ssd-sub">All results below are produced by GeekaWhat in-house testing using the same bench and methodology for consistency.</p>
+
+  <div class="gw-ssd-metrics">
+    <article class="gw-ssd-metric">
+      <p class="gw-ssd-metric-label">Sequential Read</p>
+      <p class="gw-ssd-metric-value">14,201 MB/s</p>
+    </article>
+    <article class="gw-ssd-metric">
+      <p class="gw-ssd-metric-label">Sequential Write</p>
+      <p class="gw-ssd-metric-value">13,058 MB/s</p>
+    </article>
+  </div>
+
+  <div class="gw-ssd-scale-wrap">
+    <p class="gw-ssd-scale-label">Generation Speed Context</p>
+    <div class="gw-ssd-track">
+      <div class="gw-ssd-fill">
+        <span class="gw-ssd-marker read" style="--at: 90.1%;"><span class="gw-ssd-dot-label">Read 14,201 MB/s</span></span>
+        <span class="gw-ssd-marker write" style="--at: 82.9%;"><span class="gw-ssd-dot-label">Write 13,058 MB/s</span></span>
+      </div>
+    </div>
+    <div class="gw-ssd-gen-key">
+      <span class="gw-ssd-gen-tag start">Gen3</span>
+      <span class="gw-ssd-gen-tag" style="--at: 33.3%;">Gen4</span>
+      <span class="gw-ssd-gen-tag" style="--at: 66.6%;">Gen5</span>
+      <span class="gw-ssd-edge-tag right">Maximum Speed: 15,754 MB/s</span>
+    </div>
+  </div>
+
+  <p class="gw-ssd-foot">Scale uses PCIe/NVMe theoretical throughput ceilings (x4 link). Real-world speeds vary by controller, NAND, queue depth, thermals, and test tool.</p>
+</section>

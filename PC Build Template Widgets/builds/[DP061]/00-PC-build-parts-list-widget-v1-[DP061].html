@@ -1,0 +1,379 @@
+<!--
+GeekaWhat Build Parts List Widget v1 (HTML + CSS + JS)
+Paste into a Gutenberg "Custom HTML" block.
+Add/remove parts by duplicating or removing:
+1) a left menu .gw-build-tab button
+2) its matching right panel .gw-build-panel with the same data-target/id.
+-->
+
+<style>
+  .gw-build-widget {
+    width: 100%;
+    margin: 18px 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+  }
+
+  .gw-build-layout {
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .gw-build-menu {
+    border-right: 1px solid #e6edf7;
+    background: #f8fbff;
+    padding: 8px;
+  }
+
+  .gw-build-tab {
+    width: 100%;
+    display: block;
+    border: 1px solid #d9e8ff;
+    background: #ffffff;
+    color: #111111;
+    border-radius: 10px;
+    padding: 10px 11px;
+    margin: 0 0 8px;
+    text-align: left;
+    font-size: 0.92rem;
+    font-weight: 400;
+    line-height: 1.25;
+    cursor: pointer;
+  }
+
+  .gw-build-tab:last-child {
+    margin-bottom: 0;
+  }
+
+  .gw-build-tab.is-active {
+    background: #037cff;
+    border-color: #037cff;
+    color: #ffffff;
+  }
+
+  .gw-build-tab strong {
+    font-weight: 700;
+  }
+
+  .gw-build-tab:not(.is-active):hover,
+  .gw-build-tab:not(.is-active):focus {
+    background: #eef5ff;
+    border-color: #037cff;
+    color: #111111;
+    outline: none;
+  }
+
+  .gw-build-tab.is-active:hover,
+  .gw-build-tab.is-active:focus {
+    background: #026fe5;
+    border-color: #026fe5;
+    color: #ffffff;
+    outline: none;
+  }
+
+  .gw-build-content {
+    padding: 14px;
+  }
+
+  .gw-build-panel {
+    display: none;
+  }
+
+  .gw-build-panel.is-active {
+    display: block;
+  }
+
+  .gw-build-title {
+    margin: 0;
+    font-size: 1.02rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .gw-build-media {
+    margin: 0 0 10px;
+    border: 1px solid #e6edf7;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  .gw-build-media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 260px;
+    object-fit: cover;
+  }
+
+  .gw-build-head-row {
+    margin: 0 0 8px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .gw-build-skip {
+    white-space: nowrap;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #037cff;
+    text-decoration: none;
+  }
+
+  .gw-build-skip:hover,
+  .gw-build-skip:focus {
+    text-decoration: underline;
+  }
+
+  .gw-build-summary {
+    margin: 0 0 10px;
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  .gw-build-specs {
+    margin: 0 0 12px;
+    border: 1px solid #e6edf7;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .gw-build-spec-row {
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr);
+    border-bottom: 1px solid #e6edf7;
+    background: #ffffff;
+  }
+
+  .gw-build-spec-row:last-child {
+    border-bottom: 0;
+  }
+
+  .gw-build-label,
+  .gw-build-value {
+    padding: 9px 10px;
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+
+  .gw-build-label {
+    background: #f4f8ff;
+    font-weight: 700;
+  }
+
+  .gw-build-value {
+    font-weight: 500;
+  }
+
+  .gw-buy-placeholder {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    font-size: 0.9rem;
+    line-height: 1.35;
+    color: inherit;
+  }
+
+  @media (max-width: 760px) {
+    .gw-build-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-build-menu {
+      border-right: 0;
+      border-bottom: 1px solid #e6edf7;
+    }
+
+    .gw-build-spec-row {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-build-label {
+      border-bottom: 1px solid #e6edf7;
+    }
+  }
+</style>
+
+<section class="gw-build-widget" aria-label="Build parts list">
+  <div class="gw-build-layout">
+    <div class="gw-build-menu" role="tablist" aria-label="Build Components">
+      <button class="gw-build-tab is-active" type="button" role="tab" aria-selected="true" data-target="gw-part-cpu"><strong>CPU:</strong> Intel Core Ultra 7 265K</button>
+      <button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-cooler"><strong>CPU Cooler:</strong> Corsair NAUTILUS 360 RS LCD</button>
+      <button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-mobo"><strong>Motherboard:</strong> ASUS ROG Strix B860-G Gaming WiFi</button>
+      <button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-ram"><strong>RAM:</strong> Corsair Vengeance RGB DDR5 32GB White</button>
+      <button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-ssd"><strong>SSD:</strong> TeamGroup T-Force G50 1TB</button>
+      <button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-gpu"><strong>GPU:</strong> ASUS PRIME NVIDIA GeForce RTX 5070 OC</button>
+      <button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-case"><strong>Case:</strong> Corsair 2500X White</button>
+      <button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-psu"><strong>PSU:</strong> Corsair RM750e White</button>
+      <button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-fans"><strong>Fans:</strong> Corsair LX120 RGB TRIO</button>
+    </div>
+
+    <div class="gw-build-content">
+      <article id="gw-part-cpu" class="gw-build-panel is-active" role="tabpanel">
+        <div class="gw-build-head-row"><h3 class="gw-build-title">Intel Core Ultra 7 265K</h3><a class="gw-build-skip" href="#CPU">Skip to Section</a></div>
+        <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2026/02/MPI_Intel-Core-Ultra-7-265K-Wide.jpg" alt="Intel Core Ultra 7 265K"></div>
+        <p class="gw-build-summary">Intel's Core Ultra 7 265K is a strong all-round option for gaming and creator workloads with modern platform features and overclocking headroom.</p>
+        <div class="gw-build-specs">
+          <div class="gw-build-spec-row"><div class="gw-build-label">Socket</div><div class="gw-build-value">LGA 1851</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Unlocked</div><div class="gw-build-value">Yes (K-series)</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Platform Support</div><div class="gw-build-value">DDR5 + PCIe 5.0</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Target Use</div><div class="gw-build-value">High-refresh gaming and productivity</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Generation</div><div class="gw-build-value">Intel Core Ultra 200 series</div></div>
+        </div>
+        <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/ekClK" AMAZON-US-ASIN="B0DFK2MH2D" AMAZON-GB-ASIN="B0DFK2MH2D" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fintel-core-ultra-7-265k-arrow-lake-socket-lga-1851-processor-retail-pro-int-03111.html%23see-reviews" overclockers-awin-gb-itemid="PRO-INT-03111"]</p>
+      </article>
+
+      <article id="gw-part-cooler" class="gw-build-panel" role="tabpanel">
+        <div class="gw-build-head-row"><h3 class="gw-build-title">Corsair NAUTILUS 360 RS LCD</h3><a class="gw-build-skip" href="#cpu-cooler">Skip to Section</a></div>
+        <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2026/02/MPI_Corsair-NAUTILUS-360-RS-LCD-White-Wide.jpg" alt="Corsair NAUTILUS 360 RS LCD"></div>
+        <p class="gw-build-summary">A 360mm liquid cooler with an LCD pump cap that combines strong thermals with clean white aesthetics for this build.</p>
+        <div class="gw-build-specs">
+          <div class="gw-build-spec-row"><div class="gw-build-label">Cooler Type</div><div class="gw-build-value">360mm AIO liquid cooler</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Display</div><div class="gw-build-value">Integrated LCD</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Fan Size</div><div class="gw-build-value">3 x 120mm</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Radiator</div><div class="gw-build-value">360mm</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Colour</div><div class="gw-build-value">White</div></div>
+        </div>
+        <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/pgJ0" AMAZON-US-ASIN="B0FGDMTHY4" AMAZON-GB-ASIN="B0FGDMTHY4" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fcorsair-nautilus-360-rs-lcd-white-all-in-one-cpu-cooler-360mm-coo-crs-05837.html" overclockers-awin-gb-itemid="COO-CRS-05837"]</p>
+      </article>
+
+      <article id="gw-part-mobo" class="gw-build-panel" role="tabpanel">
+        <div class="gw-build-head-row"><h3 class="gw-build-title">ASUS ROG Strix B860-G Gaming WiFi</h3><a class="gw-build-skip" href="#motherboard">Skip to Section</a></div>
+        <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2026/02/MPI_ASUS-ROG-Strix-B860-G-Gaming-WiFi-Wide.jpg" alt="ASUS ROG Strix B860-G Gaming WiFi"></div>
+        <p class="gw-build-summary">A feature-rich Intel B860 mATX board with PCIe 5.0 support, fast networking, and a strong overall connectivity stack.</p>
+        <div class="gw-build-specs">
+          <div class="gw-build-spec-row"><div class="gw-build-label">Chipset / Socket</div><div class="gw-build-value">B860 / LGA 1851</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Form Factor</div><div class="gw-build-value">Micro-ATX</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Memory Support</div><div class="gw-build-value">DDR5 up to 9066+ MT/s (OC)</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Primary GPU Slot</div><div class="gw-build-value">1 x PCIe 5.0 x16</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Networking</div><div class="gw-build-value">WiFi 7 + 2.5GbE LAN</div></div>
+        </div>
+        <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/8FhKzE" AMAZON-US-ASIN="B0FH7MB8WV" AMAZON-GB-ASIN="B0DPMQHKT8" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fasus-rog-strix-b860-g-gaming-wifi-lga-1851-ddr5-atx-motherboard-mot-asu-04068.html" overclockers-awin-gb-itemid="MOT-ASU-04068"]</p>
+      </article>
+
+      <article id="gw-part-ram" class="gw-build-panel" role="tabpanel">
+        <div class="gw-build-head-row"><h3 class="gw-build-title">Corsair Vengeance RGB DDR5 32GB White</h3><a class="gw-build-skip" href="#ram">Skip to Section</a></div>
+        <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2023/11/MPI_Corsair-Vengeance-RGB-White-DDR5_12431.jpg" alt="Corsair Vengeance RGB DDR5 32GB White"></div>
+        <p class="gw-build-summary">A 32GB DDR5 kit is a sweet spot for gaming, content work, and future-proofing. It offers strong baseline capacity while leaving headroom for heavier multitasking and newer game engines.</p>
+        <div class="gw-build-specs">
+          <div class="gw-build-spec-row"><div class="gw-build-label">Capacity</div><div class="gw-build-value">32GB (2x16GB)</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Memory Type</div><div class="gw-build-value">DDR5 UDIMM</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Speed Class</div><div class="gw-build-value">6000 MT/s</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Profile Support</div><div class="gw-build-value">Intel XMP</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Latency Class</div><div class="gw-build-value">CL36</div></div>
+        </div>
+        <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/JebbZ3c" AMAZON-US-ASIN="" AMAZON-GB-ASIN="B0DPJ9DJ3D" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fcorsair-vengeance-xmp-rgb-32gb-2x16gb-ddr5-pc5-48000c36-6000mhz-dual-wh-mem-crs-04229.html" overclockers-awin-gb-itemid="MEM-CRS-04229"]</p>
+      </article>
+
+      <article id="gw-part-ssd" class="gw-build-panel" role="tabpanel">
+        <div class="gw-build-head-row"><h3 class="gw-build-title">TeamGroup T-Force G50 1TB</h3><a class="gw-build-skip" href="#ssd">Skip to Section</a></div>
+        <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2026/02/MPI_TeamGroup-T-Force-G50-1TB-Wide.jpg" alt="TeamGroup T-Force G50 1TB"></div>
+        <p class="gw-build-summary">The TeamGroup T-Force G50 1TB is a value-focused Gen4 NVMe drive that offers fast everyday load times for gaming and general use.</p>
+        <div class="gw-build-specs">
+          <div class="gw-build-spec-row"><div class="gw-build-label">Capacity</div><div class="gw-build-value">1TB</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Form Factor</div><div class="gw-build-value">M.2 2280</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Interface</div><div class="gw-build-value">PCIe 4.0 x4 NVMe</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Read/Write (Seq)</div><div class="gw-build-value">Up to 5,000 / 4,800 MB/s (advertised)</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Best Use</div><div class="gw-build-value">OS drive + main game library</div></div>
+        </div>
+        <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/7t5uK" AMAZON-US-ASIN="B0BW8BMSX5" AMAZON-GB-ASIN="B0BW8BMSX5" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fteam-group-g50-1tb-ssd-m.2-2280-nvme-pcie-4.0-solid-state-drive-sto-tmg-03131.html" overclockers-awin-gb-itemid="STO-TMG-03131"]</p>
+      </article>
+
+      <article id="gw-part-gpu" class="gw-build-panel" role="tabpanel">
+        <div class="gw-build-head-row"><h3 class="gw-build-title">ASUS PRIME NVIDIA GeForce RTX 5070 OC</h3><a class="gw-build-skip" href="#GPU">Skip to Section</a></div>
+        <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2026/02/MPI_ASUS-PRIME-NVIDIA-GeForce-RTX-5070-OC-White-Wide.jpg" alt="ASUS PRIME NVIDIA GeForce RTX 5070 OC"></div>
+        <p class="gw-build-summary">ASUS' PRIME RTX 5070 OC is a strong upper-mid-range GPU for high-refresh 1440p gaming with excellent creator acceleration and modern NVIDIA features.</p>
+        <div class="gw-build-specs">
+          <div class="gw-build-spec-row"><div class="gw-build-label">VRAM</div><div class="gw-build-value">12GB GDDR7</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Bus / Interface</div><div class="gw-build-value">PCIe x16</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Model</div><div class="gw-build-value">Factory overclocked (OC)</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Target Resolution</div><div class="gw-build-value">High-refresh 1440p, capable 4K</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Feature Stack</div><div class="gw-build-value">DLSS, ray tracing, AV1 encode</div></div>
+        </div>
+        <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/RPmHGUX" AMAZON-US-ASIN="B0F8KLKQM3" AMAZON-GB-ASIN="B0F8KLKQM3" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fasus-geforce-rtx-5070-prime-oc-white-12gb-gddr7-graphics-card-gra-asu-05204.html" overclockers-awin-gb-itemid="GRA-ASU-05204"]</p>
+      </article>
+
+      <article id="gw-part-case" class="gw-build-panel" role="tabpanel">
+        <div class="gw-build-head-row"><h3 class="gw-build-title">Corsair 2500X White</h3><a class="gw-build-skip" href="#case">Skip to Section</a></div>
+        <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2024/03/MPI_Corsair-2500X.jpg" alt="Corsair 2500X White"></div>
+        <p class="gw-build-summary">Corsair's 2500X is a dual-chamber white chassis with strong airflow options and clean cable management for showcase-style builds.</p>
+        <div class="gw-build-specs">
+          <div class="gw-build-spec-row"><div class="gw-build-label">Case Type</div><div class="gw-build-value">Dual-chamber Mid-Tower</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Motherboard Support</div><div class="gw-build-value">Micro-ATX / Mini-ITX</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">PCIe Slots</div><div class="gw-build-value">4 horizontal</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">GPU Clearance</div><div class="gw-build-value">Up to 400mm</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Radiator Support</div><div class="gw-build-value">Up to 360mm (top/side)</div></div>
+        </div>
+        <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/PxtA" AMAZON-US-ASIN="B0CTR45PV8" AMAZON-GB-ASIN="B0CQ5FDB2C" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fcorsair-2500x-airflow-micro-atx-dual-chamber-pc-case-white-cc-9011266-ww-cas-crs-01587.html" overclockers-awin-gb-itemid="CAS-CRS-01587"]</p>
+      </article>
+
+      <article id="gw-part-psu" class="gw-build-panel" role="tabpanel">
+        <div class="gw-build-head-row"><h3 class="gw-build-title">Corsair RM750e White</h3><a class="gw-build-skip" href="#psu">Skip to Section</a></div>
+        <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2026/02/MPI_Corsair-RM750e-White-Wide.jpg" alt="Corsair RM750e White"></div>
+        <p class="gw-build-summary">A 750W ATX 3.0-class PSU offers enough overhead for mainstream performance builds with modern GPUs. It balances stability and upgrade headroom while keeping total system power in a safe range.</p>
+        <div class="gw-build-specs">
+          <div class="gw-build-spec-row"><div class="gw-build-label">Wattage</div><div class="gw-build-value">750W</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Standard</div><div class="gw-build-value">ATX 3.1 / PCIe 5.1</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Efficiency</div><div class="gw-build-value">Cybenetics Gold</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">PCIe 5 Power</div><div class="gw-build-value">12VHPWR / 12V-2x6 readiness</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Modularity</div><div class="gw-build-value">Fully modular</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Best Fit</div><div class="gw-build-value">Single-GPU gaming/creator rig</div></div>
+        </div>
+        <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/uWxfr" AMAZON-US-ASIN="B0FLG9RNY4" AMAZON-GB-ASIN="B0F3DP1D5X" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fcorsair-rm750e-modular-cybenetics-gold-atx-3.1-pcie-5.1-power-supply-whit-pow-crs-04878.html" overclockers-awin-gb-itemid="POW-CRS-04878"]</p>
+      </article>
+
+      <article id="gw-part-fans" class="gw-build-panel" role="tabpanel">
+        <div class="gw-build-head-row"><h3 class="gw-build-title">Corsair LX120 RGB TRIO</h3><a class="gw-build-skip" href="#case">Skip to Section</a></div>
+        <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2026/02/MPI_Corsair-iCUE-LINK-LX120-RGB.jpg" alt="Corsair LX120 RGB TRIO"></div>
+        <p class="gw-build-summary">A triple-pack of 120mm RGB fans with iCUE LINK support to improve airflow and complete the white visual theme.</p>
+        <div class="gw-build-specs">
+          <div class="gw-build-spec-row"><div class="gw-build-label">Pack Size</div><div class="gw-build-value">3 x 120mm fans</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Lighting</div><div class="gw-build-value">RGB</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Control</div><div class="gw-build-value">PWM</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Ecosystem</div><div class="gw-build-value">Corsair iCUE LINK</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Colour</div><div class="gw-build-value">White</div></div>
+        </div>
+        <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/uNBF" AMAZON-US-ASIN="B0D3H73YCJ" AMAZON-GB-ASIN="B0D3H73YCJ" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fcorsair-icue-link-lx120-rgb-120mm-pwm-fans-starter-kit-white-coo-crs-02479.html" overclockers-awin-gb-itemid="COO-CRS-02479"]</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.currentScript && document.currentScript.previousElementSibling;
+    if (!root || !root.classList.contains("gw-build-widget")) {
+      root = document.querySelector(".gw-build-widget");
+    }
+    if (!root) return;
+
+    var tabs = root.querySelectorAll(".gw-build-tab");
+    var panels = root.querySelectorAll(".gw-build-panel");
+
+    function activate(targetId) {
+      tabs.forEach(function (tab) {
+        var isActive = tab.getAttribute("data-target") === targetId;
+        tab.classList.toggle("is-active", isActive);
+        tab.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+
+      panels.forEach(function (panel) {
+        panel.classList.toggle("is-active", panel.id === targetId);
+      });
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        activate(tab.getAttribute("data-target"));
+      });
+    });
+  })();
+</script>

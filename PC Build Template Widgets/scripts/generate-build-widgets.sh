@@ -7,6 +7,7 @@ WIDGET_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 ORDER_FILE="${WIDGET_ROOT}/config/widget-order.txt"
 SOURCE_DIR="${WIDGET_ROOT}/templates"
 TARGET_DIR="${WIDGET_ROOT}/builds/${BUILD_CODE}"
+VALIDATE_SCRIPT="${WIDGET_ROOT}/scripts/validate-build-widgets.sh"
 
 if [[ ! -f "${ORDER_FILE}" ]]; then
   echo "Missing order file: ${ORDER_FILE}" >&2
@@ -33,3 +34,10 @@ while IFS='|' read -r prefix source_file; do
 done < "${ORDER_FILE}"
 
 echo "Generated ${count} widget files in: ${TARGET_DIR}"
+
+if [[ -x "${VALIDATE_SCRIPT}" ]]; then
+  "${VALIDATE_SCRIPT}" "${BUILD_CODE}"
+else
+  echo "Warning: validation script not executable: ${VALIDATE_SCRIPT}" >&2
+  exit 1
+fi

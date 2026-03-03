@@ -1,0 +1,485 @@
+<!--
+GeekaWhat Performance Widget v1 - DP061
+Dual widget set:
+1) RTX 5070
+2) RX 9070 XT
+-->
+
+<style>
+  .gw-perf-widget-v2 {
+    width: 100%;
+    margin: 18px 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+  }
+
+  .gw-perf-head {
+    padding: 12px 13px 10px;
+    border-bottom: 1px solid #edf2fa;
+  }
+
+  .gw-perf-kicker {
+    margin: 0 0 5px;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0.72;
+    font-weight: 700;
+  }
+
+  .gw-perf-title {
+    margin: 0;
+    font-size: 1.02rem;
+    line-height: 1.3;
+    font-weight: 700;
+  }
+
+  .gw-perf-game-nav-wrap {
+    padding: 10px 13px 6px;
+    border-bottom: 1px solid #edf2fa;
+  }
+
+  .gw-perf-game-nav {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .gw-perf-game-nav::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .gw-perf-game-nav::-webkit-scrollbar-thumb {
+    background: rgba(3, 124, 255, 0.25);
+    border-radius: 999px;
+  }
+
+  .gw-perf-game-btn {
+    border: 1px solid #d6e6ff;
+    background: #ffffff;
+    color: #122033;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .gw-perf-game-btn.is-active {
+    background: #037cff;
+    border-color: #037cff;
+    color: #ffffff;
+  }
+
+  .gw-perf-game-btn:hover,
+  .gw-perf-game-btn:focus {
+    outline: none;
+    border-color: #037cff;
+    background: #eef5ff;
+    color: #122033;
+  }
+
+  .gw-perf-game-btn.is-active:hover,
+  .gw-perf-game-btn.is-active:focus {
+    background: #026fe5;
+    border-color: #026fe5;
+    color: #ffffff;
+  }
+
+  .gw-perf-body {
+    padding: 12px 13px 0;
+  }
+
+  .gw-perf-game-panel {
+    display: none;
+    margin-bottom: 10px;
+  }
+
+  .gw-perf-game-panel.is-active {
+    display: block;
+  }
+
+  .gw-perf-resolution {
+    margin: 0 0 10px;
+    font-size: 0.84rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #1f4f98;
+    font-weight: 800;
+  }
+
+  .gw-perf-metric-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin: 0 0 10px;
+  }
+
+  .gw-perf-metric-pill {
+    border: 1px solid #d8e7ff;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+    padding: 10px;
+    text-align: center;
+  }
+
+  .gw-perf-metric-label {
+    margin: 0 0 6px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #1f4f98;
+    font-weight: 700;
+  }
+
+  .gw-perf-metric-value {
+    margin: 0;
+    font-size: 1.45rem;
+    line-height: 1.05;
+    color: #037cff;
+    font-weight: 800;
+  }
+
+  .gw-perf-metric-unit {
+    margin-left: 4px;
+    font-size: 0.68em;
+    font-weight: 700;
+    opacity: 0.8;
+  }
+
+  .gw-perf-settings-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid #037cff;
+    background: #ffffff;
+    color: #037cff;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 0.84rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .gw-perf-settings-toggle:hover,
+  .gw-perf-settings-toggle:focus {
+    background: #eef5ff;
+    color: #037cff;
+    border-color: #037cff;
+    outline: none;
+  }
+
+  .gw-perf-settings-body {
+    margin: 10px 0 0;
+    padding: 10px;
+    border: 1px solid #e1ecff;
+    border-radius: 8px;
+    background: #f9fbff;
+    display: none;
+  }
+
+  .gw-perf-settings-body.is-open {
+    display: block;
+  }
+
+  .gw-perf-settings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .gw-perf-settings-item {
+    border: 1px solid #deebff;
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 7px 8px;
+  }
+
+  .gw-perf-settings-label {
+    margin: 0 0 2px;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #1f4f98;
+    font-weight: 700;
+  }
+
+  .gw-perf-settings-value {
+    margin: 0;
+    font-size: 0.84rem;
+    line-height: 1.35;
+    font-weight: 500;
+  }
+
+  .gw-how-test-link {
+    margin: 9px 0 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: #037cff;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .gw-how-test-link:hover,
+  .gw-how-test-link:focus {
+    text-decoration: underline;
+    color: #037cff;
+  }
+
+  .gw-driver-bar {
+    margin: 10px -13px 0;
+    padding: 8px 10px;
+    border-radius: 0 0 16px 16px;
+    color: #ffffff;
+    font-size: 0.84rem;
+    font-weight: 700;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+  }
+
+  .gw-driver-logo {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.62rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .gw-driver-bar.nvidia {
+    background: #2e9f44;
+  }
+
+  .gw-driver-bar.amd {
+    background: #cf3e3e;
+  }
+
+  @media (max-width: 760px) {
+    .gw-perf-metric-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-perf-settings-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<section id="gw-perf-widget-5070" class="gw-perf-widget-v2" aria-label="Performance results RTX 5070">
+  <div class="gw-perf-head">
+    <p class="gw-perf-kicker">Performance Snapshot</p>
+    <h3 class="gw-perf-title">Multi-Game Average FPS - RTX 5070</h3>
+  </div>
+
+  <div class="gw-perf-game-nav-wrap">
+    <div class="gw-perf-game-nav" role="tablist" aria-label="Games RTX 5070"></div>
+  </div>
+
+  <div class="gw-perf-body"></div>
+  <div class="gw-driver-bar nvidia"><span class="gw-driver-logo">N</span>Driver Version (Late Feb 2026): NVIDIA Game Ready 591.86</div>
+</section>
+
+<section id="gw-perf-widget-9070xt" class="gw-perf-widget-v2" aria-label="Performance results RX 9070 XT">
+  <div class="gw-perf-head">
+    <p class="gw-perf-kicker">Performance Snapshot</p>
+    <h3 class="gw-perf-title">Multi-Game Average FPS - RX 9070 XT</h3>
+  </div>
+
+  <div class="gw-perf-game-nav-wrap">
+    <div class="gw-perf-game-nav" role="tablist" aria-label="Games RX 9070 XT"></div>
+  </div>
+
+  <div class="gw-perf-body"></div>
+  <div class="gw-driver-bar amd"><span class="gw-driver-logo">A</span>Driver Version (Late Feb 2026): AMD Adrenalin 26.2.1</div>
+</section>
+
+<script>
+  (function () {
+    var GAME_ORDER = ["bf6", "cod", "f1", "ar", "cp2077", "mr"];
+
+    var GAME_LABELS = {
+      bf6: "BF6",
+      cod: "COD",
+      f1: "F1 25",
+      ar: "AR",
+      cp2077: "CP 2077",
+      mr: "MR"
+    };
+
+    var SHARED_SETTINGS = {
+      ar: [
+        ["Map", "Dam Battlegrounds"],
+        ["Capture Length", "4-7 mins"],
+        ["Window Mode", "Fullscreen"],
+        ["Resolution Scaling", "TAAU, 100%"],
+        ["Frame Generation", "Off"],
+        ["Overall Quality", "High"]
+      ],
+      bf6: [
+        ["Map / Mode", "Empire State, Conquest"],
+        ["Capture Length", "4-7 mins"],
+        ["Display", "Fullscreen"],
+        ["Resolution", "2560x1440"],
+        ["VSync", "Off"],
+        ["Overall Quality", "High"]
+      ],
+      cod: [
+        ["Mode / Map", "Zombies Solo, Ashes of the Damned"],
+        ["Capture Length", "4-7 mins"],
+        ["Display", "Fullscreen"],
+        ["Resolution", "2560x1440"],
+        ["Frame Generation", "Off"],
+        ["Overall Quality", "High"]
+      ],
+      cp2077: [
+        ["Benchmark", "Built-in benchmark ran 2x"],
+        ["Display", "Fullscreen"],
+        ["Resolution", "3840x2160"],
+        ["Upscaling", "Off"],
+        ["Ray Tracing", "Off"],
+        ["Overall Quality", "High"]
+      ],
+      mr: [
+        ["Capture Length", "4-7 mins"],
+        ["Display", "Fullscreen"],
+        ["Resolution", "3840x2160"],
+        ["AA / Upscaling", "TAAU, Render Scale 100"],
+        ["Frame Generation", "Off"],
+        ["Overall Quality", "High"]
+      ],
+      f1: [
+        ["Status", "No benchmark data yet"],
+        ["Settings", "Pending"]
+      ]
+    };
+
+    var WIDGET_DATA = {
+      "gw-perf-widget-5070": {
+        bf6: { resolution: "1440p High", avg: 122.1, low1: 92.2, low01: 73.3 },
+        cod: { resolution: "1440p High", avg: 103.3, low1: 76.8, low01: 71.0 },
+        f1: { resolution: "Pending", avg: null, low1: null, low01: null },
+        ar: { resolution: "4K High", avg: 78.7, low1: 58.9, low01: 51.3 },
+        cp2077: { resolution: "4K High", avg: 62.1, low1: 51.3, low01: 49.8 },
+        mr: { resolution: "4K High", avg: 67.8, low1: 52.4, low01: 47.1 }
+      },
+      "gw-perf-widget-9070xt": {
+        bf6: { resolution: "1440p High", avg: 161.2, low1: 117.6, low01: 105.5 },
+        cod: { resolution: "1440p High", avg: 160.4, low1: 119.9, low01: 110.5 },
+        f1: { resolution: "Pending", avg: null, low1: null, low01: null },
+        ar: { resolution: "4K High", avg: 90.9, low1: 69.2, low01: 58.3 },
+        cp2077: { resolution: "4K High", avg: 75.6, low1: 62.6, low01: 59.4 },
+        mr: { resolution: "4K High", avg: 79.5, low1: 63.8, low01: 59.9 }
+      }
+    };
+
+    function formatFPS(v) {
+      if (v === null || typeof v !== "number" || isNaN(v)) return "--";
+      return String(v % 1 === 0 ? v.toFixed(0) : v.toFixed(1));
+    }
+
+    function buildSettingsHtml(gameKey) {
+      var rows = SHARED_SETTINGS[gameKey] || [];
+      return rows.map(function (row) {
+        return '<div class="gw-perf-settings-item"><p class="gw-perf-settings-label">' + row[0] + '</p><p class="gw-perf-settings-value">' + row[1] + '</p></div>';
+      }).join("");
+    }
+
+    function buildPanelHtml(panelId, gameKey, data) {
+      return '' +
+        '<article id="' + panelId + '" class="gw-perf-game-panel" role="tabpanel">' +
+          '<p class="gw-perf-resolution">Resolution: ' + data.resolution + '</p>' +
+          '<div class="gw-perf-metric-grid">' +
+            '<article class="gw-perf-metric-pill"><p class="gw-perf-metric-label">Average FPS</p><p class="gw-perf-metric-value">' + formatFPS(data.avg) + '<span class="gw-perf-metric-unit">FPS</span></p></article>' +
+            '<article class="gw-perf-metric-pill"><p class="gw-perf-metric-label">1% Low FPS</p><p class="gw-perf-metric-value">' + formatFPS(data.low1) + '<span class="gw-perf-metric-unit">FPS</span></p></article>' +
+            '<article class="gw-perf-metric-pill"><p class="gw-perf-metric-label">0.1% Low FPS</p><p class="gw-perf-metric-value">' + formatFPS(data.low01) + '<span class="gw-perf-metric-unit">FPS</span></p></article>' +
+          '</div>' +
+          '<button type="button" class="gw-perf-settings-toggle" aria-expanded="false">View Test Settings</button>' +
+          '<div class="gw-perf-settings-body">' +
+            '<div class="gw-perf-settings-grid">' + buildSettingsHtml(gameKey) + '</div>' +
+            '<a class="gw-how-test-link" href="#how-we-test">Learn More About How We Test <span aria-hidden="true">↗</span></a>' +
+          '</div>' +
+        '</article>';
+    }
+
+    function initWidget(widgetId) {
+      var root = document.getElementById(widgetId);
+      if (!root) return;
+
+      var widgetData = WIDGET_DATA[widgetId];
+      if (!widgetData) return;
+
+      var nav = root.querySelector('.gw-perf-game-nav');
+      var body = root.querySelector('.gw-perf-body');
+      if (!nav || !body) return;
+
+      GAME_ORDER.forEach(function (gameKey, idx) {
+        var panelId = widgetId + '-panel-' + gameKey;
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'gw-perf-game-btn' + (idx === 0 ? ' is-active' : '');
+        btn.setAttribute('role', 'tab');
+        btn.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
+        btn.setAttribute('data-target', panelId);
+        btn.textContent = GAME_LABELS[gameKey] || gameKey;
+        nav.appendChild(btn);
+
+        var wrapper = document.createElement('div');
+        wrapper.innerHTML = buildPanelHtml(panelId, gameKey, widgetData[gameKey]);
+        var panel = wrapper.firstChild;
+        if (idx === 0) panel.classList.add('is-active');
+        body.appendChild(panel);
+      });
+
+      var gameBtns = root.querySelectorAll('.gw-perf-game-btn');
+      var gamePanels = root.querySelectorAll('.gw-perf-game-panel');
+
+      function setActiveGame(targetId) {
+        gameBtns.forEach(function (btn) {
+          var active = btn.getAttribute('data-target') === targetId;
+          btn.classList.toggle('is-active', active);
+          btn.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        gamePanels.forEach(function (panel) {
+          panel.classList.toggle('is-active', panel.id === targetId);
+        });
+      }
+
+      gameBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          setActiveGame(btn.getAttribute('data-target'));
+        });
+      });
+
+      var toggles = root.querySelectorAll('.gw-perf-settings-toggle');
+      toggles.forEach(function (toggle) {
+        toggle.addEventListener('click', function () {
+          var panel = toggle.closest('.gw-perf-game-panel');
+          if (!panel) return;
+          var settingsBody = panel.querySelector('.gw-perf-settings-body');
+          if (!settingsBody) return;
+          var open = settingsBody.classList.toggle('is-open');
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+          toggle.textContent = open ? 'Hide Test Settings' : 'View Test Settings';
+        });
+      });
+    }
+
+    initWidget('gw-perf-widget-5070');
+    initWidget('gw-perf-widget-9070xt');
+  })();
+</script>

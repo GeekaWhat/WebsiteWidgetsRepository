@@ -1,0 +1,152 @@
+<!--
+GeekaWhat Motherboard Spec Grid Widget v1 (HTML + CSS only)
+Paste into a Gutenberg "Custom HTML" block.
+Source: https://www.asrock.com/mb/AMD/B550M%20Pro4/
+-->
+
+<style>
+  .gw-mobo-specs {
+    width: 100%;
+    margin: 18px 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .gw-mobo-specs-head {
+    padding: 11px 14px;
+    border-bottom: 1px solid #edf2fa;
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.3;
+    font-weight: 800;
+    color: #101828;
+  }
+
+  .gw-mobo-spec-grid {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .gw-mobo-spec-item {
+    margin: 0;
+    padding: 11px 14px;
+    border-bottom: 1px solid #edf2fa;
+    border-right: 1px solid #edf2fa;
+    display: grid;
+    gap: 4px;
+    background: #ffffff;
+  }
+
+  .gw-mobo-spec-item:nth-child(2n) {
+    border-right: none;
+  }
+
+  .gw-mobo-spec-item:nth-last-child(-n + 2) {
+    border-bottom: none;
+  }
+
+  .gw-mobo-spec-label {
+    margin: 0;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #475467;
+    font-weight: 700;
+  }
+
+  .gw-mobo-spec-value {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.35;
+    color: #101828;
+    font-weight: 700;
+  }
+
+  @media (max-width: 760px) {
+    .gw-mobo-spec-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-mobo-spec-item {
+      border-right: none;
+    }
+
+    .gw-mobo-spec-item:nth-last-child(-n + 2) {
+      border-bottom: 1px solid #edf2fa;
+    }
+
+    .gw-mobo-spec-item:last-child {
+      border-bottom: none;
+    }
+  }
+</style>
+
+<section class="gw-mobo-specs" aria-label="Motherboard specifications">
+  <h3 class="gw-mobo-specs-head">Motherboard Specifications</h3>
+
+  <ul class="gw-mobo-spec-grid">
+    <li class="gw-mobo-spec-item">
+      <p class="gw-mobo-spec-label">Model</p>
+      <p class="gw-mobo-spec-value">ASRock B550M Pro4</p>
+    </li>
+    <li class="gw-mobo-spec-item">
+      <p class="gw-mobo-spec-label">Form Factor</p>
+      <p class="gw-mobo-spec-value">Micro ATX (24.4cm x 24.4cm)</p>
+    </li>
+    <li class="gw-mobo-spec-item">
+      <p class="gw-mobo-spec-label">CPU Support</p>
+      <p class="gw-mobo-spec-value">Ryzen 3000 / 4000 / 5000 series (AM4)</p>
+    </li>
+    <li class="gw-mobo-spec-item">
+      <p class="gw-mobo-spec-label">Memory Support</p>
+      <p class="gw-mobo-spec-value">4 x DDR4, up to 128GB, up to 4733+ MT/s (OC)</p>
+    </li>
+    <li class="gw-mobo-spec-item">
+      <p class="gw-mobo-spec-label">PCIe x16 Slots</p>
+      <p class="gw-mobo-spec-value">1 x PCIe 4.0 x16, 1 x PCIe 3.0 x16 (x4 electrical), 1 x PCIe 3.0 x1</p>
+    </li>
+    <li class="gw-mobo-spec-item">
+      <p class="gw-mobo-spec-label">M.2 / SATA</p>
+      <p class="gw-mobo-spec-value">1 x Hyper M.2 (Gen4 x4), 1 x M.2 (Gen3 x2 &amp; SATA3), 6 x SATA3</p>
+    </li>
+    <li class="gw-mobo-spec-item">
+      <p class="gw-mobo-spec-label">Power Phases</p>
+      <p class="gw-mobo-spec-value">8-phase Digi Power, premium 50A chokes</p>
+    </li>
+    <li class="gw-mobo-spec-item">
+      <p class="gw-mobo-spec-label">Front I/O Headers</p>
+      <p class="gw-mobo-spec-value">USB 3.2 Gen1, USB 2.0, RGB and ARGB headers</p>
+    </li>
+    <li class="gw-mobo-spec-item">
+      <p class="gw-mobo-spec-label">Rear I/O</p>
+      <p class="gw-mobo-spec-value">USB 3.2 Gen2 Type-A + Type-C, 4 x USB 3.2 Gen1, 2 x USB 2.0</p>
+    </li>
+    <li class="gw-mobo-spec-item">
+      <p class="gw-mobo-spec-label">Audio</p>
+      <p class="gw-mobo-spec-value">7.1-channel HD Audio</p>
+    </li>
+    <li class="gw-mobo-spec-item">
+      <p class="gw-mobo-spec-label">Networking</p>
+      <p class="gw-mobo-spec-value">1 Gigabit LAN</p>
+    </li>
+    <li class="gw-mobo-spec-item">
+      <p class="gw-mobo-spec-label">Memory Slots</p>
+      <p class="gw-mobo-spec-value">4 x DDR4 DIMM</p>
+    </li>
+    <li class="gw-mobo-spec-item">
+      <p class="gw-mobo-spec-label">Best Fit</p>
+      <p class="gw-mobo-spec-value">Affordable AM4 gaming and mixed-use builds</p>
+    </li>
+    <li class="gw-mobo-spec-item">
+      <p class="gw-mobo-spec-label">PCIe Generation</p>
+      <p class="gw-mobo-spec-value">Gen4 support for GPU + primary NVMe</p>
+    </li>
+  </ul>
+</section>

@@ -1,0 +1,449 @@
+<!--
+GeekaWhat Testing Carousel Widget v1 (HTML + CSS only)
+Paste into a Gutenberg "Custom HTML" block.
+Charts are generated from DP061 streamlined CSV data.
+-->
+
+<style>
+  .gw-testing-widget {
+    width: 100%;
+    margin: 18px 0;
+    padding: 18px;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-sizing: border-box;
+  }
+
+  .gw-testing-header {
+    margin: -18px -18px 14px;
+    padding: 10px 14px;
+    border-radius: 16px 16px 0 0;
+    background: #037cff;
+    color: #ffffff;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .gw-testing-title {
+    margin: 2px 0 10px;
+    font-size: 1.2rem;
+    line-height: 1.3;
+    font-weight: 700;
+  }
+
+  .gw-testing-byline {
+    margin: -4px 0 10px;
+    font-size: 0.92rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .gw-testing-author-photo {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex: 0 0 28px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .gw-testing-byline a {
+    color: #037cff;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .gw-testing-byline a:hover,
+  .gw-testing-byline a:focus {
+    text-decoration: underline;
+  }
+
+  .gw-testing-title a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .gw-testing-title a:hover,
+  .gw-testing-title a:focus {
+    text-decoration: underline;
+  }
+
+  .gw-testing-carousel {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 100%;
+    gap: 10px;
+    overflow-x: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
+    margin-bottom: 12px;
+  }
+
+  .gw-testing-controls {
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+    margin: 0 0 10px;
+  }
+
+  .gw-testing-nav {
+    border: 1px solid #037cff;
+    background: #ffffff;
+    color: #037cff;
+    border-radius: 8px;
+    padding: 5px 10px;
+    font-size: 0.84rem;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .gw-testing-nav:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .gw-testing-nav:hover,
+  .gw-testing-nav:focus {
+    background: rgba(3, 124, 255, 0.08);
+  }
+
+  .gw-test-slide {
+    scroll-snap-align: start;
+    border-radius: 12px;
+    border: 1px solid #d9e8ff;
+    background: #f7faff;
+    padding: 12px;
+    min-height: 220px;
+    box-sizing: border-box;
+  }
+
+  .gw-test-embed {
+    height: 100%;
+    min-height: 370px;
+    border: 1px solid #d9e8ff;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 10px 10px 6px;
+    box-sizing: border-box;
+  }
+
+  .gw-test-chart-title {
+    margin: 0 0 8px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .gw-test-canvas-wrap {
+    height: 330px;
+    position: relative;
+  }
+
+  .gw-chart-fullscreen {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 3;
+    border: 1px solid #000000;
+    background: #000000;
+    color: #ffffff;
+    border-radius: 7px;
+    width: 34px;
+    height: 28px;
+    padding: 0;
+    font-weight: 700;
+    line-height: 1.1;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gw-chart-fullscreen::before {
+    content: "⛶";
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  .gw-chart-fullscreen:hover,
+  .gw-chart-fullscreen:focus {
+    background: #1f1f1f;
+  }
+
+  .gw-chart-fullscreen.is-active {
+    background: #ffffff;
+    color: #000000;
+    border-color: #000000;
+  }
+
+  .gw-test-embed:fullscreen {
+    background: #ffffff;
+    padding: 14px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .gw-test-embed:fullscreen .gw-test-canvas-wrap {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 0;
+  }
+
+  .gw-test-embed:fullscreen canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .gw-test-embed:fullscreen .gw-test-chart-title {
+    font-size: 1.22rem;
+    font-weight: 800;
+    text-align: center;
+  }
+
+  .gw-test-embed:fullscreen .gw-test-note {
+    font-size: 0.94rem;
+    font-weight: 600;
+    opacity: 0.9;
+  }
+
+  .gw-test-note {
+    margin: 8px 0 0;
+    font-size: 0.78rem;
+    line-height: 1.25;
+    opacity: 0.72;
+    text-align: center;
+  }
+
+  .gw-testing-cta {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #037cff;
+    background: #037cff;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  .gw-testing-cta:hover,
+  .gw-testing-cta:focus {
+    background: #026fe5;
+    border-color: #026fe5;
+  }
+
+  @media (max-width: 700px) {
+    .gw-testing-widget {
+      padding: 14px;
+      border-radius: 14px;
+    }
+
+    .gw-testing-header {
+      margin: -14px -14px 12px;
+      border-radius: 14px 14px 0 0;
+    }
+
+    .gw-test-slide {
+      min-height: 200px;
+      padding: 10px;
+    }
+
+    .gw-test-embed {
+      min-height: 300px;
+    }
+
+    .gw-test-canvas-wrap {
+      height: 260px;
+    }
+  }
+</style>
+
+<section class="gw-testing-widget" aria-label="Testing carousel">
+  <p class="gw-testing-header">GPU Benchmark Results</p>
+
+  <h3 class="gw-testing-title">RTX 5070 vs RX 9070 Game Benchmarks</h3>
+
+  <div class="gw-testing-controls" aria-label="Carousel navigation">
+    <button type="button" class="gw-testing-nav gw-testing-prev" aria-label="Previous graph">← Previous Graph</button>
+    <button type="button" class="gw-testing-nav gw-testing-next" aria-label="Next graph">Next Graph →</button>
+  </div>
+
+  <div class="gw-testing-carousel" aria-label="Testing charts carousel"></div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  (function () {
+    if (typeof Chart === "undefined") return;
+
+    const benchmarkBlocks = [{"game":"Fortnite","resolution":"1080p","labels":["RTX 5070","RTX 5080","RTX 5090","RX 9070","RTX 5060 Ti 16GB","RTX 5070 Ti","RX 9070 XT","RX 9060 XT 16GB","RX 9060 XT 8GB","RTX 5060","RTX 5050"],"avg":[451.8,440.0,432.4,423.7,416.5,405.9,399.8,288.2,273.6,252.3,225.8],"oneLow":[186.6,158.7,211.5,71.9,192.9,188.9,186.0,228.2,156.8,191.5,133.9],"pointOneLow":[97.3,122.4,176.0,13.6,125.7,103.6,103.9,159.3,64.6,123.3,68.6]},{"game":"Hogwarts Legacy","resolution":"1080p","labels":["RTX 5070","RTX 5060 Ti 16GB","RX 9070","RX 9060 XT 16GB","RX 9060 XT 8GB","RTX 5060","RTX 5050"],"avg":[290.1,213.1,185.1,156.9,133.4,126.8,91.0],"oneLow":[87.9,103.8,59.5,70.8,54.3,83.9,53.2],"pointOneLow":[40.2,69.5,45.1,47.6,39.4,54.5,34.2]},{"game":"Hogwarts Legacy","resolution":"1440p","labels":["RX 9070 XT","RTX 5070 Ti","RTX 5080","RTX 5090","RX 9070","RTX 5060 Ti 16GB","RTX 5070","RX 9060 XT 16GB","RX 9060 XT 8GB","RTX 5060","RTX 5050"],"avg":[181.8,156.5,152.6,151.5,146.6,142.3,130.0,110.0,93.7,85.6,63.9],"oneLow":[64.9,76.7,50.0,55.8,55.4,66.7,70.6,60.8,47.2,59.5,39.1],"pointOneLow":[43.7,51.1,37.1,41.9,40.4,39.5,51.9,43.9,35.9,38.1,28.4]},{"game":"Hogwarts Legacy","resolution":"4K","labels":["RTX 5090","RTX 5080","RX 9070 XT","RTX 5070 Ti","RX 9070","RTX 5070"],"avg":[136.2,101.3,96.5,88.7,80.3,70.6],"oneLow":[42.1,38.3,47.0,44.3,42.1,41.1],"pointOneLow":[34.0,30.0,33.2,19.2,31.8,20.7]},{"game":"Cyberpunk 2077","resolution":"1080p","labels":["RX 9070","RTX 5070","RX 9060 XT 16GB","RTX 5060 Ti 16GB","RX 9060 XT 8GB","RTX 5060","RTX 5050"],"avg":[189.3,180.6,132.2,132.2,125.8,121.2,93.2],"oneLow":[96.1,94.0,102.7,102.5,84.7,89.6,58.5],"pointOneLow":[57.7,54.6,92.4,99.7,45.8,81.9,25.1]},{"game":"Cyberpunk 2077","resolution":"1440p","labels":["RX 9070 XT","RX 9070","RTX 5070","RTX 5060 Ti 16GB","RX 9060 XT 16GB","RX 9060 XT 8GB","RTX 5060","RTX 5050"],"avg":[154.5,133.9,124.2,90.9,88.1,84.7,79.4,59.5],"oneLow":[105.3,104.6,101.8,63.3,71.8,65.6,63.6,47.0],"pointOneLow":[56.1,85.3,99.3,40.6,68.0,60.2,59.5,42.1]},{"game":"Cyberpunk 2077","resolution":"4K","labels":["RTX 5090","RTX 5080","RTX 5070 Ti","RX 9070 XT","RX 9070","RTX 5070"],"avg":[139.0,91.3,80.9,80.6,68.5,60.0],"oneLow":[84.1,63.0,58.7,62.8,51.4,46.2],"pointOneLow":[90.4,75.2,39.5,37.3,25.1,25.9]},{"game":"Marvel Rivals","resolution":"1080p","labels":["RX 9070","RTX 5060 Ti 16GB","RTX 5060","RX 9060 XT 16GB","RX 9060 XT 8GB","RTX 5050","RTX 5070"],"avg":[171.1,125.6,115.3,108.0,90.9,89.4,110.8],"oneLow":[136.1,70.8,72.2,84.2,61.5,52.1,88.3],"pointOneLow":[113.4,43.9,49.1,75.4,33.4,31.8,75.0]},{"game":"Marvel Rivals","resolution":"1440p","labels":["RTX 5090","RTX 5080","RX 9070 XT","RTX 5070 Ti","RX 9070","RTX 5070","RTX 5060 Ti 16GB","RTX 5060","RX 9060 XT 8GB","RX 9060 XT 16GB","RTX 5050"],"avg":[208.5,159.1,156.2,140.6,128.0,110.8,94.2,90.5,77.0,75.6,66.7],"oneLow":[154.2,96.6,94.2,87.8,104.5,59.2,47.1,55.9,25.8,58.4,45.5],"pointOneLow":[133.2,77.6,42.8,60.2,91.3,37.5,12.4,43.6,8.3,43.8,30.8]},{"game":"Marvel Rivals","resolution":"4K","labels":["RTX 5090","RX 9070 XT","RTX 5080","RX 9070","RTX 5070 Ti","RTX 5070"],"avg":[142.3,94.8,95.7,70.3,82.2,71.8],"oneLow":[93.9,70.9,45.3,48.3,48.2,50.3],"pointOneLow":[80.0,52.5,33.7,29.8,29.4,36.0]},{"game":"Indiana Jones","resolution":"4K","labels":["RTX 5090","RTX 5080","RTX 5070 Ti","RX 9070 XT","RX 9070","RTX 5070"],"avg":[125.4,93.5,83.3,93.3,81.3,55.5],"oneLow":[97.9,75.6,68.1,77.9,66.7,46.5],"pointOneLow":[89.0,66.8,59.7,72.5,59.9,43.0]}];
+
+    const legendPalette = ["#037cff", "#60a5ff", "#a6cbff"];
+    const baseColors = ["#037cff", "#60a5ff", "#a6cbff"];
+    const rtx5070Colors = ["#7c3aed", "#9f67f2", "#c4a3fa"];
+    const rx9070Colors = ["#7c3aed", "#9f67f2", "#c4a3fa"];
+
+    const sharedOptions = {
+      indexAxis: "y",
+      maintainAspectRatio: false,
+      responsive: true,
+      interaction: { mode: "index", intersect: false },
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: {
+            boxWidth: 12,
+            usePointStyle: false,
+            generateLabels: function (chart) {
+              const datasets = chart.data.datasets || [];
+              return datasets.map(function (dataset, i) {
+                return { text: dataset.label, fillStyle: legendPalette[i] || "#037cff", strokeStyle: legendPalette[i] || "#037cff", lineWidth: 1, hidden: !chart.isDatasetVisible(i), datasetIndex: i };
+              });
+            }
+          }
+        },
+        tooltip: { callbacks: { label: function (ctx) { return ctx.dataset.label + ": " + ctx.parsed.x + " FPS"; } } }
+      },
+      scales: {
+        x: { beginAtZero: true, ticks: { callback: function (value) { return value + " FPS"; }, font: { size: 10 } }, grid: { color: "rgba(0,0,0,0.06)" } },
+        y: { ticks: { font: { size: 10 } }, grid: { display: false } }
+      }
+    };
+
+    function colorForLabel(label, metricIndex) {
+      if (label === "RTX 5070") return rtx5070Colors[metricIndex];
+      if (label === "RX 9070") return rx9070Colors[metricIndex];
+      return baseColors[metricIndex];
+    }
+
+    function hasAnyNumber(arr) { return Array.isArray(arr) && arr.some(function (v) { return typeof v === "number" && !Number.isNaN(v); }); }
+
+    const carousel = document.querySelector(".gw-testing-carousel");
+    const prevBtn = document.querySelector(".gw-testing-prev");
+    const nextBtn = document.querySelector(".gw-testing-next");
+    if (!carousel) return;
+
+    benchmarkBlocks.forEach(function (block, idx) {
+      const slide = document.createElement("article");
+      slide.className = "gw-test-slide";
+      const embed = document.createElement("div");
+      embed.className = "gw-test-embed";
+      const title = document.createElement("p");
+      title.className = "gw-test-chart-title";
+      if (block.game === "Fortnite" && block.resolution === "1080p") {
+        title.textContent = "Fortnite - @ 1080p Competitive Settings";
+      } else {
+        title.textContent = block.game + " @ " + block.resolution + " High Settings";
+      }
+      const note = document.createElement("p");
+      note.className = "gw-test-note";
+      const hasOneLow = hasAnyNumber(block.oneLow);
+      const hasPointOneLow = hasAnyNumber(block.pointOneLow);
+      if (hasOneLow && hasPointOneLow) {
+        note.textContent = "(Avg / 1% / 0.1% FPS)";
+      } else if (hasOneLow) {
+        note.textContent = "(Avg / 1% FPS)";
+      } else if (hasPointOneLow) {
+        note.textContent = "(Avg / 0.1% FPS)";
+      } else {
+        note.textContent = "(Avg FPS)";
+      }
+      const wrap = document.createElement("div");
+      wrap.className = "gw-test-canvas-wrap";
+      const fsBtn = document.createElement("button");
+      fsBtn.type = "button"; fsBtn.className = "gw-chart-fullscreen"; fsBtn.setAttribute("aria-label", "View chart fullscreen"); fsBtn.setAttribute("title", "View chart fullscreen");
+      const canvas = document.createElement("canvas");
+      canvas.className = "gw-chart-canvas";
+      canvas.setAttribute("aria-label", block.game + " " + block.resolution + " FPS chart");
+      canvas.setAttribute("data-chart-index", String(idx));
+      wrap.appendChild(fsBtn); wrap.appendChild(canvas); embed.appendChild(title); embed.appendChild(note); embed.appendChild(wrap); slide.appendChild(embed); carousel.appendChild(slide);
+    });
+
+    const charts = [];
+    const canvases = carousel.querySelectorAll(".gw-chart-canvas");
+
+    canvases.forEach(function (canvas, idx) {
+      const block = benchmarkBlocks[idx]; if (!block) return;
+      const datasets = [{ label: "Average FPS", data: block.avg, backgroundColor: block.labels.map(function (label) { return colorForLabel(label, 0); }) }];
+      if (hasAnyNumber(block.oneLow)) datasets.push({ label: "1% Low", data: block.oneLow, backgroundColor: block.labels.map(function (label) { return colorForLabel(label, 1); }) });
+      if (hasAnyNumber(block.pointOneLow)) datasets.push({ label: "0.1% Low", data: block.pointOneLow, backgroundColor: block.labels.map(function (label) { return colorForLabel(label, 2); }) });
+      charts.push(new Chart(canvas, { type: "bar", data: { labels: block.labels, datasets: datasets }, options: sharedOptions }));
+    });
+
+    function getSlides() { return Array.from(carousel.querySelectorAll(".gw-test-slide")); }
+    let currentSlideIndex = 0;
+    function updateNavLabels() {
+      if (!prevBtn || !nextBtn) return;
+      const slides = getSlides();
+      prevBtn.disabled = currentSlideIndex <= 0;
+      nextBtn.disabled = currentSlideIndex >= slides.length - 1;
+      prevBtn.textContent = "← Previous Graph";
+      nextBtn.textContent = "Next Graph →";
+      prevBtn.setAttribute("aria-label", prevBtn.disabled ? "No previous graph" : "Previous graph");
+      nextBtn.setAttribute("aria-label", nextBtn.disabled ? "No next graph" : "Next graph");
+    }
+
+    if (prevBtn && nextBtn) {
+      prevBtn.addEventListener("click", function () {
+        const slides = getSlides();
+        currentSlideIndex = Math.max(0, currentSlideIndex - 1);
+        const target = slides[currentSlideIndex]; if (target) target.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+        updateNavLabels();
+      });
+      nextBtn.addEventListener("click", function () {
+        const slides = getSlides();
+        currentSlideIndex = Math.min(slides.length - 1, currentSlideIndex + 1);
+        const target = slides[currentSlideIndex]; if (target) target.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+        updateNavLabels();
+      });
+      updateNavLabels();
+    }
+
+    function enterFullscreen(el) { if (el.requestFullscreen) return el.requestFullscreen(); if (el.webkitRequestFullscreen) return el.webkitRequestFullscreen(); return Promise.resolve(); }
+    function exitFullscreen() { if (document.exitFullscreen) return document.exitFullscreen(); if (document.webkitExitFullscreen) return document.webkitExitFullscreen(); return Promise.resolve(); }
+
+    const fsButtons = carousel.querySelectorAll(".gw-chart-fullscreen");
+    fsButtons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        const panel = btn.closest(".gw-test-embed"); if (!panel) return;
+        const isOpen = document.fullscreenElement === panel || document.webkitFullscreenElement === panel;
+        if (isOpen) exitFullscreen(); else enterFullscreen(panel);
+      });
+    });
+
+    function syncFsButtonState() {
+      const fullscreenPanel = document.fullscreenElement || document.webkitFullscreenElement;
+      fsButtons.forEach(function (btn) {
+        const panel = btn.closest(".gw-test-embed");
+        const isActive = panel && fullscreenPanel === panel;
+        btn.classList.toggle("is-active", !!isActive);
+        btn.setAttribute("aria-label", isActive ? "Exit fullscreen" : "View chart fullscreen");
+        btn.setAttribute("title", isActive ? "Exit fullscreen" : "View chart fullscreen");
+      });
+      const isFullscreen = !!fullscreenPanel;
+      charts.forEach(function (chart) {
+        chart.options.plugins.legend.labels.font = { size: isFullscreen ? 14 : 12, weight: isFullscreen ? "700" : "400" };
+        chart.options.scales.x.ticks.font = { size: isFullscreen ? 13 : 10, weight: isFullscreen ? "700" : "400" };
+        chart.options.scales.y.ticks.font = { size: isFullscreen ? 13 : 10, weight: isFullscreen ? "700" : "400" };
+        chart.options.plugins.tooltip.bodyFont = { size: isFullscreen ? 14 : 12, weight: isFullscreen ? "700" : "400" };
+        chart.options.plugins.tooltip.titleFont = { size: isFullscreen ? 14 : 12, weight: isFullscreen ? "700" : "400" };
+        chart.update("none");
+      });
+    }
+
+    document.addEventListener("fullscreenchange", syncFsButtonState);
+    document.addEventListener("webkitfullscreenchange", syncFsButtonState);
+    syncFsButtonState();
+  })();
+</script>

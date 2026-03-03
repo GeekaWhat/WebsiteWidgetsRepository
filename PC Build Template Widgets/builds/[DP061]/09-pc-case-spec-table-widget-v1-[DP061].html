@@ -1,0 +1,190 @@
+<!--
+GeekaWhat Case Spec Grid Widget v1 (HTML + CSS only)
+Paste into a Gutenberg "Custom HTML" block.
+-->
+
+<style>
+  .gw-case-specs {
+    width: 100%;
+    margin: 18px 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .gw-case-specs-head {
+    padding: 12px 16px;
+    border-bottom: 1px solid #edf2fa;
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.3;
+    font-weight: 800;
+    color: #101828;
+  }
+
+  .gw-case-spec-grid {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .gw-case-spec-item {
+    margin: 0;
+    padding: 13px 16px;
+    border-bottom: 1px solid #edf2fa;
+    border-right: 1px solid #edf2fa;
+    display: grid;
+    gap: 6px;
+    background: #ffffff;
+  }
+
+  .gw-case-spec-item:nth-child(2n) {
+    border-right: none;
+  }
+
+  .gw-case-spec-item:nth-last-child(-n + 2) {
+    border-bottom: none;
+  }
+
+  .gw-case-spec-label {
+    margin: 0;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #475467;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .gw-case-spec-value {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.45;
+    color: #101828;
+    font-weight: 650;
+  }
+
+  .gw-case-spec-list {
+    display: grid;
+    gap: 6px;
+    margin: 0;
+  }
+
+  .gw-case-spec-kv {
+    display: grid;
+    grid-template-columns: 88px minmax(0, 1fr);
+    column-gap: 8px;
+    align-items: baseline;
+  }
+
+  .gw-case-spec-k {
+    font-weight: 700;
+    color: #334155;
+  }
+
+  .gw-case-spec-v {
+    font-weight: 650;
+  }
+
+  @media (max-width: 760px) {
+    .gw-case-spec-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-case-spec-item {
+      border-right: none;
+    }
+
+    .gw-case-spec-item:nth-last-child(-n + 2) {
+      border-bottom: 1px solid #edf2fa;
+    }
+
+    .gw-case-spec-item:last-child {
+      border-bottom: none;
+    }
+  }
+</style>
+
+<section class="gw-case-specs" aria-label="Case specifications">
+  <h3 class="gw-case-specs-head">Case Specifications</h3>
+
+  <ul class="gw-case-spec-grid">
+    <li class="gw-case-spec-item">
+      <p class="gw-case-spec-label">Model</p>
+      <p class="gw-case-spec-value">Corsair 2500X Mid-Tower Dual Chamber (White)</p>
+    </li>
+    <li class="gw-case-spec-item">
+      <p class="gw-case-spec-label">Form Factor</p>
+      <p class="gw-case-spec-value">Mid-Tower</p>
+    </li>
+    <li class="gw-case-spec-item">
+      <p class="gw-case-spec-label">Motherboard Support</p>
+      <p class="gw-case-spec-value">Mini-ITX, Micro-ATX, Reverse motherboard compatible</p>
+    </li>
+    <li class="gw-case-spec-item">
+      <p class="gw-case-spec-label">Case Dimensions (L x W x H)</p>
+      <p class="gw-case-spec-value">469mm x 304mm x 376mm</p>
+    </li>
+    <li class="gw-case-spec-item">
+      <p class="gw-case-spec-label">Front IO</p>
+      <div class="gw-case-spec-value gw-case-spec-list">
+        <div>1 x USB 3.2 Gen2 Type-C</div>
+        <div>2 x USB 3.2 Gen1 Type-A</div>
+        <div>1 x HD Audio Combo Jack</div>
+      </div>
+    </li>
+    <li class="gw-case-spec-item">
+      <p class="gw-case-spec-label">PCI-E Slots</p>
+      <p class="gw-case-spec-value">4 horizontal or 4 vertical (accessory sold separately)</p>
+    </li>
+    <li class="gw-case-spec-item">
+      <p class="gw-case-spec-label">Colour</p>
+      <p class="gw-case-spec-value">White</p>
+    </li>
+    <li class="gw-case-spec-item">
+      <p class="gw-case-spec-label">Max Clearance</p>
+      <div class="gw-case-spec-value gw-case-spec-list">
+        <div>180mm Cooler Height</div>
+        <div>400mm GPU Length</div>
+        <div>225mm PSU Length</div>
+      </div>
+    </li>
+    <li class="gw-case-spec-item">
+      <p class="gw-case-spec-label">Drive Support</p>
+      <div class="gw-case-spec-value gw-case-spec-list">
+        <div>Up to 2 x 3.5 inch drives</div>
+        <div>Up to 4 x 2.5 inch drives</div>
+      </div>
+    </li>
+    <li class="gw-case-spec-item">
+      <p class="gw-case-spec-label">Fan Support</p>
+      <div class="gw-case-spec-value gw-case-spec-list">
+        <div class="gw-case-spec-kv"><span class="gw-case-spec-k">Top:</span><span class="gw-case-spec-v">3 x 120mm or 3 x 140mm</span></div>
+        <div class="gw-case-spec-kv"><span class="gw-case-spec-k">Side:</span><span class="gw-case-spec-v">3 x 120mm</span></div>
+        <div class="gw-case-spec-kv"><span class="gw-case-spec-k">Bottom:</span><span class="gw-case-spec-v">3 x 120mm or 3 x 140mm</span></div>
+        <div class="gw-case-spec-kv"><span class="gw-case-spec-k">Rear:</span><span class="gw-case-spec-v">1 x 120mm</span></div>
+        <div class="gw-case-spec-kv"><span class="gw-case-spec-k">Front:</span><span class="gw-case-spec-v">No Support.</span></div>
+      </div>
+    </li>
+    <li class="gw-case-spec-item">
+      <p class="gw-case-spec-label">Radiator Support</p>
+      <div class="gw-case-spec-value gw-case-spec-list">
+        <div class="gw-case-spec-kv"><span class="gw-case-spec-k">Top:</span><span class="gw-case-spec-v">Up to 360mm</span></div>
+        <div class="gw-case-spec-kv"><span class="gw-case-spec-k">Side:</span><span class="gw-case-spec-v">Up to 240mm</span></div>
+        <div class="gw-case-spec-kv"><span class="gw-case-spec-k">Bottom:</span><span class="gw-case-spec-v">Up to 360mm</span></div>
+        <div class="gw-case-spec-kv"><span class="gw-case-spec-k">Rear:</span><span class="gw-case-spec-v">Up to 120mm</span></div>
+        <div class="gw-case-spec-kv"><span class="gw-case-spec-k">Front:</span><span class="gw-case-spec-v">No Support.</span></div>
+
+      </div>
+    </li>
+    <li class="gw-case-spec-item">
+      <p class="gw-case-spec-label">Pre-Installed Fans</p>
+      <p class="gw-case-spec-value">None</p>
+    </li>
+  </ul>
+</section>

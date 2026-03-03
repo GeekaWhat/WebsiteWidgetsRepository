@@ -1,0 +1,363 @@
+<!--
+GeekaWhat Build Parts List Widget v1 (HTML + CSS + JS)
+Paste into a Gutenberg "Custom HTML" block.
+Add/remove parts by duplicating or removing:
+1) a left menu .gw-build-tab button
+2) its matching right panel .gw-build-panel with the same data-target/id.
+-->
+
+<style>
+  .gw-build-widget {
+    width: 100%;
+    margin: 18px 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+  }
+
+  .gw-build-layout {
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .gw-build-menu {
+    border-right: 1px solid #e6edf7;
+    background: #f8fbff;
+    padding: 8px;
+  }
+
+  .gw-build-tab {
+    width: 100%;
+    display: block;
+    border: 1px solid #d9e8ff;
+    background: #ffffff;
+    color: #111111;
+    border-radius: 10px;
+    padding: 10px 11px;
+    margin: 0 0 8px;
+    text-align: left;
+    font-size: 0.92rem;
+    font-weight: 400;
+    line-height: 1.25;
+    cursor: pointer;
+  }
+
+  .gw-build-tab:last-child {
+    margin-bottom: 0;
+  }
+
+  .gw-build-tab.is-active {
+    background: #037cff;
+    border-color: #037cff;
+    color: #ffffff;
+  }
+
+  .gw-build-tab strong {
+    font-weight: 700;
+  }
+
+  .gw-build-tab:not(.is-active):hover,
+  .gw-build-tab:not(.is-active):focus {
+    background: #eef5ff;
+    border-color: #037cff;
+    color: #111111;
+    outline: none;
+  }
+
+  .gw-build-tab.is-active:hover,
+  .gw-build-tab.is-active:focus {
+    background: #026fe5;
+    border-color: #026fe5;
+    color: #ffffff;
+    outline: none;
+  }
+
+  .gw-build-content {
+    padding: 14px;
+  }
+
+  .gw-build-panel {
+    display: none;
+  }
+
+  .gw-build-panel.is-active {
+    display: block;
+  }
+
+  .gw-build-title {
+    margin: 0;
+    font-size: 1.02rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .gw-build-media {
+    margin: 0 0 10px;
+    border: 1px solid #e6edf7;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  .gw-build-media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 260px;
+    object-fit: cover;
+  }
+
+  .gw-build-head-row {
+    margin: 0 0 8px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .gw-build-skip {
+    white-space: nowrap;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #037cff;
+    text-decoration: none;
+  }
+
+  .gw-build-skip:hover,
+  .gw-build-skip:focus {
+    text-decoration: underline;
+  }
+
+  .gw-build-summary {
+    margin: 0 0 10px;
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  .gw-build-specs {
+    margin: 0 0 12px;
+    border: 1px solid #e6edf7;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .gw-build-spec-row {
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr);
+    border-bottom: 1px solid #e6edf7;
+    background: #ffffff;
+  }
+
+  .gw-build-spec-row:last-child {
+    border-bottom: 0;
+  }
+
+  .gw-build-label,
+  .gw-build-value {
+    padding: 9px 10px;
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+
+  .gw-build-label {
+    background: #f4f8ff;
+    font-weight: 700;
+  }
+
+  .gw-build-value {
+    font-weight: 500;
+  }
+
+  .gw-buy-placeholder {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    font-size: 0.9rem;
+    line-height: 1.35;
+    color: inherit;
+  }
+
+  @media (max-width: 760px) {
+    .gw-build-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-build-menu {
+      border-right: 0;
+      border-bottom: 1px solid #e6edf7;
+    }
+
+    .gw-build-spec-row {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-build-label {
+      border-bottom: 1px solid #e6edf7;
+    }
+  }
+</style>
+
+<section class="gw-build-widget" aria-label="Build parts list">
+  <div class="gw-build-layout">
+    <div class="gw-build-menu" role="tablist" aria-label="Build Components">
+      <button class="gw-build-tab is-active" type="button" role="tab" aria-selected="true" data-target="gw-part-cpu"><strong>CPU:</strong> AMD Ryzen 5 5500</button>
+      <button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-cooler"><strong>CPU Cooler:</strong> upHere UP1KC4</button>
+      <button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-mobo"><strong>Motherboard:</strong> ASRock B550M Pro4</button>
+      <button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-ram"><strong>RAM:</strong> Corsair Vengeance RGB RS DDR4</button>
+      <button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-ssd"><strong>SSD:</strong> TeamGroup MP44L</button>
+      <button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-gpu"><strong>GPU:</strong> Sapphire RX 9060 XT 8GB</button>
+      <button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-case"><strong>Case:</strong> Antec Flush M</button>
+      <button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-psu"><strong>PSU:</strong> MSI MAG A650BN</button>
+    </div>
+
+    <div class="gw-build-content">
+      <article id="gw-part-cpu" class="gw-build-panel is-active" role="tabpanel">
+        <div class="gw-build-head-row"><h3 class="gw-build-title">AMD Ryzen 5 5500</h3><a class="gw-build-skip" href="#CPU">Skip to Section</a></div>
+        <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2025/12/MPI_AMD-Ryzen-5-5500.jpg" alt="AMD Ryzen 5 5500"></div>
+        <p class="gw-build-summary">A reliable six-core, twelve-thread processor that keeps this build affordable while still delivering strong 1080p gaming performance with enough headroom for modern titles.</p>
+        <div class="gw-build-specs">
+          <div class="gw-build-spec-row"><div class="gw-build-label">Architecture</div><div class="gw-build-value">Zen 3 (AM4)</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Core/Thread Count</div><div class="gw-build-value">6 Cores / 12 Threads</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Boost Clock</div><div class="gw-build-value">Up to 4.2 GHz</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Default TDP</div><div class="gw-build-value">65W</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Platform Support</div><div class="gw-build-value">DDR4 + PCIe 4.0</div></div>
+        </div>
+        <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/ohYX" AMAZON-US-ASIN="B09VCJ171S" AMAZON-GB-ASIN="B09VCJ171S" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Famd-ryzen-5-5500-six-core-4.2ghz-socket-am4-processor-retail-cp-3d3-am.html" overclockers-awin-gb-itemid="CP-3D3-AM"]</p>
+      </article>
+
+      <article id="gw-part-cooler" class="gw-build-panel" role="tabpanel">
+        <div class="gw-build-head-row"><h3 class="gw-build-title">upHere UP1KC4</h3><a class="gw-build-skip" href="#cpu-cooler">Skip to Section</a></div>
+        <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2025/12/MPI_-upHere-UP1KC4.jpg" alt="upHere UP1KC4"></div>
+        <p class="gw-build-summary">A compact single-fan air cooler with PWM control that pairs well with the Ryzen 5 5500 and fits cleanly inside the Antec Flush M chassis.</p>
+        <div class="gw-build-specs">
+          <div class="gw-build-spec-row"><div class="gw-build-label">Cooler Type</div><div class="gw-build-value">Single-tower air cooler</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Fan Size</div><div class="gw-build-value">120mm PWM</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Heat Pipes</div><div class="gw-build-value">Copper heat pipes</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Heatsink Design</div><div class="gw-build-value">Enclosed aluminium fin stack</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Socket Compatibility</div><div class="gw-build-value">AM5 / AM4 / Intel mainstream</div></div>
+        </div>
+        <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/Sfdzs" AMAZON-US-ASIN="B0D8VS42T8" AMAZON-GB-ASIN="B0D91HMLYR"]</p>
+      </article>
+
+      <article id="gw-part-mobo" class="gw-build-panel" role="tabpanel">
+        <div class="gw-build-head-row"><h3 class="gw-build-title">ASRock B550M Pro4</h3><a class="gw-build-skip" href="#motherboard">Skip to Section</a></div>
+        <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2025/12/MPI_ASRock-B550M-Pro4-1.jpg" alt="ASRock B550M Pro4"></div>
+        <p class="gw-build-summary">A sensible AM4 motherboard with PCIe 4.0 support, strong memory compatibility, and enough expansion for a practical mid-range gaming system.</p>
+        <div class="gw-build-specs">
+          <div class="gw-build-spec-row"><div class="gw-build-label">Chipset / Socket</div><div class="gw-build-value">B550 / AM4</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Form Factor</div><div class="gw-build-value">Micro-ATX</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Memory Support</div><div class="gw-build-value">4 x DDR4, up to 128GB</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Primary GPU Slot</div><div class="gw-build-value">PCIe 4.0 x16</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Networking</div><div class="gw-build-value">1 Gigabit LAN</div></div>
+        </div>
+        <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/vxVRuTa" AMAZON-US-ASIN="B089W2ZTHF" AMAZON-GB-ASIN="B089W2ZTHF"]</p>
+      </article>
+
+      <article id="gw-part-ram" class="gw-build-panel" role="tabpanel">
+        <div class="gw-build-head-row"><h3 class="gw-build-title">Corsair Vengeance RGB RS DDR4</h3><a class="gw-build-skip" href="#ram">Skip to Section</a></div>
+        <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2025/12/MPI_Corsair-Vengeance-RGB-RS-DDR4.jpg" alt="Corsair Vengeance RGB RS DDR4"></div>
+        <p class="gw-build-summary">A dependable value-focused DDR4 kit with strong day-to-day stability and subtle RGB styling, ideal for budget AM4 gaming builds.</p>
+        <div class="gw-build-specs">
+          <div class="gw-build-spec-row"><div class="gw-build-label">Capacity</div><div class="gw-build-value">32GB (2x16GB)</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Memory Type</div><div class="gw-build-value">DDR4</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Positioning</div><div class="gw-build-value">Value-focused RGB kit</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Best Use</div><div class="gw-build-value">Gaming + productivity</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Compatibility</div><div class="gw-build-value">AM4 DDR4 platforms</div></div>
+        </div>
+        <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/A8QGh" AMAZON-US-ASIN="" AMAZON-GB-ASIN="B09C5WJ2B2"]</p>
+      </article>
+
+      <article id="gw-part-ssd" class="gw-build-panel" role="tabpanel">
+        <div class="gw-build-head-row"><h3 class="gw-build-title">TeamGroup MP44L</h3><a class="gw-build-skip" href="#ssd">Skip to Section</a></div>
+        <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2025/09/MPI_TeamGroup-MP44L-1TB.jpg" alt="TeamGroup MP44L 1TB"></div>
+        <p class="gw-build-summary">A proven value Gen4 NVMe SSD that consistently delivers strong real-world performance for OS, games, and daily workloads.</p>
+        <div class="gw-build-specs">
+          <div class="gw-build-spec-row"><div class="gw-build-label">Capacity</div><div class="gw-build-value">1TB</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Form Factor</div><div class="gw-build-value">M.2 2280</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Interface</div><div class="gw-build-value">PCIe 4.0 x4 NVMe</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Read/Write (Seq)</div><div class="gw-build-value">5000 / 4500 MB/s</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Best Use</div><div class="gw-build-value">OS + primary game library</div></div>
+        </div>
+        <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/moBK2" AMAZON-US-ASIN="B0B9Y3DB2K" AMAZON-GB-ASIN="B0B9Y3DB2K" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fteam-group-mp44l-1tb-ssd-m.2-2280-nvme-pcie-4.0-solid-state-drive-sto-tmg-03128.html" overclockers-awin-gb-itemid="STO-TMG-03128"]</p>
+      </article>
+
+      <article id="gw-part-gpu" class="gw-build-panel" role="tabpanel">
+        <div class="gw-build-head-row"><h3 class="gw-build-title">Sapphire RX 9060 XT 8GB</h3><a class="gw-build-skip" href="#GPU">Skip to Section</a></div>
+        <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2025/11/MPI_RX-9060-XT-8GB-Pulse-Wide.jpg" alt="Sapphire RX 9060 XT 8GB"></div>
+        <p class="gw-build-summary">The star component in this build, delivering excellent 1080p frame rates and enough power for lighter 1440p gaming while keeping costs in check.</p>
+        <div class="gw-build-specs">
+          <div class="gw-build-spec-row"><div class="gw-build-label">VRAM</div><div class="gw-build-value">8GB GDDR6</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Bus / Interface</div><div class="gw-build-value">PCIe x16</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Architecture</div><div class="gw-build-value">AMD RDNA 4</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Target Resolution</div><div class="gw-build-value">1080p high settings, light 1440p</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Variant Option</div><div class="gw-build-value">16GB model for stronger 1440p</div></div>
+        </div>
+        <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/p5ObZV" AMAZON-US-ASIN="B0F8C4XHGB" AMAZON-GB-ASIN="B0F8C4XHGB" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fsapphire-pulse-radeon-rx-9060-xt-gaming-oc-8gb-gddr6-pci-express-graphics-c-gra-spr-05182.html" overclockers-awin-gb-itemid="GRA-SPR-05182"]</p>
+      </article>
+
+      <article id="gw-part-case" class="gw-build-panel" role="tabpanel">
+        <div class="gw-build-head-row"><h3 class="gw-build-title">Antec Flush M</h3><a class="gw-build-skip" href="#case">Skip to Section</a></div>
+        <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2025/12/MPI_Antec-Flush-M.jpg" alt="Antec Flush M"></div>
+        <p class="gw-build-summary">A compact airflow-focused case with six pre-installed PWM fans and strong cooling support, making it ideal for thermally balanced mid-range builds.</p>
+        <div class="gw-build-specs">
+          <div class="gw-build-spec-row"><div class="gw-build-label">Case Type</div><div class="gw-build-value">Compact Micro-ATX</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Airflow Design</div><div class="gw-build-value">Six-sided ventilation + vertical airflow channel</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Motherboard Support</div><div class="gw-build-value">Micro-ATX / Mini-ITX</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">GPU Clearance</div><div class="gw-build-value">Up to 405mm</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Radiator Support</div><div class="gw-build-value">Top up to 360mm</div></div>
+        </div>
+        <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/6Sj2ctK" AMAZON-US-ASIN="B0FSKTFY2Q" AMAZON-GB-ASIN="B0FSKTFY2Q"]</p>
+      </article>
+
+      <article id="gw-part-psu" class="gw-build-panel" role="tabpanel">
+        <div class="gw-build-head-row"><h3 class="gw-build-title">MSI MAG A650BN</h3><a class="gw-build-skip" href="#psu">Skip to Section</a></div>
+        <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2025/12/MPI_MSI-MAG-A650BN.jpg" alt="MSI MAG A650BN"></div>
+        <p class="gw-build-summary">A dependable 650W 80 PLUS Bronze PSU that suits this mid-range configuration and provides stable power delivery without overspending.</p>
+        <div class="gw-build-specs">
+          <div class="gw-build-spec-row"><div class="gw-build-label">Wattage</div><div class="gw-build-value">650W</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Standard</div><div class="gw-build-value">ATX</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Efficiency</div><div class="gw-build-value">80 PLUS Bronze</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Cabling</div><div class="gw-build-value">Non-modular</div></div>
+          <div class="gw-build-spec-row"><div class="gw-build-label">Best Fit</div><div class="gw-build-value">Mid-range single-GPU system</div></div>
+        </div>
+        <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/mfru" AMAZON-US-ASIN="B0991TZ399" AMAZON-GB-ASIN="B0991TZ399" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fmsi-mag-a650bn-uk-psu-650w-80-plus-bronze-power-supply-pow-msi-03345.html" overclockers-awin-gb-itemid="POW-MSI-03345"]</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.currentScript && document.currentScript.previousElementSibling;
+    if (!root || !root.classList.contains("gw-build-widget")) {
+      root = document.querySelector(".gw-build-widget");
+    }
+    if (!root) return;
+
+    var tabs = root.querySelectorAll(".gw-build-tab");
+    var panels = root.querySelectorAll(".gw-build-panel");
+
+    function activate(targetId) {
+      tabs.forEach(function (tab) {
+        var isActive = tab.getAttribute("data-target") === targetId;
+        tab.classList.toggle("is-active", isActive);
+        tab.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+
+      panels.forEach(function (panel) {
+        panel.classList.toggle("is-active", panel.id === targetId);
+      });
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        activate(tab.getAttribute("data-target"));
+      });
+    });
+  })();
+</script>
