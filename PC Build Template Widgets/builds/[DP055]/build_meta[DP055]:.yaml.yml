@@ -1,0 +1,181 @@
+build_meta:
+  build_code: "[DP055]"
+  refresh_scope: "full"
+  notes: "DP055 full widget refresh; skipped CPU comparison, cooler graph, GPU comparison, and peripherals as requested."
+
+component_headings:
+  cpu: "AMD Ryzen 5 9600X"
+  cpu_cooler: "SAMA A60"
+  motherboard: "Gigabyte B850 EAGLE WIFI6E"
+  ram: "TeamGroup T-Force Vulcan DDR5"
+  ssd: "TeamGroup MP44L"
+  gpu: "Gigabyte Radeon RX 9070 GAMING OC 16G"
+  case: "SAMA V60"
+  psu: "SAMA P1000"
+
+parts_list:
+  - part_key: "cpu"
+    tab_label: "CPU"
+    name: "AMD Ryzen 5 9600X"
+    section_anchor: "#CPU"
+    image_url: "https://geekawhat.com/wp-content/uploads/2025/12/MPI_AMD-Ryzen-5-9600X-Box.jpg"
+    image_alt: "AMD Ryzen 5 9600X processor retail box"
+    summary: "Ryzen 5 9600X is a strong value gaming CPU on AM5, combining high clocks and solid efficiency for 1080p and 1440p-focused builds."
+    specs:
+      - { label: "Architecture", value: "Zen 5 (Granite Ridge) / AM5" }
+      - { label: "Core/Thread Count", value: "6 Cores / 12 Threads" }
+      - { label: "Clock Speeds", value: "3.9 GHz Base, up to 5.4 GHz Boost" }
+      - { label: "Default TDP", value: "65W" }
+      - { label: "Cache", value: "38MB Total (L2 + L3)" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/BgbCqj" AMAZON-US-ASIN="B0D6NN6TM7" AMAZON-GB-ASIN="B0D6NN6TM7" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Famd-ryzen-5-9600x-six-core-5.40ghz-socket-am5-processor-retail-pro-amd-02677.html" overclockers-awin-gb-itemid="PRO-AMD-02677"]'
+
+  - part_key: "cooler"
+    tab_label: "CPU Cooler"
+    name: "SAMA A60"
+    section_anchor: "#cpu-cooler"
+    image_url: "https://geekawhat.com/wp-content/uploads/2025/12/MPI_SAMA-A60-Box.jpg"
+    image_alt: "SAMA A60 CPU air cooler retail box"
+    summary: "SAMA A60 is a mainstream air cooler option that keeps a 65W Ryzen chip well-controlled without adding much cost to the build."
+    specs:
+      - { label: "Cooler Type", value: "Single-tower air cooler" }
+      - { label: "Fan Size", value: "120mm PWM" }
+      - { label: "Heatpipes", value: "6 heatpipes" }
+      - { label: "Rated TDP", value: "Up to 250W" }
+      - { label: "Socket Compatibility", value: "AMD AM5/AM4, Intel LGA 1851/1700/1200/115x" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/OcKlJj" AMAZON-US-ASIN="B0FCFMJVVV" AMAZON-GB-ASIN="B0FCFLLC6T"]'
+
+  - part_key: "mobo"
+    tab_label: "Motherboard"
+    name: "Gigabyte B850 EAGLE WIFI6E"
+    section_anchor: "#motherboard"
+    image_url: "https://geekawhat.com/wp-content/uploads/2025/08/MPI_Gigabyte-Eagle-WiFi-6E-3.jpg"
+    image_alt: "Gigabyte B850 EAGLE WIFI6E motherboard"
+    summary: "Gigabyte's B850 EAGLE WIFI6E brings AM5 platform essentials with PCIe 5.0 GPU support, three M.2 slots, and reliable networking in a straightforward ATX layout."
+    specs:
+      - { label: "Chipset / Socket", value: "AMD B850 / AM5" }
+      - { label: "Form Factor", value: "ATX (30.5cm x 24.4cm)" }
+      - { label: "Memory Support", value: "4 x DDR5 DIMM, up to 256GB" }
+      - { label: "Primary GPU Slot", value: "PCIe 5.0 x16" }
+      - { label: "Networking", value: "Wi-Fi 6E + GbE LAN" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/f8OtBaR" AMAZON-US-ASIN="B0DQNW4J1G" AMAZON-GB-ASIN="B0DQNW4J1G" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fgigabyte-b850-eagle-wifi6e-socket-am5-ddr5-atx-motherboard-mot-gig-03859.html" overclockers-awin-gb-itemid="MOT-GIG-03859"]'
+
+  - part_key: "ram"
+    tab_label: "RAM"
+    name: "TeamGroup T-Force Vulcan DDR5"
+    section_anchor: "#ram"
+    image_url: "https://geekawhat.com/wp-content/uploads/2024/08/MPI_Forge-320R-RX-7800-XT-TeamGroup-T-Force-Vulcan-Kit.jpg"
+    image_alt: "TeamGroup T-Force Vulcan DDR5 memory kit"
+    summary: "TeamGroup's Vulcan DDR5 kit offers strong value and dependable EXPO-compatible performance for AM5 gaming builds."
+    specs:
+      - { label: "Capacity", value: "32GB (2x16GB)" }
+      - { label: "Memory Type", value: "DDR5 UDIMM" }
+      - { label: "Speed", value: "6000MT/s" }
+      - { label: "Latency", value: "CL38" }
+      - { label: "Profile Support", value: "AMD EXPO-ready kit" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/5zY0u" AMAZON-US-ASIN="B0BNTRRLYP" AMAZON-GB-ASIN="B0BNTRRLYP"]'
+
+  - part_key: "ssd"
+    tab_label: "SSD"
+    name: "TeamGroup MP44L"
+    section_anchor: "#ssd"
+    image_url: "https://geekawhat.com/wp-content/uploads/2025/09/MPI_TeamGroup-MP44L-1TB.jpg"
+    image_alt: "TeamGroup MP44L NVMe SSD"
+    summary: "The MP44L is a fast PCIe 4.0 NVMe SSD that keeps game loads and general system responsiveness snappy at a sensible cost."
+    specs:
+      - { label: "Capacity", value: "1TB" }
+      - { label: "Form Factor", value: "M.2 2280" }
+      - { label: "Interface", value: "PCIe 4.0 x4 NVMe" }
+      - { label: "Sequential Read/Write", value: "5,152 / 4,450 MB/s (GeekaWhat test)" }
+      - { label: "Best Use", value: "OS + primary game/application library" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/moBK2" AMAZON-US-ASIN="B0B9Y3DB2K" AMAZON-GB-ASIN="B0B9Y3DB2K" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fteam-group-mp44l-1tb-ssd-m.2-2280-nvme-pcie-4.0-solid-state-drive-sto-tmg-03128.html" overclockers-awin-gb-itemid="STO-TMG-03128"]'
+
+  - part_key: "gpu"
+    tab_label: "GPU"
+    name: "Gigabyte Radeon RX 9070 GAMING OC 16G"
+    section_anchor: "#GPU"
+    image_url: "https://geekawhat.com/wp-content/uploads/2024/02/MPI_Gigabyte-Radeon-RX-9070-GAMING-OC.jpg"
+    image_alt: "Gigabyte Radeon RX 9070 GAMING OC 16G graphics card"
+    summary: "Gigabyte's RX 9070 GAMING OC 16G is built for high-refresh 1440p play with ample VRAM for modern textures and heavier game workloads."
+    specs:
+      - { label: "VRAM", value: "16GB GDDR6" }
+      - { label: "Bus / Interface", value: "PCIe 5.0 x16" }
+      - { label: "Power Connector", value: "2 x 8-pin PCIe" }
+      - { label: "Target Resolution", value: "High-refresh 1440p gaming" }
+      - { label: "Feature Stack", value: "Ray tracing + FSR upscaling/frame generation" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/pEDe8" AMAZON-US-ASIN="B0DT78YM6P" AMAZON-GB-ASIN="B0DT78YM6P" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fgigabyte-radeon-rx-9070-gaming-oc-16gb-gddr6-pci-express-graphics-card-gra-gig-04216.html" overclockers-awin-gb-itemid="GRA-GIG-04216"]'
+
+  - part_key: "case"
+    tab_label: "Case"
+    name: "SAMA V60"
+    section_anchor: "#case"
+    image_url: "https://geekawhat.com/wp-content/uploads/2025/12/MPI_SAMA-V60-4.jpg"
+    image_alt: "SAMA V60 PC case"
+    summary: "SAMA V60 is an airflow-focused mid tower with high fan capacity and broad radiator support, making it a good fit for modern gaming components."
+    specs:
+      - { label: "Case Type", value: "Mid Tower" }
+      - { label: "Motherboard Support", value: "ATX / Micro-ATX / Mini-ITX" }
+      - { label: "Dimensions", value: "475 x 285 x 398mm" }
+      - { label: "GPU Clearance", value: "Up to 445mm" }
+      - { label: "Radiator Support", value: "Top/Bottom/Side up to 360mm" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/Nx90to" AMAZON-US-ASIN="B0DP2GQRRN" AMAZON-GB-ASIN="B0DP2GQRRN"]'
+
+  - part_key: "psu"
+    tab_label: "PSU"
+    name: "SAMA P1000"
+    section_anchor: "#psu"
+    image_url: "https://geekawhat.com/wp-content/uploads/2025/12/MPI_SAMA-P1000-Wide.jpg"
+    image_alt: "SAMA P1000 power supply"
+    summary: "SAMA P1000 is a high-capacity ATX 3.1 unit with modern connector support, giving this build clean power delivery and upgrade room."
+    specs:
+      - { label: "Wattage", value: "1000W" }
+      - { label: "Standard", value: "ATX 3.1" }
+      - { label: "Efficiency", value: "80 Plus Gold" }
+      - { label: "PCIe 5 Power", value: "Native 12V-2x6 (12+4) connector" }
+      - { label: "Modularity", value: "Fully modular" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/PrBKfOo" AMAZON-US-ASIN="B0F992B8RS"]'
+
+motherboard_specs:
+  model: "Gigabyte B850 EAGLE WIFI6E"
+  source_url: "https://www.gigabyte.com/uk/Motherboard/B850-EAGLE-WIFI6E-rev-1x/sp"
+
+ram_widget:
+  speed: "6000MT/s"
+  latency: "CL38"
+  generation: "DDR5"
+  dimm_count: "2 DIMMs"
+  marker_label: "6000MT/s"
+  marker_percent: "38%"
+  note: "For this 2-DIMM DDR5 kit, use A2 + B2 first to enable dual-channel operation and the best stability on AM5 boards."
+
+ssd_widget:
+  subtext: "All results below are from GeekaWhat in-house testing, using the same bench and methodology for consistent direct comparison."
+  sequential_read_mb_s: 5152
+  sequential_write_mb_s: 4450
+  read_marker_percent: "32.7%"
+  write_marker_percent: "28.2%"
+  footnote: "Scale uses PCIe/NVMe theoretical throughput ceilings (x4 link). Real-world speeds vary by controller, NAND, queue depth, thermals, and test tool."
+
+case_specs:
+  model: "SAMA V60"
+  source_url: "https://www.samagears.com/v60/#spec-data"
+
+psu_connectors:
+  widget_title: "SAMA P1000 Connector Reference"
+  model: "SAMA P1000"
+  source_url: "https://www.samagears.com/p1000/#spec-data"
+
+performance_widget:
+  kicker: "Performance Snapshot"
+  title: "Multi-Game Average FPS"
+  driver_bar:
+    type: "amd"
+    driver_text: "Driver Version: Adrenalin Edition 25.11.1"
+  fps_input_mode: "single_line_results"
+  raw_results:
+    - "Arc Raiders\t161.3 (@1440p High)"
+    - "Battlefield 6\t142.4 (@1440p High)"
+    - "COD: Black Ops 7\t167 (@1440p High)"
+    - "Cyberpunk 2077\t132.2 (@1440p High)"
+    - "Marvel Rivals\t140.1 (@1440p High)"
+    - "Fortnite (1080p Competitive)\t344.7 (@1080p High)"
+  strict_mode: true

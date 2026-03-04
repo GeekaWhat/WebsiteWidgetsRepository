@@ -1,0 +1,171 @@
+build_meta:
+  build_code: "[DM87]"
+  refresh_scope: "full"
+  notes: "We already have a live version of this article: https://geekawhat.com/building-an-enthusiast-grade-pc-build-for-2026/"
+
+component_headings:
+  cpu: "AMD Ryzen 9 9950X3D"
+  cpu_cooler: "NZXT Kraken 360 Elite V2 (2024)"
+  motherboard: "GIGABYTE X870 AORUS Elite WIFI7 ICE"
+  ram: "CORSAIR Dominator Titanium RGB DDR5"
+  ssd: "Samsung 9100 Pro"
+  gpu: "GIGABYTE AORUS GeForce RTX 5090 MASTER ICE"
+  case: "HAVN BF 360 FLOW"
+  psu: "Lian Li SX1200P"
+
+parts_list:
+  - part_key: "cpu"
+    tab_label: "CPU"
+    name: "AMD Ryzen 9 9950X3D"
+    section_anchor: "#CPU"
+    image_url: "https://geekawhat.com/wp-content/uploads/2025/03/MPI_AMD-Ryzen-9-9950X3D-Wide.jpg"
+    image_alt: "AMD Ryzen 9 9950X3D processor product shot"
+    summary: "AMD's Ryzen 9 9950X3D is a flagship Zen 5 gaming and creator CPU that pairs 16 cores with 3D V-Cache for top-tier game performance and serious productivity throughput."
+    specs:
+      - { label: "Architecture", value: "Zen 5 with 2nd Gen 3D V-Cache (AM5)" }
+      - { label: "Core/Thread Count", value: "16 Cores / 32 Threads" }
+      - { label: "Clock Speeds", value: "4.3 GHz Base, up to 5.7 GHz Boost" }
+      - { label: "TDP", value: "170W" }
+      - { label: "Total Cache", value: "144MB (L2 + L3)" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/4NpeJ" AMAZON-US-ASIN="B0DVZSG8D5" AMAZON-GB-ASIN="B0DVZSG8D5" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Famd-ryzen-9-9950x3d-sixteen-core-5.70ghz-socket-am5-processor-retail-pro-amd-04501.html" overclockers-awin-gb-itemid="PRO-AMD-04501"]'
+
+  - part_key: "cooler"
+    tab_label: "CPU Cooler"
+    name: "NZXT Kraken 360 Elite V2 (2024)"
+    section_anchor: "#cpu-cooler"
+    image_url: "https://geekawhat.com/wp-content/uploads/2026/01/MPI__NZXT-Kraken-360-Elite-V2-2024.jpg"
+    image_alt: "NZXT Kraken 360 Elite V2 in white"
+    summary: "NZXT's Kraken 360 Elite V2 is a premium 360mm AIO with strong thermal capacity, low-noise operation, and a high-visibility LCD pump head for showcase builds."
+    specs:
+      - { label: "Cooler Type", value: "All-in-one liquid cooler (360mm)" }
+      - { label: "Fan Configuration", value: "3 x 120mm RGB PWM fans" }
+      - { label: "Display", value: "Integrated round LCD pump display" }
+      - { label: "Radiator Size", value: "360mm" }
+      - { label: "Socket Compatibility", value: "AMD AM5/AM4, Intel LGA1700/1851" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/TtolrO" AMAZON-US-ASIN="B0D9GWQPDM" AMAZON-GB-ASIN="B0D9GWQPDM" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fnzxt-kraken-360-elite-v2-white-rgb-all-in-one-cpu-cooler-360mm-coo-nzx-03909.html" overclockers-awin-gb-itemid="COO-NZX-03909"]'
+
+  - part_key: "mobo"
+    tab_label: "Motherboard"
+    name: "GIGABYTE X870 AORUS Elite WIFI7 ICE"
+    section_anchor: "#motherboard"
+    image_url: "https://geekawhat.com/wp-content/uploads/2026/01/MPI_GIGABYTE-X870-AORUS-Elite-WIFI7-ICE-Wide.jpg"
+    image_alt: "GIGABYTE X870 AORUS Elite WIFI7 ICE motherboard"
+    summary: "The X870 AORUS Elite WIFI7 ICE offers a clean white aesthetic with robust AM5 power delivery, PCIe 5.0 support, and modern I/O for a high-end enthusiast platform."
+    specs:
+      - { label: "Chipset / Socket", value: "AMD X870 / AM5" }
+      - { label: "Form Factor", value: "ATX" }
+      - { label: "Memory Support", value: "DDR5, up to 256GB" }
+      - { label: "Primary GPU Slot", value: "PCIe 5.0 x16" }
+      - { label: "Networking", value: "Wi-Fi 7 + 2.5GbE LAN" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/ZT306U5" AMAZON-US-ASIN="B0DFQCTYT6" AMAZON-GB-ASIN="B0DFQCTYT6" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fgigabyte-x870e-aorus-elite-wifi7-ice-socket-am5-ddr5-atx-motherboard-mot-gig-06613.html" overclockers-awin-gb-itemid="MOT-GIG-06613"]'
+
+  - part_key: "ram"
+    tab_label: "RAM"
+    name: "CORSAIR Dominator Titanium RGB DDR5"
+    section_anchor: "#ram"
+    image_url: "https://geekawhat.com/wp-content/uploads/2026/01/Corsair-Dominator-Titanium-RGB-DDR5-White_1.8.1.jpg"
+    image_alt: "CORSAIR Dominator Titanium RGB DDR5 modules in white"
+    summary: "CORSAIR Dominator Titanium RGB DDR5 combines premium aesthetics with tuned DDR5 performance, making it a strong fit for flagship AM5 gaming and workstation builds."
+    specs:
+      - { label: "Capacity", value: "32GB (2x16GB)" }
+      - { label: "Memory Type", value: "DDR5 UDIMM" }
+      - { label: "Speed", value: "6000MT/s" }
+      - { label: "Timings", value: "CL30" }
+      - { label: "Platform Profile", value: "AMD EXPO / Intel XMP compatible kit" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/gI4z" AMAZON-US-ASIN="" AMAZON-GB-ASIN="B0CHSBWH5Q" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fcorsair-dominator-titanium-32gb-2x16gb-ddr5-c30-6000mhz-dual-channel-kit-mem-crs-05116.html" overclockers-awin-gb-itemid="MEM-CRS-05116"]'
+
+  - part_key: "ssd"
+    tab_label: "SSD"
+    name: "Samsung 9100 Pro"
+    section_anchor: "#ssd"
+    image_url: "https://geekawhat.com/wp-content/uploads/2025/08/MPI_Samsung-9100-PRO-2TB.jpg"
+    image_alt: "Samsung 9100 Pro 2TB NVMe SSD"
+    summary: "Samsung's 9100 Pro is a bleeding-edge PCIe 5.0 NVMe SSD delivering elite game load times and excellent throughput for heavy creator or scratch-disk workloads."
+    specs:
+      - { label: "Capacity", value: "2TB" }
+      - { label: "Form Factor", value: "M.2 2280" }
+      - { label: "Interface", value: "PCIe 5.0 x4 NVMe" }
+      - { label: "Sequential Read/Write", value: "14,054 MB/s read, 13,189 MB/s write (GeekaWhat test)" }
+      - { label: "Best Use", value: "Primary OS, apps, and game library drive" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/pJ5f5c" AMAZON-US-ASIN="B0DWFLPMM5" AMAZON-GB-ASIN="B0DWFLPMM5" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fsamsung-9100-pro-2tb-m.2-2280-pcie-5.0-x4-nvme-solid-state-drive-sto-sam-04766.html" overclockers-awin-gb-itemid="STO-SAM-04766"]'
+
+  - part_key: "gpu"
+    tab_label: "GPU"
+    name: "GIGABYTE AORUS GeForce RTX 5090 MASTER ICE"
+    section_anchor: "#GPU"
+    image_url: "https://geekawhat.com/wp-content/uploads/2026/01/MPI_GIGABYTE-AORUS-GeForce-RTX-5090-Master-ICE.jpg"
+    image_alt: "GIGABYTE AORUS GeForce RTX 5090 MASTER ICE graphics card"
+    summary: "The AORUS RTX 5090 MASTER ICE targets uncompromised 4K gaming with heavy ray tracing enabled, while also delivering huge acceleration for rendering and AI-assisted creative workflows."
+    specs:
+      - { label: "VRAM", value: "32GB GDDR7" }
+      - { label: "Graphics Power", value: "575W class board power" }
+      - { label: "Power Connector", value: "1 x 12V-2x6 (16-pin)" }
+      - { label: "Target Resolution", value: "High-refresh 4K, ultra settings" }
+      - { label: "Feature Stack", value: "Ray tracing + DLSS + frame generation" }
+    buy_shortcode: '[geeka_price overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fgigabyte-geforce-rtx-5090-aorus-master-ice-32gb-gddr7-pci-express-graphics-gra-gig-04119.html" overclockers-awin-gb-itemid="GRA-GIG-04119"]'
+
+  - part_key: "case"
+    tab_label: "Case"
+    name: "HAVN BF 360 FLOW"
+    section_anchor: "#case"
+    image_url: "https://geekawhat.com/wp-content/uploads/2026/01/MPI_HAVN-BF-360-Flow.jpg"
+    image_alt: "HAVN BF 360 FLOW PC case"
+    summary: "HAVN's BF 360 FLOW is a chassis focused on unrestricted airflow, large-radiator support, and clean presentation for high-power modern hardware."
+    specs:
+      - { label: "Case Type", value: "ATX mid-tower / airflow focused" }
+      - { label: "Motherboard Support", value: "E-ATX, ATX, Micro-ATX, Mini-ITX" }
+      - { label: "Cooling Focus", value: "High airflow with multi-radiator support" }
+      - { label: "GPU Clearance", value: "Supports large triple-slot flagship GPUs" }
+      - { label: "Front I/O", value: "USB-C + USB-A + audio combo" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/70821" AMAZON-US-ASIN="B0CJ3Q5X4Y" AMAZON-GB-ASIN="B0CJ3Q5X4Y" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2FHAVN-BF-360-Flow-Mini-ITX-Motherboard-mot-hav-04999.html" overclockers-awin-gb-itemid="MOT-HAV-04999"]'
+
+  - part_key: "psu"
+    tab_label: "PSU"
+    name: "Lian Li SX1200P"
+    section_anchor: "#psu"
+    image_url: "https://geekawhat.com/wp-content/uploads/2026/01/MPI__Lian-Li-SX1200WP.jpg"
+    image_alt: "Lian Li SX1200P white power supply"
+    summary: "Lian Li's SX1200P is a high-capacity ATX 3.x unit designed for flagship GPUs and overclocked CPUs, with native next-gen GPU power support and strong efficiency."
+    specs:
+      - { label: "Wattage", value: "1200W" }
+      - { label: "Efficiency Rating", value: "80 PLUS Platinum" }
+      - { label: "Standard", value: "ATX 3.x / PCIe 5.x ready" }
+      - { label: "Modularity", value: "Fully modular cabling" }
+      - { label: "GPU Power", value: "Native 12V-2x6 connector support" }
+    buy_shortcode: '[geeka_price overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Flian-li-sx-platinum-1200w-modular-power-supply-white-pow-lia-06702.html" overclockers-awin-gb-itemid="POW-LIA-06702"]'
+
+motherboard_specs:
+  model: "GIGABYTE X870 AORUS Elite WIFI7 ICE"
+  source_url: "https://www.gigabyte.com/Motherboard/X870-AORUS-ELITE-WIFI7-ICE/sp"
+
+ssd_widget:
+  subtext: "All results below are from GeekaWhat in-house testing, using the same bench and methodology for consistent direct comparison."
+  sequential_read_mb_s: 14054
+  sequential_write_mb_s: 13189
+  read_marker_percent: "89.2%"
+  write_marker_percent: "83.7%"
+  footnote: "Scale uses PCIe/NVMe theoretical throughput ceilings (x4 link). Real-world speeds vary by controller, NAND, queue depth, thermals, and test tool."
+
+case_specs:
+  model: "HAVN BF 360 FLOW"
+  source_url: "https://havn.global/products/bf-360-flow?srsltid=AfmBOorld8z29plryyuTMGKa64Ul9aVYOcbEowcZDpznHXVD2BqIGvVx&variant=56269558940032"
+
+psu_connectors:
+  model: "Lian Li SX1200P"
+  source_url: "https://lian-li.com/product/sx-platinum/"
+
+performance_widget:
+  kicker: "Performance Snapshot"
+  title: "Multi-Game Average FPS"
+  driver_bar:
+    type: "Nvidia"
+    driver_text: "Driver Version: GeForce Game Ready Driver 591.74"
+  fps_input_mode: "single_line_results"
+  raw_results:
+    - "Arc Raiders - 184.4 FPS (@4K High)"
+    - "Battlefield 6 - 129.7 FPS (@4K High)"
+    - "Cyberpunk 2077 - 147.8 FPS (@4K High)"
+    - "F1 25 - 235.6 FPS (@4K High)"
+    - "Marvel Rivals - 159.6 FPS (@4K High)"
+    - "Fortnite (1080p Competitive Settings) - 333.9 FPS (@1080p High)"
+  strict_mode: true

@@ -3,6 +3,36 @@ build_meta:
   refresh_scope: "full"                                       # full | partial
   notes: "..."
 
+formatting_defaults:
+  multi_value_separator: "<br>"
+  no_commas_for_multi_value_lists: true
+  list_item_style: "yaml_array"
+
+part_key_rules:
+  allowed_keys: ["cpu","cpu_cooler","motherboard","ram","ssd","gpu","case","psu"]
+  tab_label_mode: "auto_from_part_key"                        # set tab_label to "__AUTO_FROM_PART_KEY__" unless override is needed
+  section_anchor_mode: "auto_from_part_key"                   # set section_anchor to "__AUTO_FROM_PART_KEY__" unless override is needed
+  anchor_style: "lowercase-kebab"                             # examples: #cpu, #cpu-cooler, #motherboard
+
+sources:
+  # shared source definitions; reuse via source_ref in widget sections
+  # example:
+  # motherboard_main:
+  #   model: "MSI MAG X870E GAMING PLUS MAX WIFI"
+  #   source_url: "https://www.msi.com/Motherboard/MAG-X870E-GAMING-PLUS-MAX-WIFI/Specification"
+
+widget_enabled:
+  cpu_comparison_table: true
+  cooler_temps_graph: true
+  motherboard_specs: true
+  ram_widget: true
+  ssd_widget: true
+  gpu_comparison_table: true
+  case_specs: true
+  psu_connectors: true
+  performance_widget: true
+  peripherals: true
+
 # 00-pc-build-component-headings
 component_headings:
   cpu: "..."
@@ -16,10 +46,10 @@ component_headings:
 
 # 01-pc-build-parts-list
 parts_list:
-  - part_key: "cpu"
-    tab_label: "CPU"
+  - part_key: "cpu"                                            # allowed values: cpu | cpu_cooler | motherboard | ram | ssd | gpu | case | psu
+    tab_label: "__AUTO_FROM_PART_KEY__"
     name: "..."
-    section_anchor: "#CPU"
+    section_anchor: "__AUTO_FROM_PART_KEY__"
     image_url: ''                                             # required: paste image URL
     image_alt: "..."                                          # required alt text
     summary: "..."
@@ -31,10 +61,10 @@ parts_list:
       - { label: "...", value: "..." }
     buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
 
-  - part_key: "cooler"
-    tab_label: "CPU Cooler"
+  - part_key: "cpu_cooler"
+    tab_label: "__AUTO_FROM_PART_KEY__"
     name: "..."
-    section_anchor: "#cpu-cooler"
+    section_anchor: "__AUTO_FROM_PART_KEY__"
     image_url: ''                                             # paste image URL
     image_alt: "..."
     summary: "..."
@@ -42,10 +72,10 @@ parts_list:
       - { label: "...", value: "..." }
     buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
 
-  - part_key: "mobo"
-    tab_label: "Motherboard"
+  - part_key: "motherboard"
+    tab_label: "__AUTO_FROM_PART_KEY__"
     name: "..."
-    section_anchor: "#motherboard"
+    section_anchor: "__AUTO_FROM_PART_KEY__"
     image_url: ''                                             # paste image URL
     image_alt: "..."
     summary: "..."
@@ -54,9 +84,9 @@ parts_list:
     buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
 
   - part_key: "ram"
-    tab_label: "RAM"
+    tab_label: "__AUTO_FROM_PART_KEY__"
     name: "..."
-    section_anchor: "#ram"
+    section_anchor: "__AUTO_FROM_PART_KEY__"
     image_url: ''                                             # paste image URL
     image_alt: "..."
     summary: "..."
@@ -65,9 +95,9 @@ parts_list:
     buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
 
   - part_key: "ssd"
-    tab_label: "SSD"
+    tab_label: "__AUTO_FROM_PART_KEY__"
     name: "..."
-    section_anchor: "#ssd"
+    section_anchor: "__AUTO_FROM_PART_KEY__"
     image_url: ''                                             # paste image URL
     image_alt: "..."
     summary: "..."
@@ -76,9 +106,9 @@ parts_list:
     buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
 
   - part_key: "gpu"
-    tab_label: "GPU"
+    tab_label: "__AUTO_FROM_PART_KEY__"
     name: "..."
-    section_anchor: "#GPU"
+    section_anchor: "__AUTO_FROM_PART_KEY__"
     image_url: ''                                             # paste image URL
     image_alt: "..."
     summary: "..."
@@ -87,9 +117,9 @@ parts_list:
     buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
 
   - part_key: "case"
-    tab_label: "Case"
+    tab_label: "__AUTO_FROM_PART_KEY__"
     name: "..."
-    section_anchor: "#case"
+    section_anchor: "__AUTO_FROM_PART_KEY__"
     image_url: ''                                             # paste image URL
     image_alt: "..."
     summary: "..."
@@ -98,9 +128,9 @@ parts_list:
     buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
 
   - part_key: "psu"
-    tab_label: "PSU"
+    tab_label: "__AUTO_FROM_PART_KEY__"
     name: "..."
-    section_anchor: "#psu"
+    section_anchor: "__AUTO_FROM_PART_KEY__"
     image_url: ''                                             # paste image URL
     image_alt: "..."
     summary: "..."
@@ -110,6 +140,7 @@ parts_list:
 
 # 02-cpu-comparison-table
 cpu_comparison_table:
+  enabled: true
   kicker: "CPU Comparison"
   title: "..."
   note: "..."
@@ -174,6 +205,7 @@ cpu_comparison_table:
 
 # 03-cooler-temps-graph
 cooler_temps_graph:
+  enabled: true
   title: "..."
   benchmark_badge: "..."
   cta_url: "..."
@@ -192,12 +224,13 @@ cooler_temps_graph:
     max_temps_c: [0,0]
 
 # 04-motherboard-specs-table
+#Make sure the specs are accurate and pulled directly form the Source_url
 motherboard_specs:
-  model: ''                                                   # required for reliable auto-source mapping
+  enabled: true
+  source_ref: ''                                              # optional: key from top-level "sources"
+  model: ''                                                   # required if source_ref is blank
   source_url: ''                                              # paste official spec URL (required for auto-fill)
-  formatting_rules:
-    multi_value_separator: "<br>"
-    no_commas_for_multi_value_lists: true
+  formatting_rules_override: {}                               # optional: override formatting_defaults only if needed
   chipset_socket: "__AUTO_FROM_SOURCE__"
   form_factor: "__AUTO_FROM_SOURCE__"
   cpu_support: "__AUTO_FROM_SOURCE__"
@@ -214,6 +247,7 @@ motherboard_specs:
 
 # 05-ram-speed-latency-configuration-widget
 ram_widget:
+  enabled: true
   speed: "..."
   latency: "..."
   generation: "..."
@@ -229,6 +263,7 @@ ram_widget:
 
 # 06-ssd-speed-graph
 ssd_widget:
+  enabled: true
   subtext: "..."
   sequential_read_mb_s: 0
   sequential_write_mb_s: 0
@@ -238,6 +273,7 @@ ssd_widget:
 
 # 07-gpu-comparison-table
 gpu_comparison_table:
+  enabled: true
   kicker: "GPU Comparison"
   title: "..."
   note: "..."
@@ -296,11 +332,13 @@ gpu_comparison_table:
       buy_shortcode: ''                                       # paste full geeka_price shortcode including brackets
 
 # 08-pc-case-spec-table-widget
+#Make sure the specs are accurate and pulled directly form the Source_url
 case_specs:
-  model: ''                                                   # required for reliable auto-source mapping
+  enabled: true
+  source_ref: ''                                              # optional: key from top-level "sources"
+  model: ''                                                   # required if source_ref is blank
   source_url: ''                                              # paste official spec URL (required for auto-fill)
-  formatting_rules:
-    list_item_style: "yaml_array"
+  formatting_rules_override: {}                               # optional: override formatting_defaults only if needed
   form_factor: "__AUTO_FROM_SOURCE__"
   motherboard_support: "__AUTO_FROM_SOURCE__"
   dimensions_l_w_h: "__AUTO_FROM_SOURCE__"
@@ -319,9 +357,12 @@ case_specs:
   pre_installed_fans: "__AUTO_FROM_SOURCE__"
 
 # 09-psu-connector-breakdown-widget
+#Make sure the specs are accurate and pulled directly form the Source_url
 psu_connectors:
+  enabled: true
   widget_title: "__AUTO_FROM_SOURCE__"
-  model: ''                                                   # required for reliable auto-source mapping
+  source_ref: ''                                              # optional: key from top-level "sources"
+  model: ''                                                   # required if source_ref is blank
   source_url: ''                                              # paste official spec URL (required for auto-fill)
   connectors:
     pcie_6_2:
@@ -361,6 +402,7 @@ psu_connectors:
 
 # 10-performance-graph-widget
 performance_widget:
+  enabled: true
   # widget_id_suffix: '' # optional: leave omitted unless you want a custom HTML id
   kicker: "Performance Snapshot"
   title: "Multi-Game Average FPS"
@@ -372,6 +414,7 @@ performance_widget:
     - "Game Name - 0 FPS (@1440p High)"
   strict_mode: true
   rules:
+    # Always remove games and/or resolutions that are not present in raw_results.
     keep_only_listed_games: true
     remove_unlisted_games: true
     keep_only_listed_resolutions_per_game: true

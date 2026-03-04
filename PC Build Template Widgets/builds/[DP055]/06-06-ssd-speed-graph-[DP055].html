@@ -139,14 +139,14 @@ Paste into a Gutenberg "Custom HTML" block.
   }
 
   .gw-ssd-marker.write .gw-ssd-dot-label {
-    top: calc(100% + 10px);
+    top: calc(100% + 8px);
     bottom: auto;
   }
 
   .gw-ssd-gen-key {
     position: relative;
-    margin: 32px 0 0;
-    min-height: 18px;
+    margin: 38px 0 0;
+    min-height: 20px;
   }
 
   .gw-ssd-gen-tag {
@@ -163,6 +163,12 @@ Paste into a Gutenberg "Custom HTML" block.
   .gw-ssd-gen-tag.start {
     left: 0%;
     transform: none;
+  }
+
+  .gw-ssd-gen-tag.end {
+    left: 100%;
+    transform: translateX(-100%);
+    text-align: right;
   }
 
   .gw-ssd-edge-tag {
@@ -201,7 +207,7 @@ Paste into a Gutenberg "Custom HTML" block.
 
 <section class="gw-ssd-widget" aria-label="SSD speed results">
   <p class="gw-ssd-head">SSD Speed Results</p>
-  <p class="gw-ssd-sub">These are our in-house TeamGroup MP44L test results.</p>
+  <p class="gw-ssd-sub">All results below are from GeekaWhat in-house testing, using the same bench and methodology for consistent direct comparison.</p>
 
   <div class="gw-ssd-metrics">
     <article class="gw-ssd-metric">
@@ -218,17 +224,17 @@ Paste into a Gutenberg "Custom HTML" block.
     <p class="gw-ssd-scale-label">Generation Speed Context</p>
     <div class="gw-ssd-track">
       <div class="gw-ssd-fill">
-        <span class="gw-ssd-marker read" style="--at: 41.2%;"><span class="gw-ssd-dot-label">Read 5,152 MB/s</span></span>
-        <span class="gw-ssd-marker write" style="--at: 36.8%;"><span class="gw-ssd-dot-label">Write 4,450 MB/s</span></span>
+        <span class="gw-ssd-marker read" style="--at: 32.7%;"><span class="gw-ssd-dot-label">Read 5,152 MB/s</span></span>
+        <span class="gw-ssd-marker write" style="--at: 28.2%;"><span class="gw-ssd-dot-label">Write 4,450 MB/s</span></span>
       </div>
     </div>
     <div class="gw-ssd-gen-key">
-      <span class="gw-ssd-gen-tag start">Gen3 (~2,000 to 3,500 MB/s)</span>
-      <span class="gw-ssd-gen-tag" style="--at: 33.3%;">Gen4 (~5,000 to 7,500 MB/s)</span>
-      <span class="gw-ssd-gen-tag" style="--at: 66.6%;">Gen5 (~10,000 to 14,500+ MB/s)</span>
-      <span class="gw-ssd-edge-tag right">Maximum Speed: 14,500+ MB/s</span>
+      <span class="gw-ssd-gen-tag" style="--at: 11%;">Gen3 (up to ~3,500 MB/s)</span>
+      <span class="gw-ssd-gen-tag" style="--at: 35%;">Gen4 (~3,500-7,500 MB/s)</span>
+      <span class="gw-ssd-gen-tag" style="--at: 69%;">Gen5 (~7,500-14,000+ MB/s)</span>
+      <span class="gw-ssd-edge-tag right">PCIe x4 ceiling: 15,754 MB/s</span>
     </div>
   </div>
 
-  <p class="gw-ssd-foot">Scale shows typical SSD generation speed ranges. Real-world speeds vary by controller, NAND, queue depth, thermals, and test tool.</p>
+  <p class="gw-ssd-foot">Scale uses PCIe/NVMe theoretical throughput ceilings (x4 link). Real-world speeds vary by controller, NAND, queue depth, thermals, and test tool.</p>
 </section>

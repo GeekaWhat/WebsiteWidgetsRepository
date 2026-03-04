@@ -75,7 +75,7 @@ Updated: All 8 games with full settings
   }
 </style>
 
-<section id="gw-perf-widget-5070" class="gw-perf-widget-single" aria-label="Performance results">
+<section id="gw-perf-widget-dp055" class="gw-perf-widget-single" aria-label="Performance results">
   <div class="gw-perf-head">
     <p class="gw-perf-kicker">Performance Snapshot</p>
     <h3 class="gw-perf-title">Multi-Game Average FPS</h3>
@@ -86,7 +86,7 @@ Updated: All 8 games with full settings
   </div>
 
   <div class="gw-perf-body"></div>
-  <div class="gw-driver-bar gpu"><span class="gw-driver-logo">?</span>Driver Version: ?? </div> 
+  <div class="gw-driver-bar amd"><span class="gw-driver-logo">A</span>Driver Version: Adrenalin Edition 25.11.1</div>
   <!-- <div class="gw-driver-bar gpu"><span class="gw-driver-logo">?</span>Driver Version: ?? </div> -->         
   <!-- <div class="gw-driver-bar amd"><span class="gw-driver-logo">A</span>Driver Version: </div> -->
   <!-- <div class="gw-driver-bar nvidia"><span class="gw-driver-logo">N</span>Driver Version: </div> -->
@@ -107,13 +107,11 @@ Updated: All 8 games with full settings
     // ─── GAME ORDER & LABELS ─────────────────────────────────────────────────
     var GAME_ORDER = [
       "arcraiders",
-      "marvelrivals",
       "battlefield6",
       "callofduty",
-      "fortnite",
       "cyberpunk2077",
-      "hogwartslegacy",
-      "f125"
+      "marvelrivals",
+      "fortnite"
     ];
 
     var GAME_LABELS = {
@@ -130,12 +128,12 @@ Updated: All 8 games with full settings
     // ─── FPS DATA ────────────────────────────────────────────────────────────
     // HD1080p / UltraHD1440p / UHD4K — update these with your real numbers as needed
     var GAME_DATA = {
-      arcraiders:     { resolution: "Resolution not set",          HD1080p: null, UltraHD1440p: null, UHD4K: null },
-      marvelrivals:   { resolution: "Resolution not set",          HD1080p: null, UltraHD1440p: null, UHD4K: null },
-      battlefield6:   { resolution: "Resolution not set",          HD1080p: null, UltraHD1440p: null, UHD4K: null },
-      callofduty:     { resolution: "Resolution not set",          HD1080p: null, UltraHD1440p: null, UHD4K: null },
-      fortnite:       { resolution: "1080p Competitive",           HD1080p: null, UltraHD1440p: null, UHD4K: null },
-      cyberpunk2077:  { resolution: "Resolution not set",          HD1080p: null, UltraHD1440p: null, UHD4K: null },
+      arcraiders:     { resolution: "1440p High",                  HD1080p: null, UltraHD1440p: 161.3, UHD4K: null },
+      marvelrivals:   { resolution: "1440p High",                  HD1080p: null, UltraHD1440p: 140.1, UHD4K: null },
+      battlefield6:   { resolution: "1440p High",                  HD1080p: null, UltraHD1440p: 142.4, UHD4K: null },
+      callofduty:     { resolution: "1440p High",                  HD1080p: null, UltraHD1440p: 167.0, UHD4K: null },
+      fortnite:       { resolution: "1080p Competitive",           HD1080p: 344.7, UltraHD1440p: null, UHD4K: null },
+      cyberpunk2077:  { resolution: "1440p High",                  HD1080p: null, UltraHD1440p: 132.2, UHD4K: null },
       hogwartslegacy: { resolution: "Resolution not set",          HD1080p: null, UltraHD1440p: null, UHD4K: null },
       f125:           { resolution: "Resolution not set",          HD1080p: null, UltraHD1440p: null, UHD4K: null }
     };
@@ -253,12 +251,25 @@ Updated: All 8 games with full settings
     }
 
     function buildPanelHTML(panelId, gameKey, gameData) {
+      var metrics = [
+        { label: "1080p", value: gameData.HD1080p },
+        { label: "1440p", value: gameData.UltraHD1440p },
+        { label: "4K", value: gameData.UHD4K }
+      ];
+      var visibleMetrics = metrics.filter(function (m) { return typeof m.value === "number" && !isNaN(m.value); });
+      var metricCount = visibleMetrics.length || 1;
+      var singleMetricStyle = "";
+      var metricGridStyle = "grid-template-columns: repeat(" + metricCount + ", minmax(0, 1fr));";
+      var metricHtml = visibleMetrics
+        .map(function (m) {
+          return '<article class="gw-perf-metric-pill"' + singleMetricStyle + '><p class="gw-perf-metric-label">' + m.label + '</p><p class="gw-perf-metric-value">' + formatFPS(m.value) + '<span class="gw-perf-metric-unit">FPS</span></p></article>';
+        })
+        .join("");
+
       return '' +
         '<article id="' + panelId + '" class="gw-perf-game-panel" role="tabpanel">' +
-          '<div class="gw-perf-metric-grid">' +
-            '<article class="gw-perf-metric-pill"><p class="gw-perf-metric-label">1080p</p><p class="gw-perf-metric-value">' + formatFPS(gameData.HD1080p) + '<span class="gw-perf-metric-unit">FPS</span></p></article>' +
-            '<article class="gw-perf-metric-pill"><p class="gw-perf-metric-label">1440p</p><p class="gw-perf-metric-value">' + formatFPS(gameData.UltraHD1440p) + '<span class="gw-perf-metric-unit">FPS</span></p></article>' +
-            '<article class="gw-perf-metric-pill"><p class="gw-perf-metric-label">4K</p><p class="gw-perf-metric-value">' + formatFPS(gameData.UHD4K) + '<span class="gw-perf-metric-unit">FPS</span></p></article>' +
+          '<div class="gw-perf-metric-grid" style="' + metricGridStyle + '">' +
+            metricHtml +
           '</div>' +
           '<button type="button" class="gw-perf-settings-toggle" aria-expanded="false">View Test Settings</button>' +
           '<div class="gw-perf-settings-body"><div class="gw-perf-settings-grid">' + buildSettingsHTML(gameKey, gameData) + '</div></div>' +
@@ -266,14 +277,14 @@ Updated: All 8 games with full settings
     }
 
     // ─── BUILD WIDGET ─────────────────────────────────────────────────────────
-    var root = document.getElementById("gw-perf-widget-5070");
+    var root = document.getElementById("gw-perf-widget-dp055");
     if (!root) return;
 
     var nav  = root.querySelector('.gw-perf-game-nav');
     var body = root.querySelector('.gw-perf-body');
 
     GAME_ORDER.forEach(function (key, idx) {
-      var panelId = 'gw-perf-5070-' + key;
+      var panelId = 'gw-perf-dp055-' + key;
 
       var btn = document.createElement('button');
       btn.type = 'button';

@@ -228,11 +228,26 @@ Updated: All 8 games with full settings
       return v % 1 === 0 ? v.toFixed(0) : v.toFixed(1);
     }
 
-    function buildSettingsHTML(key) {
+    function inferResolutionPixels(gameData) {
+      if (typeof gameData.HD1080p === "number" && !isNaN(gameData.HD1080p)) return R_1080;
+      if (typeof gameData.UltraHD1440p === "number" && !isNaN(gameData.UltraHD1440p)) return R_1440;
+      if (typeof gameData.UHD4K === "number" && !isNaN(gameData.UHD4K)) return R_4K;
+
+      var resolutionText = ((gameData && gameData.resolution) || "").toLowerCase();
+      if (resolutionText.indexOf("1080") !== -1) return R_1080;
+      if (resolutionText.indexOf("1440") !== -1) return R_1440;
+      if (resolutionText.indexOf("4k") !== -1 || resolutionText.indexOf("2160") !== -1) return R_4K;
+
+      return R_UNSET;
+    }
+
+    function buildSettingsHTML(key, gameData) {
+      var resolutionPixels = inferResolutionPixels(gameData);
       return (SETTINGS[key] || []).map(function (row) {
+        var value = (row[1] || "").split(R_UNSET).join(resolutionPixels);
         return '<div class="gw-perf-settings-item">' +
           '<p class="gw-perf-settings-label">' + row[0] + '</p>' +
-          '<p class="gw-perf-settings-value">' + row[1] + '</p>' +
+          '<p class="gw-perf-settings-value">' + value + '</p>' +
           '</div>';
       }).join("");
     }
@@ -246,7 +261,7 @@ Updated: All 8 games with full settings
             '<article class="gw-perf-metric-pill"><p class="gw-perf-metric-label">4K</p><p class="gw-perf-metric-value">' + formatFPS(gameData.UHD4K) + '<span class="gw-perf-metric-unit">FPS</span></p></article>' +
           '</div>' +
           '<button type="button" class="gw-perf-settings-toggle" aria-expanded="false">View Test Settings</button>' +
-          '<div class="gw-perf-settings-body"><div class="gw-perf-settings-grid">' + buildSettingsHTML(gameKey) + '</div></div>' +
+          '<div class="gw-perf-settings-body"><div class="gw-perf-settings-grid">' + buildSettingsHTML(gameKey, gameData) + '</div></div>' +
         '</article>';
     }
 
