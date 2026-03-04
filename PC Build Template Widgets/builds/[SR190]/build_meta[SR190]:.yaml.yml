@@ -1,0 +1,371 @@
+build_meta:
+  build_code: "[SR190]"
+  refresh_scope: "full" # full | partial
+  notes: "This article already exists, here is the link to the page: https://geekawhat.com/building-a-purple-gaming-pc-build-ft-hyte-x50-rtx-5070-ti/?preview_id=92162&preview_nonce=b905861940&preview=true&_thumbnail_id=92188"
+
+# 00-pc-build-component-headings
+component_headings:
+  cpu: "AMD Ryzen 5 9600X"
+  cpu_cooler: "Corsair iCUE Link H150i"
+  motherboard: "MSI MAG X870E GAMING PLUS MAX WiFi"
+  ram: "Thermaltake TOUGHRAM XG RGB D5"
+  ssd: "Samsung 9100 Pro"
+  gpu: "MSI RTX 5070 Ti Gaming Trio"
+  case: "HYTE X50"
+  psu: "NZXT C850 Gold"
+
+# 01-pc-build-parts-list
+parts_list:
+  - part_key: "cpu"
+    tab_label: "CPU"
+    name: "AMD Ryzen 5 9600X"
+    section_anchor: "#CPU"
+    image_url: "https://geekawhat.com/wp-content/uploads/2025/12/MPI_AMD-Ryzen-5-9600X-Box.jpg"
+    image_alt: "AMD Ryzen 5 9600X retail box"
+    summary: "..."
+    specs:
+      - { label: "...", value: "..." }
+      - { label: "...", value: "..." }
+      - { label: "...", value: "..." }
+      - { label: "...", value: "..." }
+      - { label: "...", value: "..." }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/BgbCqj" AMAZON-US-ASIN="B0D6NN6TM7" AMAZON-GB-ASIN="B0D6NN6TM7" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Famd-ryzen-5-9600x-six-core-5.40ghz-socket-am5-processor-retail-pro-amd-02677.html" overclockers-awin-gb-itemid="PRO-AMD-02677"]'
+
+  - part_key: "cooler"
+    tab_label: "CPU Cooler"
+    name: "Corsair iCUE Link H150i"
+    section_anchor: "#cpu-cooler"
+    image_url: "https://geekawhat.com/wp-content/uploads/2024/03/MPI_Corsair-iCUE-Link-H150i-LCD.jpg"
+    image_alt: "Corsair iCUE Link H150i cooler"
+    summary: "..."
+    specs:
+      - { label: "...", value: "..." }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/zm36wy" AMAZON-US-ASIN="" AMAZON-GB-ASIN="B0C6PXT7YF" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fcorsair-hydro-series-icue-link-h150i-rgb-performance-liquid-cpu-cooler-36-hs-04y-cs.html" overclockers-awin-gb-itemid="HS-04Y-CS"]'
+
+  - part_key: "mobo"
+    tab_label: "Motherboard"
+    name: "MSI MAG X870E GAMING PLUS MAX WiFi"
+    section_anchor: "#motherboard"
+    image_url: "https://geekawhat.com/wp-content/uploads/2026/01/MPI_MSI-MAG-X870E-Gaming-PLUS-MAX-WIFI-Wide-e1767699980371.jpg"
+    image_alt: "MSI MAG X870E GAMING PLUS MAX WiFi motherboard"
+    summary: "..."
+    specs:
+      - { label: "...", value: "..." }
+    buy_shortcode: ""
+
+  - part_key: "ram"
+    tab_label: "RAM"
+    name: "Thermaltake TOUGHRAM XG RGB D5"
+    section_anchor: "#ram"
+    image_url: "https://geekawhat.com/wp-content/uploads/2025/03/MPI_View-270-White-9070-XT-TOUGHRAM-XG-RGB-D5-White.jpg"
+    image_alt: "Thermaltake TOUGHRAM XG RGB D5 memory"
+    summary: "..."
+    specs:
+      - { label: "...", value: "..." }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/CSSBTvM" AMAZON-US-ASIN="" AMAZON-GB-ASIN="B0BHJMV8YC"]'
+
+  - part_key: "ssd"
+    tab_label: "SSD"
+    name: "Samsung 9100 Pro"
+    section_anchor: "#ssd"
+    image_url: "https://geekawhat.com/wp-content/uploads/2025/11/MPI_Samsung-9100-Pro-4TB.jpg"
+    image_alt: "Samsung 9100 Pro SSD"
+    summary: "..."
+    specs:
+      - { label: "...", value: "..." }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/oTAmuD" AMAZON-US-ASIN="B0DWFMD4FQ" AMAZON-GB-ASIN="B0DWFMD4FQ" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fsamsung-9100-pro-4tb-m.2-2280-pcie-5.0-x4-nvme-solid-state-drive-sto-sam-04767.html" overclockers-awin-gb-itemid="STO-SAM-04767"]'
+
+  - part_key: "gpu"
+    tab_label: "GPU"
+    name: "MSI RTX 5070 Ti Gaming Trio"
+    section_anchor: "#GPU"
+    image_url: "https://geekawhat.com/wp-content/uploads/2025/09/MPI_MSI-RTX-5070-Ti-Gaming-Trio-White.jpg"
+    image_alt: "MSI RTX 5070 Ti Gaming Trio graphics card"
+    summary: "..."
+    specs:
+      - { label: "...", value: "..." }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/Gfx07w" AMAZON-US-ASIN="B0F1NGVCPH" AMAZON-GB-ASIN="B0F1NGVCPH" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fmsi-geforce-rtx-5070-ti-gaming-trio-oc-white-16gb-gddr7-pciexpress-graphics-gra-msi-05293.html" overclockers-awin-gb-itemid="GRA-MSI-05293"]'
+
+  - part_key: "case"
+    tab_label: "Case"
+    name: "HYTE X50"
+    section_anchor: "#case"
+    image_url: "https://geekawhat.com/wp-content/uploads/2025/11/MPI_Hyte-X50-With-glass.jpg"
+    image_alt: "HYTE X50 case with glass panel"
+    summary: "..."
+    specs:
+      - { label: "...", value: "..." }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/dKb1x" AMAZON-US-ASIN="B0FQV6HM32" AMAZON-GB-ASIN="B0FQV6HM32" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fhyte-x50-modern-performance-mid-tower-atx-case-taro-milk-cas-hyt-06031.html" overclockers-awin-gb-itemid="CAS-HYT-06031"]'
+
+  - part_key: "psu"
+    tab_label: "PSU"
+    name: "NZXT C850 Gold"
+    section_anchor: "#psu"
+    image_url: "https://geekawhat.com/wp-content/uploads/2026/01/MPI_NZXT-C850-Gold-White.jpg"
+    image_alt: "NZXT C850 Gold power supply"
+    summary: "..."
+    specs:
+      - { label: "...", value: "..." }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/2nR7xH9" AMAZON-US-ASIN="B0D1VCY51R" AMAZON-GB-ASIN="B0D1VCY51R"]'
+
+# 02-cpu-comparison-table
+# Dont generate this widget
+cpu_comparison_table:
+  kicker: "CPU Comparison"
+  title: "..."
+  note: "..."
+  aria_label: "..."
+  columns: ["CPU", "Cores", "Threads", "Base Clock", "Max Boost", "TDP", "Total Cache", "Where to Buy"]
+  rows:
+    - { image_url: "...", image_alt: "...", name: "...", subtitle: "...", cores: "...", threads: "...", base_clock: "...", boost_clock: "...", tdp: "...", cache: "...", buy_shortcode: "[geeka_price ...]" }
+    - { image_url: "...", image_alt: "...", name: "...", subtitle: "...", cores: "...", threads: "...", base_clock: "...", boost_clock: "...", tdp: "...", cache: "...", buy_shortcode: "[geeka_price ...]" }
+    - { image_url: "...", image_alt: "...", name: "...", subtitle: "...", cores: "...", threads: "...", base_clock: "...", boost_clock: "...", tdp: "...", cache: "...", buy_shortcode: "[geeka_price ...]" }
+    - { image_url: "...", image_alt: "...", name: "...", subtitle: "...", cores: "...", threads: "...", base_clock: "...", boost_clock: "...", tdp: "...", cache: "...", buy_shortcode: "[geeka_price ...]" }
+    - { image_url: "...", image_alt: "...", name: "...", subtitle: "...", cores: "...", threads: "...", base_clock: "...", boost_clock: "...", tdp: "...", cache: "...", buy_shortcode: "[geeka_price ...]" }
+
+# 03-cooler-temps-graph
+# Dont generate this widget
+cooler_temps_graph:
+  title: "..."
+  benchmark_badge: "..."
+  cta_url: "..."
+  highlight_name: "..."
+  cinebench4:
+    labels: ["...", "..."]
+    avg_temps_c: [0, 0]
+    max_temps_c: [0, 0]
+  cinebench8:
+    labels: ["...", "..."]
+    avg_temps_c: [0, 0]
+    max_temps_c: [0, 0]
+  cpuz8:
+    labels: ["...", "..."]
+    avg_temps_c: [0, 0]
+    max_temps_c: [0, 0]
+
+# 04-motherboard-specs-table
+motherboard_specs:
+  model: "MSI MAG X870E GAMING PLUS MAX WiFi"
+  source_url: "https://www.msi.com/Motherboard/MAG-X870E-GAMING-PLUS-MAX-WIFI/Specification"
+  formatting_rules:
+    multi_value_separator: "<br>"
+    no_commas_for_multi_value_lists: true
+  chipset_socket: "__AUTO_FROM_SOURCE__"
+  form_factor: "__AUTO_FROM_SOURCE__"
+  cpu_support: "__AUTO_FROM_SOURCE__"
+  memory_support_html: "__AUTO_FROM_SOURCE__"
+  vrm_design: "__AUTO_FROM_SOURCE__"
+  graphics_card_compatibility_1_slot: "__AUTO_FROM_SOURCE__"
+  expansion_card_compatibility_html: "__AUTO_FROM_SOURCE__"
+  m2_compatibility_3_slots_html: "__AUTO_FROM_SOURCE__"
+  sata_storage: "__AUTO_FROM_SOURCE__"
+  networking_html: "__AUTO_FROM_SOURCE__"
+  rear_io_html: "__AUTO_FROM_SOURCE__"
+  front_io_headers_html: "__AUTO_FROM_SOURCE__"
+  audio: "__AUTO_FROM_SOURCE__"
+
+# 05-ram-speed-latency-configuration-widget
+# 6000 MT/s, CL36, 2x16GB
+ram_widget:
+  speed: "..."
+  latency: "..."
+  generation: "..."
+  dimm_count: "..."
+  marker_label: "..."
+  marker_percent: "..."
+  note: "..."
+  slots:
+    - { slot: "A1", state: "...", recommended: false }
+    - { slot: "A2", state: "...", recommended: true }
+    - { slot: "B1", state: "...", recommended: false }
+    - { slot: "B2", state: "...", recommended: true }
+
+# 06-ssd-speed-graph
+ssd_widget:
+  subtext: "..."
+  sequential_read_mb_s: 13818
+  sequential_write_mb_s: 12920
+  read_marker_percent: "..."
+  write_marker_percent: "..."
+  footnote: "..."
+
+# 07-gpu-comparison-table
+# Dont generate this widget
+gpu_comparison_table:
+  kicker: "GPU Comparison"
+  title: "..."
+  note: "..."
+  aria_label: "..."
+  columns: ["GPU", "VRAM", "TBP", "Boost Clock", "Ray Tracing", "Upscaling/FG", "Where to Buy"]
+  rows:
+    - { image_url: "...", image_alt: "...", name: "...", subtitle: "...", metric_1: "...", metric_2: "...", metric_3: "...", metric_4: "...", metric_5: "...", buy_shortcode: "[geeka_price ...]" }
+    - { image_url: "...", image_alt: "...", name: "...", subtitle: "...", metric_1: "...", metric_2: "...", metric_3: "...", metric_4: "...", metric_5: "...", buy_shortcode: "[geeka_price ...]" }
+    - { image_url: "...", image_alt: "...", name: "...", subtitle: "...", metric_1: "...", metric_2: "...", metric_3: "...", metric_4: "...", metric_5: "...", buy_shortcode: "[geeka_price ...]" }
+    - { image_url: "...", image_alt: "...", name: "...", subtitle: "...", metric_1: "...", metric_2: "...", metric_3: "...", metric_4: "...", metric_5: "...", buy_shortcode: "[geeka_price ...]" }
+    - { image_url: "...", image_alt: "...", name: "...", subtitle: "...", metric_1: "...", metric_2: "...", metric_3: "...", metric_4: "...", metric_5: "...", buy_shortcode: "[geeka_price ...]" }
+
+# 08-pc-case-spec-table-widget
+case_specs:
+  model: "HYTE X50"
+  source_url: "https://hyte.com/en-GB/store/x50/cs-hyte-x50g-tm"
+  formatting_rules:
+    list_item_style: "yaml_array"
+  form_factor: "__AUTO_FROM_SOURCE__"
+  motherboard_support: "__AUTO_FROM_SOURCE__"
+  dimensions_l_w_h: "__AUTO_FROM_SOURCE__"
+  front_io:
+    - "__AUTO_FROM_SOURCE__"
+  pcie_slots: "__AUTO_FROM_SOURCE__"
+  colour: "__AUTO_FROM_SOURCE__"
+  max_clearance:
+    - "__AUTO_FROM_SOURCE__"
+  drive_support:
+    - "__AUTO_FROM_SOURCE__"
+  fan_support:
+    - "__AUTO_FROM_SOURCE__"
+  radiator_support:
+    - "__AUTO_FROM_SOURCE__"
+  pre_installed_fans: "__AUTO_FROM_SOURCE__"
+
+# 09-psu-connector-breakdown-widget
+psu_connectors:
+  widget_title: "__AUTO_FROM_SOURCE__"
+  model: "NZXT C850 Gold"
+  source_url: "https://nzxt.com/en-intl/products/c850-gold-atx?srsltid=AfmBOoo6H7jeQKEqeCmu6puTYdSk1X6wbrI5vmkMXJgonTDAe5G5RzTa"
+  connectors:
+    pcie_6_2:
+      name: "PCIe (6+2 pin)"
+      connector_type: "__AUTO_FROM_SOURCE__"
+      build_usage: "__AUTO_FROM_SOURCE__"
+      recommended_setup: "__AUTO_FROM_SOURCE__"
+      notes: "__AUTO_FROM_SOURCE__"
+    pcie_12v_2x6:
+      name: "12V-2x6"
+      connector_type: "__AUTO_FROM_SOURCE__"
+      typical_output: "__AUTO_FROM_SOURCE__"
+      build_usage: "__AUTO_FROM_SOURCE__"
+      notes: "__AUTO_FROM_SOURCE__"
+    atx_24pin:
+      name: "ATX 24-pin"
+      connector_type: "__AUTO_FROM_SOURCE__"
+      quantity_included: "__AUTO_FROM_SOURCE__"
+      primary_use: "__AUTO_FROM_SOURCE__"
+      notes: "__AUTO_FROM_SOURCE__"
+    cpu_eps_4_4:
+      name: "CPU EPS (4+4)"
+      connector_type: "__AUTO_FROM_SOURCE__"
+      quantity_included: "__AUTO_FROM_SOURCE__"
+      primary_use: "__AUTO_FROM_SOURCE__"
+      notes: "__AUTO_FROM_SOURCE__"
+    sata_15pin:
+      name: "SATA (15-pin)"
+      connector_type: "__AUTO_FROM_SOURCE__"
+      primary_use: "__AUTO_FROM_SOURCE__"
+      build_usage: "__AUTO_FROM_SOURCE__"
+    molex_4pin:
+      name: "Peripheral (Molex 4-pin)"
+      connector_type: "__AUTO_FROM_SOURCE__"
+      primary_use: "__AUTO_FROM_SOURCE__"
+      build_usage: "__AUTO_FROM_SOURCE__"
+
+# 10-performance-graph-widget
+performance_widget:
+  widget_id_suffix: "..."
+  kicker: "Performance Snapshot"
+  title: "Multi-Game Average FPS"
+  driver_bar:
+    type: "nvidia" # gpu|amd|nvidia
+    driver_text: "Driver Version: ..."
+  fps_input_mode: "single_line_results"
+  raw_results:
+    - "Arc Raiders - 108.7 FPS (@1440p High)"
+    - "Battlefield 6 - 119 FPS (@1440p High)"
+    - "Cyberpunk 2077 - 148.1 FPS (@1440p High)"
+    - "F1 25 - 194.9 FPS (@4K High)"
+    - "Marvel Rivals - 85 FPS (@4K High)"
+    - "Fortnite - 295.4 FPS (@1080p Comp)"
+  strict_mode: true
+  rules:
+    keep_only_listed_games: true
+    remove_unlisted_games: true
+    keep_only_listed_resolutions_per_game: true
+    remove_unlisted_resolutions_per_game: true
+  settings_policy:
+    preserve_default_settings: true
+    override_only_if_provided: true
+  default_settings_locked:
+    arcraiders: []
+    marvelrivals: []
+    battlefield6: []
+    callofduty: []
+    fortnite: []
+    cyberpunk2077: []
+    hogwartslegacy: []
+    f125: []
+
+# 11-peripherals-recommendations-widget
+# Dont generate this widget
+peripherals:
+  - type: "Keyboard"
+    name: "..."
+    reason_short: "..."
+    thumb_url: "..."
+    thumb_alt: "..."
+    rating_text: "..."
+    rating_link: "https://..."
+    summary: "..."
+    specs:
+      - { label: "Switch Type", value: "..." }
+      - { label: "Layout", value: "..." }
+      - { label: "Connectivity", value: "..." }
+      - { label: "Best For", value: "..." }
+    buy_shortcode: "[geeka_price ...]"
+    review_link: "https://..."
+
+  - type: "Mouse"
+    name: "..."
+    reason_short: "..."
+    thumb_url: "..."
+    thumb_alt: "..."
+    rating_text: "..."
+    rating_link: "https://..."
+    summary: "..."
+    specs:
+      - { label: "Sensor", value: "..." }
+      - { label: "Weight", value: "..." }
+      - { label: "Connectivity", value: "..." }
+      - { label: "Best For", value: "..." }
+    buy_shortcode: "[geeka_price ...]"
+    review_link: "https://..."
+
+  - type: "Headset"
+    name: "..."
+    reason_short: "..."
+    thumb_url: "..."
+    thumb_alt: "..."
+    rating_text: "..."
+    rating_link: "https://..."
+    summary: "..."
+    specs:
+      - { label: "Connection", value: "..." }
+      - { label: "Noise Control", value: "..." }
+      - { label: "Audio", value: "..." }
+      - { label: "Battery", value: "..." }
+    buy_shortcode: "[geeka_price ...]"
+    review_link: "https://..."
+
+  - type: "Monitor"
+    name: "..."
+    reason_short: "..."
+    thumb_url: "..."
+    thumb_alt: "..."
+    rating_text: "..."
+    rating_link: "https://..."
+    summary: "..."
+    specs:
+      - { label: "Panel", value: "..." }
+      - { label: "Refresh Rate", value: "..." }
+      - { label: "Response Time", value: "..." }
+      - { label: "Best For", value: "..." }
+    buy_shortcode: "[geeka_price ...]"
+    review_link: "https://..."
