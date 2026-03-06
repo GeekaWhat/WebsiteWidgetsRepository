@@ -1,0 +1,313 @@
+<!--
+Monitor colour accuracy graph widget
+HTML + JS only (no CSS file), designed to reuse your existing testing widget styles already on page.
+-->
+
+<style>
+  .gw-testing-widget {
+    width: 100%;
+    margin: 18px 0;
+    padding: 18px;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-sizing: border-box;
+  }
+  .gw-testing-header {
+    margin: -18px -18px 14px;
+    padding: 10px 14px;
+    border-radius: 16px 16px 0 0;
+    background: #037cff;
+    color: #ffffff;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .gw-testing-title {
+    margin: 2px 0 10px;
+    font-size: 1.9rem;
+    line-height: 1.25;
+    font-weight: 700;
+  }
+  .gw-testing-title a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .gw-testing-title a:hover,
+  .gw-testing-title a:focus {
+    text-decoration: underline;
+  }
+  .gw-testing-bench-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin: -4px 0 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid #d0e4ff;
+    background: #eef5ff;
+    color: #1a4ea6;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .gw-test-embed {
+    height: 100%;
+    min-height: 370px;
+    border: 1px solid #d9e8ff;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 10px 10px 6px;
+    box-sizing: border-box;
+  }
+  .gw-test-chart-title {
+    margin: 0 0 8px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .gw-test-note {
+    margin: 8px 0 0;
+    font-size: 0.78rem;
+    line-height: 1.25;
+    opacity: 0.72;
+    text-align: center;
+  }
+  .gw-test-canvas-wrap {
+    height: 330px;
+    position: relative;
+  }
+  .gw-chart-fullscreen {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 3;
+    border: 1px solid #000000;
+    background: #000000;
+    color: #ffffff;
+    border-radius: 7px;
+    width: 34px;
+    height: 28px;
+    padding: 0;
+    font-weight: 700;
+    line-height: 1.1;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .gw-chart-fullscreen::before {
+    content: "⛶";
+    font-size: 14px;
+    line-height: 1;
+  }
+  .gw-chart-fullscreen.is-active {
+    background: #ffffff;
+    color: #000000;
+    border-color: #000000;
+  }
+  .gw-test-embed:fullscreen {
+    background: #ffffff;
+    padding: 14px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .gw-test-embed:fullscreen .gw-test-canvas-wrap {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 0;
+  }
+  .gw-test-embed:fullscreen canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+  @media (max-width: 700px) {
+    .gw-testing-widget {
+      padding: 14px;
+      border-radius: 14px;
+    }
+    .gw-testing-header {
+      margin: -14px -14px 12px;
+      border-radius: 14px 14px 0 0;
+    }
+    .gw-test-embed {
+      min-height: 300px;
+    }
+    .gw-test-canvas-wrap {
+      height: 260px;
+    }
+  }
+</style>
+
+<!-- wp:html -->
+<section class="gw-testing-widget" id="gw-monitor-adobergb-widget-v1" aria-label="Monitor Adobe RGB colour accuracy testing">
+  <p class="gw-testing-header">Monitor Colour Accuracy Testing</p>
+
+  <h3 class="gw-testing-title">Adobe RGB Colour Accuracy Benchmarks</h3>
+  <p class="gw-testing-bench-badge">
+    <span class="gw-testing-bench-icon"></span> Measured with: SpyderX Pro using SpyderXPro 6.2 software
+  </p>
+
+  <div class="gw-test-embed">
+    <p class="gw-test-chart-title">Adobe RGB Colour Accuracy — Monitor Comparison</p>
+    <p class="gw-test-note">Higher is better.</p>
+    <div class="gw-test-canvas-wrap">
+      <button type="button" class="gw-chart-fullscreen" aria-label="View Adobe RGB chart fullscreen"></button>
+      <canvas class="gw-adobergb-chart" aria-label="Adobe RGB colour accuracy by monitor"></canvas>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var scriptEl = document.currentScript;
+    var root = scriptEl ? scriptEl.previousElementSibling : null;
+    if (!root || !root.classList || !root.classList.contains("gw-testing-widget")) {
+      root = document.getElementById("gw-monitor-adobergb-widget-v1");
+    }
+    if (!root) return;
+
+    function ensureChartJs(done) {
+      if (typeof Chart !== "undefined") {
+        done();
+        return;
+      }
+      var existing = document.querySelector('script[data-gw-chartjs="1"]');
+      if (existing) {
+        existing.addEventListener("load", done, { once: true });
+        return;
+      }
+      var s = document.createElement("script");
+      s.src = "https://cdn.jsdelivr.net/npm/chart.js";
+      s.async = true;
+      s.setAttribute("data-gw-chartjs", "1");
+      s.addEventListener("load", done, { once: true });
+      document.head.appendChild(s);
+    }
+
+    function init() {
+      if (root.getAttribute("data-gw-init") === "1") return;
+      if (typeof Chart === "undefined") return;
+      root.setAttribute("data-gw-init", "1");
+
+      // ── Change this to the monitor name you are reviewing to highlight its bar ──
+      var highlightName = "Gigabyte MO27Q28G OLED";
+
+      // ── Adobe RGB Accuracy (sorted best→worst, highest % at top) ──
+      var adobergbLabels = [
+        "MSI MAG 272QP QD-OLED X50",
+        "TUF Gaming VG34WQML5A",
+        "MAG 321CUP QD-OLED",
+        "MPG 321URXW QD-OLED",
+        "Gigabyte MO27Q28G OLED",
+        "ROG STRIX XG27UCG",
+        "iiyama G-MASTER GB3261UHSCP"
+      ];
+      var adobergbAccuracy = [94, 93, 93, 93, 93, 92, 83];
+
+      function colorByHighlight(labels, focus, base, hi) {
+        return labels.map(function (n) { return n === focus ? hi : base; });
+      }
+
+      function chartOptions() {
+        return {
+          indexAxis: "y",
+          maintainAspectRatio: false,
+          responsive: true,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function (ctx) { return "Adobe RGB Accuracy: " + ctx.parsed.x + "%"; }
+              }
+            }
+          },
+          scales: {
+            x: {
+              min: 75,
+              max: 100,
+              ticks: { callback: function (v) { return v + "%"; }, font: { size: 10 } },
+              grid: { color: "rgba(0,0,0,0.08)" }
+            },
+            y: {
+              ticks: { autoSkip: false, font: { size: 10 } },
+              grid: { display: false }
+            }
+          }
+        };
+      }
+
+      function setChartHeight(canvas, rows) {
+        var wrap = canvas && canvas.closest(".gw-test-canvas-wrap");
+        if (!wrap) return;
+        var minHeight = 200;
+        var perRow = 28;
+        var target = Math.max(minHeight, rows * perRow + 70);
+        wrap.style.height = target + "px";
+      }
+
+      var adobergbCtx = root.querySelector(".gw-adobergb-chart");
+      if (adobergbCtx) {
+        setChartHeight(adobergbCtx, adobergbLabels.length);
+        new Chart(adobergbCtx, {
+          type: "bar",
+          data: {
+            labels: adobergbLabels,
+            datasets: [
+              {
+                label: "Adobe RGB Accuracy",
+                data: adobergbAccuracy,
+                backgroundColor: colorByHighlight(adobergbLabels, highlightName, "#3c8dff", "#7c3aed")
+              }
+            ]
+          },
+          options: chartOptions()
+        });
+      }
+
+      // ── Fullscreen ──
+      function enterFullscreen(el) {
+        if (el.requestFullscreen) return el.requestFullscreen();
+        if (el.webkitRequestFullscreen) return el.webkitRequestFullscreen();
+        return Promise.resolve();
+      }
+      function exitFullscreen() {
+        if (document.exitFullscreen) return document.exitFullscreen();
+        if (document.webkitExitFullscreen) return document.webkitExitFullscreen();
+        return Promise.resolve();
+      }
+
+      var fsButtons = root.querySelectorAll(".gw-chart-fullscreen");
+      fsButtons.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var panel = btn.closest(".gw-test-embed");
+          if (!panel) return;
+          var open = document.fullscreenElement === panel || document.webkitFullscreenElement === panel;
+          if (open) exitFullscreen(); else enterFullscreen(panel);
+        });
+      });
+
+      function syncFs() {
+        var active = document.fullscreenElement || document.webkitFullscreenElement;
+        fsButtons.forEach(function (btn) {
+          var panel = btn.closest(".gw-test-embed");
+          var on = panel && active === panel;
+          btn.classList.toggle("is-active", !!on);
+          btn.setAttribute("title", on ? "Exit fullscreen" : "View chart fullscreen");
+        });
+      }
+      document.addEventListener("fullscreenchange", syncFs);
+      document.addEventListener("webkitfullscreenchange", syncFs);
+      syncFs();
+    }
+
+    ensureChartJs(init);
+  })();
+</script>
+<!-- /wp:html -->
