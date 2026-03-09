@@ -1,0 +1,499 @@
+build_meta:
+  build_code: "[DP064]"
+  refresh_scope: "full"                                       # full | partial
+  notes: "..."
+
+formatting_defaults:
+  multi_value_separator: "<br>"
+  no_commas_for_multi_value_lists: true
+  list_item_style: "yaml_array"
+
+part_key_rules:
+  allowed_keys: ["cpu","cpu_cooler","motherboard","ram","ssd","gpu","case","psu"]
+  tab_label_mode: "auto_from_part_key"                        # set tab_label to "__AUTO_FROM_PART_KEY__" unless override is needed
+  section_anchor_mode: "auto_from_part_key"                   # set section_anchor to "__AUTO_FROM_PART_KEY__" unless override is needed
+  anchor_style: "lowercase-kebab"                             # examples: #cpu, #cpu-cooler, #motherboard
+
+sources:
+  # shared source definitions; reuse via source_ref in widget sections
+  # example:
+  # motherboard_main:
+  #   model: "MSI MAG X870E GAMING PLUS MAX WIFI"
+  #   source_url: "https://www.msi.com/Motherboard/MAG-X870E-GAMING-PLUS-MAX-WIFI/Specification"
+
+widget_enabled:
+  cpu_comparison_table: true
+  cooler_temps_graph: true
+  motherboard_specs: true
+  ram_widget: true
+  ssd_widget: true
+  gpu_comparison_table: true
+  case_specs: true
+  psu_connectors: true
+  performance_widget: true
+  peripherals: true
+
+# 00-pc-build-component-headings
+component_headings:
+  cpu: "..."
+  cpu_cooler: "..."
+  motherboard: "..."
+  ram: "..."
+  ssd: "..."
+  gpu: "..."
+  case: "..."
+  psu: "..."
+
+# 01-pc-build-parts-list
+parts_list:
+  - part_key: "cpu"                                            # allowed values: cpu | cpu_cooler | motherboard | ram | ssd | gpu | case | psu
+    tab_label: "__AUTO_FROM_PART_KEY__"
+    name: "..."
+    section_anchor: "__AUTO_FROM_PART_KEY__"
+    image_url: ''                                             # required: paste image URL
+    image_alt: "..."                                          # required alt text
+    summary: "..."
+    specs:
+      - { label: "...", value: "..." }
+      - { label: "...", value: "..." }
+      - { label: "...", value: "..." }
+      - { label: "...", value: "..." }
+      - { label: "...", value: "..." }
+    buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
+
+  - part_key: "cpu_cooler"
+    tab_label: "__AUTO_FROM_PART_KEY__"
+    name: "..."
+    section_anchor: "__AUTO_FROM_PART_KEY__"
+    image_url: ''                                             # paste image URL
+    image_alt: "..."
+    summary: "..."
+    specs:
+      - { label: "...", value: "..." }
+    buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
+
+  - part_key: "motherboard"
+    tab_label: "__AUTO_FROM_PART_KEY__"
+    name: "..."
+    section_anchor: "__AUTO_FROM_PART_KEY__"
+    image_url: ''                                             # paste image URL
+    image_alt: "..."
+    summary: "..."
+    specs:
+      - { label: "...", value: "..." }
+    buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
+
+  - part_key: "ram"
+    tab_label: "__AUTO_FROM_PART_KEY__"
+    name: "..."
+    section_anchor: "__AUTO_FROM_PART_KEY__"
+    image_url: ''                                             # paste image URL
+    image_alt: "..."
+    summary: "..."
+    specs:
+      - { label: "...", value: "..." }
+    buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
+
+  - part_key: "ssd"
+    tab_label: "__AUTO_FROM_PART_KEY__"
+    name: "..."
+    section_anchor: "__AUTO_FROM_PART_KEY__"
+    image_url: ''                                             # paste image URL
+    image_alt: "..."
+    summary: "..."
+    specs:
+      - { label: "...", value: "..." }
+    buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
+
+  - part_key: "gpu"
+    tab_label: "__AUTO_FROM_PART_KEY__"
+    name: "..."
+    section_anchor: "__AUTO_FROM_PART_KEY__"
+    image_url: ''                                             # paste image URL
+    image_alt: "..."
+    summary: "..."
+    specs:
+      - { label: "...", value: "..." }
+    buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
+
+  - part_key: "case"
+    tab_label: "__AUTO_FROM_PART_KEY__"
+    name: "..."
+    section_anchor: "__AUTO_FROM_PART_KEY__"
+    image_url: ''                                             # paste image URL
+    image_alt: "..."
+    summary: "..."
+    specs:
+      - { label: "...", value: "..." }
+    buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
+
+  - part_key: "psu"
+    tab_label: "__AUTO_FROM_PART_KEY__"
+    name: "..."
+    section_anchor: "__AUTO_FROM_PART_KEY__"
+    image_url: ''                                             # paste image URL
+    image_alt: "..."
+    summary: "..."
+    specs:
+      - { label: "...", value: "..." }
+    buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
+
+# 02-cpu-comparison-table
+cpu_comparison_table:
+  enabled: true
+  kicker: "CPU Comparison"
+  title: "..."
+  note: "..."
+  aria_label: "..."
+  columns: ["CPU","Cores","Threads","Base Clock","Max Boost","TDP","Total Cache","Where to Buy"]
+  rows:
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      cores: "..."
+      threads: "..."
+      base_clock: "..."
+      boost_clock: "..."
+      tdp: "..."
+      cache: "..."
+      buy_shortcode: ''                                       # paste full geeka_price shortcode including brackets
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      cores: "..."
+      threads: "..."
+      base_clock: "..."
+      boost_clock: "..."
+      tdp: "..."
+      cache: "..."
+      buy_shortcode: ''                                       # paste full geeka_price shortcode including brackets
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      cores: "..."
+      threads: "..."
+      base_clock: "..."
+      boost_clock: "..."
+      tdp: "..."
+      cache: "..."
+      buy_shortcode: ''                                       # paste full geeka_price shortcode including brackets
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      cores: "..."
+      threads: "..."
+      base_clock: "..."
+      boost_clock: "..."
+      tdp: "..."
+      cache: "..."
+      buy_shortcode: ''                                       # paste full geeka_price shortcode including brackets
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      cores: "..."
+      threads: "..."
+      base_clock: "..."
+      boost_clock: "..."
+      tdp: "..."
+      cache: "..."
+      buy_shortcode: ''                                       # paste full geeka_price shortcode including brackets
+
+# 03-cooler-temps-graph
+cooler_temps_graph:
+  enabled: true
+  title: "..."
+  benchmark_badge: "..."
+  cta_url: "..."
+  highlight_name: "..."
+  cinebench4:
+    labels: ["...","..."]
+    avg_temps_c: [0,0]
+    max_temps_c: [0,0]
+  cinebench8:
+    labels: ["...","..."]
+    avg_temps_c: [0,0]
+    max_temps_c: [0,0]
+  cpuz8:
+    labels: ["...","..."]
+    avg_temps_c: [0,0]
+    max_temps_c: [0,0]
+
+# 04-motherboard-specs-table
+#Make sure the specs are accurate and pulled directly form the Source_url
+motherboard_specs:
+  enabled: true
+  source_ref: ''                                              # optional: key from top-level "sources"
+  model: ''                                                   # required if source_ref is blank
+  source_url: ''                                              # paste official spec URL (required for auto-fill)
+  formatting_rules_override: {}                               # optional: override formatting_defaults only if needed
+  chipset_socket: "__AUTO_FROM_SOURCE__"
+  form_factor: "__AUTO_FROM_SOURCE__"
+  cpu_support: "__AUTO_FROM_SOURCE__"
+  memory_support_html: "__AUTO_FROM_SOURCE__"
+  vrm_design: "__AUTO_FROM_SOURCE__"
+  graphics_card_compatibility_1_slot: "__AUTO_FROM_SOURCE__"
+  expansion_card_compatibility_html: "__AUTO_FROM_SOURCE__"
+  m2_compatibility_3_slots_html: "__AUTO_FROM_SOURCE__"
+  sata_storage: "__AUTO_FROM_SOURCE__"
+  networking_html: "__AUTO_FROM_SOURCE__"
+  rear_io_html: "__AUTO_FROM_SOURCE__"
+  front_io_headers_html: "__AUTO_FROM_SOURCE__"
+  audio: "__AUTO_FROM_SOURCE__"
+
+# 05-ram-speed-latency-configuration-widget
+ram_widget:
+  enabled: true
+  speed: "..."
+  latency: "..."
+  generation: "..."
+  dimm_count: "..."
+  marker_label: "..."
+  marker_percent: "..."
+  note: "..."
+  slots:
+    - { slot: "A1", state: "...", recommended: false }
+    - { slot: "A2", state: "...", recommended: true }
+    - { slot: "B1", state: "...", recommended: false }
+    - { slot: "B2", state: "...", recommended: true }
+
+# 06-ssd-speed-graph
+ssd_widget:
+  enabled: true
+  subtext: "..."
+  sequential_read_mb_s: 0
+  sequential_write_mb_s: 0
+  read_marker_percent: "..."
+  write_marker_percent: "..."
+  footnote: "..."
+
+# 07-gpu-comparison-table
+gpu_comparison_table:
+  enabled: true
+  kicker: "GPU Comparison"
+  title: "..."
+  note: "..."
+  aria_label: "..."
+  columns: ["GPU","VRAM","TBP","Boost Clock","Ray Tracing","Upscaling/FG","Where to Buy"]
+  rows:
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      metric_1: "..."
+      metric_2: "..."
+      metric_3: "..."
+      metric_4: "..."
+      metric_5: "..."
+      buy_shortcode: ''                                       # paste full geeka_price shortcode including brackets
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      metric_1: "..."
+      metric_2: "..."
+      metric_3: "..."
+      metric_4: "..."
+      metric_5: "..."
+      buy_shortcode: ''                                       # paste full geeka_price shortcode including brackets
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      metric_1: "..."
+      metric_2: "..."
+      metric_3: "..."
+      metric_4: "..."
+      metric_5: "..."
+      buy_shortcode: ''                                       # paste full geeka_price shortcode including brackets
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      metric_1: "..."
+      metric_2: "..."
+      metric_3: "..."
+      metric_4: "..."
+      metric_5: "..."
+      buy_shortcode: ''                                       # paste full geeka_price shortcode including brackets
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      metric_1: "..."
+      metric_2: "..."
+      metric_3: "..."
+      metric_4: "..."
+      metric_5: "..."
+      buy_shortcode: ''                                       # paste full geeka_price shortcode including brackets
+
+# 08-pc-case-spec-table-widget
+#Make sure the specs are accurate and pulled directly form the Source_url
+case_specs:
+  enabled: true
+  source_ref: ''                                              # optional: key from top-level "sources"
+  model: ''                                                   # required if source_ref is blank
+  source_url: ''                                              # paste official spec URL (required for auto-fill)
+  formatting_rules_override: {}                               # optional: override formatting_defaults only if needed
+  form_factor: "__AUTO_FROM_SOURCE__"
+  motherboard_support: "__AUTO_FROM_SOURCE__"
+  dimensions_l_w_h: "__AUTO_FROM_SOURCE__"
+  front_io:
+    - "__AUTO_FROM_SOURCE__"
+  pcie_slots: "__AUTO_FROM_SOURCE__"
+  colour: "__AUTO_FROM_SOURCE__"
+  max_clearance:
+    - "__AUTO_FROM_SOURCE__"
+  drive_support:
+    - "__AUTO_FROM_SOURCE__"
+  fan_support:
+    - "__AUTO_FROM_SOURCE__"
+  radiator_support:
+    - "__AUTO_FROM_SOURCE__"
+  pre_installed_fans: "__AUTO_FROM_SOURCE__"
+
+# 09-psu-connector-breakdown-widget
+#Make sure the specs are accurate and pulled directly form the Source_url
+psu_connectors:
+  enabled: true
+  widget_title: "__AUTO_FROM_SOURCE__"
+  source_ref: ''                                              # optional: key from top-level "sources"
+  model: ''                                                   # required if source_ref is blank
+  source_url: ''                                              # paste official spec URL (required for auto-fill)
+  connectors:
+    pcie_6_2:
+      name: "PCIe (6+2 pin)"
+      connector_type: "__AUTO_FROM_SOURCE__"
+      build_usage: "__AUTO_FROM_SOURCE__"
+      recommended_setup: "__AUTO_FROM_SOURCE__"
+      notes: "__AUTO_FROM_SOURCE__"
+    pcie_12v_2x6:
+      name: "12V-2x6"
+      connector_type: "__AUTO_FROM_SOURCE__"
+      typical_output: "__AUTO_FROM_SOURCE__"
+      build_usage: "__AUTO_FROM_SOURCE__"
+      notes: "__AUTO_FROM_SOURCE__"
+    atx_24pin:
+      name: "ATX 24-pin"
+      connector_type: "__AUTO_FROM_SOURCE__"
+      quantity_included: "__AUTO_FROM_SOURCE__"
+      primary_use: "__AUTO_FROM_SOURCE__"
+      notes: "__AUTO_FROM_SOURCE__"
+    cpu_eps_4_4:
+      name: "CPU EPS (4+4)"
+      connector_type: "__AUTO_FROM_SOURCE__"
+      quantity_included: "__AUTO_FROM_SOURCE__"
+      primary_use: "__AUTO_FROM_SOURCE__"
+      notes: "__AUTO_FROM_SOURCE__"
+    sata_15pin:
+      name: "SATA (15-pin)"
+      connector_type: "__AUTO_FROM_SOURCE__"
+      primary_use: "__AUTO_FROM_SOURCE__"
+      build_usage: "__AUTO_FROM_SOURCE__"
+    molex_4pin:
+      name: "Peripheral (Molex 4-pin)"
+      connector_type: "__AUTO_FROM_SOURCE__"
+      primary_use: "__AUTO_FROM_SOURCE__"
+      build_usage: "__AUTO_FROM_SOURCE__"
+
+# 10-performance-graph-widget
+performance_widget:
+  enabled: true
+  # widget_id_suffix: '' # optional: leave omitted unless you want a custom HTML id
+  kicker: "Performance Snapshot"
+  title: "Multi-Game Average FPS"
+  driver_bar:
+    type: "gpu"                                               # gpu|amd|nvidia
+    driver_text: "Driver Version: ..."
+  fps_input_mode: "single_line_results"
+  raw_results:
+    - "Game Name - 0 FPS (@1440p High)"
+  strict_mode: true
+  rules:
+    # Always remove games and/or resolutions that are not present in raw_results.
+    keep_only_listed_games: true
+    remove_unlisted_games: true
+    keep_only_listed_resolutions_per_game: true
+    remove_unlisted_resolutions_per_game: true
+  settings_policy:
+    preserve_default_settings: true
+    override_only_if_provided: true
+  default_settings_locked:
+    arcraiders: []
+    marvelrivals: []
+    battlefield6: []
+    callofduty: []
+    fortnite: []
+    cyberpunk2077: []
+    hogwartslegacy: []
+    f125: []
+
+# 11-peripherals-recommendations-widget
+peripherals:
+  - type: "Keyboard"
+    name: "..."
+    reason_short: "..."
+    thumb_url: "..."
+    thumb_alt: "..."
+    rating_text: "..."
+    rating_link: ''                                           # optional: paste rating/review URL
+    summary: "..."
+    specs:
+      - { label: "Switch Type", value: "..." }
+      - { label: "Layout", value: "..." }
+      - { label: "Connectivity", value: "..." }
+      - { label: "Best For", value: "..." }
+    buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
+    review_link: ''                                           # optional: paste full review URL
+
+  - type: "Mouse"
+    name: "..."
+    reason_short: "..."
+    thumb_url: "..."
+    thumb_alt: "..."
+    rating_text: "..."
+    rating_link: ''                                           # optional: paste rating/review URL
+    summary: "..."
+    specs:
+      - { label: "Sensor", value: "..." }
+      - { label: "Weight", value: "..." }
+      - { label: "Connectivity", value: "..." }
+      - { label: "Best For", value: "..." }
+    buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
+    review_link: ''                                           # optional: paste full review URL
+
+  - type: "Headset"
+    name: "..."
+    reason_short: "..."
+    thumb_url: "..."
+    thumb_alt: "..."
+    rating_text: "..."
+    rating_link: ''                                           # optional: paste rating/review URL
+    summary: "..."
+    specs:
+      - { label: "Connection", value: "..." }
+      - { label: "Noise Control", value: "..." }
+      - { label: "Audio", value: "..." }
+      - { label: "Battery", value: "..." }
+    buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
+    review_link: ''                                           # optional: paste full review URL
+
+  - type: "Monitor"
+    name: "..."
+    reason_short: "..."
+    thumb_url: "..."
+    thumb_alt: "..."
+    rating_text: "..."
+    rating_link: ''                                           # optional: paste rating/review URL
+    summary: "..."
+    specs:
+      - { label: "Panel", value: "..." }
+      - { label: "Refresh Rate", value: "..." }
+      - { label: "Response Time", value: "..." }
+      - { label: "Best For", value: "..." }
+    buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
+    review_link: ''                                           # optional: paste full review URL
