@@ -8,6 +8,7 @@ ORDER_FILE="${WIDGET_ROOT}/config/widget-order.txt"
 SOURCE_DIR="${WIDGET_ROOT}/templates"
 TARGET_DIR="${WIDGET_ROOT}/builds/${BUILD_CODE}"
 VALIDATE_SCRIPT="${WIDGET_ROOT}/scripts/validate-build-widgets.sh"
+RENDER_SCRIPT="${WIDGET_ROOT}/scripts/render-build-widgets.rb"
 
 if [[ ! -f "${ORDER_FILE}" ]]; then
   echo "Missing order file: ${ORDER_FILE}" >&2
@@ -34,6 +35,10 @@ while IFS='|' read -r prefix source_file; do
 done < "${ORDER_FILE}"
 
 echo "Generated ${count} widget files in: ${TARGET_DIR}"
+
+if [[ -f "${RENDER_SCRIPT}" ]]; then
+  ruby "${RENDER_SCRIPT}" "${BUILD_CODE}"
+fi
 
 if [[ -x "${VALIDATE_SCRIPT}" ]]; then
   "${VALIDATE_SCRIPT}" "${BUILD_CODE}"

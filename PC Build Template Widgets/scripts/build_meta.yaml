@@ -1,6 +1,9 @@
 build_meta:
   build_code: "[BUILD_CODE]"
   refresh_scope: "full"                                       # full | partial
+  auto_fill_from_sources: true                                # prefer sources to populate widgets
+  auto_fill_policy: "always"                                  # always | when_missing | off
+  auto_fill_notes: "Auto-fill any '...' placeholders unless explicitly overridden."
   notes: "..."
 
 formatting_defaults:
@@ -497,3 +500,4 @@ peripherals:
       - { label: "Best For", value: "..." }
     buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
     review_link: ''                                           # optional: paste full review URL
+                                      

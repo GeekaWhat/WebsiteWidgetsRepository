@@ -228,22 +228,22 @@ cooler_temps_graph:
 motherboard_specs:
   enabled: true
   source_ref: ''                                              # optional: key from top-level "sources"
-  model: ''                                                   # required if source_ref is blank
+  model: 'ASUS ROG Strix X870-I Gaming WiFi'                                                   # required if source_ref is blank
   source_url: 'https://rog.asus.com/motherboards/rog-strix/rog-strix-x870-i-gaming-wifi/spec/'                                              # paste official spec URL (required for auto-fill)
   formatting_rules_override: {}                               # optional: override formatting_defaults only if needed
-  chipset_socket: "__AUTO_FROM_SOURCE__"
-  form_factor: "__AUTO_FROM_SOURCE__"
-  cpu_support: "__AUTO_FROM_SOURCE__"
-  memory_support_html: "__AUTO_FROM_SOURCE__"
-  vrm_design: "__AUTO_FROM_SOURCE__"
-  graphics_card_compatibility_1_slot: "__AUTO_FROM_SOURCE__"
-  expansion_card_compatibility_html: "__AUTO_FROM_SOURCE__"
-  m2_compatibility_3_slots_html: "__AUTO_FROM_SOURCE__"
-  sata_storage: "__AUTO_FROM_SOURCE__"
-  networking_html: "__AUTO_FROM_SOURCE__"
-  rear_io_html: "__AUTO_FROM_SOURCE__"
-  front_io_headers_html: "__AUTO_FROM_SOURCE__"
-  audio: "__AUTO_FROM_SOURCE__"
+  chipset_socket: "AMD X870 / AM5"
+  form_factor: "Mini-ITX (17cm x 17cm)"
+  cpu_support: "AMD Ryzen 9000 / 8000 / 7000 Series"
+  memory_support_html: "2 x DDR5 DIMM, up to 128GB<br>Up to 8400+ MT/s (Ryzen 9000)<br>Up to 8600+ MT/s (Ryzen 8000)<br>Up to 8000+ MT/s (Ryzen 7000)"
+  vrm_design: "10-stage power solution"
+  graphics_card_compatibility_1_slot: "1 x PCIe x16 slot (PCIe 5.0 with Ryzen 9000/7000; PCIe 4.0 with Ryzen 8000)"
+  expansion_card_compatibility_html: "Single full-length PCIe slot only (Mini-ITX)<br>No additional PCIe expansion slots"
+  m2_compatibility_3_slots_html: "2 x M.2 slots:<br>M.2_1 PCIe 5.0 x4 (2280)<br>M.2_2 PCIe 4.0 x4 (2242/2260/2280)"
+  sata_storage: "2 x SATA 6Gb/s (via ROG FPS Card)"
+  networking_html: "Intel 2.5Gb Ethernet<br>Wi-Fi 7 (2x2)<br>Bluetooth 5.4"
+  rear_io_html: "2 x USB4 (40Gbps, Type-C)<br>5 x USB 10Gbps (4 x Type-A + 1 x Type-C)<br>3 x USB 2.0 Type-A<br>1 x HDMI<br>1 x Intel 2.5GbE<br>BIOS FlashBack + Clear CMOS"
+  front_io_headers_html: "1 x USB 10Gbps Type-C front header<br>1 x USB 5Gbps header (2 ports)<br>ROG FPS Card: 2 x USB 2.0 headers (3 ports total)"
+  audio: "ROG Strix Hive II audio (ESS SABRE9260Q DAC, Hyper-Grounding, silver-plated jacks)"
 
 # 05-ram-speed-latency-configuration-widget
 ram_widget:
@@ -335,70 +335,80 @@ gpu_comparison_table:
 #Make sure the specs are accurate and pulled directly form the Source_url
 case_specs:
   enabled: true
-  source_ref: https://nzxt.com/en-intl/products/h2-flow?srsltid=AfmBOorDQSiiGIV2S9-X8YI0W1JwzoIkpaTm8IPm3O4nt9yI6vpYeywa'                                              # optional: key from top-level "sources"
-  model: ''                                                   # required if source_ref is blank
-  source_url: ''                                              # paste official spec URL (required for auto-fill)
+  source_ref: ''                                              # optional: key from top-level "sources"
+  model: 'NZXT H2 Flow'                                                   # required if source_ref is blank
+  source_url: 'https://nzxt.com/en-intl/products/h2-flow'                                              # paste official spec URL (required for auto-fill)
   formatting_rules_override: {}                               # optional: override formatting_defaults only if needed
-  form_factor: "__AUTO_FROM_SOURCE__"
-  motherboard_support: "__AUTO_FROM_SOURCE__"
-  dimensions_l_w_h: "__AUTO_FROM_SOURCE__"
+  form_factor: "Small Form Factor Case (Vertical Mini-ITX)"
+  motherboard_support: "Mini-ITX"
+  dimensions_l_w_h: "263 x 181 x 435 mm (L x W x H)"
   front_io:
-    - "__AUTO_FROM_SOURCE__"
-  pcie_slots: "__AUTO_FROM_SOURCE__"
-  colour: "__AUTO_FROM_SOURCE__"
+    - "2 x USB 3.2 Type-A"
+    - "1 x USB 3.2 Gen2x2 Type-C"
+    - "1 x Headset jack"
+  pcie_slots: "3 (standard vertical)"
+  colour: "Black"
   max_clearance:
-    - "__AUTO_FROM_SOURCE__"
+    - "CPU cooler: up to 75 mm"
+    - "GPU length: up to 331 mm"
+    - "GPU thickness: up to 65 mm"
+    - "GPU width: up to 150 mm"
+    - "PSU length: up to 130 mm"
+    - "Front radiator + fan thickness: up to 60 mm"
   drive_support:
-    - "__AUTO_FROM_SOURCE__"
+    - '2 x 2.5" (up to 8.5mm)'
+    - '3.5" not supported'
   fan_support:
-    - "__AUTO_FROM_SOURCE__"
+    - "Total: 4 x 120mm / 2 x 140mm"
+    - "Front: 2 x 120mm / 2 x 140mm"
+    - "Top: 2 x 120mm"
   radiator_support:
-    - "__AUTO_FROM_SOURCE__"
-  pre_installed_fans: "__AUTO_FROM_SOURCE__"
+    - "Front: up to 280mm"
+  pre_installed_fans: "2 x F120Q (Case Version), 120mm, top-mounted, 3-pin"
 
 # 09-psu-connector-breakdown-widget
 #Make sure the specs are accurate and pulled directly form the Source_url
 psu_connectors:
   enabled: true
-  widget_title: "__AUTO_FROM_SOURCE__"
+  widget_title: "NZXT C850 SFX Gold Connector Reference"
   source_ref: ''                                              # optional: key from top-level "sources"
-  model: ''                                                   # required if source_ref is blank
-  source_url: 'https://nzxt.com/en-intl/products/c850-sfx-gold?srsltid=AfmBOopg-CAkvLiygfaCHPsRITiuPoPkBM28XIOx1reeFQuG3OuE4PLc'                                              # paste official spec URL (required for auto-fill)
+  model: 'NZXT C850 SFX Gold'                                                   # required if source_ref is blank
+  source_url: 'https://nzxt.com/en-intl/products/c850-sfx-gold'                                              # paste official spec URL (required for auto-fill)
   connectors:
     pcie_6_2:
       name: "PCIe (6+2 pin)"
-      connector_type: "__AUTO_FROM_SOURCE__"
-      build_usage: "__AUTO_FROM_SOURCE__"
-      recommended_setup: "__AUTO_FROM_SOURCE__"
-      notes: "__AUTO_FROM_SOURCE__"
+      connector_type: "6+2 PCIe power cables"
+      build_usage: "Legacy/standard PCIe GPU power where 8-pin connectors are required"
+      recommended_setup: "Use with dual-8-pin adapters/cables as needed by the GPU"
+      notes: "Includes 1 x direct 6+2 cable and 2 x 16-pin (PSU) to dual 8-pin PCIe cables"
     pcie_12v_2x6:
       name: "12V-2x6"
-      connector_type: "__AUTO_FROM_SOURCE__"
-      typical_output: "__AUTO_FROM_SOURCE__"
-      build_usage: "__AUTO_FROM_SOURCE__"
-      notes: "__AUTO_FROM_SOURCE__"
+      connector_type: "16-pin (12+4) PCIe 5.1 / 12V-2x6"
+      typical_output: "Up to 600W"
+      build_usage: "Primary modern GPU connector for high-power cards"
+      notes: "ATX 3.1 compliant; included 16-pin 12V-2x6 cable"
     atx_24pin:
       name: "ATX 24-pin"
-      connector_type: "__AUTO_FROM_SOURCE__"
-      quantity_included: "__AUTO_FROM_SOURCE__"
-      primary_use: "__AUTO_FROM_SOURCE__"
-      notes: "__AUTO_FROM_SOURCE__"
+      connector_type: "24-pin ATX motherboard cable"
+      quantity_included: "1"
+      primary_use: "Motherboard main power"
+      notes: "Cable length: 350mm"
     cpu_eps_4_4:
       name: "CPU EPS (4+4)"
-      connector_type: "__AUTO_FROM_SOURCE__"
-      quantity_included: "__AUTO_FROM_SOURCE__"
-      primary_use: "__AUTO_FROM_SOURCE__"
-      notes: "__AUTO_FROM_SOURCE__"
+      connector_type: "4+4 EPS CPU power cable"
+      quantity_included: "1"
+      primary_use: "CPU power (8-pin EPS)"
+      notes: "Cable length: 470mm"
     sata_15pin:
       name: "SATA (15-pin)"
-      connector_type: "__AUTO_FROM_SOURCE__"
-      primary_use: "__AUTO_FROM_SOURCE__"
-      build_usage: "__AUTO_FROM_SOURCE__"
+      connector_type: "SATA power cables"
+      primary_use: "2.5-inch SSDs, hubs, and SATA-powered accessories"
+      build_usage: "2 cables, 6 SATA connectors total"
     molex_4pin:
       name: "Peripheral (Molex 4-pin)"
-      connector_type: "__AUTO_FROM_SOURCE__"
-      primary_use: "__AUTO_FROM_SOURCE__"
-      build_usage: "__AUTO_FROM_SOURCE__"
+      connector_type: "Peripheral cable"
+      primary_use: "Legacy peripherals/controllers"
+      build_usage: "1 cable with 3 peripheral connectors"
 
 # 10-performance-graph-widget
 performance_widget:
@@ -407,11 +417,16 @@ performance_widget:
   kicker: "Performance Snapshot"
   title: "Multi-Game Average FPS"
   driver_bar:
-    type: "gpu"                                               # gpu|amd|nvidia
-    driver_text: "Driver Version: ..."
+    type: "nvidia"                                               # gpu|amd|nvidia
+    driver_text: "Driver Version: NVIDIA (capture build)"
   fps_input_mode: "single_line_results"
   raw_results:
-    - "Game Name - 0 FPS (@1440p High)"
+    - "CyberPunk 2077 - 89 FPS (@4K High)"
+    - "Marvel Rivals - 88.4 FPS (@4K High)"
+    - "RESIDENT EVIL Requiem - 91.9 FPS (@4K High)"
+    - "Battlefield 6 - 93.8 FPS (@4K High)"
+    - "Arc Raiders - 112.4 FPS (@4K High)"
+    - "Fortnite - 326.5 FPS (@1080p Competitive)"
   strict_mode: true
   rules:
     # Always remove games and/or resolutions that are not present in raw_results.
