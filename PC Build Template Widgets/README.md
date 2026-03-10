@@ -15,7 +15,7 @@ Example:
 
 ## Commands
 
-Default placeholder code (`[****]`):
+Default placeholder code (`[CODE]`):
 
 ```bash
 "PC Build Template Widgets/scripts/generate-build-widgets.sh"

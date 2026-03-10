@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-BUILD_CODE="${1:-[****]}"
+BUILD_CODE="${1:-[CODE]}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 WIDGET_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 ORDER_FILE="${WIDGET_ROOT}/config/widget-order.txt"
