@@ -28,6 +28,16 @@ Run this from repo root:
 
 Replace `"[DM92]"` with the target build code (including brackets).
 
+## One-click Windows launcher
+For Windows desktop usage, run:
+
+```bat
+generate-build-widgets-windows.bat [DM92]
+```
+
+If no build code is provided, the launcher prompts for it.
+The launcher enforces the same pipeline and fails if `build-audit.txt` is missing or not clean.
+
 ## What this command must do (in order)
 1. Copy templates into `PC Build Template Widgets/builds/<BUILD_CODE>/`
 2. Run YAML renderer:
