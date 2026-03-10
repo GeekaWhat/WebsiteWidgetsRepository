@@ -34,7 +34,7 @@ Updated: All 8 games with full settings
     margin: 0 0 10px; font-size: 0.84rem; text-transform: uppercase; letter-spacing: 0.06em; color: #1f4f98; font-weight: 800;
   }
 
-  .gw-perf-widget-single .gw-perf-metric-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0 0 10px; }
+  .gw-perf-widget-single .gw-perf-metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin: 0 0 10px; }
   .gw-perf-widget-single .gw-perf-metric-pill {
     border: 1px solid #d8e7ff; border-radius: 12px; background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%); padding: 10px; text-align: center;
   }
@@ -86,7 +86,7 @@ Updated: All 8 games with full settings
   </div>
 
   <div class="gw-perf-body"></div>
-  <div class="gw-driver-bar gpu"><span class="gw-driver-logo">?</span>Driver Version: ?? </div> 
+  <div class="gw-driver-bar amd"><span class="gw-driver-logo">A</span>Driver Version: AMD Software: Adrenalin Edition 26.2.2 (WHQL Recommended, released 2026-02-26)</div> 
   <!-- <div class="gw-driver-bar gpu"><span class="gw-driver-logo">?</span>Driver Version: ?? </div> -->         
   <!-- <div class="gw-driver-bar amd"><span class="gw-driver-logo">A</span>Driver Version: </div> -->
   <!-- <div class="gw-driver-bar nvidia"><span class="gw-driver-logo">N</span>Driver Version: </div> -->
@@ -115,11 +115,11 @@ Updated: All 8 games with full settings
     ];
 
     var GAME_LABELS = {
-      cyberpunk2077: "CyberPunk 2077",
+      cyberpunk2077: "Cyberpunk 2077",
       marvelrivals: "Marvel Rivals",
       residentevilrequiem: "RESIDENT EVIL Requiem",
       battlefield6: "Battlefield 6",
-      arcraiders: "Arc Raiders",
+      arcraiders: "ARC Raiders",
       fortnite: "Fortnite"
     };
 
@@ -166,12 +166,59 @@ Updated: All 8 games with full settings
 
     // ─── TEST SETTINGS ───────────────────────────────────────────────────────
     var SETTINGS = {
-      cyberpunk2077: [["Resolution", "4K High"], ["Preset", "As configured in benchmark run"]],
-      marvelrivals: [["Resolution", "4K High"], ["Preset", "As configured in benchmark run"]],
-      residentevilrequiem: [["Resolution", "4K High"], ["Preset", "As configured in benchmark run"]],
-      battlefield6: [["Resolution", "4K High"], ["Preset", "As configured in benchmark run"]],
-      arcraiders: [["Resolution", "4K High"], ["Preset", "As configured in benchmark run"]],
-      fortnite: [["Resolution", "1080p Competitive"], ["Preset", "As configured in benchmark run"]]
+      arcraiders: [
+        ["Map",                "Dam Battlegrounds"],
+        ["Capture Length",     "4-7 mins"],
+        ["Window Mode",        "Fullscreen"],
+        ["Resolution Scaling", "TAAU, 100% (" + R_UNSET + "), Manual"],
+        ["Frame Generation",   "Off"],
+        ["VSync / Reflex",     "VSync Off, NVIDIA Reflex On"],
+        ["Overall Quality",    "High"],
+        ["Graphics Breakdown", "View Distance / AA / Shadows / Post / Texture / Effects / Reflections / Foliage / GI all High"]
+      ],
+      marvelrivals: [
+        ["Capture Length",     "4-7 mins"],
+        ["Display",            "Fullscreen, " + R_UNSET + ", Aspect 16:9"],
+        ["AA / Upscaling",     "TAAU, Render Scale 100"],
+        ["Frame Gen / Latency","Frame Generation Off, Low Latency Off"],
+        ["VSync / FPS Cap",    "VSync Off, Match/Lobby/Background FPS No Limit"],
+        ["Preset",             "Graphics Quality High"],
+        ["GI / Reflections",   "Lumen GI High Quality, SSR Reflections"],
+        ["Graphics Breakdown", "Model / Post / Shadows / Texture / Effects / Foliage all High"]
+      ],
+      residentevilrequiem: [
+        ["Resolution",         "4K High"],
+        ["Preset",             "As configured in benchmark run"]
+      ],
+      battlefield6: [
+        ["Map / Mode",         "Empire State, Conquest"],
+        ["Capture Length",     "4-7 mins"],
+        ["Fullscreen Mode",    "Windowed (Fullscreen Device Monitor 1)"],
+        ["Resolution / Refresh", R_UNSET + ", 120Hz, Aspect Auto"],
+        ["VSync / FOV",        "VSync Off, FOV 90, Vehicle FOV 79"],
+        ["Preset",             "Custom, Graphics Quality High"],
+        ["Texture / Mesh / Terrain", "All High"],
+        ["Graphics Breakdown", "Reflections / SSR / GTAO / Lighting / Shadows / Post Process all High"]
+      ],
+      fortnite: [
+        ["Game Mode",          "Zero-Build Battle Royale"],
+        ["Capture Length",     "4-7 mins"],
+        ["Display",            "Fullscreen, " + R_1080 + ", DirectX 12, VSync Off, Unlimited FPS"],
+        ["AA / Upscaling",     "TAA, TSR Quality, 3D Resolution 100%, Dynamic 3D Resolution Off"],
+        ["Frame Gen / Ray Tracing", "Both Off"],
+        ["Preset",             "Custom"],
+        ["Graphics Breakdown", "Nanite Off / GI Off / Reflections Off / Shadows Off / View Distance Far / Textures Low / Effects Low / Post Processing Low"]
+      ],
+      cyberpunk2077: [
+        ["Benchmark Mode",     "Built-in benchmark ran 2x"],
+        ["Display",            "Fullscreen, " + R_UNSET + ", VSync Off, FPS Cap Off"],
+        ["Preset",             "Custom, Texture High"],
+        ["Upscaling / Frame Gen", "Resolution Scaling Off, Frame Generation Off"],
+        ["Ray Tracing / Path Tracing", "All Off"],
+        ["Crowd / FOV",        "Crowd Density Medium, FOV 80"],
+        ["Post Effects",       "Film Grain On, DoF On, Lens Flare On, Motion Blur Off"],
+        ["Graphics Breakdown", "Local Shadow Mesh / Local Shadow / Cascaded Range / Cascaded Resolution all High"]
+      ]
     };
 
     // ─── HELPERS ─────────────────────────────────────────────────────────────
@@ -204,13 +251,29 @@ Updated: All 8 games with full settings
       }).join("");
     }
 
+    function buildMetricsHTML(gameData) {
+      var metrics = [
+        { label: "1080p", value: gameData.HD1080p },
+        { label: "1440p", value: gameData.UltraHD1440p },
+        { label: "4K", value: gameData.UHD4K }
+      ].filter(function (metric) {
+        return typeof metric.value === "number" && !isNaN(metric.value);
+      });
+
+      if (!metrics.length) {
+        return '<article class="gw-perf-metric-pill"><p class="gw-perf-metric-label">FPS</p><p class="gw-perf-metric-value">--<span class="gw-perf-metric-unit">FPS</span></p></article>';
+      }
+
+      return metrics.map(function (metric) {
+        return '<article class="gw-perf-metric-pill"><p class="gw-perf-metric-label">' + metric.label + '</p><p class="gw-perf-metric-value">' + formatFPS(metric.value) + '<span class="gw-perf-metric-unit">FPS</span></p></article>';
+      }).join("");
+    }
+
     function buildPanelHTML(panelId, gameKey, gameData) {
       return '' +
         '<article id="' + panelId + '" class="gw-perf-game-panel" role="tabpanel">' +
           '<div class="gw-perf-metric-grid">' +
-            '<article class="gw-perf-metric-pill"><p class="gw-perf-metric-label">1080p</p><p class="gw-perf-metric-value">' + formatFPS(gameData.HD1080p) + '<span class="gw-perf-metric-unit">FPS</span></p></article>' +
-            '<article class="gw-perf-metric-pill"><p class="gw-perf-metric-label">1440p</p><p class="gw-perf-metric-value">' + formatFPS(gameData.UltraHD1440p) + '<span class="gw-perf-metric-unit">FPS</span></p></article>' +
-            '<article class="gw-perf-metric-pill"><p class="gw-perf-metric-label">4K</p><p class="gw-perf-metric-value">' + formatFPS(gameData.UHD4K) + '<span class="gw-perf-metric-unit">FPS</span></p></article>' +
+            buildMetricsHTML(gameData) +
           '</div>' +
           '<button type="button" class="gw-perf-settings-toggle" aria-expanded="false">View Test Settings</button>' +
           '<div class="gw-perf-settings-body"><div class="gw-perf-settings-grid">' + buildSettingsHTML(gameKey, gameData) + '</div></div>' +

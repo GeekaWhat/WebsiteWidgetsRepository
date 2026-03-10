@@ -457,6 +457,57 @@ def to_js_object(hash)
   "{\n#{lines.join(",\n")}\n    }"
 end
 
+def escape_js_string(value)
+  value.to_s.gsub("\\", "\\\\\\").gsub('"', "\\\"")
+end
+
+def parse_perf_setting_pair(entry)
+  case entry
+  when Hash
+    label = entry["label"] || entry[:label]
+    value = entry["value"] || entry[:value]
+    return nil if blankish?(label) || blankish?(value)
+    [label.to_s, value.to_s]
+  when Array
+    return nil if entry.length < 2
+    label = entry[0]
+    value = entry[1]
+    return nil if blankish?(label) || blankish?(value)
+    [label.to_s, value.to_s]
+  when String
+    return nil unless entry.include?(":")
+    label, value = entry.split(":", 2).map(&:strip)
+    return nil if blankish?(label) || blankish?(value)
+    [label, value]
+  else
+    nil
+  end
+end
+
+def performance_settings_pairs(perf, key, resolution)
+  preserve_defaults = perf.dig("settings_policy", "preserve_default_settings") != false
+  locked = perf["default_settings_locked"]
+  raw_pairs = locked.is_a?(Hash) ? locked[key] : nil
+  pairs = Array(raw_pairs).map { |entry| parse_perf_setting_pair(entry) }.compact
+  return pairs unless pairs.empty? && preserve_defaults
+
+  [
+    ["Resolution", resolution.to_s],
+    ["Preset", "As configured in benchmark run"]
+  ]
+end
+
+def performance_driver_class_and_logo(driver_type)
+  case driver_type.to_s.strip.downcase
+  when "amd"
+    ["amd", "A"]
+  when "nvidia"
+    ["nvidia", "N"]
+  else
+    ["gpu", "?"]
+  end
+end
+
 def apply_performance_widget!(path, build_data)
   return unless path && File.exist?(path)
 
@@ -471,15 +522,63 @@ def apply_performance_widget!(path, build_data)
   data_map = parsed.to_h { |key, _, data| [key, data] }
 
   game_order_js = "var GAME_ORDER = [\n      " + order.map { |k| "\"#{k}\"" }.join(",\n      ") + "\n    ];"
-  game_labels_js = "var GAME_LABELS = {\n" + order.map { |k| "      #{k}: \"#{labels[k].gsub('"', '\"')}\"" }.join(",\n") + "\n    };"
+  game_labels_js = "var GAME_LABELS = {\n" + order.map { |k| "      #{k}: \"#{escape_js_string(labels[k])}\"" }.join(",\n") + "\n    };"
   game_data_js = "var GAME_DATA = {\n" + order.map { |k| "      #{k}: #{to_js_object(data_map[k])}" }.join(",\n") + "\n    };"
-  settings_js = "var SETTINGS = {\n" + order.map { |k| "      #{k}: [[\"Resolution\", \"#{data_map[k]["resolution"].gsub('"', '\"')}\"], [\"Preset\", \"As configured in benchmark run\"]]" }.join(",\n") + "\n    };"
+  settings_js = "var SETTINGS = {\n" + order.map { |k|
+    pairs = performance_settings_pairs(perf, k, data_map[k]["resolution"])
+    js_pairs = pairs.map { |label, value| "[\"#{escape_js_string(label)}\", \"#{escape_js_string(value)}\"]" }.join(", ")
+    "      #{k}: [#{js_pairs}]"
+  }.join(",\n") + "\n    };"
+  metrics_helper_js = <<~JS.chomp
+    function buildMetricsHTML(gameData) {
+      var metrics = [
+        { label: "1080p", value: gameData.HD1080p },
+        { label: "1440p", value: gameData.UltraHD1440p },
+        { label: "4K", value: gameData.UHD4K }
+      ].filter(function (metric) {
+        return typeof metric.value === "number" && !isNaN(metric.value);
+      });
+
+      if (!metrics.length) {
+        return '<article class="gw-perf-metric-pill"><p class="gw-perf-metric-label">FPS</p><p class="gw-perf-metric-value">--<span class="gw-perf-metric-unit">FPS</span></p></article>';
+      }
+
+      return metrics.map(function (metric) {
+        return '<article class="gw-perf-metric-pill"><p class="gw-perf-metric-label">' + metric.label + '</p><p class="gw-perf-metric-value">' + formatFPS(metric.value) + '<span class="gw-perf-metric-unit">FPS</span></p></article>';
+      }).join("");
+    }
+  JS
+  panel_js = <<~JS.chomp
+    function buildPanelHTML(panelId, gameKey, gameData) {
+      return '' +
+        '<article id="' + panelId + '" class="gw-perf-game-panel" role="tabpanel">' +
+          '<div class="gw-perf-metric-grid">' +
+            buildMetricsHTML(gameData) +
+          '</div>' +
+          '<button type="button" class="gw-perf-settings-toggle" aria-expanded="false">View Test Settings</button>' +
+          '<div class="gw-perf-settings-body"><div class="gw-perf-settings-grid">' + buildSettingsHTML(gameKey, gameData) + '</div></div>' +
+        '</article>';
+    }
+  JS
+  driver_type = perf.dig("driver_bar", "type")
+  driver_text = perf.dig("driver_bar", "driver_text")
+  driver_class, driver_logo = performance_driver_class_and_logo(driver_type)
+  driver_text = "Driver Version: #{driver_text}".sub(/\ADriver Version:\s*Driver Version:\s*/i, "Driver Version: ")
+  driver_text = "Driver Version: ..." if blankish?(driver_text.sub(/\ADriver Version:\s*/, ""))
 
   content = File.read(path)
+  content.sub!(%r|\.gw-perf-widget-single \.gw-perf-metric-grid \{[^}]*\}|m, '.gw-perf-widget-single .gw-perf-metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin: 0 0 10px; }')
+  if content.include?("function buildMetricsHTML(gameData)")
+    content.sub!(/function buildMetricsHTML\(gameData\) \{.*?\n    \}/m, metrics_helper_js)
+  elsif content.include?("function buildPanelHTML(panelId, gameKey, gameData)")
+    content.sub!(/function buildPanelHTML\(panelId, gameKey, gameData\) \{/m, "#{metrics_helper_js}\n\n    function buildPanelHTML(panelId, gameKey, gameData) {")
+  end
+  content.sub!(/function buildPanelHTML\(panelId, gameKey, gameData\) \{.*?\n    \}/m, panel_js)
   content.sub!(/var GAME_ORDER = \[.*?\];/m, game_order_js)
   content.sub!(/var GAME_LABELS = \{.*?\};/m, game_labels_js)
   content.sub!(/var GAME_DATA = \{.*?\};/m, game_data_js)
   content.sub!(/var SETTINGS = \{.*?\};/m, settings_js)
+  content.sub!(%r{<div class="gw-driver-bar\s+[^"]*"><span class="gw-driver-logo">.*?</span>.*?</div>}m, %(<div class="gw-driver-bar #{driver_class}"><span class="gw-driver-logo">#{driver_logo}</span>#{escape_html(driver_text)}</div>))
 
   File.write(path, content)
 end
@@ -528,6 +627,14 @@ def run_quality_audit(build_data, target_dir, component_headings)
     issues << "psu_connectors incomplete fields: #{missing.join(', ')}" unless missing.empty?
   end
 
+  if section_enabled?(build_data, "performance_widget")
+    perf = build_data["performance_widget"]
+    parsed = parse_performance_results(perf["raw_results"])
+    if parsed.empty?
+      issues << "performance_widget raw_results is empty or invalid"
+    end
+  end
+
   checks = [
     ["motherboard-specs-table", component_headings["motherboard"], "motherboard widget does not include component heading value"],
     ["pc-case-spec-table", component_headings["case"], "case widget does not include component heading value"],
@@ -545,6 +652,36 @@ def run_quality_audit(build_data, target_dir, component_headings)
 
     content = File.read(file)
     issues << "#{message}: expected `#{expected}` in #{File.basename(file)}" unless content.include?(expected)
+  end
+
+  if section_enabled?(build_data, "performance_widget")
+    perf = build_data["performance_widget"]
+    expected_results = parse_performance_results(perf["raw_results"])
+    expected_keys = expected_results.map(&:first)
+    perf_name = target_files.find { |f| f.include?("performance-graph-widget") && f.end_with?(build_suffix) } || target_files.find { |f| f.include?("performance-graph-widget") }
+    if perf_name.nil?
+      issues << "missing performance widget html for enabled performance_widget section"
+    else
+      perf_file = target_dir.join(perf_name).to_s
+      perf_content = File.read(perf_file)
+
+      match = perf_content.match(/var GAME_ORDER = \[(.*?)\];/m)
+      html_keys = if match
+                    match[1].scan(/"([^"]+)"/).flatten
+                  else
+                    []
+                  end
+      issues << "performance widget GAME_ORDER does not match YAML raw_results (expected #{expected_keys.join(', ')}, got #{html_keys.join(', ')})" if html_keys != expected_keys
+
+      driver_text = perf.dig("driver_bar", "driver_text").to_s
+      issues << "performance widget driver bar did not render expected driver text" unless driver_text.empty? || perf_content.include?(driver_text)
+
+      if perf_content.include?("Driver Version: ??") || perf_content.include?("capture build")
+        issues << "performance widget driver bar still contains placeholder text"
+      end
+
+      issues << "performance widget still uses static 3-pill metric rows (expected dynamic metric scaling)" unless perf_content.include?("buildMetricsHTML(gameData)")
+    end
   end
 
   audit_path = target_dir.join("build-audit.txt").to_s

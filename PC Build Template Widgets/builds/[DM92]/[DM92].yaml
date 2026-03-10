@@ -417,12 +417,12 @@ performance_widget:
   kicker: "Performance Snapshot"
   title: "Multi-Game Average FPS"
   driver_bar:
-    type: "nvidia"                                               # gpu|amd|nvidia
-    driver_text: "Driver Version: NVIDIA (capture build)"
+    type: "amd"                                               # gpu|amd|nvidia
+    driver_text: "Driver Version: AMD Software: Adrenalin Edition 26.2.2 (WHQL Recommended, released 2026-02-26)"
   fps_input_mode: "single_line_results"
   raw_results:
     - "CyberPunk 2077 - 89 FPS (@4K High)"
-    - "Marvel Rivals - 88.4 FPS (@4K High)"
+    - "marvel rivals - 88.4 FPS (@4K High)"
     - "RESIDENT EVIL Requiem - 91.9 FPS (@4K High)"
     - "Battlefield 6 - 93.8 FPS (@4K High)"
     - "Arc Raiders - 112.4 FPS (@4K High)"
@@ -438,12 +438,22 @@ performance_widget:
     preserve_default_settings: true
     override_only_if_provided: true
   default_settings_locked:
-    arcraiders: []
-    marvelrivals: []
-    battlefield6: []
+    arcraiders:
+      - { label: "Resolution", value: "4K High" }
+      - { label: "Preset", value: "As configured in benchmark run" }
+    marvelrivals:
+      - { label: "Resolution", value: "4K High" }
+      - { label: "Preset", value: "As configured in benchmark run" }
+    battlefield6:
+      - { label: "Resolution", value: "4K High" }
+      - { label: "Preset", value: "As configured in benchmark run" }
     callofduty: []
-    fortnite: []
-    cyberpunk2077: []
+    fortnite:
+      - { label: "Resolution", value: "1080p Competitive" }
+      - { label: "Preset", value: "As configured in benchmark run" }
+    cyberpunk2077:
+      - { label: "Resolution", value: "4K High" }
+      - { label: "Preset", value: "As configured in benchmark run" }
     hogwartslegacy: []
     f125: []
 

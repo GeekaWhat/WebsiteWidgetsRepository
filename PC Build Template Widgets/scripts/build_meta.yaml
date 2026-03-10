@@ -426,6 +426,13 @@ performance_widget:
     preserve_default_settings: true
     override_only_if_provided: true
   default_settings_locked:
+    # Optional per-game settings rows shown in widget.
+    # Supported entry formats per game:
+    # - { label: "Preset", value: "Ultra" }
+    # - ["Preset", "Ultra"]
+    # - "Preset: Ultra"
+    # If empty and preserve_default_settings=true, renderer auto-adds:
+    # Resolution + "As configured in benchmark run".
     arcraiders: []
     marvelrivals: []
     battlefield6: []
