@@ -86,7 +86,7 @@ Updated: All 8 games with full settings
   </div>
 
   <div class="gw-perf-body"></div>
-  <div class="gw-driver-bar amd"><span class="gw-driver-logo">A</span>Driver Version: AMD Software: Adrenalin Edition 26.2.2 (WHQL Recommended, released 2026-02-26)</div> 
+  <div class="gw-driver-bar nvidia"><span class="gw-driver-logo">N</span>Driver Version: GeForce Game Ready Driver 591.86</div> 
   <!-- <div class="gw-driver-bar gpu"><span class="gw-driver-logo">?</span>Driver Version: ?? </div> -->         
   <!-- <div class="gw-driver-bar amd"><span class="gw-driver-logo">A</span>Driver Version: </div> -->
   <!-- <div class="gw-driver-bar nvidia"><span class="gw-driver-logo">N</span>Driver Version: </div> -->
@@ -117,7 +117,7 @@ Updated: All 8 games with full settings
     var GAME_LABELS = {
       cyberpunk2077: "Cyberpunk 2077",
       marvelrivals: "Marvel Rivals",
-      residentevilrequiem: "RESIDENT EVIL Requiem",
+      residentevilrequiem: "Resident Evil Requiem",
       battlefield6: "Battlefield 6",
       arcraiders: "ARC Raiders",
       fortnite: "Fortnite"
@@ -187,8 +187,16 @@ Updated: All 8 games with full settings
         ["Graphics Breakdown", "Model / Post / Shadows / Texture / Effects / Foliage all High"]
       ],
       residentevilrequiem: [
-        ["Resolution",         "4K High"],
-        ["Preset",             "As configured in benchmark run"]
+        ["Display",            "Fullscreen, 3840x2160"],
+        ["Frame Rate",         "Variable"],
+        ["Preset",             "Custom, Ray Tracing Off"],
+        ["Upscaling / Frame Gen", "Upscaling Off, Frame Generation Off"],
+        ["Low Latency / Reconstruction", "Low-latency mode On where available, Ray Reconstruction Off"],
+        ["Core Quality",       "Lighting & Shadow High, Texture High, Texture Filter High (ANISO x8), Ambient Occlusion High"],
+        ["Geometry / Effects", "Hair Strands On, Mesh Quality Standard, Particle Lighting On, VFX Quality Standard"],
+        ["Reflections / Volumetrics", "Screen Space Reflections On, Volumetric Fog High, Subsurface Scattering High"],
+        ["Image / Post Effects", "TAA, Motion Blur Off, Depth of Field On, Lens Distortion + Chromatic Aberration On, Lens Dirt On, Lens Flare Standard"],
+        ["Shadow Detail",      "Shadow Quality High, Contact Shadows On"]
       ],
       battlefield6: [
         ["Map / Mode",         "Empire State, Conquest"],
@@ -206,7 +214,7 @@ Updated: All 8 games with full settings
         ["Display",            "Fullscreen, " + R_1080 + ", DirectX 12, VSync Off, Unlimited FPS"],
         ["AA / Upscaling",     "TAA, TSR Quality, 3D Resolution 100%, Dynamic 3D Resolution Off"],
         ["Frame Gen / Ray Tracing", "Both Off"],
-        ["Preset",             "Custom"],
+        ["Preset",             "Custom, Competitive settings"],
         ["Graphics Breakdown", "Nanite Off / GI Off / Reflections Off / Shadows Off / View Distance Far / Textures Low / Effects Low / Post Processing Low"]
       ],
       cyberpunk2077: [
