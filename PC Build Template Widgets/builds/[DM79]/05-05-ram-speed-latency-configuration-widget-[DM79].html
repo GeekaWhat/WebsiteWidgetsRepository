@@ -130,32 +130,11 @@ Paste into a Gutenberg "Custom HTML" block.
 
   .gw-ram-bar-scale {
     margin: 8px 0 0;
-    position: relative;
-    height: 18px;
+    display: flex;
+    justify-content: space-between;
     font-size: 0.76rem;
     color: #516078;
     line-height: 1.2;
-  }
-
-  .gw-ram-bar-scale span {
-    position: absolute;
-    top: 0;
-    transform: translateX(-50%);
-    white-space: nowrap;
-  }
-
-  .gw-ram-bar-scale .gw-ram-scale-min {
-    left: 0;
-    transform: none;
-  }
-
-  .gw-ram-bar-scale .gw-ram-scale-current {
-    left: var(--ram-marker-at);
-  }
-
-  .gw-ram-bar-scale .gw-ram-scale-max {
-    right: 0;
-    transform: none;
   }
 
   .gw-ram-slot-card {
@@ -260,9 +239,9 @@ Paste into a Gutenberg "Custom HTML" block.
         <span class="gw-ram-bar-marker"><span class="gw-ram-bar-marker-label">6000MHz</span></span>
       </div>
       <div class="gw-ram-bar-scale">
-        <span class="gw-ram-scale-min">4800MHz</span>
-        <span class="gw-ram-scale-current"><strong>6000MHz</strong></span>
-        <span class="gw-ram-scale-max">8000MHz+</span>
+        <span>4800MHz</span>
+        <span><strong>6000MHz</strong></span>
+        <span>8000MHz+</span>
       </div>
     </article>
 

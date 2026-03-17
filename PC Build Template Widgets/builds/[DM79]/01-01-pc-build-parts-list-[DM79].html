@@ -1,0 +1,356 @@
+<!--
+GeekaWhat Build Parts List Widget v1 (HTML + CSS + JS)
+Paste into a Gutenberg "Custom HTML" block.
+Add/remove parts by duplicating or removing:
+1) a left menu .gw-build-tab button
+2) its matching right panel .gw-build-panel with the same data-target/id.
+-->
+
+<style>
+  .gw-build-widget {
+    width: 100%;
+    margin: 18px 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+  }
+
+  .gw-build-layout {
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .gw-build-menu {
+    border-right: 1px solid #e6edf7;
+    background: #f8fbff;
+    padding: 8px;
+  }
+
+  .gw-build-tab {
+    width: 100%;
+    display: block;
+    border: 1px solid #d9e8ff;
+    background: #ffffff;
+    color: #111111;
+    border-radius: 10px;
+    padding: 10px 11px;
+    margin: 0 0 8px;
+    text-align: left;
+    font-size: 0.92rem;
+    font-weight: 400;
+    line-height: 1.25;
+    cursor: pointer;
+  }
+
+  .gw-build-tab:last-child {
+    margin-bottom: 0;
+  }
+
+  .gw-build-tab.is-active {
+    background: #037cff;
+    border-color: #037cff;
+    color: #ffffff;
+  }
+
+  .gw-build-tab strong {
+    font-weight: 700;
+  }
+
+  .gw-build-tab:not(.is-active):hover,
+  .gw-build-tab:not(.is-active):focus {
+    background: #eef5ff;
+    border-color: #037cff;
+    color: #111111;
+    outline: none;
+  }
+
+  .gw-build-tab.is-active:hover,
+  .gw-build-tab.is-active:focus {
+    background: #026fe5;
+    border-color: #026fe5;
+    color: #ffffff;
+    outline: none;
+  }
+
+  .gw-build-content {
+    padding: 14px;
+  }
+
+  .gw-build-panel {
+    display: none;
+  }
+
+  .gw-build-panel.is-active {
+    display: block;
+  }
+
+  .gw-build-title {
+    margin: 0;
+    font-size: 1.02rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .gw-build-media {
+    margin: 0 0 10px;
+    border: 1px solid #e6edf7;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  .gw-build-media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 260px;
+    object-fit: cover;
+  }
+
+  .gw-build-head-row {
+    margin: 0 0 8px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .gw-build-skip {
+    white-space: nowrap;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #037cff;
+    text-decoration: none;
+  }
+
+  .gw-build-skip:hover,
+  .gw-build-skip:focus {
+    text-decoration: underline;
+  }
+
+  .gw-build-summary {
+    margin: 0 0 10px;
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  .gw-build-specs {
+    margin: 0 0 12px;
+    border: 1px solid #e6edf7;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .gw-build-spec-row {
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr);
+    border-bottom: 1px solid #e6edf7;
+    background: #ffffff;
+  }
+
+  .gw-build-spec-row:last-child {
+    border-bottom: 0;
+  }
+
+  .gw-build-label,
+  .gw-build-value {
+    padding: 9px 10px;
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+
+  .gw-build-label {
+    background: #f4f8ff;
+    font-weight: 700;
+  }
+
+  .gw-build-value {
+    font-weight: 500;
+  }
+
+  .gw-buy-placeholder {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    font-size: 0.9rem;
+    line-height: 1.35;
+    color: inherit;
+  }
+
+  @media (max-width: 760px) {
+    .gw-build-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-build-menu {
+      border-right: 0;
+      border-bottom: 1px solid #e6edf7;
+    }
+
+    .gw-build-spec-row {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-build-label {
+      border-bottom: 1px solid #e6edf7;
+    }
+  }
+</style>
+
+<section class="gw-build-widget" aria-label="Build parts list">
+  <div class="gw-build-layout">
+          <div class="gw-build-menu" role="tablist" aria-label="Build Components">
+<button class="gw-build-tab is-active" type="button" role="tab" aria-selected="true" data-target="gw-part-cpu"><strong>CPU:</strong> AMD Ryzen 7 7800X3D</button>
+<button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-cooler"><strong>CPU Cooler:</strong> COUGAR Poseidon Vistek Pro ARGB 360</button>
+<button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-mobo"><strong>Motherboard:</strong> MSI MPG X870E CARBON WiFi</button>
+<button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-ram"><strong>RAM:</strong> G.Skill Trident Z5 NEO DDR5</button>
+<button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-ssd"><strong>SSD:</strong> Samsung 9100 Pro</button>
+<button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-gpu"><strong>GPU:</strong> MSI GeForce RTX 5080 16G Expert</button>
+<button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-case"><strong>Case:</strong> COUGAR CFV235</button>
+<button class="gw-build-tab" type="button" role="tab" aria-selected="false" data-target="gw-part-psu"><strong>PSU:</strong> MSI MAG A850GLS PCIE5</button>
+      </div>
+
+          <div class="gw-build-content">
+<article id="gw-part-cpu" class="gw-build-panel is-active" role="tabpanel">
+  <div class="gw-build-head-row"><h3 class="gw-build-title">AMD Ryzen 7 7800X3D</h3><a class="gw-build-skip" href="#CPU">Skip to Section</a></div>
+  <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2025/09/MPI_AMD-Ryzen-7-7800X3D-1.jpg" alt="AMD Ryzen 7 7800X3D processor"></div>
+  <p class="gw-build-summary">AMD's Ryzen 7 7800X3D remains a strong gaming-first CPU thanks to its 8 Zen 4 cores and 3D V-Cache, making it a sensible match for a high-end 4K GeForce build.</p>
+          <div class="gw-build-specs">
+<div class="gw-build-spec-row"><div class="gw-build-label">Cores / Threads</div><div class="gw-build-value">8 Cores / 16 Threads</div></div>
+<div class="gw-build-spec-row"><div class="gw-build-label">Boost Clock</div><div class="gw-build-value">Up to 5.0GHz</div></div>
+<div class="gw-build-spec-row"><div class="gw-build-label">Cache</div><div class="gw-build-value">96MB L3 3D V-Cache</div></div>
+<div class="gw-build-spec-row"><div class="gw-build-label">Socket</div><div class="gw-build-value">AM5</div></div>
+<div class="gw-build-spec-row"><div class="gw-build-label">TDP</div><div class="gw-build-value">120W</div></div>
+        </div>
+  <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/7kss" AMAZON-US-ASIN="B0BTZB7F88" AMAZON-GB-ASIN="B0BTZB7F88" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Famd-ryzen-7-7800x3d-eight-core-5.00ghz-socket-am5-processor-retail-cp-3dt-am.html" overclockers-awin-gb-itemid="CP-3DT-AM"]</p>
+</article>
+
+<article id="gw-part-cooler" class="gw-build-panel" role="tabpanel">
+  <div class="gw-build-head-row"><h3 class="gw-build-title">COUGAR Poseidon Vistek Pro ARGB 360</h3><a class="gw-build-skip" href="#cpu-cooler">Skip to Section</a></div>
+  <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2025/11/MPI_Cougar-Poseidon-Vistek-Pro-ARGB-360.jpg" alt="COUGAR Poseidon Vistek Pro ARGB 360 liquid CPU cooler"></div>
+  <p class="gw-build-summary">COUGAR's 360mm Poseidon Vistek Pro ARGB pairs a large radiator with an IPS display and bundled ARGB fans, giving this refresh build both strong cooling headroom and the right visual flair.</p>
+          <div class="gw-build-specs">
+<div class="gw-build-spec-row"><div class="gw-build-label">Cooler Type</div><div class="gw-build-value">360mm AIO Liquid Cooler</div></div>
+<div class="gw-build-spec-row"><div class="gw-build-label">Display</div><div class="gw-build-value">3.95-inch IPS LCD</div></div>
+<div class="gw-build-spec-row"><div class="gw-build-label">Fans</div><div class="gw-build-value">3 x 120mm ARGB PWM</div></div>
+<div class="gw-build-spec-row"><div class="gw-build-label">Socket Support</div><div class="gw-build-value">AM5 / LGA1851 / LGA1700</div></div>
+        </div>
+  
+</article>
+
+<article id="gw-part-mobo" class="gw-build-panel" role="tabpanel">
+  <div class="gw-build-head-row"><h3 class="gw-build-title">MSI MPG X870E CARBON WiFi</h3><a class="gw-build-skip" href="#motherboard">Skip to Section</a></div>
+  <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2024/11/MPI_MSI-MPG-X870E-Carbon-WiFi.jpg" alt="MSI MPG X870E CARBON WiFi motherboard"></div>
+  <p class="gw-build-summary">MSI's MPG X870E CARBON WiFi is a premium AM5 motherboard with PCIe 5.0 graphics and storage support, dual LAN, and Wi-Fi 7, making it a feature-rich foundation for this 4K gaming PC.</p>
+          <div class="gw-build-specs">
+<div class="gw-build-spec-row"><div class="gw-build-label">Chipset</div><div class="gw-build-value">AMD X870E</div></div>
+<div class="gw-build-spec-row"><div class="gw-build-label">Form Factor</div><div class="gw-build-value">ATX</div></div>
+<div class="gw-build-spec-row"><div class="gw-build-label">Memory Support</div><div class="gw-build-value">DDR5 up to 256GB / 8400+ MT/s (OC)</div></div>
+<div class="gw-build-spec-row"><div class="gw-build-label">Networking</div><div class="gw-build-value">5G LAN + 2.5G LAN + Wi-Fi 7</div></div>
+        </div>
+  <p class="gw-buy-placeholder">[geeka_price newegg-howl-us-href="https://howl.me/cnctHtjSB9l" newegg-howl-us-itemid="N82E16813144666" AMAZON-GENIUS-HREF="https://geni.us/pqAPMkw" AMAZON-US-ASIN="‎" AMAZON-GB-ASIN="B0DCZXJ32B" bestbuy-howl-us-href="" bestbuy-howl-us-itemid="" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fmsi-mpg-x870e-carbon-wifi-socket-am5-ddr5-atx-motherboard-mot-msi-03300.html%3F_gl%3D1%2A10w0xa8%2A_up%2AMQ..%26gclid%3DCjwKCAjw88yxBhBWEiwA7cm6pUaGLINOoTnXMXXNULHQDnW-L6Dmiqd7Bys2SxdjXYegU5glFKU0ghoC2V0QAvD_BwE" overclockers-awin-gb-itemid="MOT-MSI-03300"]</p>
+</article>
+
+<article id="gw-part-ram" class="gw-build-panel" role="tabpanel">
+  <div class="gw-build-head-row"><h3 class="gw-build-title">G.Skill Trident Z5 NEO DDR5</h3><a class="gw-build-skip" href="#ram">Skip to Section</a></div>
+  <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2022/09/GSkill-Trident-Z5-Neo-DDR5.jpg" alt="G.Skill Trident Z5 NEO DDR5 memory kit"></div>
+  <p class="gw-build-summary">This Trident Z5 NEO kit gives the AM5 platform the DDR5-6000 sweet spot with tight timings, which is exactly where Ryzen 7000 gaming systems tend to deliver their best balance of latency and stability.</p>
+          <div class="gw-build-specs">
+<div class="gw-build-spec-row"><div class="gw-build-label">Capacity</div><div class="gw-build-value">32GB (2 x 16GB)</div></div>
+<div class="gw-build-spec-row"><div class="gw-build-label">Speed</div><div class="gw-build-value">DDR5-6000</div></div>
+<div class="gw-build-spec-row"><div class="gw-build-label">Latency</div><div class="gw-build-value">CL26</div></div>
+<div class="gw-build-spec-row"><div class="gw-build-label">Profile</div><div class="gw-build-value">AMD EXPO</div></div>
+        </div>
+  <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/F4Q2Q" AMAZON-US-ASIN="B0BF6ZQ8MY" AMAZON-GB-ASIN="B0BF6ZQ8MY" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Ftrident-z5-neo-expo-rgb-32gb-2x16gb-ddr5-c26-6000mhz-dual-channel-kit-mem-gsk-05022.html" overclockers-awin-gb-itemid="MEM-GSK-05022"]</p>
+</article>
+
+<article id="gw-part-ssd" class="gw-build-panel" role="tabpanel">
+  <div class="gw-build-head-row"><h3 class="gw-build-title">Samsung 9100 Pro</h3><a class="gw-build-skip" href="#ssd">Skip to Section</a></div>
+  <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2025/08/MPI_Samsung-9100-PRO-2TB.jpg" alt="Samsung 9100 Pro 2TB PCIe 5.0 NVMe SSD"></div>
+  <p class="gw-build-summary">Samsung's 9100 Pro is a flagship PCIe 5.0 SSD built for extreme sequential throughput, giving this build a fast boot drive with plenty of bandwidth for large game installs and content workloads.</p>
+          <div class="gw-build-specs">
+<div class="gw-build-spec-row"><div class="gw-build-label">Capacity</div><div class="gw-build-value">2TB</div></div>
+<div class="gw-build-spec-row"><div class="gw-build-label">Interface</div><div class="gw-build-value">PCIe 5.0 x4 / NVMe 2.0</div></div>
+<div class="gw-build-spec-row"><div class="gw-build-label">Sequential Read</div><div class="gw-build-value">14,054 MB/s (GeekaWhat test)</div></div>
+<div class="gw-build-spec-row"><div class="gw-build-label">Sequential Write</div><div class="gw-build-value">13,189 MB/s (GeekaWhat test)</div></div>
+        </div>
+  <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/pJ5f5c" AMAZON-US-ASIN="B0DWFLPMM5" AMAZON-GB-ASIN="B0DWFLPMM5" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fsamsung-9100-pro-2tb-m.2-2280-pcie-5.0-x4-nvme-solid-state-drive-sto-sam-04766.html" overclockers-awin-gb-itemid="STO-SAM-04766"]</p>
+</article>
+
+<article id="gw-part-gpu" class="gw-build-panel" role="tabpanel">
+  <div class="gw-build-head-row"><h3 class="gw-build-title">MSI GeForce RTX 5080 16G Expert</h3><a class="gw-build-skip" href="#GPU">Skip to Section</a></div>
+  <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2025/11/MPI_MSI-GeForce-RTX-5080-16G-Expert.jpg" alt="MSI GeForce RTX 5080 16G Expert graphics card"></div>
+  <p class="gw-build-summary">The RTX 5080 16G Expert is the centerpiece of this build, delivering the 4K gaming performance shown in the article while keeping NVIDIA's latest upscaling and frame generation stack on the table.</p>
+          <div class="gw-build-specs">
+<div class="gw-build-spec-row"><div class="gw-build-label">VRAM</div><div class="gw-build-value">16GB GDDR7</div></div>
+<div class="gw-build-spec-row"><div class="gw-build-label">Boost Clock</div><div class="gw-build-value">2617MHz</div></div>
+<div class="gw-build-spec-row"><div class="gw-build-label">Interface</div><div class="gw-build-value">PCIe 5.0 x16</div></div>
+<div class="gw-build-spec-row"><div class="gw-build-label">Power Connector</div><div class="gw-build-value">1 x 16-pin (12V-2x6)</div></div>
+        </div>
+  <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="https://geni.us/9AokXWd" AMAZON-US-ASIN="B0FLSWN28H" AMAZON-GB-ASIN="B096Y3TYDH"]</p>
+</article>
+
+<article id="gw-part-case" class="gw-build-panel" role="tabpanel">
+  <div class="gw-build-head-row"><h3 class="gw-build-title">COUGAR CFV235</h3><a class="gw-build-skip" href="#case">Skip to Section</a></div>
+  <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2025/11/MPI_Cougar-CFV235-Vision.jpg" alt="COUGAR CFV235 PC case"></div>
+  <p class="gw-build-summary">COUGAR's CFV235 is the showpiece chassis for this build, combining panoramic tempered glass styling with broad radiator, fan, and GPU clearance support for a powerful but still display-friendly system.</p>
+          <div class="gw-build-specs">
+<div class="gw-build-spec-row"><div class="gw-build-label">Case Type</div><div class="gw-build-value">Mid Tower</div></div>
+<div class="gw-build-spec-row"><div class="gw-build-label">Motherboard Support</div><div class="gw-build-value">Mini-ITX / Micro-ATX / ATX / CEB</div></div>
+<div class="gw-build-spec-row"><div class="gw-build-label">GPU Clearance</div><div class="gw-build-value">Up to 430mm</div></div>
+<div class="gw-build-spec-row"><div class="gw-build-label">Radiator Support</div><div class="gw-build-value">Up to 360mm</div></div>
+        </div>
+  
+</article>
+
+<article id="gw-part-psu" class="gw-build-panel" role="tabpanel">
+  <div class="gw-build-head-row"><h3 class="gw-build-title">MSI MAG A850GLS PCIE5</h3><a class="gw-build-skip" href="#psu">Skip to Section</a></div>
+  <div class="gw-build-media"><img src="https://geekawhat.com/wp-content/uploads/2025/11/MPI_MSI-MAG-A850GLS-PCIE5.jpg" alt="MSI MAG A850GLS PCIE5 power supply"></div>
+  <p class="gw-build-summary">MSI's MAG A850GLS PCIE5 brings native ATX 3.1 and PCIe 5.1 support to the build, including the modern 12V-2x6 GPU cable needed for a clean RTX 5080 install.</p>
+          <div class="gw-build-specs">
+<div class="gw-build-spec-row"><div class="gw-build-label">Output</div><div class="gw-build-value">850W</div></div>
+<div class="gw-build-spec-row"><div class="gw-build-label">Efficiency</div><div class="gw-build-value">80 Plus Gold</div></div>
+<div class="gw-build-spec-row"><div class="gw-build-label">Standard</div><div class="gw-build-value">ATX 3.1 / PCIe 5.1</div></div>
+<div class="gw-build-spec-row"><div class="gw-build-label">GPU Cable</div><div class="gw-build-value">Native 12V-2x6 (600W)</div></div>
+        </div>
+  <p class="gw-buy-placeholder">[geeka_price AMAZON-GENIUS-HREF="" AMAZON-US-ASIN="" AMAZON-GB-ASIN="" overclockers-awin-gb-href="" overclockers-awin-gb-itemid=""]</p>
+</article>
+      </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.currentScript && document.currentScript.previousElementSibling;
+    if (!root || !root.classList.contains("gw-build-widget")) {
+      root = document.querySelector(".gw-build-widget");
+    }
+    if (!root) return;
+
+    var tabs = root.querySelectorAll(".gw-build-tab");
+    var panels = root.querySelectorAll(".gw-build-panel");
+
+    function activate(targetId) {
+      tabs.forEach(function (tab) {
+        var isActive = tab.getAttribute("data-target") === targetId;
+        tab.classList.toggle("is-active", isActive);
+        tab.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+
+      panels.forEach(function (panel) {
+        panel.classList.toggle("is-active", panel.id === targetId);
+      });
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        activate(tab.getAttribute("data-target"));
+      });
+    });
+  })();
+</script>

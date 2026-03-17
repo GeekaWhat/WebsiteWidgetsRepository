@@ -1,7 +1,7 @@
 @echo off
 setlocal
 
-set "REPO_ROOT=%~dp0"
+set "REPO_ROOT=%~dp0..\..\.."
 pushd "%REPO_ROOT%" >nul 2>&1
 if errorlevel 1 (
   echo ERROR: Failed to open repo root: "%REPO_ROOT%"

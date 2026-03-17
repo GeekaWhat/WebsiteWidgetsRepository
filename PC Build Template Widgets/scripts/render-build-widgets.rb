@@ -343,6 +343,92 @@ def apply_case_specs!(path, build_data)
   File.write(path, content)
 end
 
+def format_mb_s(value)
+  value.to_i.to_s.reverse.scan(/\d{1,3}/).join(",").reverse
+end
+
+def escape_js_string(value)
+  value.to_s.gsub("\\", "\\\\\\").gsub('"', "\\\"")
+end
+
+def apply_cooler_temps_graph!(path, build_data)
+  return unless path && File.exist?(path)
+
+  cooler = build_data["cooler_temps_graph"]
+  return unless cooler.is_a?(Hash) && cooler["enabled"] == true
+
+  title = cooler["title"]
+  benchmark_badge = cooler["benchmark_badge"]
+  highlight_names = Array(cooler["highlight_names"]).map(&:to_s).map(&:strip).reject(&:empty?)
+  highlight_name = cooler["highlight_name"].to_s
+  highlight_value = if highlight_names.any?
+    "[#{highlight_names.map { |name| %("#{escape_js_string(name)}") }.join(", ")}]"
+  else
+    %("#{escape_js_string(highlight_name)}")
+  end
+
+  content = File.read(path)
+  content.sub!(%r{(<section class="gw-testing-widget" id="gw-cooler-testing-widget-v2" aria-label=")(.*?)(">)}m) do
+    "#{Regexp.last_match(1)}#{escape_html(title)} testing carousel#{Regexp.last_match(3)}"
+  end
+  content.sub!(%r{(<h3 class="gw-testing-title">)(.*?)(</h3>)}m) do
+    "#{Regexp.last_match(1)}#{escape_html(title)}#{Regexp.last_match(3)}"
+  end
+  content.sub!(%r{(<p class="gw-testing-bench-badge">\s*<span class="gw-testing-bench-icon"></span>\s*)(.*?)(\s*</p>)}m) do
+    "#{Regexp.last_match(1)}#{escape_html(benchmark_badge)}#{Regexp.last_match(3)}"
+  end
+  content.sub!(/var highlightName = ".*?";/, %(var highlightName = #{highlight_value};))
+  content.sub!(%r{function colorByHighlight\(labels, focus, base, hi\) \{\s*return labels\.map\(function \(n\) \{ return n === focus \? hi : base; \}\);\s*\}\s*}m) do
+    <<~JS.chomp
+      function colorByHighlight(labels, focus, base, hi) {
+        var focusList = Array.isArray(focus) ? focus : [focus];
+        var normalizedFocus = focusList.map(function (entry) {
+          return String(entry || "").trim().toLowerCase();
+        });
+        return labels.map(function (n) {
+          return normalizedFocus.indexOf(String(n || "").trim().toLowerCase()) !== -1 ? hi : base;
+        });
+      }
+    JS
+  end
+
+  File.write(path, content)
+end
+
+def apply_ssd_widget!(path, build_data)
+  return unless path && File.exist?(path)
+
+  ssd = build_data["ssd_widget"]
+  return unless ssd.is_a?(Hash) && ssd["enabled"] == true
+
+  read_value = format_mb_s(ssd["sequential_read_mb_s"])
+  write_value = format_mb_s(ssd["sequential_write_mb_s"])
+  read_percent = ssd["read_marker_percent"].to_s.strip
+  write_percent = ssd["write_marker_percent"].to_s.strip
+
+  content = File.read(path)
+  content.sub!(%r{(<p class="gw-ssd-sub">)(.*?)(</p>)}m) do
+    "#{Regexp.last_match(1)}#{escape_html(ssd["subtext"])}#{Regexp.last_match(3)}"
+  end
+  content.sub!(%r{(<p class="gw-ssd-metric-label">Sequential Read</p>\s*<p class="gw-ssd-metric-value">)(.*?)(</p>)}m) do
+    "#{Regexp.last_match(1)}#{read_value} MB/s#{Regexp.last_match(3)}"
+  end
+  content.sub!(%r{(<p class="gw-ssd-metric-label">Sequential Write</p>\s*<p class="gw-ssd-metric-value">)(.*?)(</p>)}m) do
+    "#{Regexp.last_match(1)}#{write_value} MB/s#{Regexp.last_match(3)}"
+  end
+  content.sub!(%r{<span class="gw-ssd-marker read" style="--at:\s*[^;]+;"><span class="gw-ssd-dot-label">.*?</span></span>}m) do
+    %(<span class="gw-ssd-marker read" style="--at: #{escape_html(read_percent)}%;"><span class="gw-ssd-dot-label">Read #{read_value} MB/s</span></span>)
+  end
+  content.sub!(%r{<span class="gw-ssd-marker write" style="--at:\s*[^;]+;"><span class="gw-ssd-dot-label">.*?</span></span>}m) do
+    %(<span class="gw-ssd-marker write" style="--at: #{escape_html(write_percent)}%;"><span class="gw-ssd-dot-label">Write #{write_value} MB/s</span></span>)
+  end
+  content.sub!(%r{(<p class="gw-ssd-foot">)(.*?)(</p>)}m) do
+    "#{Regexp.last_match(1)}#{escape_html(ssd["footnote"])}#{Regexp.last_match(3)}"
+  end
+
+  File.write(path, content)
+end
+
 def render_psu_spec_rows(row_map)
   row_map.map do |label, key, data|
     next if blankish?(data[key])
@@ -455,10 +541,6 @@ def to_js_object(hash)
     "      #{k}: #{value}"
   end
   "{\n#{lines.join(",\n")}\n    }"
-end
-
-def escape_js_string(value)
-  value.to_s.gsub("\\", "\\\\\\").gsub('"', "\\\"")
 end
 
 def parse_perf_setting_pair(entry)
@@ -636,14 +718,15 @@ def run_quality_audit(build_data, target_dir, component_headings)
   end
 
   checks = [
-    ["motherboard-specs-table", component_headings["motherboard"], "motherboard widget does not include component heading value"],
-    ["pc-case-spec-table", component_headings["case"], "case widget does not include component heading value"],
-    ["psu-connector-breakdown", component_headings["psu"], "psu widget does not include component heading value"]
+    ["motherboard_specs", "motherboard-specs-table", component_headings["motherboard"], "motherboard widget does not include component heading value"],
+    ["case_specs", "pc-case-spec-table", component_headings["case"], "case widget does not include component heading value"],
+    ["psu_connectors", "psu-connector-breakdown", component_headings["psu"], "psu widget does not include component heading value"]
   ]
 
   build_suffix = "-#{build_data.dig("build_meta", "build_code")}.html"
   target_files = Dir.children(target_dir).select { |name| name.end_with?(".html") }
-  checks.each do |needle, expected, message|
+  checks.each do |section_key, needle, expected, message|
+    next unless section_enabled?(build_data, section_key)
     next if blankish?(expected)
 
     file_name = target_files.find { |f| f.include?(needle) && f.end_with?(build_suffix) } || target_files.find { |f| f.include?(needle) }
@@ -681,6 +764,34 @@ def run_quality_audit(build_data, target_dir, component_headings)
       end
 
       issues << "performance widget still uses static 3-pill metric rows (expected dynamic metric scaling)" unless perf_content.include?("buildMetricsHTML(gameData)")
+    end
+  end
+
+  if section_enabled?(build_data, "cooler_temps_graph")
+    cooler_name = target_files.find { |f| f.include?("cooler-temps-graph") && f.end_with?(build_suffix) } || target_files.find { |f| f.include?("cooler-temps-graph") }
+    if cooler_name.nil?
+      issues << "missing cooler temps graph html for enabled cooler_temps_graph section"
+    else
+      cooler_file = target_dir.join(cooler_name).to_s
+      cooler_content = File.read(cooler_file)
+      title = build_data.dig("cooler_temps_graph", "title").to_s
+      highlight_name = build_data.dig("cooler_temps_graph", "highlight_name").to_s
+      issues << "cooler temps graph did not render expected title" unless blankish?(title) || cooler_content.include?(title)
+      issues << "cooler temps graph did not render expected highlight name" unless blankish?(highlight_name) || cooler_content.include?(highlight_name)
+    end
+  end
+
+  if section_enabled?(build_data, "ssd_widget")
+    ssd_name = target_files.find { |f| f.include?("ssd-speed") && f.end_with?(build_suffix) } || target_files.find { |f| f.include?("ssd-speed") }
+    if ssd_name.nil?
+      issues << "missing ssd widget html for enabled ssd_widget section"
+    else
+      ssd_file = target_dir.join(ssd_name).to_s
+      ssd_content = File.read(ssd_file)
+      read_value = "#{format_mb_s(build_data.dig("ssd_widget", "sequential_read_mb_s"))} MB/s"
+      write_value = "#{format_mb_s(build_data.dig("ssd_widget", "sequential_write_mb_s"))} MB/s"
+      issues << "ssd widget did not render expected sequential read value" unless ssd_content.include?(read_value)
+      issues << "ssd widget did not render expected sequential write value" unless ssd_content.include?(write_value)
     end
   end
 
@@ -731,10 +842,14 @@ parts_list_file = target_dir.join(parts_list_file).to_s if parts_list_file
 motherboard_file = target_files.find { |f| f.include?("motherboard-specs-table") && f.end_with?("-#{build_code}.html") }
 case_file = target_files.find { |f| f.include?("pc-case-spec-table") && f.end_with?("-#{build_code}.html") }
 psu_file = target_files.find { |f| f.include?("psu-connector-breakdown") && f.end_with?("-#{build_code}.html") }
+ssd_file = target_files.find { |f| f.include?("ssd-speed") && f.end_with?("-#{build_code}.html") }
+cooler_file = target_files.find { |f| f.include?("cooler-temps-graph") && f.end_with?("-#{build_code}.html") }
 
 motherboard_file = target_dir.join(motherboard_file).to_s if motherboard_file
 case_file = target_dir.join(case_file).to_s if case_file
 psu_file = target_dir.join(psu_file).to_s if psu_file
+ssd_file = target_dir.join(ssd_file).to_s if ssd_file
+cooler_file = target_dir.join(cooler_file).to_s if cooler_file
 performance_file = target_files.find { |f| f.include?("performance-graph-widget") && f.end_with?("-#{build_code}.html") }
 performance_file = target_dir.join(performance_file).to_s if performance_file
 
@@ -742,6 +857,8 @@ apply_component_headings!(component_headings_file, component_headings) if compon
 apply_parts_list!(parts_list_file, build_data) if parts_list_file
 apply_motherboard_specs!(motherboard_file, build_data) if motherboard_file
 apply_case_specs!(case_file, build_data) if case_file
+apply_cooler_temps_graph!(cooler_file, build_data) if cooler_file
+apply_ssd_widget!(ssd_file, build_data) if ssd_file
 apply_psu_specs!(psu_file, build_data) if psu_file
 apply_performance_widget!(performance_file, build_data) if performance_file
 write_shortcodes!(target_dir.join("shortcodes.txt").to_s, build_data)

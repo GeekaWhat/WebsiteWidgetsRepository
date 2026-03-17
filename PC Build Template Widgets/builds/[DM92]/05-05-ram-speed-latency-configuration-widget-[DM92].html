@@ -191,6 +191,10 @@ Paste into a Gutenberg "Custom HTML" block.
     color: #1d4ea6;
   }
 
+  .gw-ram-slots.gw-ram-slots-two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .gw-ram-note {
     margin: 0;
     font-size: 0.82rem;
@@ -246,27 +250,19 @@ Paste into a Gutenberg "Custom HTML" block.
     </article>
 
     <article class="gw-ram-slot-card">
-      <p class="gw-ram-slot-title">Recommended Motherboard Slot Population (4-Slot Board)</p>
-      <div class="gw-ram-slots">
-        <div class="gw-ram-slot">
-          <p class="gw-ram-slot-name">Slot 1 (A1)</p>
-          <p class="gw-ram-slot-state">Leave Empty</p>
-        </div>
+      <p class="gw-ram-slot-title">Recommended Motherboard Slot Population (2-DIMM Board)</p>
+      <div class="gw-ram-slots gw-ram-slots-two">
         <div class="gw-ram-slot recommended">
-          <p class="gw-ram-slot-name">Slot 2 (A2)</p>
+          <p class="gw-ram-slot-name">Slot 1 (DIMM_A)</p>
           <p class="gw-ram-slot-state">Install DIMM</p>
         </div>
-        <div class="gw-ram-slot">
-          <p class="gw-ram-slot-name">Slot 3 (B1)</p>
-          <p class="gw-ram-slot-state">Leave Empty</p>
-        </div>
         <div class="gw-ram-slot recommended">
-          <p class="gw-ram-slot-name">Slot 4 (B2)</p>
+          <p class="gw-ram-slot-name">Slot 2 (DIMM_B)</p>
           <p class="gw-ram-slot-state">Install DIMM</p>
         </div>
       </div>
     </article>
 
-    <p class="gw-ram-note">For 2-DIMM kits on 4-slot motherboards, install memory in slots 2 and 4 (A2 + B2) for dual-channel operation and best stability.</p>
+    <p class="gw-ram-note">On 2-DIMM Mini-ITX boards, install both sticks in the available DIMM slots for dual-channel operation.</p>
   </div>
 </section>

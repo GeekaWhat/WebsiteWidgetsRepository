@@ -39,4 +39,4 @@ These rules apply to all Codex runs in this repository.
 - Preferred shell: WSL Bash.
 - Acceptable fallback: Git Bash.
 - Ruby must be available in PATH for YAML rendering.
-- Additional operating instructions: `WINDOWS_CODEX_INSTRUCTIONS.md`.
+- Additional operating instructions: `docs/windows/WINDOWS_CODEX_INSTRUCTIONS.md`.
