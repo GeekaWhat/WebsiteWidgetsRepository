@@ -33,6 +33,14 @@ These rules apply to all Codex runs in this repository.
 10. If generated HTML passes validation/audit but some disabled sections still contain placeholders, report the remaining placeholders without saying the build was not generated.
 11. Never create sidecar blocker files such as `missing-placeholder-keys.txt` unless the user explicitly asks for them.
 12. Never `git commit` or `git push` unless the user explicitly asks.
+13. Widget copy should be context-first and reader-friendly:
+   - Prefer build-specific wording over generic phrasing.
+   - Name the exact component a cable, connector, slot, or spec relates to whenever that improves clarity.
+   - Do not assume the reader already knows what a term means; make the purpose of the item obvious in plain English.
+   - Clearly state when something is not used or unnecessary for the current build.
+14. Do not regenerate a full build for every adjustment by default.
+   - If the user asks for a targeted wording/content tweak, prefer updating the relevant YAML and/or specific widget file directly.
+   - Only run the canonical generator when the user explicitly wants regeneration, when the pipeline output is needed for verification, or when a source change must be propagated across generated files.
 
 ## Windows 11 Codex Notes
 

@@ -3,6 +3,9 @@
 
 require "yaml"
 require "pathname"
+require "csv"
+require "open-uri"
+require "uri"
 
 def escape_html(text)
   text
@@ -351,6 +354,136 @@ def escape_js_string(value)
   value.to_s.gsub("\\", "\\\\\\").gsub('"', "\\\"")
 end
 
+def numeric_js_array(values)
+  "[" + Array(values).map do |value|
+    number = value.to_f
+    number == number.to_i ? number.to_i.to_s : number.to_s
+  end.join(",") + "]"
+end
+
+def string_js_array(values)
+  "[\n      " + Array(values).map { |value| %("#{escape_js_string(value)}") }.join(",\n      ") + "\n    ]"
+end
+
+def present_cooler_chart_data?(chart)
+  return false unless chart.is_a?(Hash)
+
+  labels = Array(chart["labels"])
+  avg = Array(chart["avg_temps_c"])
+  max = Array(chart["max_temps_c"])
+
+  return false if labels.empty? || avg.empty? || max.empty?
+
+  labels.length == avg.length && labels.length == max.length
+end
+
+def google_sheet_csv_export_url(raw_url)
+  return nil if raw_url.to_s.strip.empty?
+
+  match = raw_url.match(%r{/spreadsheets/d/([a-zA-Z0-9\-_]+)})
+  return nil unless match
+
+  gid_match = raw_url.match(/[?&#]gid=([0-9]+)/)
+  gid = gid_match ? gid_match[1] : "0"
+  "https://docs.google.com/spreadsheets/d/#{match[1]}/export?format=csv&gid=#{gid}"
+end
+
+def parse_cooler_sheet_csv(csv_text)
+  section_map = {
+    "Cinebench R23 4 Threads" => "cinebench4",
+    "Cinebench 8 Threads" => "cinebench8",
+    "CPU-Z 8 Threads" => "cpuz8"
+  }
+
+  rows = CSV.parse(csv_text.to_s.encode("UTF-8", invalid: :replace, undef: :replace, replace: ""), headers: false)
+  return {} if rows.empty?
+
+  first_row = Array(rows.first).map { |value| value.to_s.strip }
+  horizontal_offsets = []
+
+  first_row.each_with_index do |cell, idx|
+    next unless section_map.key?(cell)
+
+    horizontal_offsets << [idx, section_map[cell]]
+  end
+
+  if horizontal_offsets.length > 1
+    parsed = horizontal_offsets.to_h do |(_, key)|
+      [key, { "labels" => [], "avg_temps_c" => [], "max_temps_c" => [] }]
+    end
+
+    rows[1..].to_a.each do |row|
+      cells = Array(row).map { |value| value.to_s.strip }
+      next if cells.all?(&:empty?)
+
+      horizontal_offsets.each do |offset, key|
+        slice = cells[offset, 4] || []
+        name = slice[0].to_s.strip
+        avg_raw = slice[2].to_s.strip
+        max_raw = slice[3].to_s.strip
+        next if name.empty? || avg_raw.empty? || max_raw.empty?
+
+        avg = avg_raw.tr(",", "").to_f
+        max = max_raw.tr(",", "").to_f
+
+        parsed[key]["labels"] << name
+        parsed[key]["avg_temps_c"] << (avg == avg.to_i ? avg.to_i : avg)
+        parsed[key]["max_temps_c"] << (max == max.to_i ? max.to_i : max)
+      end
+    end
+
+    return parsed
+  end
+
+  parsed = {}
+  current_key = nil
+
+  rows.each do |row|
+    cells = Array(row).map { |value| value.to_s.strip }
+    next if cells.all?(&:empty?)
+
+    heading = section_map[cells[0]]
+    if heading
+      current_key = heading
+      parsed[current_key] ||= { "labels" => [], "avg_temps_c" => [], "max_temps_c" => [] }
+      next
+    end
+
+    next if current_key.nil?
+    next if cells[0].casecmp("Type").zero? || cells[1].casecmp("Type").zero?
+    next if cells[0].empty? || cells[2].empty? || cells[3].empty?
+
+    avg = cells[2].tr(",", "").to_f
+    max = cells[3].tr(",", "").to_f
+
+    parsed[current_key]["labels"] << cells[0]
+    parsed[current_key]["avg_temps_c"] << (avg == avg.to_i ? avg.to_i : avg)
+    parsed[current_key]["max_temps_c"] << (max == max.to_i ? max.to_i : max)
+  end
+
+  parsed
+end
+
+def hydrate_cooler_graph_data_from_sheet!(build_data)
+  cooler = build_data["cooler_temps_graph"]
+  return unless cooler.is_a?(Hash) && cooler["enabled"] == true
+
+  source_url = cooler["data_source_url"] || cooler["cta_url"]
+  csv_url = google_sheet_csv_export_url(source_url)
+  return if csv_url.nil?
+
+  csv_text = URI.open(csv_url, &:read)
+  parsed = parse_cooler_sheet_csv(csv_text)
+
+  %w[cinebench4 cinebench8 cpuz8].each do |key|
+    next unless present_cooler_chart_data?(parsed[key])
+
+    cooler[key] = parsed[key]
+  end
+rescue StandardError => e
+  warn "Could not hydrate cooler graph data from sheet: #{e.message}"
+end
+
 def apply_cooler_temps_graph!(path, build_data)
   return unless path && File.exist?(path)
 
@@ -378,6 +511,20 @@ def apply_cooler_temps_graph!(path, build_data)
     "#{Regexp.last_match(1)}#{escape_html(benchmark_badge)}#{Regexp.last_match(3)}"
   end
   content.sub!(/var highlightName = ".*?";/, %(var highlightName = #{highlight_value};))
+
+  {
+    "cinebench4" => "cinebench4",
+    "cinebench8" => "cinebench8",
+    "cpuz8" => "cpuz"
+  }.each do |data_key, js_prefix|
+    chart = cooler[data_key]
+    next unless present_cooler_chart_data?(chart)
+
+    content.sub!(/var #{js_prefix}Labels = \[.*?\];/m, "var #{js_prefix}Labels = #{string_js_array(chart["labels"])};")
+    content.sub!(/var #{js_prefix}Avg = \[.*?\];/m, "var #{js_prefix}Avg = #{numeric_js_array(chart["avg_temps_c"])};")
+    content.sub!(/var #{js_prefix}Max = \[.*?\];/m, "var #{js_prefix}Max = #{numeric_js_array(chart["max_temps_c"])};")
+  end
+
   content.sub!(%r{function colorByHighlight\(labels, focus, base, hi\) \{\s*return labels\.map\(function \(n\) \{ return n === focus \? hi : base; \}\);\s*\}\s*}m) do
     <<~JS.chomp
       function colorByHighlight(labels, focus, base, hi) {
@@ -827,6 +974,7 @@ unless File.exist?(yaml_path)
 end
 
 build_data = YAML.load_file(yaml_path.to_s)
+hydrate_cooler_graph_data_from_sheet!(build_data)
 component_headings = build_data["component_headings"] || {}
 
 target_files = Dir.children(target_dir).select { |f| f.end_with?(".html") }
