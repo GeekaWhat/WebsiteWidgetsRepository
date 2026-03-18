@@ -22,121 +22,149 @@ sources:
   #   source_url: "https://www.msi.com/Motherboard/MAG-X870E-GAMING-PLUS-MAX-WIFI/Specification"
 
 widget_enabled:
-  cpu_comparison_table: true
+  cpu_comparison_table: false
   cooler_temps_graph: true
   motherboard_specs: true
   ram_widget: true
   ssd_widget: true
-  gpu_comparison_table: true
+  gpu_comparison_table: false
   case_specs: true
   psu_connectors: true
-  performance_widget: true
-  peripherals: true
+  performance_widget: false
+  peripherals: false
 
 # 00-pc-build-component-headings
 component_headings:
-  cpu: "..."
-  cpu_cooler: "..."
-  motherboard: "..."
-  ram: "..."
-  ssd: "..."
-  gpu: "..."
-  case: "..."
-  psu: "..."
+  cpu: "AMD Ryzen 7 7800X3D"
+  cpu_cooler: "ASUS Prime LC 360 ARGB"
+  motherboard: "ASUS TUF Gaming B850-PLUS WIFI"
+  ram: "TeamGroup T-FORCE DELTA RGB DDR5"
+  ssd: "TeamGroup MP44L 1TB"
+  gpu: "ASUS Prime Radeon RX 9070 XT OC Edition 16GB"
+  case: "ASUS Prime AP303"
+  psu: "Corsair RM750e (2025)"
 
 # 01-pc-build-parts-list
 parts_list:
   - part_key: "cpu"                                            # allowed values: cpu | cpu_cooler | motherboard | ram | ssd | gpu | case | psu
     tab_label: "__AUTO_FROM_PART_KEY__"
-    name: "..."
+    name: "AMD Ryzen 7 7800X3D"
     section_anchor: "__AUTO_FROM_PART_KEY__"
-    image_url: ''                                             # required: paste image URL
-    image_alt: "..."                                          # required alt text
-    summary: "..."
+    image_url: 'https://geekawhat.com/wp-content/uploads/2025/09/MPI_AMD-Ryzen-7-7800X3D.jpg'                                             # required: paste image URL
+    image_alt: "AMD Ryzen 7 7800X3D"                           # required alt text
+    summary: "A gaming-focused 8-core CPU with 3D V-Cache that boosts frame rates in many titles while keeping AM5 upgrade options open."
     specs:
-      - { label: "...", value: "..." }
-      - { label: "...", value: "..." }
-      - { label: "...", value: "..." }
-      - { label: "...", value: "..." }
-      - { label: "...", value: "..." }
-    buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
+      - { label: "Architecture", value: "Zen 4 (AM5)" }
+      - { label: "Cores / Threads", value: "8 / 16" }
+      - { label: "Base / Boost", value: "4.2 GHz / up to 5.0 GHz" }
+      - { label: "Default TDP", value: "120W" }
+      - { label: "Total Cache", value: "104MB (L2+L3)" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/7kss" AMAZON-US-ASIN="B0BTZB7F88" AMAZON-GB-ASIN="B0BTZB7F88" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Famd-ryzen-7-7800x3d-eight-core-5.00ghz-socket-am5-processor-retail-cp-3dt-am.html" overclockers-awin-gb-itemid="CP-3DT-AM"]'                                         # paste full geeka_price shortcode including brackets
 
   - part_key: "cpu_cooler"
     tab_label: "__AUTO_FROM_PART_KEY__"
-    name: "..."
+    name: "ASUS Prime LC 360 ARGB"
     section_anchor: "__AUTO_FROM_PART_KEY__"
-    image_url: ''                                             # paste image URL
-    image_alt: "..."
-    summary: "..."
+    image_url: 'https://geekawhat.com/wp-content/uploads/2025/04/MPI_ASUS-Prime-LC-360-ARGB-Radiator-Wide.jpg'                                             # paste image URL
+    image_alt: "ASUS Prime LC 360 ARGB"
+    summary: "A 360mm AIO liquid cooler with pre-installed ARGB fans, designed to deliver strong CPU thermals while matching ASUS Aura Sync lighting."
     specs:
-      - { label: "...", value: "..." }
-    buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
+      - { label: "Radiator", value: "397 x 120 x 27 mm (Aluminum)" }
+      - { label: "Fans", value: "3 x 120mm (integrated)" }
+      - { label: "Fan Speed", value: "600-2200 RPM (+/-10%)" }
+      - { label: "Airflow / Pressure", value: "75.7 CFM / 3.2 mmH2O" }
+      - { label: "Tubing", value: "400 mm sleeved rubber" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/1bBMvK" AMAZON-US-ASIN="B08JLKL3GN" AMAZON-GB-ASIN="B08JLKL3GN" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fasus-prime-lc-360-argb-all-in-one-cpu-cooler-360mm-coo-asu-03187.html" overclockers-awin-gb-itemid="COO-ASU-03187"]'                                         # paste full geeka_price shortcode including brackets
 
   - part_key: "motherboard"
     tab_label: "__AUTO_FROM_PART_KEY__"
-    name: "..."
+    name: "ASUS TUF Gaming B850-PLUS WIFI"
     section_anchor: "__AUTO_FROM_PART_KEY__"
-    image_url: ''                                             # paste image URL
-    image_alt: "..."
-    summary: "..."
+    image_url: 'https://geekawhat.com/wp-content/uploads/2025/08/MPI_ASUS-TUF-Gaming-B850-PLUS-WIFI-2.jpg'                                             # paste image URL
+    image_alt: "ASUS TUF Gaming B850-PLUS WIFI"
+    summary: "A full-size AM5 TUF board built around the AMD B850 chipset, offering PCIe 5.0 expansion, multiple M.2 slots, and modern networking for a high-end gaming build."
     specs:
-      - { label: "...", value: "..." }
-    buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
+      - { label: "Chipset / Socket", value: "AMD B850 / AM5" }
+      - { label: "Form Factor", value: "ATX (30.5 x 24.4 cm)" }
+      - { label: "Memory", value: "4 x DDR5 (up to 256GB)" }
+      - { label: "Storage", value: "3 x M.2 + 4 x SATA" }
+      - { label: "Networking", value: "Wi-Fi 7 + 2.5GbE + BT 5.4" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/uN74G5" AMAZON-US-ASIN="B0DPLPLR88" AMAZON-GB-ASIN="B0DPLPLR88" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fasus-tuf-gaming-b850-plus-wifi-socket-am5-ddr5-atx-motherboard-mot-asu-03844.html" overclockers-awin-gb-itemid="MOT-ASU-03844"]'                                         # paste full geeka_price shortcode including brackets
 
   - part_key: "ram"
     tab_label: "__AUTO_FROM_PART_KEY__"
-    name: "..."
+    name: "TeamGroup T-FORCE DELTA RGB DDR5"
     section_anchor: "__AUTO_FROM_PART_KEY__"
-    image_url: ''                                             # paste image URL
-    image_alt: "..."
-    summary: "..."
+    image_url: 'https://geekawhat.com/wp-content/uploads/2024/01/MPI_TEAMGROUP-T-Force-Delta-RGB-DDR5-32GB.jpg'                                             # paste image URL
+    image_alt: "TeamGroup T-FORCE DELTA RGB DDR5"
+    summary: "A 32GB DDR5 kit aimed at AM5 gaming builds, balancing strong frequency with RGB styling for a cleaner themed setup."
     specs:
-      - { label: "...", value: "..." }
-    buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
+      - { label: "Capacity", value: "32GB (2 x 16GB)" }
+      - { label: "Speed", value: "DDR5-6000" }
+      - { label: "Latency", value: "CL38" }
+      - { label: "Voltage", value: "1.35V" }
+      - { label: "Lighting", value: "ARGB" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/xNLfL" AMAZON-US-ASIN="B09LHQL3GF" AMAZON-GB-ASIN="B09LHQL3GF" overclockers-awin-gb-href="https://www.overclockers.co.uk/teamgroup-delta-rgb-32gb-2x16gb-ddr5-pc5-48000c38-6000mhz-dual-channel-ki-my-0at-tg.html" overclockers-awin-gb-itemid="MY-0AT-TG"]'                                         # paste full geeka_price shortcode including brackets
 
   - part_key: "ssd"
     tab_label: "__AUTO_FROM_PART_KEY__"
-    name: "..."
+    name: "TeamGroup MP44L 1TB"
     section_anchor: "__AUTO_FROM_PART_KEY__"
-    image_url: ''                                             # paste image URL
-    image_alt: "..."
-    summary: "..."
+    image_url: 'https://geekawhat.com/wp-content/uploads/2025/09/MPI_TeamGroup-MP44L-1TB.jpg'                                             # paste image URL
+    image_alt: "TeamGroup MP44L 1TB"
+    summary: "A PCIe 4.0 NVMe drive that provides fast OS and game load times, with 1TB capacity that suits a primary drive in a balanced build."
     specs:
-      - { label: "...", value: "..." }
-    buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
+      - { label: "Form Factor", value: "M.2 2280" }
+      - { label: "Interface", value: "PCIe 4.0 x4 NVMe" }
+      - { label: "Sequential Read", value: "5,152 MB/s (test)" }
+      - { label: "Sequential Write", value: "4,450 MB/s (test)" }
+      - { label: "Capacity", value: "1TB" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/moBK2" AMAZON-US-ASIN="B0B9Y3DB2K" AMAZON-GB-ASIN="B0B9Y3DB2K"]'                                         # paste full geeka_price shortcode including brackets
 
   - part_key: "gpu"
     tab_label: "__AUTO_FROM_PART_KEY__"
-    name: "..."
+    name: "ASUS Prime Radeon RX 9070 XT OC Edition 16GB"
     section_anchor: "__AUTO_FROM_PART_KEY__"
-    image_url: ''                                             # paste image URL
-    image_alt: "..."
-    summary: "..."
+    image_url: 'https://geekawhat.com/wp-content/uploads/2026/03/MPI_ASUS-Prime-Radeon-RX-9070-XT-OC-Edition-16GB.jpg'                                             # paste image URL
+    image_alt: "ASUS Prime Radeon RX 9070 XT OC Edition 16GB"
+    summary: "A 16GB GDDR6 graphics card tuned for high-refresh 1440p and strong 4K settings, with a factory OC profile and modern display support."
     specs:
-      - { label: "...", value: "..." }
-    buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
+      - { label: "VRAM", value: "16GB GDDR6" }
+      - { label: "Boost / Game Clock (OC)", value: "up to 3030 / 2480 MHz" }
+      - { label: "Power Connectors", value: "3 x 8-pin" }
+      - { label: "Bus Standard", value: "PCI Express 5.0" }
+      - { label: "Outputs", value: "1 x HDMI 2.1b + 3 x DisplayPort 2.1a" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/dyRT7tb" AMAZON-US-ASIN="" AMAZON-GB-ASIN="B0DSG52H7D" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fasus-radeon-rx-9070-xt-prime-oc-16gb-gddr6-pci-express-graphics-card-gra-asu-04155.html" overclockers-awin-gb-itemid="GRA-ASU-04155"]'                                         # paste full geeka_price shortcode including brackets
 
   - part_key: "case"
     tab_label: "__AUTO_FROM_PART_KEY__"
-    name: "..."
+    name: "ASUS Prime AP303"
     section_anchor: "__AUTO_FROM_PART_KEY__"
-    image_url: ''                                             # paste image URL
-    image_alt: "..."
-    summary: "..."
+    image_url: 'https://geekawhat.com/wp-content/uploads/2026/03/MPI_ASUS-Prime-AP303.jpg'                                             # paste image URL
+    image_alt: "ASUS Prime AP303"
+    summary: "A clean, airflow-focused mid tower with support for large GPUs and 360mm top radiators, built for straightforward cable management and modern front I/O."
     specs:
-      - { label: "...", value: "..." }
-    buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
+      - { label: "Motherboard Support", value: "Mini-ITX / Micro-ATX / ATX" }
+      - { label: "Max GPU Length", value: "360 mm" }
+      - { label: "Radiator Support", value: "Top: up to 360 mm (Rear: 120 mm)" }
+      - { label: "Cooling Support", value: "Top: 3 x 140mm or 3 x 120mm (Rear: 1 x 120mm)" }
+      - { label: "Front I/O", value: "USB-C 3.2 Gen 2x2 + 2 x USB 3.2 Gen1 + Audio" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/iVYNOb" AMAZON-US-ASIN="" AMAZON-GB-ASIN="B09CD53X1G"]'                                         # paste full geeka_price shortcode including brackets
 
   - part_key: "psu"
     tab_label: "__AUTO_FROM_PART_KEY__"
-    name: "..."
+    name: "Corsair RM750e (2025)"
     section_anchor: "__AUTO_FROM_PART_KEY__"
-    image_url: ''                                             # paste image URL
-    image_alt: "..."
-    summary: "..."
+    image_url: 'https://geekawhat.com/wp-content/uploads/2025/04/MPI_Corsair-RM750e-2025.jpg'                                             # paste image URL
+    image_alt: "Corsair RM750e (2025)"
+    summary: "A modern 750W fully modular PSU designed for current GPUs, with ATX 3.x support and the headroom needed for high-performance single-GPU builds."
     specs:
-      - { label: "...", value: "..." }
-    buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
+      - { label: "Wattage", value: "750W" }
+      - { label: "Standard", value: "ATX 3.x (PCIe 5.x)" }
+      - { label: "Modularity", value: "Fully modular" }
+      - { label: "Efficiency", value: "80 PLUS Gold" }
+      - { label: "PCIe 5 Power", value: "12V-2x6 / 12VHPWR ready" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/qKRtl" AMAZON-US-ASIN="B0DPR6X7JX" AMAZON-GB-ASIN="B0DMTLSJC3" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fcorsair-rme-series-rm750e-fully-modular-atx-3.1-power-supply-cp-9020295-uk-pow-crs-03874.html" overclockers-awin-gb-itemid="POW-CRS-03874"]'                                         # paste full geeka_price shortcode including brackets
 
 # 02-cpu-comparison-table
 cpu_comparison_table:
@@ -206,10 +234,14 @@ cpu_comparison_table:
 # 03-cooler-temps-graph
 cooler_temps_graph:
   enabled: true
-  title: "..."
-  benchmark_badge: "..."
-  cta_url: "..."
-  highlight_name: "..."
+  title: "ASUS Prime LC 360 ARGB Benchmarks"
+  benchmark_badge: "Tested with: Intel Core i7-14700K"
+  cta_url: ""
+  CoolerTesting_urll: "https://docs.google.com/spreadsheets/d/1gemZNlSFT--aBTL7dW3NS9bGOsga1wOSLyHEmF6AkIY/edit?gid=1584843454#gid=1584843454" #Grab the testing data from here
+  highlight_name: "ASUS Prime LC 360 ARGB"
+  highlight_names:
+    - "ASUS PRIME LC 360 ARGB"
+    - "ASUS PRIME LC 360 ARGB LCD"
   cinebench4:
     labels: ["...","..."]
     avg_temps_c: [0,0]
@@ -228,32 +260,32 @@ cooler_temps_graph:
 motherboard_specs:
   enabled: true
   source_ref: ''                                              # optional: key from top-level "sources"
-  model: ''                                                   # required if source_ref is blank
-  source_url: ''                                              # paste official spec URL (required for auto-fill)
+  model: 'ASUS TUF Gaming B850-PLUS WIFI'                     # required if source_ref is blank
+  source_url: 'https://www.asus.com/uk/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b850-plus-wifi/techspec/'                                              # paste official spec URL (required for auto-fill)
   formatting_rules_override: {}                               # optional: override formatting_defaults only if needed
-  chipset_socket: "__AUTO_FROM_SOURCE__"
-  form_factor: "__AUTO_FROM_SOURCE__"
-  cpu_support: "__AUTO_FROM_SOURCE__"
-  memory_support_html: "__AUTO_FROM_SOURCE__"
-  vrm_design: "__AUTO_FROM_SOURCE__"
-  graphics_card_compatibility_1_slot: "__AUTO_FROM_SOURCE__"
-  expansion_card_compatibility_html: "__AUTO_FROM_SOURCE__"
-  m2_compatibility_3_slots_html: "__AUTO_FROM_SOURCE__"
-  sata_storage: "__AUTO_FROM_SOURCE__"
-  networking_html: "__AUTO_FROM_SOURCE__"
-  rear_io_html: "__AUTO_FROM_SOURCE__"
-  front_io_headers_html: "__AUTO_FROM_SOURCE__"
-  audio: "__AUTO_FROM_SOURCE__"
+  chipset_socket: "AMD B850 / AM5"
+  form_factor: "ATX Form Factor (30.5 x 24.4 cm)"
+  cpu_support: "AMD Ryzen 9000 / 8000 / 7000 Series Desktop Processors"
+  memory_support_html: "4 x DIMM, max. 256GB, DDR5<br>Supports up to 8000+MT/s (OC)<br>Supports EXPO and AEMP"
+  vrm_design: "14+2+1 power stages"
+  graphics_card_compatibility_1_slot: "1 x PCIe 5.0 x16 slot (x16 mode on Ryzen 9000 / 7000 CPUs)"
+  expansion_card_compatibility_html: "1 x PCIe 5.0 x16 slot<br>1 x PCIe 4.0 x16 slot (x4 mode)<br>2 x PCIe 4.0 x1 slots"
+  m2_compatibility_3_slots_html: "M.2_1: type 2280, PCIe 5.0 x4<br>M.2_2: type 2242/2260/2280/22110, PCIe 4.0 x4<br>M.2_3: type 2280, PCIe 4.0 x4"
+  sata_storage: "4 x SATA 6Gb/s ports"
+  networking_html: "Wi-Fi 7 (2x2)<br>Realtek 2.5Gb Ethernet<br>Bluetooth 5.4"
+  rear_io_html: "1 x USB 20Gbps USB-C<br>3 x USB 10Gbps Type-A<br>4 x USB 5Gbps Type-A<br>2 x USB 2.0 Type-A<br>1 x DisplayPort<br>1 x HDMI<br>1 x Wi-Fi module<br>1 x Realtek 2.5GbE<br>5 x audio jacks"
+  front_io_headers_html: "1 x USB 10Gbps front USB-C connector<br>1 x USB 5Gbps header for 2 ports<br>2 x USB 2.0 headers for 4 ports"
+  audio: "Realtek ALC1220P 7.1 Surround Sound High Definition Audio CODEC"
 
 # 05-ram-speed-latency-configuration-widget
 ram_widget:
   enabled: true
-  speed: "..."
-  latency: "..."
-  generation: "..."
-  dimm_count: "..."
-  marker_label: "..."
-  marker_percent: "..."
+  speed: "6000"
+  latency: "CL38"
+  generation: "DDR5"
+  dimm_count: "2"
+  marker_label: "..." #To be calculated by Codex accurately 
+  marker_percent: "..." #To be calculated by Codex accurately 
   note: "..."
   slots:
     - { slot: "A1", state: "...", recommended: false }
@@ -264,11 +296,11 @@ ram_widget:
 # 06-ssd-speed-graph
 ssd_widget:
   enabled: true
-  subtext: "..."
-  sequential_read_mb_s: 0
-  sequential_write_mb_s: 0
-  read_marker_percent: "..."
-  write_marker_percent: "..."
+  subtext: "This is from our in-house testing to reflect real world performance. For official benchmarks, please refer to the manufacturer's website."
+  sequential_read_mb_s: 5152
+  sequential_write_mb_s: 4450
+  read_marker_percent: "..." #To be calculated by Codex accurately 
+  write_marker_percent: "..." #To be calculated by Codex accurately 
   footnote: "..."
 
 # 07-gpu-comparison-table
@@ -336,73 +368,80 @@ gpu_comparison_table:
 case_specs:
   enabled: true
   source_ref: ''                                              # optional: key from top-level "sources"
-  model: ''                                                   # required if source_ref is blank
-  source_url: ''                                              # paste official spec URL (required for auto-fill)
+  model: 'ASUS Prime AP303 - Tempered Glass Panel'            # required if source_ref is blank
+  source_url: 'https://www.asus.com/uk/motherboards-components/cases/prime/asus-prime-ap303-tempered-glass-panel/techspec/'                                              # paste official spec URL (required for auto-fill)
   formatting_rules_override: {}                               # optional: override formatting_defaults only if needed
-  form_factor: "__AUTO_FROM_SOURCE__"
-  motherboard_support: "__AUTO_FROM_SOURCE__"
-  dimensions_l_w_h: "__AUTO_FROM_SOURCE__"
+  form_factor: "Mid tower"
+  motherboard_support: "Mini-ITX<br>Micro-ATX<br>ATX"
+  dimensions_l_w_h: "215 x 425 x 485 mm (W x H x D)"
   front_io:
-    - "__AUTO_FROM_SOURCE__"
-  pcie_slots: "__AUTO_FROM_SOURCE__"
-  colour: "__AUTO_FROM_SOURCE__"
+    - "1 x USB 3.2 Gen 2x2 Type-C"
+    - "2 x USB 3.2 Gen 1"
+    - "1 x Headphone / Microphone"
+  pcie_slots: "7"
+  colour: "Black"
   max_clearance:
-    - "__AUTO_FROM_SOURCE__"
+    - "Maximum CPU cooler height: 165 mm"
+    - "Maximum GPU length: 360 mm"
+    - "Maximum PSU length: 180 mm"
   drive_support:
-    - "__AUTO_FROM_SOURCE__"
+    - "1 x 2.5/3.5-inch combo bay"
+    - "2 x 2.5-inch bays"
   fan_support:
-    - "__AUTO_FROM_SOURCE__"
+    - "Top: 3 x 140 mm or 3 x 120 mm"
+    - "Rear: 1 x 120 mm"
   radiator_support:
-    - "__AUTO_FROM_SOURCE__"
-  pre_installed_fans: "__AUTO_FROM_SOURCE__"
+    - "Top: 360 / 280 / 240 / 140 / 120 mm"
+    - "Rear: 120 mm"
+  pre_installed_fans: "Rear: 1 x 120 mm"
 
 # 09-psu-connector-breakdown-widget
 #Make sure the specs are accurate and pulled directly form the Source_url
 psu_connectors:
   enabled: true
-  widget_title: "__AUTO_FROM_SOURCE__"
+  widget_title: "Corsair RM750e (2025) Connector Reference"
   source_ref: ''                                              # optional: key from top-level "sources"
-  model: ''                                                   # required if source_ref is blank
-  source_url: ''                                              # paste official spec URL (required for auto-fill)
+  model: 'Corsair RM750e (2025)'                              # required if source_ref is blank
+  source_url: 'https://www.corsair.com/uk/en/p/psu/cp-9020292-uk/rme-series-rm750e-fully-modular-low-noise-atx-power-supply-white-uk-cp-9020292-uk?srsltid=AfmBOoqR-zgGtcf-WSW0YabkTClqWRGvPhvlSe3Xjg8Ka4tdtS0_B_0v#tab-techspecs'                                              # paste official spec URL (required for auto-fill)
   connectors:
     pcie_6_2:
       name: "PCIe (6+2 pin)"
-      connector_type: "__AUTO_FROM_SOURCE__"
-      build_usage: "__AUTO_FROM_SOURCE__"
-      recommended_setup: "__AUTO_FROM_SOURCE__"
-      notes: "__AUTO_FROM_SOURCE__"
+      connector_type: "PCIe 6+2-pin"
+      build_usage: "ASUS Prime Radeon RX 9070 XT OC Edition 16GB (3 x 8-pin PCIe)"
+      recommended_setup: "Use three separate PCIe leads from the PSU where possible"
+      notes: "This is the active GPU power connector type for this build."
     pcie_12v_2x6:
       name: "12V-2x6"
-      connector_type: "__AUTO_FROM_SOURCE__"
-      typical_output: "__AUTO_FROM_SOURCE__"
-      build_usage: "__AUTO_FROM_SOURCE__"
-      notes: "__AUTO_FROM_SOURCE__"
+      connector_type: "12V-2x6 (ATX 3.1 / PCIe 5.1)"
+      typical_output: "Up to 600W (GPU dependent)"
+      build_usage: "Not used in this build"
+      notes: "Available for GPUs that use a native 12V-2x6 input."
     atx_24pin:
       name: "ATX 24-pin"
-      connector_type: "__AUTO_FROM_SOURCE__"
-      quantity_included: "__AUTO_FROM_SOURCE__"
-      primary_use: "__AUTO_FROM_SOURCE__"
-      notes: "__AUTO_FROM_SOURCE__"
+      connector_type: "ATX 24-pin"
+      quantity_included: "1"
+      primary_use: "Motherboard power (ASUS TUF Gaming B850-PLUS WIFI)"
+      notes: "Required for all standard desktop builds."
     cpu_eps_4_4:
       name: "CPU EPS (4+4)"
-      connector_type: "__AUTO_FROM_SOURCE__"
-      quantity_included: "__AUTO_FROM_SOURCE__"
-      primary_use: "__AUTO_FROM_SOURCE__"
-      notes: "__AUTO_FROM_SOURCE__"
+      connector_type: "4+4-pin EPS 12V"
+      quantity_included: "2 cables"
+      primary_use: "CPU power for AMD Ryzen 7 7800X3D on the ASUS TUF Gaming B850-PLUS WIFI"
+      notes: "Connect the required EPS lead for the board and use the second if you want the extra available CPU power headroom."
     sata_15pin:
       name: "SATA (15-pin)"
-      connector_type: "__AUTO_FROM_SOURCE__"
-      primary_use: "__AUTO_FROM_SOURCE__"
-      build_usage: "__AUTO_FROM_SOURCE__"
+      connector_type: "SATA"
+      primary_use: "SATA storage, fan/ARGB hubs, accessories"
+      build_usage: "Optional (build storage is M.2 NVMe)"
     molex_4pin:
       name: "Peripheral (Molex 4-pin)"
-      connector_type: "__AUTO_FROM_SOURCE__"
-      primary_use: "__AUTO_FROM_SOURCE__"
-      build_usage: "__AUTO_FROM_SOURCE__"
+      connector_type: "Molex"
+      primary_use: "Legacy accessories and older peripherals"
+      build_usage: "Not required"
 
 # 10-performance-graph-widget
 performance_widget:
-  enabled: true
+  enabled: false
   # widget_id_suffix: '' # optional: leave omitted unless you want a custom HTML id
   kicker: "Performance Snapshot"
   title: "Multi-Game Average FPS"

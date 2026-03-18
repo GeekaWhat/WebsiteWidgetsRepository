@@ -108,6 +108,7 @@ Updated: All 8 games with full settings
     var GAME_ORDER = [
       "arcraiders",
       "marvelrivals",
+      "residentevilrequiem",
       "battlefield6",
       "callofduty",
       "fortnite",
@@ -119,6 +120,7 @@ Updated: All 8 games with full settings
     var GAME_LABELS = {
       arcraiders:     "ARC Raiders",
       marvelrivals:   "Marvel Rivals",
+      residentevilrequiem: "Resident Evil Requiem",
       battlefield6:   "Battlefield 6",
       callofduty:     "Call of Duty: Black Ops 7",
       fortnite:       "Fortnite",
@@ -132,6 +134,7 @@ Updated: All 8 games with full settings
     var GAME_DATA = {
       arcraiders:     { resolution: "Resolution not set",          HD1080p: null, UltraHD1440p: null, UHD4K: null },
       marvelrivals:   { resolution: "Resolution not set",          HD1080p: null, UltraHD1440p: null, UHD4K: null },
+      residentevilrequiem: { resolution: "Resolution not set",     HD1080p: null, UltraHD1440p: null, UHD4K: null },
       battlefield6:   { resolution: "Resolution not set",          HD1080p: null, UltraHD1440p: null, UHD4K: null },
       callofduty:     { resolution: "Resolution not set",          HD1080p: null, UltraHD1440p: null, UHD4K: null },
       fortnite:       { resolution: "1080p Competitive",           HD1080p: null, UltraHD1440p: null, UHD4K: null },
@@ -161,6 +164,19 @@ Updated: All 8 games with full settings
         ["Preset",             "Graphics Quality High"],
         ["GI / Reflections",   "Lumen GI High Quality, SSR Reflections"],
         ["Graphics Breakdown", "Model / Post / Shadows / Texture / Effects / Foliage all High"]
+      ],
+      residentevilrequiem: [
+        ["Capture Method",     "4-7 min loop through Crime Scene"],
+        ["Resolution",         "Fullscreen, (" + R_UNSET + ")"],
+        ["Frame Rate",         "Variable"],
+        ["Preset",             "Custom, Ray Tracing Off"],
+        ["Upscaling / Frame Gen", "Upscaling Off, Frame Generation Off"],
+        ["Low Latency / Reconstruction", "Low-latency mode On where available, Ray Reconstruction Off"],
+        ["Core Quality",       "Lighting & Shadow High, Texture High, Texture Filter High (ANISO x8), Ambient Occlusion High"],
+        ["Geometry / Effects", "Hair Strands On, Mesh Quality Standard, Particle Lighting On, VFX Quality Standard"],
+        ["Reflections / Volumetrics", "Screen Space Reflections On, Volumetric Fog High, Subsurface Scattering High"],
+        ["Image / Post Effects", "TAA, Motion Blur Off, Depth of Field On, Lens Distortion + Chromatic Aberration On, Lens Dirt On, Lens Flare Standard"],
+        ["Shadow Detail",      "Shadow Quality High, Contact Shadows On"]
       ],
       battlefield6: [
         ["Map / Mode",         "Empire State, Conquest"],

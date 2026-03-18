@@ -19,6 +19,18 @@ fi
 
 YAML_FILE="${TARGET_DIR}/${BUILD_CODE}.yaml"
 PERF_FILE="$(find "${TARGET_DIR}" -maxdepth 1 -type f -name "*-10-performance-graph-widget-*.html" | head -n 1)"
+PERF_ENABLED=0
+
+if [[ -f "${YAML_FILE}" ]]; then
+  if awk '
+    /^\s*performance_widget:\s*$/ { in_perf=1; next }
+    in_perf && /^\S/ { exit }
+    in_perf && /^\s*enabled:\s*true\s*$/ { found=1; exit }
+    END { exit(found ? 0 : 1) }
+  ' "${YAML_FILE}"; then
+    PERF_ENABLED=1
+  fi
+fi
 
 check_label_has_br() {
   local label="$1"
@@ -53,7 +65,28 @@ check_label_has_br "Networking" "${MOTHERBOARD_FILE}"
 check_label_has_br "Rear I/O" "${MOTHERBOARD_FILE}"
 check_label_has_br "Front I/O Headers" "${MOTHERBOARD_FILE}"
 
-if [[ -f "${PERF_FILE}" && -f "${YAML_FILE}" ]]; then
+if [[ ${PERF_ENABLED} -eq 1 && -f "${PERF_FILE}" && -f "${YAML_FILE}" ]]; then
+  PYTHON_BIN=""
+  for candidate in python3 python; do
+    candidate_path="$(command -v "${candidate}" 2>/dev/null || true)"
+    [[ -z "${candidate_path}" ]] && continue
+    if "${candidate_path}" -c "import sys" >/dev/null 2>&1; then
+      PYTHON_BIN="${candidate_path}"
+      break
+    fi
+  done
+  if [[ -z "${PYTHON_BIN}" ]]; then
+    echo "Validation failed: python3 or python is required for performance widget checks." >&2
+    exit 1
+  fi
+
+  PYTHON_YAML_FILE="${YAML_FILE}"
+  PYTHON_PERF_FILE="${PERF_FILE}"
+  if [[ "${PYTHON_BIN}" == /[a-zA-Z]/* ]]; then
+    PYTHON_YAML_FILE="$(cygpath -w "${YAML_FILE}")"
+    PYTHON_PERF_FILE="$(cygpath -w "${PERF_FILE}")"
+  fi
+
   if grep -Eq '^[[:space:]]*<div class="gw-driver-bar [^"]*".*Driver Version: \?\?.*</div>[[:space:]]*$' "${PERF_FILE}" || \
      grep -Eqi '^[[:space:]]*<div class="gw-driver-bar [^"]*".*capture build.*</div>[[:space:]]*$' "${PERF_FILE}"; then
     echo "Validation failed: performance widget still contains placeholder driver text." >&2
@@ -65,7 +98,7 @@ if [[ -f "${PERF_FILE}" && -f "${YAML_FILE}" ]]; then
     exit 1
   fi
 
-  python3 - "${YAML_FILE}" "${PERF_FILE}" <<'PY'
+  "${PYTHON_BIN}" - "${PYTHON_YAML_FILE}" "${PYTHON_PERF_FILE}" <<'PY'
 import re
 import sys
 from pathlib import Path

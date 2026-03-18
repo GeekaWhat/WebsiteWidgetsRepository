@@ -1,0 +1,8 @@
+CPU: AMD Ryzen 7 7800X3D
+CPU Cooler: COUGAR Poseidon Vistek Pro ARGB 360
+Motherboard: MSI MPG X870E CARBON WiFi
+RAM: G.Skill Trident Z5 NEO DDR5
+SSD: Samsung 9100 Pro
+GPU: MSI GeForce RTX 5080 16G Expert
+Case: COUGAR CFV235
+PSU: MSI MAG A850GLS PCIE5

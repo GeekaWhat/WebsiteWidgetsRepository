@@ -35,7 +35,7 @@ Replace `"[DM92]"` with the target build code (including brackets).
 For Windows desktop usage, run:
 
 ```bat
-generate-build-widgets-windows.bat [DM92]
+PC Build Template Widgets\scripts\windows\generate-build-widgets-windows.bat [DM92]
 ```
 
 If no build code is provided, the launcher prompts for it.

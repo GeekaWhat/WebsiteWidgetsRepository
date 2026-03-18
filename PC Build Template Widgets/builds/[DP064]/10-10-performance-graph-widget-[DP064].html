@@ -86,10 +86,8 @@ Updated: All 8 games with full settings
   </div>
 
   <div class="gw-perf-body"></div>
-  <div class="gw-driver-bar nvidia"><span class="gw-driver-logo">N</span>Driver Version: GeForce Game Ready Driver 591.86</div> 
-  <!-- <div class="gw-driver-bar gpu"><span class="gw-driver-logo">?</span>Driver Version: ?? </div> -->         
-  <!-- <div class="gw-driver-bar amd"><span class="gw-driver-logo">A</span>Driver Version: </div> -->
-  <!-- <div class="gw-driver-bar nvidia"><span class="gw-driver-logo">N</span>Driver Version: </div> -->
+  <div class="gw-driver-bar gpu"><span class="gw-driver-logo">?</span>Driver Version: ...</div> 
+  <!-- Driver bar variants are injected by the YAML renderer. -->
 </section>
 
 
@@ -106,62 +104,38 @@ Updated: All 8 games with full settings
 
     // ─── GAME ORDER & LABELS ─────────────────────────────────────────────────
     var GAME_ORDER = [
-      "cyberpunk2077",
-      "marvelrivals",
-      "residentevilrequiem",
-      "battlefield6",
       "arcraiders",
-      "fortnite"
+      "marvelrivals",
+      "battlefield6",
+      "callofduty",
+      "fortnite",
+      "cyberpunk2077",
+      "hogwartslegacy",
+      "f125"
     ];
 
     var GAME_LABELS = {
-      cyberpunk2077: "Cyberpunk 2077",
-      marvelrivals: "Marvel Rivals",
-      residentevilrequiem: "Resident Evil Requiem",
-      battlefield6: "Battlefield 6",
-      arcraiders: "ARC Raiders",
-      fortnite: "Fortnite"
+      arcraiders:     "ARC Raiders",
+      marvelrivals:   "Marvel Rivals",
+      battlefield6:   "Battlefield 6",
+      callofduty:     "Call of Duty: Black Ops 7",
+      fortnite:       "Fortnite",
+      cyberpunk2077:  "Cyberpunk 2077",
+      hogwartslegacy: "Hogwarts Legacy",
+      f125:           "F1 25"
     };
 
     // ─── FPS DATA ────────────────────────────────────────────────────────────
     // HD1080p / UltraHD1440p / UHD4K — update these with your real numbers as needed
     var GAME_DATA = {
-      cyberpunk2077: {
-      HD1080p: null,
-      UltraHD1440p: null,
-      UHD4K: 89.0,
-      resolution: "4K High"
-    },
-      marvelrivals: {
-      HD1080p: null,
-      UltraHD1440p: null,
-      UHD4K: 88.4,
-      resolution: "4K High"
-    },
-      residentevilrequiem: {
-      HD1080p: null,
-      UltraHD1440p: null,
-      UHD4K: 91.9,
-      resolution: "4K High"
-    },
-      battlefield6: {
-      HD1080p: null,
-      UltraHD1440p: null,
-      UHD4K: 93.8,
-      resolution: "4K High"
-    },
-      arcraiders: {
-      HD1080p: null,
-      UltraHD1440p: null,
-      UHD4K: 112.4,
-      resolution: "4K High"
-    },
-      fortnite: {
-      HD1080p: 326.5,
-      UltraHD1440p: null,
-      UHD4K: null,
-      resolution: "1080p Competitive"
-    }
+      arcraiders:     { resolution: "Resolution not set",          HD1080p: null, UltraHD1440p: null, UHD4K: null },
+      marvelrivals:   { resolution: "Resolution not set",          HD1080p: null, UltraHD1440p: null, UHD4K: null },
+      battlefield6:   { resolution: "Resolution not set",          HD1080p: null, UltraHD1440p: null, UHD4K: null },
+      callofduty:     { resolution: "Resolution not set",          HD1080p: null, UltraHD1440p: null, UHD4K: null },
+      fortnite:       { resolution: "1080p Competitive",           HD1080p: null, UltraHD1440p: null, UHD4K: null },
+      cyberpunk2077:  { resolution: "Resolution not set",          HD1080p: null, UltraHD1440p: null, UHD4K: null },
+      hogwartslegacy: { resolution: "Resolution not set",          HD1080p: null, UltraHD1440p: null, UHD4K: null },
+      f125:           { resolution: "Resolution not set",          HD1080p: null, UltraHD1440p: null, UHD4K: null }
     };
 
     // ─── TEST SETTINGS ───────────────────────────────────────────────────────
@@ -186,18 +160,6 @@ Updated: All 8 games with full settings
         ["GI / Reflections",   "Lumen GI High Quality, SSR Reflections"],
         ["Graphics Breakdown", "Model / Post / Shadows / Texture / Effects / Foliage all High"]
       ],
-      residentevilrequiem: [
-        ["Display",            "Fullscreen, 3840x2160"],
-        ["Frame Rate",         "Variable"],
-        ["Preset",             "Custom, Ray Tracing Off"],
-        ["Upscaling / Frame Gen", "Upscaling Off, Frame Generation Off"],
-        ["Low Latency / Reconstruction", "Low-latency mode On where available, Ray Reconstruction Off"],
-        ["Core Quality",       "Lighting & Shadow High, Texture High, Texture Filter High (ANISO x8), Ambient Occlusion High"],
-        ["Geometry / Effects", "Hair Strands On, Mesh Quality Standard, Particle Lighting On, VFX Quality Standard"],
-        ["Reflections / Volumetrics", "Screen Space Reflections On, Volumetric Fog High, Subsurface Scattering High"],
-        ["Image / Post Effects", "TAA, Motion Blur Off, Depth of Field On, Lens Distortion + Chromatic Aberration On, Lens Dirt On, Lens Flare Standard"],
-        ["Shadow Detail",      "Shadow Quality High, Contact Shadows On"]
-      ],
       battlefield6: [
         ["Map / Mode",         "Empire State, Conquest"],
         ["Capture Length",     "4-7 mins"],
@@ -208,13 +170,23 @@ Updated: All 8 games with full settings
         ["Texture / Mesh / Terrain", "All High"],
         ["Graphics Breakdown", "Reflections / SSR / GTAO / Lighting / Shadows / Post Process all High"]
       ],
+      callofduty: [
+        ["Mode / Map",         "Zombies Solo, Ashes of the Damned (Spawn Area)"],
+        ["Capture Length",     "4-7 mins"],
+        ["Display / Resolution","Fullscreen, " + R_UNSET],
+        ["Render Resolution",  "100%, Dynamic Resolution Off"],
+        ["VSync / Frame Cap",  "VSync Off, Unlimited FPS"],
+        ["Reflex / Frame Gen", "NVIDIA Reflex On, Frame Generation Off"],
+        ["Preset",             "Custom (Eco Preset Efficiency baseline)"],
+        ["Graphics Breakdown", "Textures / Detail / Particles / Shaders / Shadows / Terrain / Volumetrics all High"]
+      ],
       fortnite: [
         ["Game Mode",          "Zero-Build Battle Royale"],
         ["Capture Length",     "4-7 mins"],
         ["Display",            "Fullscreen, " + R_1080 + ", DirectX 12, VSync Off, Unlimited FPS"],
         ["AA / Upscaling",     "TAA, TSR Quality, 3D Resolution 100%, Dynamic 3D Resolution Off"],
         ["Frame Gen / Ray Tracing", "Both Off"],
-        ["Preset",             "Custom, Competitive settings"],
+        ["Preset",             "Custom"],
         ["Graphics Breakdown", "Nanite Off / GI Off / Reflections Off / Shadows Off / View Distance Far / Textures Low / Effects Low / Post Processing Low"]
       ],
       cyberpunk2077: [
@@ -226,6 +198,25 @@ Updated: All 8 games with full settings
         ["Crowd / FOV",        "Crowd Density Medium, FOV 80"],
         ["Post Effects",       "Film Grain On, DoF On, Lens Flare On, Motion Blur Off"],
         ["Graphics Breakdown", "Local Shadow Mesh / Local Shadow / Cascaded Range / Cascaded Resolution all High"]
+      ],
+      hogwartslegacy: [
+        ["Capture Method",     "4-7 min loop through Hogwarts Castle"],
+        ["Display",            "Windowed Fullscreen, " + R_UNSET + ", VSync Off, Uncapped"],
+        ["AA / Upscaling",     "TAA High, Upscale Type None, Frame Generation Off"],
+        ["Low Latency / Ray Reconstruction", "Both Off"],
+        ["FOV / Motion Blur",  "FOV +20, Motion Blur Off"],
+        ["Post Effects",       "DoF On, Chromatic Aberration On, Film Grain On"],
+        ["Preset",             "Global Quality High"],
+        ["Graphics Breakdown", "Effects / Material / Fog / Sky / Foliage / Post / Shadows / Texture / View Distance / Population all High"]
+      ],
+      f125: [
+        ["Track / Mode",       "Belgium, Benchmark Mode, 2 Laps, Clear (Dry)"],
+        ["Capture Length",     "4-7 mins"],
+        ["Display",            "Fullscreen, " + R_UNSET + ", VSync Off, Frame Rate Limit Off"],
+        ["AA / Upscaling",     "TAA + FidelityFX Sharpening, Quality Mode, Dynamic Resolution Off"],
+        ["Frame Gen / Ray Tracing", "Frame Gen Off, All Ray Tracing Off"],
+        ["Preset",             "Custom, NVIDIA Reflex Off"],
+        ["Graphics Breakdown", "Lighting / Shadows / Crowd / Mirrors / Car & Helmet Reflections / Weather / Ground Cover / Trees / SSR / Textures all Ultra High"]
       ]
     };
 

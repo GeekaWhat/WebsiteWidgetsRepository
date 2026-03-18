@@ -1,3 +1,18 @@
+# QUICK START
+# 1. Set build code and notes.
+# 2. Decide which widgets are actually used in this build.
+# 3. Keep `widget_enabled` and each section's own `enabled:` value in sync.
+# 4. Fill `component_headings` and `parts_list` first.
+# 5. For spec widgets, prefer plain-English reader-friendly wording over raw spec-sheet jargon.
+# 6. If a term is technical, explain what it does in the wording rather than assuming the reader knows it.
+# 7. If something is not used in the build, say that clearly instead of leaving generic text.
+#
+# STYLE GUIDE
+# - Avoid repeating the heading inside the value.
+# - Prefer "5G LAN" over "5GbE" for reader-facing copy.
+# - Avoid unexplained spec shorthand like "5600-4800 JEDEC" unless you also explain it.
+# - Tie cables, slots, and connectors to the exact component they power or affect where helpful.
+
 build_meta:
   build_code: "[BUILD_CODE]"
   refresh_scope: "full"                                       # full | partial
@@ -17,14 +32,9 @@ part_key_rules:
   section_anchor_mode: "auto_from_part_key"                   # set section_anchor to "__AUTO_FROM_PART_KEY__" unless override is needed
   anchor_style: "lowercase-kebab"                             # examples: #cpu, #cpu-cooler, #motherboard
 
-sources:
-  # shared source definitions; reuse via source_ref in widget sections
-  # example:
-  # motherboard_main:
-  #   model: "MSI MAG X870E GAMING PLUS MAX WIFI"
-  #   source_url: "https://www.msi.com/Motherboard/MAG-X870E-GAMING-PLUS-MAX-WIFI/Specification"
-
 widget_enabled:
+  # High-level widget toggle list for planning.
+  # IMPORTANT: keep these values matched with each section's own `enabled:` flag below.
   cpu_comparison_table: true
   cooler_temps_graph: true
   motherboard_specs: true
@@ -37,17 +47,20 @@ widget_enabled:
   peripherals: true
 
 # 00-pc-build-component-headings
+# These names feed the heading widget and can also be reused by other widgets.
 component_headings:
-  cpu: "..."
-  cpu_cooler: "..."
-  motherboard: "..."
-  ram: "..."
-  ssd: "..."
-  gpu: "..."
-  case: "..."
-  psu: "..."
+  cpu: ""
+  cpu_cooler: ""
+  motherboard: ""
+  ram: ""
+  ssd: ""
+  gpu: ""
+  case: ""
+  psu: ""
 
 # 01-pc-build-parts-list
+# This is the most important reader-facing section.
+# Write summaries/specs for normal readers first, not just enthusiasts.
 parts_list:
   - part_key: "cpu"                                            # allowed values: cpu | cpu_cooler | motherboard | ram | ssd | gpu | case | psu
     tab_label: "__AUTO_FROM_PART_KEY__"
@@ -211,29 +224,21 @@ cooler_temps_graph:
   enabled: true
   title: "..."
   benchmark_badge: "..."
-  cta_url: "..."
-  highlight_name: "..."
-  cinebench4:
-    labels: ["...","..."]
-    avg_temps_c: [0,0]
-    max_temps_c: [0,0]
-  cinebench8:
-    labels: ["...","..."]
-    avg_temps_c: [0,0]
-    max_temps_c: [0,0]
-  cpuz8:
-    labels: ["...","..."]
-    avg_temps_c: [0,0]
-    max_temps_c: [0,0]
+  cta_url: "..."                                              # optional reader-facing link
+  data_source_url: "https://docs.google.com/spreadsheets/d/1gemZNlSFT--aBTL7dW3NS9bGOsga1wOSLyHEmF6AkIY/edit?gid=1584843454#gid=1584843454"                                         # optional Google Sheet tab URL; if present, latest graph data is pulled during render
+  highlight_name: "..."                                       # exact cooler name to highlight in the chart
 
 # 04-motherboard-specs-table
-#Make sure the specs are accurate and pulled directly form the Source_url
+# Make sure the specs are accurate and pulled directly from the Source_url.
+# Keep values easy to scan:
+# - use plain English where possible
+# - do not repeat the label inside the value
+# - "Expansion Card Compatibility" should describe the PCIe slots / expansion slots, not the chipset
 motherboard_specs:
   enabled: true
-  source_ref: ''                                              # optional: key from top-level "sources"
-  model: ''                                                   # required if source_ref is blank
-  source_url: ''                                              # paste official spec URL (required for auto-fill)
-  formatting_rules_override: {}                               # optional: override formatting_defaults only if needed
+  model: ''                                                   # motherboard name used for the widget
+  source_url: ''                                              # official spec URL
+  formatting_rules_override: {}                               # optional: use when you want custom line breaks / formatting in this widget
   chipset_socket: "__AUTO_FROM_SOURCE__"
   form_factor: "__AUTO_FROM_SOURCE__"
   cpu_support: "__AUTO_FROM_SOURCE__"
@@ -267,7 +272,7 @@ ram_widget:
 # 06-ssd-speed-graph
 ssd_widget:
   enabled: true
-  subtext: "..."
+  subtext: "..."                                              # reader-facing context; avoid unexplained benchmark jargon
   sequential_read_mb_s: 0
   sequential_write_mb_s: 0
   read_marker_percent: "..."
@@ -335,13 +340,13 @@ gpu_comparison_table:
       buy_shortcode: ''                                       # paste full geeka_price shortcode including brackets
 
 # 08-pc-case-spec-table-widget
-#Make sure the specs are accurate and pulled directly form the Source_url
+# Make sure the specs are accurate and pulled directly from the Source_url.
+# When possible, describe what matters in practice: board support, radiator room, GPU room, front I/O.
 case_specs:
   enabled: true
-  source_ref: ''                                              # optional: key from top-level "sources"
-  model: ''                                                   # required if source_ref is blank
-  source_url: ''                                              # paste official spec URL (required for auto-fill)
-  formatting_rules_override: {}                               # optional: override formatting_defaults only if needed
+  model: ''                                                   # case name used for the widget
+  source_url: ''                                              # official spec URL
+  formatting_rules_override: {}                               # optional: use when you want custom line breaks / formatting in this widget
   form_factor: "__AUTO_FROM_SOURCE__"
   motherboard_support: "__AUTO_FROM_SOURCE__"
   dimensions_l_w_h: "__AUTO_FROM_SOURCE__"
@@ -360,13 +365,14 @@ case_specs:
   pre_installed_fans: "__AUTO_FROM_SOURCE__"
 
 # 09-psu-connector-breakdown-widget
-#Make sure the specs are accurate and pulled directly form the Source_url
+# Make sure the specs are accurate and pulled directly from the Source_url.
+# This widget should explain what each cable powers in this exact build.
+# Mention the motherboard / CPU / GPU by name where useful, and clearly say when a cable is unnecessary.
 psu_connectors:
   enabled: true
   widget_title: "__AUTO_FROM_SOURCE__"
-  source_ref: ''                                              # optional: key from top-level "sources"
-  model: ''                                                   # required if source_ref is blank
-  source_url: ''                                              # paste official spec URL (required for auto-fill)
+  model: ''                                                   # PSU name used for the widget
+  source_url: ''                                              # official product / spec URL
   connectors:
     pcie_6_2:
       name: "PCIe (6+2 pin)"
@@ -450,6 +456,8 @@ performance_widget:
     f125: []
 
 # 11-peripherals-recommendations-widget
+# Keep these recommendations beginner-friendly:
+# explain why the product fits the build/user, not just the raw specs.
 peripherals:
   - type: "Keyboard"
     name: "..."

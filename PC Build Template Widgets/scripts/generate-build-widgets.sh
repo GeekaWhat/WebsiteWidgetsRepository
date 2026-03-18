@@ -22,6 +22,10 @@ while IFS='|' read -r prefix source_file; do
   [[ -z "${prefix}" ]] && continue
   [[ -z "${source_file}" ]] && continue
 
+  # Tolerate CRLF in widget-order.txt when running via Git Bash on Windows.
+  prefix="${prefix%$'\r'}"
+  source_file="${source_file%$'\r'}"
+
   base_name="${source_file%.html}"
   source_path="${SOURCE_DIR}/${source_file}"
   if [[ ! -f "${source_path}" ]]; then

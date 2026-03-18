@@ -1,0 +1,8 @@
+CPU: AMD Ryzen 7 7800X3D
+CPU Cooler: ASUS Prime LC 360 ARGB
+Motherboard: ASUS TUF Gaming B850-PLUS WIFI
+RAM: TeamGroup T-FORCE DELTA RGB DDR5
+SSD: TeamGroup MP44L 1TB
+GPU: ASUS Prime Radeon RX 9070 XT OC Edition 16GB
+Case: ASUS Prime AP303
+PSU: Corsair RM750e (2025)

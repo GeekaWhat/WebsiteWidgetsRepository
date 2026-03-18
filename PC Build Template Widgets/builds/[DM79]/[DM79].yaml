@@ -1,0 +1,601 @@
+build_meta:
+  build_code: "[DM79]"
+  refresh_scope: "full"                                       # full | partial
+  auto_fill_from_sources: true                                # prefer sources to populate widgets
+  auto_fill_policy: "always"                                  # always | when_missing | off
+  auto_fill_notes: "Auto-fill any '...' placeholders unless explicitly overridden."
+  notes: "This article already exists, we are doing a refresh you can use this page as well https://geekawhat.com/building-a-high-end-4k-gaming-pc-ft-cougars-cfv235-case/"
+
+formatting_defaults:
+  multi_value_separator: "<br>"
+  no_commas_for_multi_value_lists: true
+  list_item_style: "yaml_array"
+
+part_key_rules:
+  allowed_keys: ["cpu","cpu_cooler","motherboard","ram","ssd","gpu","case","psu"]
+  tab_label_mode: "auto_from_part_key"                        # set tab_label to "__AUTO_FROM_PART_KEY__" unless override is needed
+  section_anchor_mode: "auto_from_part_key"                   # set section_anchor to "__AUTO_FROM_PART_KEY__" unless override is needed
+  anchor_style: "lowercase-kebab"                             # examples: #cpu, #cpu-cooler, #motherboard
+
+sources:
+  # shared source definitions; reuse via source_ref in widget sections
+  # example:
+  # motherboard_main:
+  #   model: "MSI MAG X870E GAMING PLUS MAX WIFI"
+  #   source_url: "https://www.msi.com/Motherboard/MAG-X870E-GAMING-PLUS-MAX-WIFI/Specification"
+
+widget_enabled:
+  cpu_comparison_table: false
+  cooler_temps_graph: false
+  motherboard_specs: true
+  ram_widget: true
+  ssd_widget: true
+  gpu_comparison_table: false
+  case_specs: true
+  psu_connectors: true
+  performance_widget: true
+  peripherals: false
+
+# 00-pc-build-component-headings
+component_headings:
+  cpu: "AMD Ryzen 7 7800X3D"
+  cpu_cooler: "COUGAR Poseidon Vistek Pro ARGB 360"
+  motherboard: "MSI MPG X870E CARBON WiFi"
+  ram: "G.Skill Trident Z5 NEO DDR5"
+  ssd: "Samsung 9100 Pro"
+  gpu: "MSI GeForce RTX 5080 16G Expert"
+  case: "COUGAR CFV235"
+  psu: "MSI MAG A850GLS PCIE5"
+
+# 01-pc-build-parts-list
+parts_list:
+  - part_key: "cpu"                                       # allowed values: cpu | cpu_cooler | motherboard | ram | ssd | gpu | case | psu
+    tab_label: "__AUTO_FROM_PART_KEY__"
+    name: "AMD Ryzen 7 7800X3D"
+    section_anchor: "__AUTO_FROM_PART_KEY__"
+    image_url: 'https://geekawhat.com/wp-content/uploads/2025/09/MPI_AMD-Ryzen-7-7800X3D-1.jpg'                                             # required: paste image URL
+    image_alt: "AMD Ryzen 7 7800X3D processor"                                          # required alt text
+    summary: "AMD's Ryzen 7 7800X3D remains a strong gaming-first CPU thanks to its 8 Zen 4 cores and 3D V-Cache, making it a sensible match for a high-end 4K GeForce build."
+    specs:
+      - { label: "Cores / Threads", value: "8 Cores / 16 Threads" }
+      - { label: "Boost Clock", value: "Up to 5.0GHz" }
+      - { label: "Cache", value: "96MB L3 3D V-Cache" }
+      - { label: "Socket", value: "AM5" }
+      - { label: "TDP", value: "120W" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/7kss" AMAZON-US-ASIN="B0BTZB7F88" AMAZON-GB-ASIN="B0BTZB7F88" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Famd-ryzen-7-7800x3d-eight-core-5.00ghz-socket-am5-processor-retail-cp-3dt-am.html" overclockers-awin-gb-itemid="CP-3DT-AM"]'                                         # paste full geeka_price shortcode including brackets
+
+  - part_key: "cpu_cooler"
+    tab_label: "__AUTO_FROM_PART_KEY__"
+    name: "COUGAR Poseidon Vistek Pro ARGB 360"
+    section_anchor: "__AUTO_FROM_PART_KEY__"
+    image_url: 'https://geekawhat.com/wp-content/uploads/2025/11/MPI_Cougar-Poseidon-Vistek-Pro-ARGB-360.jpg'                                             # paste image URL
+    image_alt: "COUGAR Poseidon Vistek Pro ARGB 360 liquid CPU cooler"
+    summary: "COUGAR's 360mm Poseidon Vistek Pro ARGB pairs a large radiator with an IPS display and bundled ARGB fans, giving this refresh build both strong cooling headroom and the right visual flair."
+    specs:
+      - { label: "Cooler Type", value: "360mm AIO Liquid Cooler" }
+      - { label: "Display", value: "3.95-inch IPS LCD" }
+      - { label: "Fans", value: "3 x 120mm ARGB PWM" }
+      - { label: "Socket Support", value: "AM5 / LGA1851 / LGA1700" }
+    buy_shortcode:                           # NO SHORTCODE
+
+  - part_key: "motherboard"
+    tab_label: "__AUTO_FROM_PART_KEY__"
+    name: "MSI MPG X870E CARBON WiFi"
+    section_anchor: "__AUTO_FROM_PART_KEY__"
+    image_url: 'https://geekawhat.com/wp-content/uploads/2024/11/MPI_MSI-MPG-X870E-Carbon-WiFi.jpg'                                             # paste image URL
+    image_alt: "MSI MPG X870E CARBON WiFi motherboard"
+    summary: "MSI's MPG X870E CARBON WiFi is a premium AM5 motherboard with PCIe 5.0 graphics and storage support, dual LAN, and Wi-Fi 7, making it a feature-rich foundation for this 4K gaming PC."
+    specs:
+      - { label: "Chipset", value: "AMD X870E" }
+      - { label: "Form Factor", value: "ATX" }
+      - { label: "Memory Support", value: "DDR5 up to 256GB / 8400+ MT/s (OC)" }
+      - { label: "Networking", value: "5G LAN + 2.5G LAN + Wi-Fi 7" }
+    buy_shortcode: '[geeka_price newegg-howl-us-href="https://howl.me/cnctHtjSB9l" newegg-howl-us-itemid="N82E16813144666" AMAZON-GENIUS-HREF="https://geni.us/pqAPMkw" AMAZON-US-ASIN="‎" AMAZON-GB-ASIN="B0DCZXJ32B" bestbuy-howl-us-href="" bestbuy-howl-us-itemid="" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fmsi-mpg-x870e-carbon-wifi-socket-am5-ddr5-atx-motherboard-mot-msi-03300.html%3F_gl%3D1%2A10w0xa8%2A_up%2AMQ..%26gclid%3DCjwKCAjw88yxBhBWEiwA7cm6pUaGLINOoTnXMXXNULHQDnW-L6Dmiqd7Bys2SxdjXYegU5glFKU0ghoC2V0QAvD_BwE" overclockers-awin-gb-itemid="MOT-MSI-03300"]'                                         # paste full geeka_price shortcode including brackets
+
+  - part_key: "ram"
+    tab_label: "__AUTO_FROM_PART_KEY__"
+    name: "G.Skill Trident Z5 NEO DDR5"
+    section_anchor: "__AUTO_FROM_PART_KEY__"
+    image_url: 'https://geekawhat.com/wp-content/uploads/2022/09/GSkill-Trident-Z5-Neo-DDR5.jpg'                                             # paste image URL
+    image_alt: "G.Skill Trident Z5 NEO DDR5 memory kit"
+    summary: "This Trident Z5 NEO kit gives the AM5 platform the DDR5-6000 sweet spot with tight timings, which is exactly where Ryzen 7000 gaming systems tend to deliver their best balance of latency and stability."
+    specs:
+      - { label: "Capacity", value: "32GB (2 x 16GB)" }
+      - { label: "Speed", value: "DDR5-6000" }
+      - { label: "Latency", value: "CL26" }
+      - { label: "Profile", value: "AMD EXPO" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/F4Q2Q" AMAZON-US-ASIN="B0BF6ZQ8MY" AMAZON-GB-ASIN="B0BF6ZQ8MY" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Ftrident-z5-neo-expo-rgb-32gb-2x16gb-ddr5-c26-6000mhz-dual-channel-kit-mem-gsk-05022.html" overclockers-awin-gb-itemid="MEM-GSK-05022"]'                                         # paste full geeka_price shortcode including brackets
+
+  - part_key: "ssd"
+    tab_label: "__AUTO_FROM_PART_KEY__"
+    name: "Samsung 9100 Pro"
+    section_anchor: "__AUTO_FROM_PART_KEY__"
+    image_url: 'https://geekawhat.com/wp-content/uploads/2025/08/MPI_Samsung-9100-PRO-2TB.jpg'                                             # paste image URL
+    image_alt: "Samsung 9100 Pro 2TB PCIe 5.0 NVMe SSD"
+    summary: "Samsung's 9100 Pro is a flagship PCIe 5.0 SSD built for extreme sequential throughput, giving this build a fast boot drive with plenty of bandwidth for large game installs and content workloads."
+    specs:
+      - { label: "Capacity", value: "2TB" }
+      - { label: "Interface", value: "PCIe 5.0 x4 / NVMe 2.0" }
+      - { label: "Sequential Read", value: "14,054 MB/s (GeekaWhat test)" }
+      - { label: "Sequential Write", value: "13,189 MB/s (GeekaWhat test)" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/pJ5f5c" AMAZON-US-ASIN="B0DWFLPMM5" AMAZON-GB-ASIN="B0DWFLPMM5" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fsamsung-9100-pro-2tb-m.2-2280-pcie-5.0-x4-nvme-solid-state-drive-sto-sam-04766.html" overclockers-awin-gb-itemid="STO-SAM-04766"]'                                         # paste full geeka_price shortcode including brackets
+
+  - part_key: "gpu"
+    tab_label: "__AUTO_FROM_PART_KEY__"
+    name: "MSI GeForce RTX 5080 16G Expert"
+    section_anchor: "__AUTO_FROM_PART_KEY__"
+    image_url: 'https://geekawhat.com/wp-content/uploads/2025/11/MPI_MSI-GeForce-RTX-5080-16G-Expert.jpg'                                             # paste image URL
+    image_alt: "MSI GeForce RTX 5080 16G Expert graphics card"
+    summary: "The RTX 5080 16G Expert is the centerpiece of this build, delivering the 4K gaming performance shown in the article while keeping NVIDIA's latest upscaling and frame generation stack on the table."
+    specs:
+      - { label: "VRAM", value: "16GB GDDR7" }
+      - { label: "Boost Clock", value: "2617MHz" }
+      - { label: "Interface", value: "PCIe 5.0 x16" }
+      - { label: "Power Connector", value: "1 x 16-pin (12V-2x6)" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/9AokXWd" AMAZON-US-ASIN="B0FLSWN28H" AMAZON-GB-ASIN="B096Y3TYDH"]'                                         # paste full geeka_price shortcode including brackets
+
+  - part_key: "case"
+    tab_label: "__AUTO_FROM_PART_KEY__"
+    name: "COUGAR CFV235"
+    section_anchor: "__AUTO_FROM_PART_KEY__"
+    image_url: 'https://geekawhat.com/wp-content/uploads/2025/11/MPI_Cougar-CFV235-Vision.jpg'                                             # paste image URL
+    image_alt: "COUGAR CFV235 PC case"
+    summary: "COUGAR's CFV235 is the showpiece chassis for this build, combining panoramic tempered glass styling with broad radiator, fan, and GPU clearance support for a powerful but still display-friendly system."
+    specs:
+      - { label: "Case Type", value: "Mid Tower" }
+      - { label: "Motherboard Support", value: "Mini-ITX / Micro-ATX / ATX / CEB" }
+      - { label: "GPU Clearance", value: "Up to 430mm" }
+      - { label: "Radiator Support", value: "Up to 360mm" }
+    buy_shortcode: ''                                         # nO sHORTCODE
+
+  - part_key: "psu"
+    tab_label: "__AUTO_FROM_PART_KEY__"
+    name: "MSI MAG A850GLS PCIE5"
+    section_anchor: "__AUTO_FROM_PART_KEY__"
+    image_url: 'https://geekawhat.com/wp-content/uploads/2025/11/MPI_MSI-MAG-A850GLS-PCIE5.jpg'                                             # paste image URL
+    image_alt: "MSI MAG A850GLS PCIE5 power supply"
+    summary: "MSI's MAG A850GLS PCIE5 brings native ATX 3.1 and PCIe 5.1 support to the build, including the modern 12V-2x6 GPU cable needed for a clean RTX 5080 install."
+    specs:
+      - { label: "Output", value: "850W" }
+      - { label: "Efficiency", value: "80 Plus Gold" }
+      - { label: "Standard", value: "ATX 3.1 / PCIe 5.1" }
+      - { label: "GPU Cable", value: "Native 12V-2x6 (600W)" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="" AMAZON-US-ASIN="" AMAZON-GB-ASIN="" overclockers-awin-gb-href="" overclockers-awin-gb-itemid=""]'                                      
+# 02-cpu-comparison-table
+cpu_comparison_table:
+  enabled: false
+  kicker: "CPU Comparison"
+  title: "..."
+  note: "..."
+  aria_label: "..."
+  columns: ["CPU","Cores","Threads","Base Clock","Max Boost","TDP","Total Cache","Where to Buy"]
+  rows:
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      cores: "..."
+      threads: "..."
+      base_clock: "..."
+      boost_clock: "..."
+      tdp: "..."
+      cache: "..."
+      buy_shortcode: ''                                       # paste full geeka_price shortcode including brackets
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      cores: "..."
+      threads: "..."
+      base_clock: "..."
+      boost_clock: "..."
+      tdp: "..."
+      cache: "..."
+      buy_shortcode: ''                                       # paste full geeka_price shortcode including brackets
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      cores: "..."
+      threads: "..."
+      base_clock: "..."
+      boost_clock: "..."
+      tdp: "..."
+      cache: "..."
+      buy_shortcode: ''                                       # paste full geeka_price shortcode including brackets
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      cores: "..."
+      threads: "..."
+      base_clock: "..."
+      boost_clock: "..."
+      tdp: "..."
+      cache: "..."
+      buy_shortcode: ''                                       # paste full geeka_price shortcode including brackets
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      cores: "..."
+      threads: "..."
+      base_clock: "..."
+      boost_clock: "..."
+      tdp: "..."
+      cache: "..."
+      buy_shortcode: ''                                       # paste full geeka_price shortcode including brackets
+
+# 03-cooler-temps-graph
+cooler_temps_graph:
+  enabled: true
+  title: "COUGAR Poseidon Vistek Pro ARGB 360 Benchmarks"
+  benchmark_badge: "Tested with: Intel Core i7-14700K"
+  cta_url: "..."
+  Cooler_temps_graphs_url: "https://docs.google.com/spreadsheets/d/1gemZNlSFT--aBTL7dW3NS9bGOsga1wOSLyHEmF6AkIY/edit?gid=1584843454#gid=1584843454"
+  highlight_name: "COUGAR Poseidon Vistek Pro ARGB 360"
+  cinebench4:
+    labels: ["...","..."]
+    avg_temps_c: [0,0]
+    max_temps_c: [0,0]
+  cinebench8:
+    labels: ["...","..."]
+    avg_temps_c: [0,0]
+    max_temps_c: [0,0]
+  cpuz8:
+    labels: ["...","..."]
+    avg_temps_c: [0,0]
+    max_temps_c: [0,0]
+
+# 04-motherboard-specs-table
+#Make sure the specs are accurate and pulled directly form the Source_url
+motherboard_specs:
+  enabled: true
+  source_ref: ''                                              # optional: key from top-level "sources"
+  model: 'MSI MPG X870E CARBON WiFi'                                                   # required if source_ref is blank
+  source_url: 'https://www.msi.com/Motherboard/MPG-X870E-CARBON-WIFI/Specification'                                              # paste official spec URL (required for auto-fill)
+  formatting_rules_override: {}                               # optional: override formatting_defaults only if needed
+  chipset_socket: "AMD X870E / Socket AM5"
+  form_factor: "ATX (243.84 x 304.8mm)"
+  cpu_support: "AMD Ryzen 9000 / 8000 / 7000 Series desktop processors"
+  memory_support_html: "4 x DDR5 DIMM, up to 256GB<br>Dual-channel DDR5 8400+ MT/s (OC)<br>AMD EXPO memory overclocking support"
+  vrm_design: "18+2+1 Duet Rail Power System"
+  graphics_card_compatibility_1_slot: "PCI_E1 PCIe 5.0 x16 primary graphics slot for modern high-end GPUs"
+  expansion_card_compatibility_html: "PCI_E1: PCIe 5.0 x16<br>PCI_E2: PCIe 5.0 x4<br>PCI_E3: PCIe 4.0 x4"
+  m2_compatibility_3_slots_html: "4 x M.2 total:<br>M.2_1 PCIe 5.0 x4 (2260/2280)<br>M.2_2 PCIe 5.0 x4 (2260/2280)<br>M.2_3 PCIe 4.0 x4 (22110/2280)<br>M.2_4 PCIe 4.0 x4 (2260/2280)"
+  sata_storage: "4 x SATA 6Gb/s"
+  networking_html: "Realtek 8126 5G LAN<br>Realtek 8125 2.5G LAN<br>Wi-Fi 7 + Bluetooth 5.4"
+  rear_io_html: "2 x USB4 Type-C (40Gbps)<br>5 x USB 10Gbps Type-A<br>4 x USB 5Gbps Type-A<br>1 x HDMI 2.1<br>1 x 5G LAN + 1 x 2.5G LAN<br>Wi-Fi antenna connectors + optical S/PDIF"
+  front_io_headers_html: "1 x USB 20Gbps Type-C front header with 27W PD<br>2 x USB 5Gbps headers (4 ports)<br>2 x USB 2.0 headers (4 ports)<br>Front audio, RGB, ARGB, TPM, and fan headers"
+  audio: "Realtek ALC4080 with 7.1-channel USB high-performance audio and optical S/PDIF out"
+
+# 05-ram-speed-latency-configuration-widget
+ram_widget:
+  enabled: true
+  speed: "6000"
+  latency: "CL26"
+  generation: "DDR5"
+  dimm_count: "2 Sticks"
+  marker_label: "6000MHz" #To be calculated by Codex accurately 
+  marker_percent: "37.5" #To be calculated by Codex accurately 
+  note: "For a 2-DIMM kit on this 4-slot motherboard, install memory in A2 and B2 for dual-channel operation and the best chance of stable EXPO operation."
+  slots:
+    - { slot: "A1", state: "Leave Empty", recommended: false }
+    - { slot: "A2", state: "Install DIMM", recommended: true }
+    - { slot: "B1", state: "Leave Empty", recommended: false }
+    - { slot: "B2", state: "Install DIMM", recommended: true }
+
+# 06-ssd-speed-graph
+ssd_widget:
+  enabled: true
+  subtext: "All results below are from GeekaWhat in-house testing, using the same bench and methodology for consistent direct comparison."
+  sequential_read_mb_s: 14054
+  sequential_write_mb_s: 13189
+  read_marker_percent: "89.2"
+  write_marker_percent: "83.7"
+  footnote: "Scale uses PCIe/NVMe x4 throughput context. Real-world performance varies by workload, thermals, and test method."
+
+# 07-gpu-comparison-table
+gpu_comparison_table:
+  enabled: false
+  kicker: "GPU Comparison"
+  title: "..."
+  note: "..."
+  aria_label: "..."
+  columns: ["GPU","VRAM","TBP","Boost Clock","Ray Tracing","Upscaling/FG","Where to Buy"]
+  rows:
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      metric_1: "..."
+      metric_2: "..."
+      metric_3: "..."
+      metric_4: "..."
+      metric_5: "..."
+      buy_shortcode: ''                                       # paste full geeka_price shortcode including brackets
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      metric_1: "..."
+      metric_2: "..."
+      metric_3: "..."
+      metric_4: "..."
+      metric_5: "..."
+      buy_shortcode: ''                                       # paste full geeka_price shortcode including brackets
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      metric_1: "..."
+      metric_2: "..."
+      metric_3: "..."
+      metric_4: "..."
+      metric_5: "..."
+      buy_shortcode: ''                                       # paste full geeka_price shortcode including brackets
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      metric_1: "..."
+      metric_2: "..."
+      metric_3: "..."
+      metric_4: "..."
+      metric_5: "..."
+      buy_shortcode: ''                                       # paste full geeka_price shortcode including brackets
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      metric_1: "..."
+      metric_2: "..."
+      metric_3: "..."
+      metric_4: "..."
+      metric_5: "..."
+      buy_shortcode: ''                                       # paste full geeka_price shortcode including brackets
+
+# 08-pc-case-spec-table-widget
+#Make sure the specs are accurate and pulled directly form the Source_url
+case_specs:
+  enabled: true
+  source_ref: ''                                              # optional: key from top-level "sources"
+  model: 'COUGAR CFV235'                                                   # required if source_ref is blank
+  source_url: 'https://cougargaming.com/us/products/cases/cfv235/'                                              # paste official spec URL (required for auto-fill)
+  formatting_rules_override: {}                               # optional: override formatting_defaults only if needed
+  form_factor: "Mid Tower"
+  motherboard_support: "Reverse connector / Mini-ITX / Micro-ATX / ATX / CEB"
+  dimensions_l_w_h: "460 x 235 x 493 mm (L x W x H)"
+  front_io:
+    - "1 x USB 3.2 Gen 2x2 Type-C"
+    - "2 x USB 3.0 Type-A"
+    - "1 x 4-pole headset audio jack"
+    - "1 x RGB control button"
+  pcie_slots: "7"
+  colour: "Black"
+  max_clearance:
+    - "GPU length: up to 430mm"
+    - "CPU cooler height: up to 175mm"
+    - "PSU length: up to 200mm"
+  drive_support:
+    - '2 x 3.5-inch drive bays'
+    - '2 x 2.5-inch dedicated bays'
+    - '2 x additional 2.5-inch mounts via converted 3.5-inch bays'
+  fan_support:
+    - "Top: 3 x 120mm / 2 x 140mm"
+    - "Motherboard side: 3 x 120mm / 2 x 140mm"
+    - "Bottom: 2 x 120mm"
+    - "Rear: 1 x 120mm"
+  radiator_support:
+    - "Top: up to 360 / 280 / 240 / 140 / 120mm"
+    - "Rear: up to 120mm"
+  pre_installed_fans: "Motherboard side: 1 x Unity 240 ARGB PWM reverse fan<br>Rear: 1 x 120mm ARGB PWM fan"
+
+# 09-psu-connector-breakdown-widget
+#Make sure the specs are accurate and pulled directly form the Source_url
+psu_connectors:
+  enabled: true
+  widget_title: "MSI MAG A850GLS PCIE5 Connector Reference"
+  source_ref: ''                                              # optional: key from top-level "sources"
+  model: 'MSI MAG A850GLS PCIE5'                                                   # required if source_ref is blank
+  source_url: 'https://www.msi.com/Power-Supply/MAG-A850GLS-PCIE5/Specification'                                              # paste official spec URL (required for auto-fill)
+  connectors:
+    pcie_6_2:
+      name: "PCIe (6+2 pin)"
+      connector_type: "4 x PCIe 6+2-pin connectors"
+      build_usage: "Alternative GPU power for graphics cards that still use standard 8-pin PCIe leads"
+      recommended_setup: "Keep available for older GPUs or add-in cards; this build's RTX 5080 should use the native 12V-2x6 cable"
+      notes: "Useful for adapter-based installs or future GPU swaps"
+    pcie_12v_2x6:
+      name: "12V-2x6"
+      connector_type: "1 x native 16-pin 12V-2x6 / PCIe 5.1 cable"
+      typical_output: "Up to 600W"
+      build_usage: "Primary GPU power lead for the MSI GeForce RTX 5080 16G Expert"
+      notes: "ATX 3.1 / PCIe 5.1 ready with dual-colour connector design to help confirm proper insertion"
+    atx_24pin:
+      name: "ATX 24-pin"
+      connector_type: "24-pin ATX motherboard cable"
+      quantity_included: "1"
+      primary_use: "Primary motherboard power"
+      notes: "Required for the MPG X870E CARBON WiFi main board connection"
+    cpu_eps_4_4:
+      name: "CPU EPS (4+4)"
+      connector_type: "4+4-pin EPS CPU power cables"
+      quantity_included: "2"
+      primary_use: "CPU power for the Ryzen 7 7800X3D and motherboard EPS headers"
+      notes: "Use both EPS leads if you want all available CPU power inputs populated"
+    sata_15pin:
+      name: "SATA (15-pin)"
+      connector_type: "SATA power cable set"
+      primary_use: "SATA SSDs, hubs, RGB/fan controllers, and accessories"
+      build_usage: "8 SATA connectors total across the modular cable set"
+    molex_4pin:
+      name: "Peripheral (Molex 4-pin)"
+      connector_type: "Peripheral cable"
+      primary_use: "Legacy peripherals, pumps, and fan/RGB accessories"
+      build_usage: "3 peripheral connectors total"
+
+# 10-performance-graph-widget
+performance_widget:
+  enabled: true
+  # widget_id_suffix: '' # optional: leave omitted unless you want a custom HTML id
+  kicker: "Performance Snapshot"
+  title: "Multi-Game Average FPS"
+  driver_bar:
+    type: "nvidia"                                               # gpu|amd|nvidia
+    driver_text: "NVIDIA GeForce Game Ready Driver"
+  fps_input_mode: "single_line_results"
+  raw_results:
+    - "Arc Raiders - 136.6 FPS (@4K High)"
+    - "Battlefield 6 - 104.3 FPS (@4K High)"
+    - "COD: Black Ops 7 - 94.7 FPS (@4K High)"
+    - "Cyberpunk 2077 - 93.3 FPS (@4K High)"
+    - "F1 25 - 152.9 FPS (@4K High)"
+    - "Marvel Rivals - 86.2 FPS (@4K High)"
+    - "Fortnite - 430.1 FPS (@1080p Competitive)"
+  strict_mode: true
+  rules:
+    # Always remove games and/or resolutions that are not present in raw_results.
+    keep_only_listed_games: true
+    remove_unlisted_games: true
+    keep_only_listed_resolutions_per_game: true
+    remove_unlisted_resolutions_per_game: true
+  settings_policy:
+    preserve_default_settings: true
+    override_only_if_provided: true
+  default_settings_locked:
+    # Optional per-game settings rows shown in widget.
+    # Supported entry formats per game:
+    # - { label: "Preset", value: "Ultra" }
+    # - ["Preset", "Ultra"]
+    # - "Preset: Ultra"
+    # If empty and preserve_default_settings=true, renderer auto-adds:
+    # Resolution + "As configured in benchmark run".
+    arcraiders:
+      - { label: "Map", value: "Dam Battlegrounds" }
+      - { label: "Capture Length", value: "4-7 mins" }
+      - { label: "Window Mode", value: "Fullscreen" }
+      - { label: "Resolution Scaling", value: "TAAU, 100% (3840x2160), Manual" }
+      - { label: "Frame Generation", value: "Off" }
+      - { label: "VSync / Reflex", value: "VSync Off, NVIDIA Reflex On" }
+      - { label: "Overall Quality", value: "High" }
+      - { label: "Graphics Breakdown", value: "View Distance / AA / Shadows / Post / Texture / Effects / Reflections / Foliage / GI all High" }
+    marvelrivals:
+      - { label: "Capture Length", value: "4-7 mins" }
+      - { label: "Display", value: "Fullscreen, 3840x2160, Aspect 16:9" }
+      - { label: "AA / Upscaling", value: "TAAU, Render Scale 100" }
+      - { label: "Frame Gen / Latency", value: "Frame Generation Off, Low Latency Off" }
+      - { label: "VSync / FPS Cap", value: "VSync Off, Match/Lobby/Background FPS No Limit" }
+      - { label: "Preset", value: "Graphics Quality High" }
+      - { label: "GI / Reflections", value: "Lumen GI High Quality, SSR Reflections" }
+      - { label: "Graphics Breakdown", value: "Model / Post / Shadows / Texture / Effects / Foliage all High" }
+    battlefield6:
+      - { label: "Map / Mode", value: "Empire State, Conquest" }
+      - { label: "Capture Length", value: "4-7 mins" }
+      - { label: "Fullscreen Mode", value: "Windowed (Fullscreen Device Monitor 1)" }
+      - { label: "Resolution / Refresh", value: "3840x2160, 120Hz, Aspect Auto" }
+      - { label: "VSync / FOV", value: "VSync Off, FOV 90, Vehicle FOV 79" }
+      - { label: "Preset", value: "Custom, Graphics Quality High" }
+      - { label: "Texture / Mesh / Terrain", value: "All High" }
+      - { label: "Graphics Breakdown", value: "Reflections / SSR / GTAO / Lighting / Shadows / Post Process all High" }
+    codblackops7:
+      - { label: "Mode / Map", value: "Zombies Solo, Ashes of the Damned (Spawn Area)" }
+      - { label: "Capture Length", value: "4-7 mins" }
+      - { label: "Display / Resolution", value: "Fullscreen, 3840x2160" }
+      - { label: "Render Resolution", value: "100%, Dynamic Resolution Off" }
+      - { label: "VSync / Frame Cap", value: "VSync Off, Unlimited FPS" }
+      - { label: "Reflex / Frame Gen", value: "NVIDIA Reflex On, Frame Generation Off" }
+      - { label: "Preset", value: "Custom (Eco Preset Efficiency baseline)" }
+      - { label: "Graphics Breakdown", value: "Textures / Detail / Particles / Shaders / Shadows / Terrain / Volumetrics all High" }
+    fortnite:
+      - { label: "Game Mode", value: "Zero-Build Battle Royale" }
+      - { label: "Capture Length", value: "4-7 mins" }
+      - { label: "Display", value: "Fullscreen, 1920x1080, DirectX 12, VSync Off, Unlimited FPS" }
+      - { label: "AA / Upscaling", value: "TAA, TSR Quality, 3D Resolution 100%, Dynamic 3D Resolution Off" }
+      - { label: "Frame Gen / Ray Tracing", value: "Both Off" }
+      - { label: "Preset", value: "Custom" }
+      - { label: "Graphics Breakdown", value: "Nanite Off / GI Off / Reflections Off / Shadows Off / View Distance Far / Textures Low / Effects Low / Post Processing Low" }
+    cyberpunk2077:
+      - { label: "Benchmark Mode", value: "Built-in benchmark ran 2x" }
+      - { label: "Display", value: "Fullscreen, 3840x2160, VSync Off, FPS Cap Off" }
+      - { label: "Preset", value: "Custom, Texture High" }
+      - { label: "Upscaling / Frame Gen", value: "Resolution Scaling Off, Frame Generation Off" }
+      - { label: "Ray Tracing / Path Tracing", value: "All Off" }
+      - { label: "Crowd / FOV", value: "Crowd Density Medium, FOV 80" }
+      - { label: "Post Effects", value: "Film Grain On, DoF On, Lens Flare On, Motion Blur Off" }
+      - { label: "Graphics Breakdown", value: "Local Shadow Mesh / Local Shadow / Cascaded Range / Cascaded Resolution all High" }
+    hogwartslegacy: []
+    f125:
+      - { label: "Track / Mode", value: "Belgium, Benchmark Mode, 2 Laps, Clear (Dry)" }
+      - { label: "Capture Length", value: "4-7 mins" }
+      - { label: "Display", value: "Fullscreen, 3840x2160, VSync Off, Frame Rate Limit Off" }
+      - { label: "AA / Upscaling", value: "TAA + FidelityFX Sharpening, Quality Mode, Dynamic Resolution Off" }
+      - { label: "Frame Gen / Ray Tracing", value: "Frame Gen Off, All Ray Tracing Off" }
+      - { label: "Preset", value: "Custom, NVIDIA Reflex Off" }
+      - { label: "Graphics Breakdown", value: "Lighting / Shadows / Crowd / Mirrors / Car & Helmet Reflections / Weather / Ground Cover / Trees / SSR / Textures all Ultra High" }
+
+# 11-peripherals-recommendations-widget
+peripherals:
+  - type: "Keyboard"
+    name: "..."
+    reason_short: "..."
+    thumb_url: "..."
+    thumb_alt: "..."
+    rating_text: "..."
+    rating_link: ''                                           # optional: paste rating/review URL
+    summary: "..."
+    specs:
+      - { label: "Switch Type", value: "..." }
+      - { label: "Layout", value: "..." }
+      - { label: "Connectivity", value: "..." }
+      - { label: "Best For", value: "..." }
+    buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
+    review_link: ''                                           # optional: paste full review URL
+
+  - type: "Mouse"
+    name: "..."
+    reason_short: "..."
+    thumb_url: "..."
+    thumb_alt: "..."
+    rating_text: "..."
+    rating_link: ''                                           # optional: paste rating/review URL
+    summary: "..."
+    specs:
+      - { label: "Sensor", value: "..." }
+      - { label: "Weight", value: "..." }
+      - { label: "Connectivity", value: "..." }
+      - { label: "Best For", value: "..." }
+    buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
+    review_link: ''                                           # optional: paste full review URL
+
+  - type: "Headset"
+    name: "..."
+    reason_short: "..."
+    thumb_url: "..."
+    thumb_alt: "..."
+    rating_text: "..."
+    rating_link: ''                                           # optional: paste rating/review URL
+    summary: "..."
+    specs:
+      - { label: "Connection", value: "..." }
+      - { label: "Noise Control", value: "..." }
+      - { label: "Audio", value: "..." }
+      - { label: "Battery", value: "..." }
+    buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
+    review_link: ''                                           # optional: paste full review URL
+
+  - type: "Monitor"
+    name: "..."
+    reason_short: "..."
+    thumb_url: "..."
+    thumb_alt: "..."
+    rating_text: "..."
+    rating_link: ''                                           # optional: paste rating/review URL
+    summary: "..."
+    specs:
+      - { label: "Panel", value: "..." }
+      - { label: "Refresh Rate", value: "..." }
+      - { label: "Response Time", value: "..." }
+      - { label: "Best For", value: "..." }
+    buy_shortcode: ''                                         # paste full geeka_price shortcode including brackets
+    review_link: ''                                           # optional: paste full review URL
