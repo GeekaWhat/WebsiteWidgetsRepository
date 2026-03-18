@@ -1,0 +1,270 @@
+<!--
+GeekaWhat Review Summary Widget v1
+Standalone DP064 review summary for ASUS TUF Gaming B850-Plus WiFi.
+-->
+
+<style>
+  .gw-review-widget {
+    --gw-accent: #037cff;
+    --gw-star: #037cff;
+    width: 100%;
+    margin: 18px 0;
+    padding: 18px;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-sizing: border-box;
+  }
+
+  .gw-review-header {
+    margin: -18px -18px 14px;
+    padding: 10px 14px;
+    border-radius: 16px 16px 0 0;
+    background: #037cff;
+    color: #ffffff;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .gw-review-top {
+    display: flex;
+    gap: 14px;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: -6px;
+  }
+
+  .gw-review-title {
+    margin: 2px 0 -2px;
+    font-size: 1.2rem;
+    line-height: 1.3;
+    font-weight: 700;
+  }
+
+  .gw-review-title a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .gw-review-title a:hover,
+  .gw-review-title a:focus {
+    text-decoration: underline;
+  }
+
+  .gw-review-stars {
+    flex: 0 0 auto;
+    padding: 8px 10px;
+    border-radius: 10px;
+    background: #f7faff;
+    border: 1px solid #d9e8ff;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+
+  .gw-stars-row {
+    margin: 0;
+    color: var(--gw-star);
+    letter-spacing: 1px;
+    font-size: 15px;
+    line-height: 1;
+  }
+
+  .gw-stars-score {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .gw-review-meta {
+    margin: 0 0 12px;
+    font-size: 0.92rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .gw-review-author-photo {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex: 0 0 28px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .gw-review-meta a {
+    color: var(--gw-accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .gw-review-meta a:hover,
+  .gw-review-meta a:focus {
+    text-decoration: underline;
+  }
+
+  .gw-review-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .gw-review-col {
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #fbfcff;
+    border: 1px solid #ecf1fa;
+  }
+
+  .gw-review-col h4 {
+    margin: 0 0 8px;
+    font-size: 0.95rem;
+    line-height: 1.2;
+  }
+
+  .gw-review-pros h4 {
+    color: #057a3f;
+  }
+
+  .gw-review-cons h4 {
+    color: #b42318;
+  }
+
+  .gw-review-col ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+
+  .gw-review-col li {
+    margin: 0 0 6px;
+    font-size: 0.92rem;
+    line-height: 1.35;
+  }
+
+  .gw-review-summary-label,
+  .gw-review-section-label {
+    margin: 0 0 6px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    opacity: 0.75;
+  }
+
+  .gw-review-summary {
+    margin: 0 0 12px;
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+
+  .gw-review-cta {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #037cff;
+    background: #037cff;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  .gw-review-cta:hover,
+  .gw-review-cta:focus {
+    background: #026fe5;
+    border-color: #026fe5;
+  }
+
+  @media (max-width: 700px) {
+    .gw-review-widget {
+      padding: 14px;
+      border-radius: 14px;
+    }
+
+    .gw-review-header {
+      margin: -14px -14px 12px;
+      border-radius: 14px 14px 0 0;
+    }
+
+    .gw-review-top {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+    }
+
+    .gw-review-stars {
+      align-self: flex-start;
+    }
+
+    .gw-review-meta {
+      align-items: flex-start;
+    }
+
+    .gw-review-grid {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+  }
+</style>
+
+<section class="gw-review-widget" aria-label="ASUS TUF Gaming B850-Plus WiFi review summary">
+  <p class="gw-review-header">From Our Full Review</p>
+  <div class="gw-review-top">
+    <div>
+      <h3 class="gw-review-title">
+        <a href="https://geekawhat.com/asus-tuf-gaming-b850-plus-wifi-review/" target="_blank" rel="noopener noreferrer">
+          ASUS TUF Gaming B850-Plus WiFi
+        </a>
+      </h3>
+    </div>
+    <div class="gw-review-stars" aria-label="Review score 4.3 out of 5, displayed as 4 stars">
+      <p class="gw-stars-row">&#9733;&#9733;&#9733;&#9733;&#9734;</p>
+      <p class="gw-stars-score">4.3/5</p>
+    </div>
+  </div>
+
+  <p class="gw-review-meta">
+    <img class="gw-review-author-photo" src="https://secure.gravatar.com/avatar/4ba8ad1c20d377202e9940d2322981be3788bcda3d04d935224af50fca956db0?s=150&d=mm&r=g" alt="Jay Harris">
+    <span>
+      Reviewed by
+      <a href="https://geekawhat.com/author/jayharris/">Jay Harris</a>
+      &middot; February 3, 2025
+    </span>
+  </p>
+
+  <p class="gw-review-section-label">Pros and Cons</p>
+  <div class="gw-review-grid">
+    <div class="gw-review-col gw-review-pros">
+      <h4>Pros</h4>
+      <ul>
+        <li>Competitive pricing</li>
+        <li>Sleek industrial design</li>
+        <li>Excellent rear I/O selection</li>
+      </ul>
+    </div>
+    <div class="gw-review-col gw-review-cons">
+      <h4>Cons</h4>
+      <ul>
+        <li>Limited Gen5 support</li>
+        <li>Minimal tool-less features</li>
+        <li>Only three RGB headers</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="gw-review-summary-label">Bottom Line</p>
+  <p class="gw-review-summary">
+    The ASUS TUF Gaming B850-Plus WiFi is an easy fit for a budget-to-mid-range Ryzen 9000 build because it balances strong networking, generous rear I/O, and a clean TUF design at a competitive price. It gives up broader Gen5 coverage and some convenience-focused tool-less touches, but the overall feature set still makes it a solid AM5 shortlist option.
+  </p>
+
+  <a class="gw-review-cta" href="https://geekawhat.com/asus-tuf-gaming-b850-plus-wifi-review/" target="_blank" rel="noopener noreferrer">
+    Read The Full Review
+  </a>
+</section>

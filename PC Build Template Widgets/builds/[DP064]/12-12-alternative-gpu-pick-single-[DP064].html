@@ -109,6 +109,92 @@ Standalone DP064 alternative GPU recommendation.
     font-weight: 500;
   }
 
+  .gw-alt-buy-wrap {
+    margin-top: 12px;
+    padding: 12px;
+    border: 1px solid #d6e4ff;
+    border-radius: 10px;
+    background:
+      radial-gradient(circle at top right, rgba(3, 124, 255, 0.12), transparent 42%),
+      linear-gradient(180deg, #ffffff 0%, #eef5ff 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  }
+
+  .gw-alt-buy-heading {
+    margin: 0 0 4px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #173a72;
+  }
+
+  .gw-alt-buy-subtext {
+    margin: 0 0 10px;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    color: #45618d;
+  }
+
+  .gw-alt-buy {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .gw-alt-buy:empty {
+    display: none;
+  }
+
+  .gw-alt-buy-wrap a,
+  .gw-alt-buy-wrap button,
+  .gw-alt-buy-wrap input[type="button"],
+  .gw-alt-buy-wrap input[type="submit"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid #037cff;
+    background: linear-gradient(180deg, #1d8dff 0%, #037cff 100%);
+    box-shadow: 0 8px 18px rgba(3, 124, 255, 0.18);
+    color: #ffffff;
+    font-size: 0.88rem;
+    font-weight: 700;
+    line-height: 1.1;
+    text-decoration: none;
+    transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+  }
+
+  .gw-alt-buy-wrap a:hover,
+  .gw-alt-buy-wrap a:focus,
+  .gw-alt-buy-wrap button:hover,
+  .gw-alt-buy-wrap button:focus,
+  .gw-alt-buy-wrap input[type="button"]:hover,
+  .gw-alt-buy-wrap input[type="button"]:focus,
+  .gw-alt-buy-wrap input[type="submit"]:hover,
+  .gw-alt-buy-wrap input[type="submit"]:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(3, 124, 255, 0.24);
+    background: linear-gradient(180deg, #339bff 0%, #0b6fe0 100%);
+  }
+
+  .gw-alt-buy-wrap a:focus,
+  .gw-alt-buy-wrap button:focus,
+  .gw-alt-buy-wrap input[type="button"]:focus,
+  .gw-alt-buy-wrap input[type="submit"]:focus {
+    outline: 2px solid rgba(3, 124, 255, 0.2);
+    outline-offset: 2px;
+  }
+
+  .gw-alt-buy-note {
+    margin: 10px 0 0;
+    font-size: 0.77rem;
+    line-height: 1.35;
+    color: #5a6f94;
+  }
+
   @media (max-width: 760px) {
     .gw-alt-top {
       grid-template-columns: 1fr;
@@ -140,6 +226,12 @@ Standalone DP064 alternative GPU recommendation.
       <div class="gw-alt-meta">
         <div class="gw-alt-row"><div class="gw-alt-label">Buy This If:</div><div class="gw-alt-value">You prefer NVIDIA's Blackwell platform, especially for DLSS 4, stronger RT-heavy game support, and wider creator app acceleration than the RX 9070 XT OC offers.</div></div>
         <div class="gw-alt-row"><div class="gw-alt-label">Main Tradeoff:</div><div class="gw-alt-value">Compared with the ASUS Prime Radeon RX 9070 XT OC, you're usually choosing ecosystem, ray tracing, and AI-led features over AMD's stronger value proposition in pure raster-focused workloads.</div></div>
+      </div>
+      <div class="gw-alt-buy-wrap">
+        <p class="gw-alt-buy-heading">Check Current Pricing</p>
+        <p class="gw-alt-buy-subtext">This section is styled for the `geeka_price` shortcode so the retailer buttons sit more naturally inside the card.</p>
+        <p class="gw-alt-buy"></p>
+        <p class="gw-alt-buy-note">Paste the correct RTX 5070 Ti `geeka_price` shortcode into the `.gw-alt-buy` paragraph.</p>
       </div>
     </div>
   </article>

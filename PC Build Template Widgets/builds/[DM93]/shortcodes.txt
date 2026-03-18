@@ -1,0 +1,8 @@
+CPU: AMD Ryzen 5 9600X
+CPU Cooler: Corsair NAUTILUS 360 RS ARGB
+Motherboard: MSI PRO B850-P WIFI
+RAM: CORSAIR VENGEANCE RGB DDR5
+SSD: TeamGroup NV5000
+GPU: PowerColor Reaper RX 9070 16GB
+Case: Corsair 3200D
+PSU: Corsair RM650e

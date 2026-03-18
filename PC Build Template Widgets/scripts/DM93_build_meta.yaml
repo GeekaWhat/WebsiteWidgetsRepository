@@ -1,0 +1,503 @@
+build_meta:
+  build_code: "[DM93]"
+  refresh_scope: "full"
+  auto_fill_from_sources: true
+  auto_fill_policy: "always"
+  auto_fill_notes: "Auto-fill any '...' placeholders unless explicitly overridden."
+  notes: "Auto-filled active widget fields from official AMD, MSI, Corsair, TeamGroup, and PowerColor product sources."
+
+formatting_defaults:
+  multi_value_separator: "<br>"
+  no_commas_for_multi_value_lists: true
+  list_item_style: "yaml_array"
+
+part_key_rules:
+  allowed_keys: ["cpu","cpu_cooler","motherboard","ram","ssd","gpu","case","psu"]
+  tab_label_mode: "auto_from_part_key"
+  section_anchor_mode: "auto_from_part_key"
+  anchor_style: "lowercase-kebab"
+
+sources:
+  # shared source definitions; reuse via source_ref in widget sections
+
+widget_enabled:
+  cpu_comparison_table: false
+  cooler_temps_graph: true
+  motherboard_specs: true
+  ram_widget: false
+  ssd_widget: true
+  gpu_comparison_table: false
+  case_specs: false
+  psu_connectors: true
+  performance_widget: false
+  peripherals: false
+
+component_headings:
+  cpu: "AMD Ryzen 5 9600X"
+  cpu_cooler: "Corsair NAUTILUS 360 RS ARGB"
+  motherboard: "MSI PRO B850-P WIFI"
+  ram: "CORSAIR VENGEANCE RGB DDR5"
+  ssd: "TeamGroup NV5000"
+  gpu: "PowerColor Reaper RX 9070 16GB"
+  case: "Corsair 3200D"
+  psu: "Corsair RM650e"
+
+parts_list:
+  - part_key: "cpu"
+    tab_label: "__AUTO_FROM_PART_KEY__"
+    name: "AMD Ryzen 5 9600X"
+    section_anchor: "__AUTO_FROM_PART_KEY__"
+    image_url: 'https://geekawhat.com/wp-content/uploads/2025/12/MPI_AMD-Ryzen-5-9600X-Box.jpg'
+    image_alt: "AMD Ryzen 5 9600X processor retail box"
+    summary: "AMD's Ryzen 5 9600X is a strong gaming-focused Zen 5 chip, pairing 6 cores with high single-threaded speed to suit a balanced 1440p build without overspending on the CPU."
+    specs:
+      - { label: "Cores / Threads", value: "6 Cores / 12 Threads" }
+      - { label: "Boost Clock", value: "Up to 5.4GHz" }
+      - { label: "Base Clock", value: "3.9GHz" }
+      - { label: "Cache", value: "38MB Total Cache" }
+      - { label: "TDP", value: "65W" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/BgbCqj" AMAZON-US-ASIN="B0D6NN6TM7" AMAZON-GB-ASIN="B0D6NN6TM7" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Famd-ryzen-5-9600x-six-core-5.40ghz-socket-am5-processor-retail-pro-amd-02677.html" overclockers-awin-gb-itemid="PRO-AMD-02677"]'
+
+  - part_key: "cpu_cooler"
+    tab_label: "__AUTO_FROM_PART_KEY__"
+    name: "Corsair NAUTILUS 360 RS ARGB"
+    section_anchor: "__AUTO_FROM_PART_KEY__"
+    image_url: 'https://geekawhat.com/wp-content/uploads/2026/03/MPI_Corsair-NAUTILUS-360-RS-ARGB-Black.jpg'
+    image_alt: "Corsair NAUTILUS 360 RS ARGB liquid CPU cooler"
+    summary: "Corsair's 360mm NAUTILUS RS ARGB keeps installation simple with direct motherboard connectivity while still delivering the airflow, static pressure, and radiator size needed for a modern AM5 gaming system."
+    specs:
+      - { label: "Cooler Type", value: "360mm AIO Liquid Cooler" }
+      - { label: "Fans", value: "3 x RS120 ARGB PWM" }
+      - { label: "Socket Support", value: "AM5 / AM4 / LGA1851 / LGA1700" }
+      - { label: "Control", value: "Direct motherboard PWM + ARGB" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/eqsQEB" AMAZON-US-ASIN="B0DF7C4YPQ" AMAZON-GB-ASIN="B0DF7C4YPQ" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fcorsair-nautilus-360-rs-argb-all-in-one-cpu-cooler-360mm-coo-crs-03511.html%3F_gl%3D1%2A1rtomx5%2A_up%2AMQ..%2A_gs%2AMQ..%26gclid%3DCjwKCAjw88yxBhBWEiwA7cm6pUaGLINOoTnXMXXNULHQDnW-L6Dmiqd7Bys2SxdjXYegU5glFKU0ghoC2V0QAvD_BwE" overclockers-awin-gb-itemid="COO-CRS-03511"]'
+
+  - part_key: "motherboard"
+    tab_label: "__AUTO_FROM_PART_KEY__"
+    name: "MSI PRO B850-P WIFI"
+    section_anchor: "__AUTO_FROM_PART_KEY__"
+    image_url: 'https://geekawhat.com/wp-content/uploads/2026/03/MPI_MSI-PRO-B850-P-WIFI.jpg'
+    image_alt: "MSI PRO B850-P WIFI ATX motherboard"
+    summary: "MSI's PRO B850-P WIFI gives this AM5 build a sensible feature set, combining PCIe 5.0 graphics support, multiple M.2 slots, 5G LAN, and Wi-Fi 7 + Bluetooth 5.4 on a full-size ATX board."
+    specs:
+      - { label: "Chipset", value: "AMD B850" }
+      - { label: "Form Factor", value: "ATX" }
+      - { label: "Memory Support", value: "DDR5 up to 256GB / 8200+ MT/s (OC)" }
+      - { label: "Networking", value: "5G LAN, Wi-Fi 7 + Bluetooth 5.4" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/J5dAr" AMAZON-US-ASIN="B0BVWB869H" AMAZON-GB-ASIN="B0BVWB869H" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fmsi-pro-b850-p-wifi-amd-am5-b850-atx-motherboard-mot-msi-03995.html" overclockers-awin-gb-itemid="MOT-MSI-03995"]'
+
+  - part_key: "ram"
+    tab_label: "__AUTO_FROM_PART_KEY__"
+    name: "CORSAIR VENGEANCE RGB DDR5"
+    section_anchor: "__AUTO_FROM_PART_KEY__"
+    image_url: 'https://geekawhat.com/wp-content/uploads/2023/12/MPI_Corsair-Vengeance-RGB-DDR5-For-AMD.jpg'
+    image_alt: "Corsair VENGEANCE RGB DDR5 memory kit"
+    summary: "This VENGEANCE RGB DDR5 kit hits a familiar AM5 sweet spot with a 32GB capacity, 6000MT/s speed, and AMD EXPO support, while adding Corsair's panoramic RGB light bar."
+    specs:
+      - { label: "Capacity", value: "32GB (2 x 16GB)" }
+      - { label: "Speed", value: "DDR5-6000" }
+      - { label: "Latency", value: "CL36" }
+      - { label: "Profile", value: "AMD EXPO" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/fAixlVt" AMAZON-US-ASIN="B0BZHTVHN5" AMAZON-GB-ASIN="B0BZHTVHN5" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fcorsair-vengeance-rgb-expo-32gb-2x16gb-ddr5-pc5-48000c36-6000mhz-dual-cha-mem-crs-00997.html" overclockers-awin-gb-itemid="MEM-CRS-00997"]'
+
+  - part_key: "ssd"
+    tab_label: "__AUTO_FROM_PART_KEY__"
+    name: "TeamGroup NV5000"
+    section_anchor: "__AUTO_FROM_PART_KEY__"
+    image_url: 'https://geekawhat.com/wp-content/uploads/2026/03/MPI_TeamGroup-NV5000.jpg'
+    image_alt: "TeamGroup NV5000 PCIe 4.0 NVMe SSD"
+    summary: "TeamGroup's NV5000 is an entry-level PCIe 4.0 NVMe drive aimed at straightforward gaming builds, offering enough throughput for a snappy OS and game library without demanding a premium budget."
+    specs:
+      - { label: "Capacity", value: "1TB" }
+      - { label: "Interface", value: "PCIe 4.0 x4 / NVMe" }
+      - { label: "Sequential Read", value: "Up to 4,500 MB/s" }
+      - { label: "Sequential Write", value: "Up to 1,900 MB/s" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/liAdy" AMAZON-US-ASIN="B0FCS69ZZJ" AMAZON-GB-ASIN="B0FCS69ZZJ" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fteam-group-nv5000-1tb-ssd-m.2-2280-nvme-pcie-4.0-solid-state-drive-sto-tmg-07234.html" overclockers-awin-gb-itemid="STO-TMG-07234"]'
+
+  - part_key: "gpu"
+    tab_label: "__AUTO_FROM_PART_KEY__"
+    name: "PowerColor Reaper RX 9070 16GB"
+    section_anchor: "__AUTO_FROM_PART_KEY__"
+    image_url: 'https://geekawhat.com/wp-content/uploads/2026/03/MPI_PowerColor-Reaper-RX-9070-16GB.jpg'
+    image_alt: "PowerColor Reaper Radeon RX 9070 16GB graphics card"
+    summary: "PowerColor's Reaper RX 9070 is the graphics centerpiece here, bringing 16GB of GDDR6 memory, a compact dual-slot design, and the raster performance expected from a modern 1440p-focused Radeon card."
+    specs:
+      - { label: "VRAM", value: "16GB GDDR6" }
+      - { label: "Boost Clock", value: "Up to 2520MHz" }
+      - { label: "Bus Interface", value: "PCIe 5.0 x16" }
+      - { label: "Power Connectors", value: "2 x 8-pin PCIe" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/ciNNWh" AMAZON-US-ASIN="B0DSWL46CF" AMAZON-GB-ASIN="B0DSWL46CF" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fpowercolor-radeon-rx-9070-reaper-16gb-gddr6-pci-express-graphics-card-gra-pwc-04020.html" overclockers-awin-gb-itemid="GRA-PWC-04020"]'
+
+  - part_key: "case"
+    tab_label: "__AUTO_FROM_PART_KEY__"
+    name: "Corsair 3200D"
+    section_anchor: "__AUTO_FROM_PART_KEY__"
+    image_url: 'https://geekawhat.com/wp-content/uploads/2026/03/MPI_Corsair-3200D.jpg'
+    image_alt: "Corsair 3200D mid-tower PC case"
+    summary: "Corsair's 3200D focuses on airflow and easy building, with roof radiator support, direct GPU airflow from the angled PSU shroud fan mount, and tidy cable routing for a clean gaming PC build."
+    specs:
+      - { label: "Case Type", value: "Mid Tower" }
+      - { label: "Motherboard Support", value: "Reverse-connector boards supported" }
+      - { label: "Cooling", value: "Supports up to a 360mm roof radiator" }
+      - { label: "Included Fans", value: "3 x RS120 fans included" }
+    buy_shortcode: ''
+
+  - part_key: "psu"
+    tab_label: "__AUTO_FROM_PART_KEY__"
+    name: "Corsair RM650e"
+    section_anchor: "__AUTO_FROM_PART_KEY__"
+    image_url: 'https://geekawhat.com/wp-content/uploads/2025/04/MPI_Corsair-RM650e-with-box.jpg'
+    image_alt: "Corsair RM650e modular power supply"
+    summary: "Corsair's RM650e rounds the build out with a compact fully modular design, ATX 3.1 readiness, and enough modern GPU cabling flexibility to support this Radeon system cleanly."
+    specs:
+      - { label: "Output", value: "650W" }
+      - { label: "Efficiency", value: "80 Plus Gold" }
+      - { label: "Standard", value: "ATX 3.1 / PCIe 5.1" }
+      - { label: "Design", value: "Fully Modular" }
+    buy_shortcode: '[geeka_price AMAZON-GENIUS-HREF="https://geni.us/uiLgpL" AMAZON-US-ASIN="B0DPR6YG4V" AMAZON-GB-ASIN="B0DMTPFW3J" overclockers-awin-gb-href="https://www.awin1.com/cread.php?awinmid=28821&awinaffid=1167182&ued=https%3A%2F%2Fwww.overclockers.co.uk%2Fcorsair-rme-series-rm650e-fully-modular-atx-3.1-power-supply-pow-crs-06103.html" overclockers-awin-gb-itemid="POW-CRS-06103"]'
+
+cpu_comparison_table:
+  enabled: false
+  kicker: "CPU Comparison"
+  title: "..."
+  note: "..."
+  aria_label: "..."
+  columns: ["CPU","Cores","Threads","Base Clock","Max Boost","TDP","Total Cache","Where to Buy"]
+  rows:
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      cores: "..."
+      threads: "..."
+      base_clock: "..."
+      boost_clock: "..."
+      tdp: "..."
+      cache: "..."
+      buy_shortcode: ''
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      cores: "..."
+      threads: "..."
+      base_clock: "..."
+      boost_clock: "..."
+      tdp: "..."
+      cache: "..."
+      buy_shortcode: ''
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      cores: "..."
+      threads: "..."
+      base_clock: "..."
+      boost_clock: "..."
+      tdp: "..."
+      cache: "..."
+      buy_shortcode: ''
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      cores: "..."
+      threads: "..."
+      base_clock: "..."
+      boost_clock: "..."
+      tdp: "..."
+      cache: "..."
+      buy_shortcode: ''
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      cores: "..."
+      threads: "..."
+      base_clock: "..."
+      boost_clock: "..."
+      tdp: "..."
+      cache: "..."
+      buy_shortcode: ''
+
+cooler_temps_graph:
+  enabled: true
+  title: "Corsair NAUTILUS 360 RS ARGB Benchmarks"
+  benchmark_badge: "Tested with: Intel Core i7-14700K"
+  cta_url: "https://docs.google.com/spreadsheets/d/1gemZNlSFT--aBTL7dW3NS9bGOsga1wOSLyHEmF6AkIY/edit?gid=1584843454#gid=1584843454"
+  data_source_url: "https://docs.google.com/spreadsheets/d/1gemZNlSFT--aBTL7dW3NS9bGOsga1wOSLyHEmF6AkIY/edit?gid=1584843454#gid=1584843454"
+  highlight_name: "Corsair Nautilus 360 RS ARGB"
+  cinebench4:
+    labels: ["Corsair Nautilus 360 RS ARGB","Cougar Poseidon Vistek Pro ARGB 360"]
+    avg_temps_c: [60,60]
+    max_temps_c: [68,67]
+  cinebench8:
+    labels: ["Corsair Nautilus 360 RS ARGB","Cougar Poseidon Vistek Pro ARGB 360"]
+    avg_temps_c: [70,73]
+    max_temps_c: [76,79]
+  cpuz8:
+    labels: ["Corsair Nautilus 360 RS ARGB","Cougar Poseidon Vistek Pro ARGB 360"]
+    avg_temps_c: [70,72]
+    max_temps_c: [73,75]
+
+motherboard_specs:
+  enabled: true
+  source_ref: ''
+  model: 'MSI PRO B850-P WIFI'
+  source_url: 'https://www.msi.com/Motherboard/PRO-B850-P-WIFI/Specification'
+  formatting_rules_override: {}
+  chipset_socket: "AMD B850 / Socket AM5"
+  form_factor: "ATX (244 x 305 mm)"
+  cpu_support: "AMD Ryzen 9000 / 8000 / 7000 Series desktop processors"
+  memory_support_html: "4 x DDR5 UDIMM, <br> Up to 256GB<br>DDR5 8200+ MT/s (OC)<br>Dual-channel"
+  vrm_design: "12+2+1 Duet Rail Power System"
+  graphics_card_compatibility_1_slot: "Primary PCI_E1 slot supports up to PCIe 5.0 x16 for modern full-size graphics cards"
+  expansion_card_compatibility_html: "PCI_E1: PCIe 5.0 x16<br>PCI_E2: PCIe 3.0 x1<br>PCI_E3: PCIe 4.0 x4<br>PCI_E4: PCIe 3.0 x1"
+  m2_compatibility_3_slots_html: "M2_1 PCIe 5.0 x4 (2260/2280)<br>M2_2 PCIe 4.0 x4 (2280/22110)<br>M2_3 PCIe 4.0 x2 (2260/2280)"
+  sata_storage: "4 x SATA 6Gb/s"
+  networking_html: "Realtek 8126VB 5G LAN<br>Wi-Fi 7 up to 5.8Gbps<br>Bluetooth 5.4"
+  rear_io_html: "1 x USB 10Gbps Type-A<br>2 x USB 10Gbps Type-C<br>1 x USB 5Gbps Type-A<br>4 x USB 2.0<br>2 x audio jacks <br> 1 x Optical S/PDIF out"
+  front_io_headers_html: "1 x USB 5Gbps Type-C front header<br>2 x USB 5Gbps headers (4 ports)<br>2 x USB 2.0 headers (4 ports)<br>Front-panel audio header"
+  audio: "Realtek ALC897 7.1-channel high-definition audio"
+
+ram_widget:
+  enabled: false
+  speed: "..."
+  latency: "..."
+  generation: "..."
+  dimm_count: "..."
+  marker_label: "..."
+  marker_percent: "..."
+  note: "..."
+  slots:
+    - { slot: "A1", state: "...", recommended: false }
+    - { slot: "A2", state: "...", recommended: true }
+    - { slot: "B1", state: "...", recommended: false }
+    - { slot: "B2", state: "...", recommended: true }
+
+ssd_widget:
+  enabled: true
+  subtext: "These figures are TeamGroup's advertised CrystalDiskMark speeds for the 1TB NV5000."
+  sequential_read_mb_s: 4500
+  sequential_write_mb_s: 1900
+  read_marker_percent: "28.6"
+  write_marker_percent: "12.1"
+  footnote: "Scale uses PCIe/NVMe throughput context. Real-world results vary by platform, workload, thermals, and test method."
+
+gpu_comparison_table:
+  enabled: false
+  kicker: "GPU Comparison"
+  title: "..."
+  note: "..."
+  aria_label: "..."
+  columns: ["GPU","VRAM","TBP","Boost Clock","Ray Tracing","Upscaling/FG","Where to Buy"]
+  rows:
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      metric_1: "..."
+      metric_2: "..."
+      metric_3: "..."
+      metric_4: "..."
+      metric_5: "..."
+      buy_shortcode: ''
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      metric_1: "..."
+      metric_2: "..."
+      metric_3: "..."
+      metric_4: "..."
+      metric_5: "..."
+      buy_shortcode: ''
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      metric_1: "..."
+      metric_2: "..."
+      metric_3: "..."
+      metric_4: "..."
+      metric_5: "..."
+      buy_shortcode: ''
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      metric_1: "..."
+      metric_2: "..."
+      metric_3: "..."
+      metric_4: "..."
+      metric_5: "..."
+      buy_shortcode: ''
+    - image_url: "..."
+      image_alt: "..."
+      name: "..."
+      subtitle: "..."
+      metric_1: "..."
+      metric_2: "..."
+      metric_3: "..."
+      metric_4: "..."
+      metric_5: "..."
+      buy_shortcode: ''
+
+case_specs:
+  enabled: false
+  source_ref: ''
+  model: ''
+  source_url: ''
+  formatting_rules_override: {}
+  form_factor: "__AUTO_FROM_SOURCE__"
+  motherboard_support: "__AUTO_FROM_SOURCE__"
+  dimensions_l_w_h: "__AUTO_FROM_SOURCE__"
+  front_io:
+    - "__AUTO_FROM_SOURCE__"
+  pcie_slots: "__AUTO_FROM_SOURCE__"
+  colour: "__AUTO_FROM_SOURCE__"
+  max_clearance:
+    - "__AUTO_FROM_SOURCE__"
+  drive_support:
+    - "__AUTO_FROM_SOURCE__"
+  fan_support:
+    - "__AUTO_FROM_SOURCE__"
+  radiator_support:
+    - "__AUTO_FROM_SOURCE__"
+  pre_installed_fans: "__AUTO_FROM_SOURCE__"
+
+psu_connectors:
+  enabled: true
+  widget_title: "Corsair RM650e Connector Reference"
+  source_ref: ''
+  model: 'Corsair RM650e'
+  source_url: 'https://www.corsair.com/uk/en/p/psu/cp-9020302-uk/rme-series-rm650e-fully-modular-low-noise-atx-power-supply-uk-cp-9020302-uk?srsltid=AfmBOopToq6DkfY2IP0SS-LShtL4emN2QZg6EYl_KHk4WnUnDjFGVMBB'
+  connectors:
+    pcie_6_2:
+      name: "PCIe (6+2 pin)"
+      connector_type: "1 x PCIe 8-pin (6+2) cable plus 1 x 12V-2x6 to dual 8-pin (6+2) cable"
+      build_usage: "Three total 6+2 PCIe connectors are included across these two GPU cable options"
+      recommended_setup: "For this RX 9070 build, use the 12V-2x6 to dual 8-pin cable so both GPU sockets are populated from one cable run"
+      notes: "Single 6+2 cable: 1 connector, 650mm. 12V-2x6 to dual 8-pin cable: 2 connectors, 650mm total length."
+    pcie_12v_2x6:
+      name: "12V-2x6"
+      connector_type: "1 x native 12V-2x6 (12+4) GPU cable"
+      typical_output: "1 connector, 650mm total cable length"
+      build_usage: "Available for graphics cards that use a native 12V-2x6 socket"
+      notes: "Separate from the dual-8-pin breakout cable; this native lead is not required for the selected RX 9070"
+    atx_24pin:
+      name: "ATX 24-pin"
+      connector_type: "24-pin ATX motherboard cable"
+      quantity_included: "1"
+      primary_use: "Primary motherboard power for the MSI PRO B850-P WIFI"
+      notes: "1 connector, 610mm total cable length, used for the board's main 24-pin power input"
+    cpu_eps_4_4:
+      name: "CPU EPS (4+4)"
+      connector_type: "EPS / ATX12V 8-pin (4+4) cable"
+      quantity_included: "1 cable / 2 EPS connectors"
+      primary_use: "CPU power for the AMD Ryzen 5 9600X on the MSI PRO B850-P WIFI, with enough connectors to populate both 8-pin EPS headers"
+      notes: "2 connectors on one cable, spaced 750mm + 100mm for 850mm total length"
+    sata_15pin:
+      name: "SATA (15-pin)"
+      connector_type: "1 x SATA cable with 4 straight SATA connectors"
+      primary_use: "Primary SATA power run for SSDs, hubs, RGB/fan controllers, and other SATA-powered accessories"
+      build_usage: "4 connectors total, spaced 450mm + 100mm + 100mm + 100mm for 750mm total length"
+    molex_4pin:
+      name: "Peripheral (Molex 4-pin)"
+      connector_type: "1 x combo cable with 2 straight SATA and 2 straight PATA/Molex connectors"
+      primary_use: "Legacy peripheral power only"
+      build_usage: "Unnecessary for this build"
+
+performance_widget:
+  enabled: false
+  kicker: "Performance Snapshot"
+  title: "Multi-Game Average FPS"
+  driver_bar:
+    type: "gpu"
+    driver_text: "Driver Version: ..."
+  fps_input_mode: "single_line_results"
+  raw_results:
+    - "Game Name - 0 FPS (@1440p High)"
+  strict_mode: true
+  rules:
+    keep_only_listed_games: true
+    remove_unlisted_games: true
+    keep_only_listed_resolutions_per_game: true
+    remove_unlisted_resolutions_per_game: true
+  settings_policy:
+    preserve_default_settings: true
+    override_only_if_provided: true
+  default_settings_locked:
+    arcraiders: []
+    marvelrivals: []
+    battlefield6: []
+    callofduty: []
+    fortnite: []
+    cyberpunk2077: []
+    hogwartslegacy: []
+    f125: []
+
+peripherals:
+  - type: "Keyboard"
+    name: "..."
+    reason_short: "..."
+    thumb_url: "..."
+    thumb_alt: "..."
+    rating_text: "..."
+    rating_link: ''
+    summary: "..."
+    specs:
+      - { label: "Switch Type", value: "..." }
+      - { label: "Layout", value: "..." }
+      - { label: "Connectivity", value: "..." }
+      - { label: "Best For", value: "..." }
+    buy_shortcode: ''
+    review_link: ''
+
+  - type: "Mouse"
+    name: "..."
+    reason_short: "..."
+    thumb_url: "..."
+    thumb_alt: "..."
+    rating_text: "..."
+    rating_link: ''
+    summary: "..."
+    specs:
+      - { label: "Sensor", value: "..." }
+      - { label: "Weight", value: "..." }
+      - { label: "Connectivity", value: "..." }
+      - { label: "Best For", value: "..." }
+    buy_shortcode: ''
+    review_link: ''
+
+  - type: "Headset"
+    name: "..."
+    reason_short: "..."
+    thumb_url: "..."
+    thumb_alt: "..."
+    rating_text: "..."
+    rating_link: ''
+    summary: "..."
+    specs:
+      - { label: "Connection", value: "..." }
+      - { label: "Noise Control", value: "..." }
+      - { label: "Audio", value: "..." }
+      - { label: "Battery", value: "..." }
+    buy_shortcode: ''
+    review_link: ''
+
+  - type: "Monitor"
+    name: "..."
+    reason_short: "..."
+    thumb_url: "..."
+    thumb_alt: "..."
+    rating_text: "..."
+    rating_link: ''
+    summary: "..."
+    specs:
+      - { label: "Panel", value: "..." }
+      - { label: "Refresh Rate", value: "..." }
+      - { label: "Response Time", value: "..." }
+      - { label: "Best For", value: "..." }
+    buy_shortcode: ''
+    review_link: ''

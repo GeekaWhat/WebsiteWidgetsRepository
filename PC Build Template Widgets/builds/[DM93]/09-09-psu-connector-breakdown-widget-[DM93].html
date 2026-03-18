@@ -1,0 +1,261 @@
+<!--
+GeekaWhat PSU Connector Breakdown Widget v1 (HTML + CSS + JS)
+Paste into a Gutenberg "Custom HTML" block.
+-->
+
+<style>
+  .gw-psu-widget {
+    width: 100%;
+    margin: 18px 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+  }
+
+  .gw-psu-layout {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .gw-psu-head {
+    padding: 12px 13px 10px;
+    border-bottom: 1px solid #edf2fa;
+    background: #ffffff;
+  }
+
+  .gw-psu-widget-title {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.3;
+    font-weight: 800;
+    color: #142033;
+  }
+
+  .gw-psu-menu {
+    border-right: 1px solid #e6edf7;
+    background: #f8fbff;
+    padding: 8px;
+  }
+
+  .gw-psu-tab {
+    width: 100%;
+    display: block;
+    border: 1px solid #d9e8ff;
+    background: #ffffff;
+    color: #111111;
+    border-radius: 10px;
+    padding: 10px 11px;
+    margin: 0 0 8px;
+    text-align: left;
+    font-size: 0.93rem;
+    font-weight: 600;
+    line-height: 1.25;
+    cursor: pointer;
+  }
+
+  .gw-psu-tab:last-child {
+    margin-bottom: 0;
+  }
+
+  .gw-psu-tab.is-active {
+    background: #037cff;
+    border-color: #037cff;
+    color: #ffffff;
+  }
+
+  .gw-psu-tab:not(.is-active):hover,
+  .gw-psu-tab:not(.is-active):focus {
+    background: #eef5ff;
+    border-color: #037cff;
+    color: #111111;
+    outline: none;
+  }
+
+  .gw-psu-tab.is-active:hover,
+  .gw-psu-tab.is-active:focus {
+    background: #026fe5;
+    border-color: #026fe5;
+    color: #ffffff;
+    outline: none;
+  }
+
+  .gw-psu-content {
+    padding: 14px;
+  }
+
+  .gw-psu-panel {
+    display: none;
+  }
+
+  .gw-psu-panel.is-active {
+    display: block;
+  }
+
+  .gw-psu-title {
+    margin: 0 0 8px;
+    font-size: 1.02rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .gw-psu-specs {
+    margin: 0 0 12px;
+    border: 1px solid #e6edf7;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .gw-psu-spec-row {
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr);
+    border-bottom: 1px solid #e6edf7;
+    background: #ffffff;
+  }
+
+  .gw-psu-spec-row:last-child {
+    border-bottom: 0;
+  }
+
+  .gw-psu-label,
+  .gw-psu-value {
+    padding: 9px 10px;
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+
+  .gw-psu-label {
+    background: #f4f8ff;
+    font-weight: 700;
+  }
+
+  .gw-psu-value {
+    font-weight: 500;
+  }
+
+  @media (max-width: 760px) {
+    .gw-psu-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-psu-menu {
+      border-right: 0;
+      border-bottom: 1px solid #e6edf7;
+    }
+
+    .gw-psu-spec-row {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-psu-label {
+      border-bottom: 1px solid #e6edf7;
+    }
+  }
+</style>
+
+<section class="gw-psu-widget" aria-label="PSU connector breakdown">
+  <div class="gw-psu-head">
+    <h3 class="gw-psu-widget-title">Corsair RM650e Connector Reference</h3>
+  </div>
+  <div class="gw-psu-layout">
+    <div class="gw-psu-menu" role="tablist" aria-label="PSU Connectors">
+      <button class="gw-psu-tab is-active" type="button" role="tab" aria-selected="true" data-target="gw-psu-pcie62">PCIe (6+2 pin)</button>
+      <button class="gw-psu-tab" type="button" role="tab" aria-selected="false" data-target="gw-psu-12v2x6">12V-2x6</button>
+      <button class="gw-psu-tab" type="button" role="tab" aria-selected="false" data-target="gw-psu-atx24">ATX 24-pin</button>
+      <button class="gw-psu-tab" type="button" role="tab" aria-selected="false" data-target="gw-psu-atx12v">CPU EPS (4+4)</button>
+      <button class="gw-psu-tab" type="button" role="tab" aria-selected="false" data-target="gw-psu-sata">SATA (15-pin)</button>
+      <button class="gw-psu-tab" type="button" role="tab" aria-selected="false" data-target="gw-psu-molex">Peripheral (Molex 4-pin)</button>
+    </div>
+
+    <div class="gw-psu-content">
+<article id="gw-psu-pcie62" class="gw-psu-panel is-active" role="tabpanel">
+  <h3 class="gw-psu-title">PCIe (6+2 pin)</h3>
+  <div class="gw-psu-specs">
+    <div class="gw-psu-spec-row"><div class="gw-psu-label">Connector Type</div><div class="gw-psu-value">1 x PCIe 8-pin (6+2) cable plus 1 x 12V-2x6 to dual 8-pin (6+2) cable</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Build Usage</div><div class="gw-psu-value">Three total 6+2 PCIe connectors are included across these two GPU cable options</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Recommended Setup</div><div class="gw-psu-value">For this RX 9070 build, use the 12V-2x6 to dual 8-pin cable so both GPU sockets are populated from one cable run</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Notes</div><div class="gw-psu-value">Single 6+2 cable: 1 connector, 650mm. 12V-2x6 to dual 8-pin cable: 2 connectors, 650mm total length.</div></div>
+  </div>
+</article>
+
+<article id="gw-psu-12v2x6" class="gw-psu-panel" role="tabpanel">
+  <h3 class="gw-psu-title">12V-2x6</h3>
+  <div class="gw-psu-specs">
+    <div class="gw-psu-spec-row"><div class="gw-psu-label">Connector Type</div><div class="gw-psu-value">1 x native 12V-2x6 (12+4) GPU cable</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Typical Output</div><div class="gw-psu-value">1 connector, 650mm total cable length</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Build Usage</div><div class="gw-psu-value">Available for graphics cards that use a native 12V-2x6 socket</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Notes</div><div class="gw-psu-value">Separate from the dual-8-pin breakout cable; this native lead is not required for the selected RX 9070</div></div>
+  </div>
+</article>
+
+<article id="gw-psu-atx24" class="gw-psu-panel" role="tabpanel">
+  <h3 class="gw-psu-title">ATX 24-pin</h3>
+  <div class="gw-psu-specs">
+    <div class="gw-psu-spec-row"><div class="gw-psu-label">Connector Type</div><div class="gw-psu-value">24-pin ATX motherboard cable</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Quantity Included</div><div class="gw-psu-value">1</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Primary Use</div><div class="gw-psu-value">Primary motherboard power for the MSI PRO B850-P WIFI</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Notes</div><div class="gw-psu-value">1 connector, 610mm total cable length, used for the board's main 24-pin power input</div></div>
+  </div>
+</article>
+
+<article id="gw-psu-atx12v" class="gw-psu-panel" role="tabpanel">
+  <h3 class="gw-psu-title">CPU EPS (4+4)</h3>
+  <div class="gw-psu-specs">
+    <div class="gw-psu-spec-row"><div class="gw-psu-label">Connector Type</div><div class="gw-psu-value">EPS / ATX12V 8-pin (4+4) cable</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Quantity Included</div><div class="gw-psu-value">1 cable / 2 EPS connectors</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Primary Use</div><div class="gw-psu-value">CPU power for the AMD Ryzen 5 9600X on the MSI PRO B850-P WIFI, with enough connectors to populate both 8-pin EPS headers</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Notes</div><div class="gw-psu-value">2 connectors on one cable, spaced 750mm + 100mm for 850mm total length</div></div>
+  </div>
+</article>
+
+<article id="gw-psu-sata" class="gw-psu-panel" role="tabpanel">
+  <h3 class="gw-psu-title">SATA (15-pin)</h3>
+  <div class="gw-psu-specs">
+    <div class="gw-psu-spec-row"><div class="gw-psu-label">Connector Type</div><div class="gw-psu-value">1 x SATA cable with 4 straight SATA connectors</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Primary Use</div><div class="gw-psu-value">Primary SATA power run for SSDs, hubs, RGB/fan controllers, and other SATA-powered accessories</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Build Usage</div><div class="gw-psu-value">4 connectors total, spaced 450mm + 100mm + 100mm + 100mm for 750mm total length</div></div>
+  </div>
+</article>
+
+<article id="gw-psu-molex" class="gw-psu-panel" role="tabpanel">
+  <h3 class="gw-psu-title">Peripheral (Molex 4-pin)</h3>
+  <div class="gw-psu-specs">
+    <div class="gw-psu-spec-row"><div class="gw-psu-label">Connector Type</div><div class="gw-psu-value">1 x combo cable with 2 straight SATA and 2 straight PATA/Molex connectors</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Primary Use</div><div class="gw-psu-value">Legacy peripheral power only</div></div>
+          <div class="gw-psu-spec-row"><div class="gw-psu-label">Build Usage</div><div class="gw-psu-value">Unnecessary for this build</div></div>
+  </div>
+</article>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.currentScript && document.currentScript.previousElementSibling;
+    if (!root || !root.classList.contains("gw-psu-widget")) return;
+    if (!root) return;
+
+    var tabs = root.querySelectorAll(".gw-psu-tab");
+    var panels = root.querySelectorAll(".gw-psu-panel");
+
+    function activate(targetId) {
+      tabs.forEach(function (tab) {
+        var isActive = tab.getAttribute("data-target") === targetId;
+        tab.classList.toggle("is-active", isActive);
+        tab.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+
+      panels.forEach(function (panel) {
+        panel.classList.toggle("is-active", panel.id === targetId);
+      });
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        activate(tab.getAttribute("data-target"));
+      });
+    });
+  })();
+</script>

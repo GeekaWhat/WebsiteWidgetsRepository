@@ -1,0 +1,146 @@
+<!--
+GeekaWhat Alternative Picks (Single Product Cards) v1
+Standalone DP064 alternative air cooler recommendation.
+-->
+
+<style>
+  .gw-alt-single {
+    width: 100%;
+    margin: 18px 0;
+    display: grid;
+    gap: 14px;
+  }
+
+  .gw-alt-card {
+    border: 1px solid #d6e4ff;
+    border-left: 6px solid #037cff;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    box-shadow: 0 10px 22px rgba(3, 50, 120, 0.09);
+    padding: 13px 13px 12px;
+  }
+
+  .gw-alt-top {
+    display: grid;
+    grid-template-columns: 30% minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+    margin: 0 0 11px;
+  }
+
+  .gw-alt-media {
+    margin: 0;
+    border: 1px solid #dfeaff;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  .gw-alt-media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 150px;
+    object-fit: cover;
+  }
+
+  .gw-alt-body {
+    min-width: 0;
+  }
+
+  .gw-alt-kicker {
+    margin: 0 0 8px;
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: #037cff;
+    color: #ffffff;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+  }
+
+  .gw-alt-head {
+    margin: 0 0 8px;
+    font-size: 1.04rem;
+    line-height: 1.3;
+    font-weight: 700;
+  }
+
+  .gw-alt-copy {
+    margin: 0 0 11px;
+    font-size: 0.92rem;
+    line-height: 1.47;
+  }
+
+  .gw-alt-meta {
+    margin: 0 0 11px;
+    border: 1px solid #dfeaff;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  .gw-alt-row {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr);
+    border-bottom: 1px solid #edf3ff;
+  }
+
+  .gw-alt-row:last-child {
+    border-bottom: 0;
+  }
+
+  .gw-alt-label,
+  .gw-alt-value {
+    padding: 8px 10px;
+    font-size: 0.86rem;
+    line-height: 1.3;
+  }
+
+  .gw-alt-label {
+    background: #eef5ff;
+    font-weight: 700;
+    color: #173a72;
+  }
+
+  .gw-alt-value {
+    font-weight: 500;
+  }
+
+  @media (max-width: 760px) {
+    .gw-alt-top {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-alt-row {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-alt-label {
+      border-bottom: 1px solid #e6edf7;
+    }
+  }
+</style>
+
+<section class="gw-alt-single" aria-label="Alternative picks">
+  <article class="gw-alt-card">
+    <div class="gw-alt-top">
+      <figure class="gw-alt-media">
+        <img src="https://geekawhat.com/wp-content/uploads/2025/08/MPI_ThermalRight-Assassin-X-120-Refined-SE-1.jpg" alt="Thermalright Assassin X 120 Refined SE">
+      </figure>
+      <div class="gw-alt-body">
+        <p class="gw-alt-kicker">Alternative Air Cooler Choice</p>
+        <h3 class="gw-alt-head">Thermalright Assassin X 120 Refined SE</h3>
+        <p class="gw-alt-copy">If you want to step away from a 360mm liquid cooler entirely, the Thermalright Assassin X 120 Refined SE is the kind of budget-friendly air option that makes sense for a simpler build. Compared with the Corsair NAUTILUS 360 RS ARGB, the appeal here is lower cost, easier installation, and avoiding pump-related complexity while still covering mainstream CPU cooling duties.</p>
+      </div>
+    </div>
+    <div class="gw-alt-lower">
+      <div class="gw-alt-meta">
+        <div class="gw-alt-row"><div class="gw-alt-label">Buy This If:</div><div class="gw-alt-value">You want a cheaper, simpler air-cooling route than the Corsair NAUTILUS 360 RS ARGB, with less setup overhead and no liquid-cooler pump to think about.</div></div>
+        <div class="gw-alt-row"><div class="gw-alt-label">Main Tradeoff:</div><div class="gw-alt-value">Against the NAUTILUS 360 RS ARGB, you are giving up the thermal headroom, radiator-driven airflow coverage, and stronger visual impact that a 360mm AIO usually brings.</div></div>
+      </div>
+    </div>
+  </article>
+</section>
